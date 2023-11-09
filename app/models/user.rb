@@ -1,0 +1,52 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  first_name      :string           not null
+#  last_name       :string           not null
+#  email           :string           not null
+#  phone           :string
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  nationality     :string
+#  date_of_birth   :date
+#  age             :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+class User < ApplicationRecord
+    has_secure_password
+    before_validation :ensure_session_token
+
+    validates :first_name, :last_name, presence: true
+    validates :password, presence: true, length: { minimum: 8 }, format: { with: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/, message: 'must include at least 8 characters and contain at least 3 of the following 4 types of characters: lowercase letters, uppercase letters, numbers, special characters.' }
+    validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+    validates_format_of :phone_number, uniqueness: true, with: /\A[0-9+\(\)#\.\s\/ext-]+\z/, message: "is not a valid phone number" ######
+
+    def self.find_by_credentials(email, password)
+        user = User.find_by(email: email)
+        if user&.authenticate(password)
+          return user
+        else 
+          nil
+        end
+      end
+    
+      def generate_unique_session_token
+        loop do 
+          token = SecureRandom.urlsafe_base64
+          return token if !User.exists?(session_token: token)
+        end
+      end
+    
+      def ensure_session_token
+        self.session_token ||= generate_unique_session_token
+      end
+      
+      def reset_session_token!
+        self.session_token = generate_unique_session_token
+        self.save!
+        self.session_token
+      end
+end
