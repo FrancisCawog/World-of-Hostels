@@ -5,25 +5,25 @@ import App from './App';
 import configureStore from './store';
 import { Provider } from 'react-redux';
 import { restoreSession } from './store/csrf';
-import { loginUser, logoutUser, createUser } from './store/usersReducer';
+import { loginUser, logoutUser, signupUser } from './store/usersReducer';
 import { csrfFetch } from "./store/csrf"
 
 const initializeApp = () => {
-  // let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+  let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   let initialState = {};
 
-  // if (currentUser) {
-  //   initialState = {
-  //     users: {
-  //       [currentUser.id]: currentUser
-  //     }
-  //   };
-  // }
+  if (currentUser) {
+    initialState = {
+      users: {
+        [currentUser.id]: currentUser
+      }
+    };
+  }
 
   const store = configureStore(initialState);
 
   window.store = store;
-  window.createUser = createUser;
+  window.signupUser = signupUser;
   window.loginUser = loginUser;
   window.logoutUser = logoutUser;
   window.csrfFetch = csrfFetch;

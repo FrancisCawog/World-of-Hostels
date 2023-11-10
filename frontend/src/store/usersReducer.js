@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import * as UserAPIUtil from "../util/user_api_util";
 
 const RECEIVE_USER = 'users/RECEIVE_USER';
 const REMOVE_USER = 'users/REMOVE_USER';
@@ -35,17 +36,11 @@ export const logoutUser = userId => async dispatch => {
     }
 }
 
-export const createUser = user => async dispatch => {
-    let res = await csrfFetch('/api/users', {
-        method: 'POST',
-        body: JSON.stringify(user)
-    });
-
-    let data = await res.json();
-    sessionStorage.setItem('currentUser', JSON.stringify(data.user))
+export const signupUser = user => async (dispatch) => {
+    const res = await UserAPIUtil.postUser(user);
+    const data = await res.json();
     dispatch(receiveUser(data));
 }
-
 
 const usersReducer = (state = {}, action) => {
     const nextState = {...(Object.freeze(state))};

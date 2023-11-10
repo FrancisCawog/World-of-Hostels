@@ -22,10 +22,9 @@ class Api::SessionsController < ApplicationController
     end
 
     def show 
-        # debugger
         @user = current_user
         if @user 
-            render '/api/users/show'
+            render '/api/users/show'  #########  bring back to the page they were previously on
         else  
             render json: { user: nil }
         end
