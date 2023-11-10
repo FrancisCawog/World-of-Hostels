@@ -20,9 +20,9 @@ class User < ApplicationRecord
     before_validation :ensure_session_token
 
     validates :first_name, :last_name, presence: true
-    validates :password, presence: true, length: { minimum: 8 }, format: { with: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/, message: 'must include at least 8 characters and contain at least 3 of the following 4 types of characters: lowercase letters, uppercase letters, numbers, special characters.' }
+    validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-    validates_format_of :phone_number, uniqueness: true, with: /\A[0-9+\(\)#\.\s\/ext-]+\z/, message: "is not a valid phone number" ######
+    validates_format_of :phone, uniqueness: true, with: /\A[0-9+\(\)#\.\s\/ext-]+\z/, message: "is not a valid phone number" ######
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

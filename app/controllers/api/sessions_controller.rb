@@ -3,10 +3,10 @@ class Api::SessionsController < ApplicationController
     before_action :require_logged_out, only: [:create]
 
     def create 
-        username = params[:username]
+        email = params[:email]
         password = params[:password]
 
-        @user = User.find_by_credentials(username, password)
+        @user = User.find_by_credentials(email, password)
         if @user 
             login!(@user)
             render 'api/users/show'
@@ -22,9 +22,10 @@ class Api::SessionsController < ApplicationController
     end
 
     def show 
+        # debugger
         @user = current_user
         if @user 
-            render '/api/users/show'  #########  bring back to the page they were previously on
+            render '/api/users/show'
         else  
             render json: { user: nil }
         end
