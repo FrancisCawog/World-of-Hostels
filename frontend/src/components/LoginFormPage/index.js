@@ -36,7 +36,7 @@ function LoginFormPage() {
   return (
     <>
     <div className="page-container" id="ele">
-      <div className="element" id="loginContainer" style={{transform: 'translateY(-60%)'}}>
+      <div className="element" id="loginContainer" style={{transform: 'translateY(-65%)'}}>
       <Link to="/" exact="true">
         <img src={MyArrowSVG} alt="Back" style={{ width: '10px' }}/> Back
       </Link>

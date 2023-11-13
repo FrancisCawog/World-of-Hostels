@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 8px;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .left-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  img {
+    margin-right: 10px;
+  }
+  
+  .WOF {
+    color: #e45b2e;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .circles {
+    margin-left: auto;
+    display: flex;
+  }
+  
+  .circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2.5px solid #d3d3d3;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  
