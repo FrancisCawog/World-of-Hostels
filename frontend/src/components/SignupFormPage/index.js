@@ -4,10 +4,10 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 import { Link } from "react-router-dom"
-import car from "../../assests/pictures/Screenshot 2023-11-12 at 12.22.54 PM.png"
-import logo from "../../assests/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png"
-import MyArrowSVG from "../../assests/pictures/icons/arrow-left.svg"
-import UserSVG from "../../assests/pictures/icons/user-line.svg"
+import car from "../../assets/pictures/Screenshot 2023-11-12 at 12.22.54 PM.png"
+import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png"
+import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
+import UserSVG from "../../assets/pictures/icons/user-line.svg"
 
 function SignupFormPage() {
   const dispatch = useDispatch();

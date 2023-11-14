@@ -29,14 +29,20 @@ ApplicationRecord.transaction do
         age: 13
     )
   
-    # More users
-    # 10.times do 
-    #   User.create!({
-    #     username: Faker::Internet.unique.username(specifier: 3),
-    #     email: Faker::Internet.unique.email,
-    #     password: 'password'
-    #   }) 
-    # end
+    l1 = Listing.create!(
+        property_name: "Mad Monkey Hostel",
+        property_type: "hostel", 
+        address: "",
+        city: "",
+        country: "", 
+        description: "", 
+        facilities: "",
+        house_rules: "",
+        latitude: "",
+        longitude: "",
+        has_wifi?: false,
+        has_breakfast?: true,
+    )
   
     puts "Done!"
   end

@@ -96,6 +96,7 @@ input {
     color: black;
     text-decoration: underline;
     font-weight: bold;
+    cursor: pointer;
   }
 
 #bottom {

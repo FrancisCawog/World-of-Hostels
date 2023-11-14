@@ -3,10 +3,10 @@ import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import './LoginForm.css';
-import car from "../../assests/pictures/Screenshot 2023-11-12 at 12.22.54 PM.png"
-import logo from "../../assests/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png"
-import MyArrowSVG from "../../assests/pictures/icons/arrow-left.svg"
-import PencilSVG from "../../assests/pictures/icons/edit.svg"
+import car from "../../assets/pictures/Screenshot 2023-11-12 at 12.22.54 PM.png"
+import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png"
+import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
+import PencilSVG from "../../assets/pictures/icons/edit.svg"
 
 function LoginFormPage() {
   const dispatch = useDispatch();

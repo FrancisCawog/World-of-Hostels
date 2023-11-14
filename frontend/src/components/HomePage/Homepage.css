@@ -51,7 +51,7 @@ img {
 .background {
   width: 100%;
   height: 400px;
-  background: url("../../assests/pictures/icons/Screenshot 2023-11-13 at 1.49.53 PM.png") center/120%;
+  background: url("../../assets/pictures/icons/Screenshot 2023-11-13 at 1.49.53 PM.png") center/120%;
   border-radius: 35px;
 }
 
@@ -129,4 +129,116 @@ img {
 
 .search-bar button::after {
   content: none;
+}
+
+.cancellation img {
+  margin-bottom: -5px;
+}
+
+.cancellation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 8px;
+  height: 100%;
+  font-family: Poppins;
+}
+
+#calender {
+  color: white;
+}
+
+.bold {
+  font-family: Poppins-bold;
+}
+
+.boxContainer {
+  display: flex;
+}
+
+.box {
+  width: 430px;
+  height: 500px;
+  margin: 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#box1 {
+  background-color: #f6a90e;
+}
+
+.profile {
+  width: 240px; 
+  height: auto; 
+  position: absolute; 
+  bottom: -9.6em; 
+  left: 24.5em;
+}
+
+#box2 {
+  background-color: #00e0ce
+}
+
+.message {
+  width: 240px; 
+  height: auto; 
+  position: absolute; 
+  bottom: -9.6em; 
+  left: 52.5em;
+}
+
+#box3 {
+  background-color: #2767e7
+}
+
+.walking {
+  width: 240px; 
+  height: auto; 
+  position: absolute;
+  left: 80.5em;
+}
+
+#boxH1 {
+  font-size: 1.1em;
+  margin-top: 5px;
+  margin-bottom: -10px;
+  font-family: Poppins-bold;
+}
+
+#boxp {
+  font-size: .8em;
+  margin-bottom: 5px;
+  font-family: Poppins;
+}
+
+.card-tag1 {
+  background-color: #fff;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+  padding: 0rem 1rem 0rem .5rem;
+  width: fit-content;
+  margin-top: 1.3em;
+}
+
+.card-tag2 {
+  background-color: #fff;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+  padding: 0rem 1rem 0rem .5rem;
+  width: fit-content;
+  margin-top: 1.3em;
+}
+
+.card-tag3 {
+  background-color: #fff;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 100%, 0 100%);
+  padding: 0rem 1rem 0rem .5rem;
+  width: fit-content;
+  margin-top: 26em;
 }

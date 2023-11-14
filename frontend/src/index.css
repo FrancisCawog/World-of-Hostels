@@ -1,1 +1,9 @@
-/* TODO Add site wide styles */
+@font-face {
+    font-family: "Poppins";
+    src: url("../src/assets/Poppins/Poppins-Regular.ttf") format('opentype');
+}
+
+@font-face {
+    font-family: "Poppins-bold";
+    src: url("../src/assets/Poppins/Poppins-Bold.ttf") format('opentype');
+}
