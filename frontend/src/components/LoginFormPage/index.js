@@ -11,27 +11,50 @@ import PencilSVG from "../../assests/pictures/icons/edit.svg"
 function LoginFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-  const [credential, setCredential] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors([]);
-    return dispatch(sessionActions.login({ credential, password }))
-      .catch(async (res) => {
-        let data;
-        try {
-          data = await res.clone().json();
-        } catch {
-          data = await res.text();
-        }
-        if (data?.errors) setErrors(data.errors);
-        else if (data) setErrors([data]);
-        else setErrors([res.statusText]);
-      });
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setErrors([]);
+  try {
+    await dispatch(sessionActions.login({ email, password }));
+  } catch (res) {
+    let data;
+    try {
+      data = await res.clone().json();
+    } catch {
+      data = await res.text();
+    }
+    if (data?.errors) setErrors(data.errors);
+    else if (data) setErrors([data]);
+    else setErrors([res.statusText]);
+  }
+};
+
+const handleDemoLogin = async () => {
+  const demoUser = {
+    email: "demo_user@gmail.com",
+    password: "Password123!",
   };
+
+  try {
+    await dispatch(sessionActions.login(demoUser));
+  } catch (res) {
+    let data;
+    try {
+      data = await res.clone().json();
+    } catch {
+      data = await res.text();
+    }
+    if (data?.errors) setErrors(data.errors);
+    else if (data) setErrors([data]);
+    else setErrors([res.statusText]);
+  }
+};
 
   return (
     <>
@@ -53,8 +76,8 @@ function LoginFormPage() {
           <input
             type="text"
             placeholder="Email"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
@@ -72,6 +95,9 @@ function LoginFormPage() {
 
       <br/>
       <p id="bottom">Don't have an account?</p>
+      <span id="bottom" className="link" onClick={handleDemoLogin}>
+        Demo User
+      </span>
       <Link id="bottom" className="link" to="/signup">
       <img src={PencilSVG} alt="Back" style={{ width: '14px' }}/> Sign Up
       </Link>

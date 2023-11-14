@@ -10,9 +10,76 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_09_193047) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_13_230224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "listings", force: :cascade do |t|
+    t.string "property_name", null: false
+    t.string "property_type", null: false
+    t.string "address", null: false
+    t.string "city", null: false
+    t.string "country", null: false
+    t.text "description"
+    t.text "facilities"
+    t.text "house_rules"
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.boolean "has_wifi?"
+    t.boolean "has_breakfast?"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address"], name: "index_listings_on_address", unique: true
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "num_guests", null: false
+    t.integer "num_nights", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.bigint "total_price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_reservations_on_listing_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "reservation_id", null: false
+    t.integer "security", null: false
+    t.integer "cleanliness", null: false
+    t.integer "location", null: false
+    t.integer "facilities", null: false
+    t.integer "staff", null: false
+    t.integer "value_for_money", null: false
+    t.integer "atmosphere", null: false
+    t.text "feedback"
+    t.string "about_you", null: false
+    t.string "age_group", null: false
+    t.string "trip_type", null: false
+    t.float "total_score", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_reviews_on_listing_id"
+    t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.string "type", null: false
+    t.text "description"
+    t.integer "num_beds", null: false
+    t.integer "available_beds", null: false
+    t.float "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_rooms_on_listing_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
@@ -31,4 +98,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_193047) do
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
+  add_foreign_key "reservations", "listings"
+  add_foreign_key "reservations", "users"
+  add_foreign_key "reviews", "listings"
+  add_foreign_key "reviews", "reservations"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "rooms", "listings"
 end
