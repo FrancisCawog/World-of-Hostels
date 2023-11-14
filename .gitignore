@@ -29,4 +29,5 @@
 /config/master.key
 
 .byebug_history
+/public
 .DS_Store
