@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: World_of_Hostels_production
-  username: World_of_Hostels
-  password: <%= ENV["WORLD_OF_HOSTELS_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>

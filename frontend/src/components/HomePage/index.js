@@ -42,7 +42,7 @@ export default function HomePage() {
   };
 
   const handleSearch = () => {
-    console.log("Search clicked with inputs:", searchInputs);
+    // console.log("Search clicked with inputs:", searchInputs);
   };
 
   return (
