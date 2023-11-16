@@ -5,7 +5,7 @@ import listingReducer from './listings';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
-    listing: listingReducer
+    listings: listingReducer
 })
 
 let enhancer;
