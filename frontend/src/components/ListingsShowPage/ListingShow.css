@@ -1,3 +1,108 @@
 .top-picture {
-    background-color: black;
+    height: 260px;
+    width: calc(100% - 12px);
+    margin: 0 6px;
+    background-color: lightgray;
+  }
+  
+.title {
+    font-family: Poppins-bold;
+    font-size: 50px;
+    margin-left: 10%;
+    margin-bottom: 0;
+}
+
+.listings-p {
+    font-family: Poppins;
+    font-size: 16px;
+    margin-left: 10%;
+    margin-top: 0;
+}
+
+.wifi,
+.coffee{
+    font-size: 12px;
+    margin-top: 0;
+    background-color: #f1f5fd;
+    width: 25px;
+}
+
+.coffee {
+    margin-top: 2px;
+}
+
+.coffee img {
+    position: relative;
+    top: 2px; 
+    left: 2px;
+  }  
+
+.wifi-text {
+    margin-left: 10%;
+    font-family: Poppins;
+}
+
+.tabs {
+    height: 50px;
+    width: 100%;
+    background-color: rgb(237, 237, 237);
+  }
+
+.tabs-name {
+    margin-right: 30px;
+    font-family: Poppins;
+    font-size: 16px;
+}
+
+.choose-room,
+.about,
+.house-rules,
+.facilities {
+    margin-top: 20px;
+    margin-left: 2%;
+    font-family: Poppins-bold;
+    font-size: 20px;
+}
+
+.house-rules,
+.facilities {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-right: 20%;
+  }
+
+  .angled-box {
+    margin-top: 50px;
+    position: relative;
+    background-color: rgb(127, 50, 205);
+    padding: 20px;
+    transform-origin: top right;
+    transform: skew(-6deg);
+    height: 900px;
+    width: 260px;
+    margin-bottom: 10px;
+}
+
+.skewed-wrapper {
+    transform: skew(6deg);
+}
+
+#reviews {
+    margin-left: 15%;
+    color: white;
+    display: inline-block;
+    margin-bottom: 1px;
+    font-family: Poppins-bold;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+#review-box {
+    margin-left: 15%;
+    background-color: white;
+    width: 280px;
+    height: 350px;
+    box-shadow: 5px 0 7px lightgray;
+    border-radius: 9%;
+    margin-bottom: 10px;
 }

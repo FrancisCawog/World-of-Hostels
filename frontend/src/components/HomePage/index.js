@@ -22,10 +22,6 @@ export default function HomePage() {
     dispatch(sessionActions.logout());
   };
 
-  const handleCircleClick = (circleNumber) => {
-    
-  };
-
   const [searchInputs, setSearchInputs] = useState({
     location: "",
     checkInDate: "",
@@ -58,7 +54,7 @@ export default function HomePage() {
             <Link to="/login">
               <div className="circle"> <img src={userIcon} ></img></div>
             </Link>
-            <div className="circle" onClick={() => handleCircleClick(2)}></div>
+            {/* <div className="circle" onClick={() => handleCircleClick(2)}></div> */}
           </div>
       </header>
 

@@ -26,6 +26,7 @@ class Listing < ApplicationRecord
     validate :valid_coordinates
 
     has_many :rooms, dependent: :destroy
+    has_many :reservations
 
     private
 

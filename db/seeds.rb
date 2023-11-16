@@ -28,6 +28,17 @@ ApplicationRecord.transaction do
         date_of_birth: "2010-10-10",
         age: 13
     )
+
+    u2 = User.create!(
+        first_name: "Francis",
+        last_name: "Cawog",
+        email: "franciscawog@gmail.com",
+        phone: "3479999999",
+        password: "Password123!",
+        nationality: "American",
+        date_of_birth: "1997-05-11",
+        age: 26
+    )
   
     l1 = Listing.create!(
         property_name: "Mad Monkey Hostel",
@@ -170,6 +181,37 @@ ApplicationRecord.transaction do
         has_wifi?: true,
         has_breakfast?: true
         )
+
+    RO1 = Room.create!(
+        listing_id: 1,
+        room_type: "shared",
+        room_title: "Standard 8 Bed Dorm",
+        description: "Bed located in a shared room with 8 beds distributed in 4 bunk beds 0.90X2.00, equipped with curtains, night light, private locker and private bathroom. Bed linen is provided.",
+        num_beds: 8,
+        price: 20.00
+    )
+
+    RE1 = Reservation.create!(
+        listing_id: 1,
+        user_id: 1,
+        room_id: 1,
+        num_guests: 2,
+        num_nights: 2,
+        start_date: "2023-11-18",
+        end_date: "2023-11-20",
+        total_price: 40.00
+    )
+
+    RE2 = Reservation.create!(
+        listing_id: 1,
+        user_id: 2,
+        room_id: 1,
+        num_guests: 1,
+        num_nights: 3,
+        start_date: "2023-11-18",
+        end_date: "2023-11-21",
+        total_price: 60.00
+    )
     
     puts "Done!"
   end

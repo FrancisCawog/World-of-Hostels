@@ -5,6 +5,7 @@
 #  id          :bigint           not null, primary key
 #  listing_id  :bigint           not null
 #  user_id     :bigint           not null
+#  room_id     :bigint           not null
 #  num_guests  :integer          not null
 #  num_nights  :integer          not null
 #  start_date  :date             not null

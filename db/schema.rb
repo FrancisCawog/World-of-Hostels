@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_13_230224) do
   create_table "reservations", force: :cascade do |t|
     t.bigint "listing_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
     t.integer "num_guests", null: false
     t.integer "num_nights", null: false
     t.date "start_date", null: false
@@ -43,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_13_230224) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["listing_id"], name: "index_reservations_on_listing_id"
+    t.index ["room_id"], name: "index_reservations_on_room_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
@@ -71,10 +73,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_13_230224) do
 
   create_table "rooms", force: :cascade do |t|
     t.bigint "listing_id", null: false
-    t.string "type", null: false
+    t.string "room_type", null: false
+    t.string "room_title", null: false
     t.text "description"
     t.integer "num_beds", null: false
-    t.integer "available_beds", null: false
     t.float "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,6 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_13_230224) do
   end
 
   add_foreign_key "reservations", "listings"
+  add_foreign_key "reservations", "rooms"
   add_foreign_key "reservations", "users"
   add_foreign_key "reviews", "listings"
   add_foreign_key "reviews", "reservations"

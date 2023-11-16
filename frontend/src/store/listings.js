@@ -8,13 +8,13 @@ const setListings = (listings) => ({
     payload: listings
 });
 
-const setListing = (listing) => ({
+const setListing = (payload) => ({
     type: SET_LISTING,
-    payload: listing
+    payload
 });
 
 export const fetchListings = () => async (dispatch) => {
-    const response = await csrfFetch("api/listings");
+    const response = await csrfFetch("/api/listings");
     if (response.ok) {
         const data = await response.json();
         dispatch(setListings(data.listings));
@@ -25,12 +25,10 @@ export const fetchListings = () => async (dispatch) => {
 }
 
 export const fetchListing = (listingId) => async (dispatch) => {
-    const response = await csrfFetch(`api/listings/${listingId}`);
-    debugger;
+    const response = await csrfFetch(`/api/listings/${listingId}`);
     if (response.ok) {
-        debugger;
         const data = await response.json();
-        dispatch(setListing(data.listing));
+        dispatch(setListing(data));
     } else {
         throw response;
     }
@@ -48,7 +46,7 @@ const listingReducer = (state = {}, action) => {
             });
             return newState;
         case SET_LISTING:
-            newState[action.payload.id] = action.payload;
+            newState[action.payload.listing.id] = action.payload.listing
             return newState;
         default:
             return state;
