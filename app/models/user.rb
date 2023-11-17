@@ -22,7 +22,9 @@ class User < ApplicationRecord
     validates :first_name, :last_name, presence: true
     validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-    validates_format_of :phone, allow_nil: true, uniqueness: true, with: /\A[0-9+\(\)#\.\s\/ext-]+\z/, message: "is not a valid phone number" ######
+    validates_format_of :phone, allow_nil: true, uniqueness: true, with: /\A[0-9+\(\)#\.\s\/ext-]+\z/, message: "is not a valid phone number"
+
+    has_one_attached :photo
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

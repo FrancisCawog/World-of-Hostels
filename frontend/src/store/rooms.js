@@ -1,4 +1,4 @@
-const SET_ROOMS = "listings/RECEIVE_LISTING";
+const SET_ROOMS = "listings/setListing";
 
 const roomReducer = (state = {}, action) => {
     switch (action.type) {

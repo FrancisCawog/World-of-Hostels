@@ -44,7 +44,6 @@
 
 .tabs {
     height: 50px;
-    width: 100%;
     background-color: rgb(237, 237, 237);
   }
 
@@ -59,9 +58,110 @@
 .house-rules,
 .facilities {
     margin-top: 20px;
+    margin-right: 20%;
     margin-left: 2%;
     font-family: Poppins-bold;
-    font-size: 20px;
+    font-size: 24px;
+}
+
+.checkInandOut {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 2%;
+  }
+  
+  .checkInContainer,
+  .checkOutContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkIn,
+  .checkOut {
+    margin-right: 15px; 
+  }
+
+  .check_in,
+  .check_out {
+    font-family: Poppins;
+    margin-right: 10px;
+  }
+  
+  
+  .separator {
+    height: 30px; 
+    border-left: 2px solid #ccc;
+    margin: 0 10px;
+  }
+  
+  .checkInText,
+  .checkOutText {
+    display: flex;
+    flex-direction: column;
+    font-family: Poppins-bold;
+    font-size: 14px;
+  }
+
+.room-type {
+    margin-left: 2%;
+    font-family: Poppins-bold;
+    font-size: 18px;
+}
+  
+.dorm-bed-div {
+    margin-left: 2%;
+    margin-right: 20%;
+    height: 175px;
+    border: 2px solid lightgray;
+    border-radius: 25px;
+    margin-bottom: 15px;
+}
+
+
+.about-description {
+    font-family: Poppins;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 6.75em;
+}
+
+.read-more-hov {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;
+    margin-right: 20%;
+    margin-left: 73%;
+    width: 120px;
+    padding-left: 1%;
+}
+
+.view-house-rules {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;
+    margin-right: 20%;
+    margin-left: 68.5%;
+    width: 200px;
+    padding-left: 1%;
+}
+
+.read-more-hov:hover,
+.view-house-rules:hover {
+    background-color: rgb(245, 243, 243);
+    border-radius: 15px 15px 15px 15px;
+}
+
+.read-more {
+    font-family: Poppins-bold;
+    text-decoration: underline; 
+    color: black;
+    font-size: 14px;
+    margin-right: 5px;
 }
 
 .house-rules,
@@ -80,7 +180,7 @@
     transform: skew(-6deg);
     height: 900px;
     width: 260px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .skewed-wrapper {
@@ -114,9 +214,110 @@
     border: 1px solid black;
     width: 250px;
     height: 70px;
-    margin-top: 20px;
+    margin-left: 6%;
+    margin-bottom: 1%;
 }
 
 .rating-cats {
-    
+    margin-left: 10%;
+    margin-right: 45%;
+    font-family: Poppins;
+    margin-bottom: 10px;
 }
+
+li {
+    margin-bottom: 6px;
+}
+
+.show-reviews {
+    display: flex;
+    align-items: flex-start;
+}
+
+.side-divs {
+    margin-top: 6.6%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    margin-right: 20%;
+    width: 100%;
+}
+
+.side-div {
+    height: 255px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 0 9px 1px rgb(225, 225, 225);
+    border-radius: 25px 25px 25px 25px;
+}
+
+.fakemap {
+    margin-top: 20px;
+    position: relative;
+    margin-left: 2%;
+    margin-right: 20%;
+    height: 200px;
+    border-radius: 35px;
+    margin-bottom: 50px;
+    overflow: hidden;
+}
+
+.fakemap::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(https://www.hostelworld.com/_nuxt/img/8a208fd.svg) center/100%;
+  transform: scaleX(-1);
+}
+
+
+.location-text {
+    position: absolute;
+    left: 2%;
+    font-family: 'Poppins-bold', sans-serif;
+    font-size: 24px;
+}
+
+.address-info {
+    position: absolute;
+    top: 35%;
+    font-family: 'Poppins';
+    margin-left: 3.5%;
+}
+
+.address-info p {
+    margin: 0px;
+}
+
+.mapsvg {
+    position: absolute;
+    left: 1.5%;
+    top: 40%;
+    width: 20px;
+}
+
+.viewMap {
+    position: absolute;
+    font-family: Poppins-bold;
+    top: 60%;
+    right: 2.5%;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 15px 15px 15px 15px;
+    cursor: pointer;
+}
+
+.viewMap:hover {
+    box-shadow: 0 0 15px rgba(106, 106, 106, 0.5);
+}
+
+.footer {
+    position: relative;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.925);
+    clip-path: polygon(0% 15%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  

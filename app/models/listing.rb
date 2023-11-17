@@ -19,7 +19,7 @@
 #  updated_at     :datetime         not null
 #
 class Listing < ApplicationRecord
-    validates :property_name, :address, :city, :country, :latitude, :longitude, presence: true
+    validates :property_name, :address, :city, :country, :latitude, :longitude, :check_in, :check_out, presence: true
     validates :property_type, inclusion: { in: %w(hostel bed_and_breakfast hotel), message: "%{value} is not a valid property type" }
     validates :address, uniqueness: true
     validates :has_wifi?, :has_breakfast?, inclusion: { in: [true, false] }
@@ -27,6 +27,7 @@ class Listing < ApplicationRecord
 
     has_many :rooms, dependent: :destroy
     has_many :reservations
+    has_many_attached :photo
 
     private
 

@@ -1,3 +1,5 @@
+require "open-uri"
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -7,10 +9,14 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-ApplicationRecord.transaction do 
+# ApplicationRecord.transaction do 
     puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
+    Listing.destroy_all
+    Room.destroy_all
+    Reservation.destroy_all
     User.destroy_all
+    # Reviews.destroy_all
   
     puts "Resetting primary keys..."
     # For easy testing, so that after seeding, the first `User` has `id` of 1
@@ -29,6 +35,8 @@ ApplicationRecord.transaction do
         age: 13
     )
 
+    # u1.photo.attach(io: URI.open(""), filename: "profile_pic.png")
+
     u2 = User.create!(
         first_name: "Francis",
         last_name: "Cawog",
@@ -45,7 +53,9 @@ ApplicationRecord.transaction do
         property_type: "hostel", 
         address: "55 Phra Sumen Road",
         city: "Bangkok",
-        country: "Thailand", 
+        country: "Thailand",
+        check_in: "14:00 - 23:00",
+        check_out: "12:00",
         description: "Discover the best of Bangkok with Mad Monkey! The bustling capital of Thailand, Bangkok is a place where ancient temples, modern skyscrapers, vibrant street markets, and a rich cultural heritage blend into a captivating urban tapestry. We'll take your hostel experience to the next level with our signature Pub Crawls to the famous Khaosan Road and unforgettable Madventures city tours that will allow you to discover Bangkok like you never imagined! 
  
         Enjoy a free welcome drink as soon as you arrive and indulge in a delectable offering of high-quality international cuisine and local flavors at Mad Monkey Bangkok. From smoothie bowls and delicious paninis to juicy burgers and authentic pad thai, we’ll be sure to satiate your every craving! BONUS: our bar is also the best place to start your night — listen to your favorite tunes, join in on some drinking games (see our nightly events below!) and meet other travelers from around the world!
@@ -94,7 +104,9 @@ ApplicationRecord.transaction do
         property_type: "hostel", 
         address: "28 Sukhumvit Road",
         city: "Bangkok",
-        country: "Thailand", 
+        country: "Thailand",
+        check_in: "12:00 - 24:00",
+        check_out: "11:00", 
         description: "Welcome to Bangkok Backpacker Haven, your ultimate home away from home in the vibrant city of Bangkok! Nestled in the bustling Sukhumvit area, our hostel offers a perfect blend of comfort, convenience, and a lively atmosphere. Explore the nearby street markets, indulge in delicious street food, and experience the best of Bangkok's nightlife just steps away from your doorstep.
         
         Our hostel features cozy shared dorms and private rooms, ensuring a comfortable stay for solo travelers and groups alike. Enjoy our communal spaces, including a rooftop lounge with panoramic city views and a vibrant common area where you can meet fellow travelers from around the world.
@@ -143,6 +155,8 @@ ApplicationRecord.transaction do
         address: "45 Ratchadaphisek Road",
         city: "Bangkok",
         country: "Thailand",
+        check_in: "14:00 - 22:00",
+        check_out: "11:00",
         description: "Discover the vibrant energy of Bangkok at Urban Oasis Hostel! Our modern and stylish hostel is located in the heart of Ratchadaphisek, offering a perfect blend of comfort and convenience. Immerse yourself in the local culture, explore nearby attractions, and enjoy the lively atmosphere of this urban oasis.",
         facilities: "[Free WiFi, Air Conditioning, 24-Hour Reception, Rooftop Garden, Shared Kitchen, Lounge Area, Luggage Storage]",
         house_rules: "1. Check-in Time: from 15:00 to 22:00. 2. Check-out Time: before 11:00. 3. Payment: Credit cards accepted. 4. Cancellation Policy: 48 hours advance notice required. 5. Age Restriction: Adults only. 6. No loud noises after 10:00 PM. 7. Respect fellow guests and staff. 8. Smoking allowed only in designated areas.",
@@ -158,6 +172,8 @@ ApplicationRecord.transaction do
         address: "19 Sukhumvit Road",
         city: "Bangkok",
         country: "Thailand",
+        check_in: "14:00 - 23:00",
+        check_out: "12:00",
         description: "Welcome to Cosmic Traveler Hostel, where the charm of Bangkok meets the comfort of home. Nestled in the heart of Sukhumvit, our hostel offers a unique blend of modern amenities and a vibrant atmosphere. Immerse yourself in the city's diverse culture, explore nearby markets, and make memories with fellow travelers.",
         facilities: "[Free WiFi, Air Conditioning, 24-Hour Reception, Cozy Lounge, Shared Kitchen, Cultural Events]",
         house_rules: "1. Check-in Time: from 14:00 to 22:00. 2. Check-out Time: before 12:00. 3. Payment: Credit cards accepted. 4. Cancellation Policy: 72 hours advance notice required. 5. Age Restriction: 18 and above. 6. Quiet hours from 10:00 PM to 7:00 AM. 7. No pets allowed. 8. Eco-friendly practices encouraged.",
@@ -173,6 +189,8 @@ ApplicationRecord.transaction do
         address: "8 Silom Road",
         city: "Bangkok",
         country: "Thailand",
+        check_in: "14:00 - 23:00",
+        check_out: "12:00",
         description: "Indulge in luxury at Serenity Suites, a boutique hotel in the heart of Silom. Impeccable design, personalized service, and a tranquil ambiance await you. Whether you're here for business or leisure, our sophisticated rooms and amenities will make your stay in Bangkok truly memorable.",
         facilities: "[Free High-Speed WiFi, Spa & Wellness Center, Rooftop Pool, 24-Hour Concierge, Gourmet Restaurant, Conference Facilities]",
         house_rules: "1. Check-in Time: from 15:00 to 23:00. 2. Check-out Time: before 12:00. 3. Payment: All major credit cards accepted. 4. Cancellation Policy: 48 hours advance notice required. 5. No smoking in rooms. 6. Pets are not allowed. 7. Dress code for dining areas. 8. Respectful behavior is expected.",
@@ -189,6 +207,60 @@ ApplicationRecord.transaction do
         description: "Bed located in a shared room with 8 beds distributed in 4 bunk beds 0.90X2.00, equipped with curtains, night light, private locker and private bathroom. Bed linen is provided.",
         num_beds: 8,
         price: 20.00
+    )
+
+    RO2 = Room.create!(
+        listing_id: 2,
+        room_type: "private",
+        room_title: "Private 2 Bed Dorm",
+        description: "Bed located in a shared room with 2 beds distributed in 4 bunk beds 0.90X2.00, equipped with curtains, night light, private locker and private bathroom. Bed linen is provided.",
+        num_beds: 8,
+        price: 100.00
+    )
+
+    RO3 = Room.create!(
+        listing_id: 3,
+        room_type: "shared",
+        room_title: "Standard 6 Bed Dorm",
+        description: "Bed located in a shared room with 6 beds distributed in 4 bunk beds 0.90X2.00, equipped with curtains, night light, private locker and private bathroom. Bed linen is provided.",
+        num_beds: 6,
+        price: 25.00
+    )
+
+    RO4 = Room.create!(
+        listing_id: 4,
+        room_type: "shared",
+        room_title: "Standard 4 Bed Dorm",
+        description: "Bed located in a shared room with 4 beds distributed in 4 bunk beds 0.90X2.00, equipped with curtains, night light, private locker and private bathroom. Bed linen is provided.",
+        num_beds: 4,
+        price: 50.00
+    )
+
+    RO5 = Room.create!(
+        listing_id: 5,
+        room_type: "private",
+        room_title: "Private Room",
+        description: "Nice Primate Room",
+        num_beds: 2,
+        price: 100.00
+    )
+
+    RO6 = Room.create!(
+        listing_id: 1,
+        room_type: "shared",
+        room_title: "Standard 12 Bed Dorm",
+        description: "Bed located in a shared room with 12 beds distributed in 4 bunk beds 0.90X2.00, equipped with curtains, night light, private locker and private bathroom. Bed linen is provided.",
+        num_beds: 12,
+        price: 12.00
+    )
+
+    RO7 = Room.create!(
+        listing_id: 1,
+        room_type: "private",
+        room_title: "Private Room overlooking the city",
+        description: "Best hostel room in the city.",
+        num_beds: 2,
+        price: 50.00
     )
 
     RE1 = Reservation.create!(
@@ -214,4 +286,4 @@ ApplicationRecord.transaction do
     )
     
     puts "Done!"
-  end
+#   end

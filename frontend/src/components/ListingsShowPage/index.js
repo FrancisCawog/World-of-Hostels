@@ -5,11 +5,16 @@ import { fetchListing } from "../../store/listings";
 import "./ListingShow.css";
 import WifiSVG from "../../assets/pictures/icons/wifi.svg"
 import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
+import MapSVG from "../../assets/pictures/icons/map-icon.svg"
+import MyArrowSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
+import checkIn from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png"
+import checkOut from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png"
 
 function ListingsShowPage() {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
+  const rooms = useSelector((state) => Object.values(state.rooms))
 
   useEffect(() => {
     dispatch(fetchListing(listingId))
@@ -22,7 +27,6 @@ function ListingsShowPage() {
     // Blank function
   }
   
-
   return (
     <>
       <div className="top-picture"></div>
@@ -33,7 +37,7 @@ function ListingsShowPage() {
         <span style={{ margin: '0 5px', color: 'black' }}>•</span>
         {listing?.city}, {listing?.country}
         <span style={{ margin: '0 5px' }}>•</span>
-        <a href="#" style={{ textDecoration: 'underline' }}>View Map</a>
+        <a href="#" style={{ textDecoration: 'underline', color: "black" }}>View Map</a>
       </p>
 
       <div className="wifi-text" style={{ display: 'flex', alignItems: 'center' }}>
@@ -71,49 +75,136 @@ function ListingsShowPage() {
         </div>
       </div>
 
-      <div className="choose-room"> Choose your room
-        {listing?.rooms && listing.rooms.some(room_type => room_type === "shared") && (
-          <p>Dorm Beds</p>
+      <div>
+  <div className="choose-room">Choose your room</div>
+    {rooms && (
+      <>
+        {rooms.some(room => room.room_type === "private") && (
+          <>
+            <p className="room-type">Private Rooms</p>
+            {rooms
+              .filter(room => room.room_type === "private")
+              .map((privateRoom, index) => (
+                <div key={index}>
+                  <div className="dorm-bed-div">
+                    {/* Content for the private rooms */}
+                  </div>
+                </div>
+              ))}
+          </>
         )}
-      </div>
+
+        {rooms.some(room => room.room_type === "shared") && (
+          <>
+            <p className="room-type">Dorm Beds</p>
+            {rooms
+              .filter(room => room.room_type === "shared")
+              .map((sharedRoom, index) => (
+                <div key={index}>
+                  <div className="dorm-bed-div">
+                    {/* Content for the shared rooms */}
+                  </div>
+                </div>
+              ))}
+          </>
+        )}
+      </>
+    )}
+  </div>
+
 
 
       <div className="about"> About
-
+          <p className="about-description"> {listing?.description} </p>
       </div>
+          <div className="read-more-hov">
+            <p className="read-more">Read more</p>
+            <img src={MyArrowSVG} style={{ width: '14px' }}/>
+          </div>
 
       <div className="house-rules"> House Rules
 
       </div>
 
+      <div className="checkInandOut">
+        <div className="checkInContainer">
+          <img className="checkIn" src={checkIn} style={{ width: '18px' }}/>
+          <div className="checkInText">
+            Check In
+            <div className="check_in"> {listing?.check_in}
+            </div>
+          </div>
+        </div>
+        <div className="separator"></div>
+        <div className="checkOutContainer">
+          <img className="checkOut" src={checkOut} style={{ width: '18px' }}/>
+          <div className="checkOutText">
+            Check Out
+            <div className="check_out"> until {listing?.check_out}
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <div className="view-house-rules">
+            <p className="read-more">View all the house rules</p>
+            <img src={MyArrowSVG} style={{ width: '14px' }}/>
+          </div>
+
       <div className="facilities"> Facilities
 
       </div>
 
-      <div className="purple-container">
-          <div className="angled-box">
-              <div className="skewed-wrapper">
-                  <div>
-                      <span id="reviews">Reviews</span>
-                      <div id="review-box">
-                        <div className="review-rating-box"> 
+      <div className="show-reviews">
+        <div className="purple-container">
+            <div className="angled-box">
+                <div className="skewed-wrapper">
+                    <div>
+                        <span id="reviews">Reviews</span>
+                        <div id="review-box">
+                          <div className="review-rating-box"> 
 
+                          </div>
+                          <ul className="rating-cats">
+                            <li>Security</li>
+                            <li>Location</li>
+                            <li>Staff</li>
+                            <li>Atmosphere</li>
+                            <li>Cleanliness</li>
+                            <li>Facilities</li>
+                            <li>Value for Money</li>
+                          </ul>
                         </div>
-                        <ul className="rating-cats">
-                          <li>Security</li>
-                          <li>Location</li>
-                          <li>Staff</li>
-                          <li>Atmosphere</li>
-                          <li>Cleanliness</li>
-                          <li>Facilities</li>
-                          <li>Value for Money</li>
-                        </ul>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="side-divs">
+            <div className="side-div"></div>
+            <div className="side-div"></div>
+            <div className="side-div"></div>
+        </div>
       </div>
 
+      <div className="fakemap">
+        <p className="location-text">Location</p>
+        <img className="mapsvg" src={MapSVG} alt="Map Icon" />
+        <div className="address-info">
+            <p>{listing?.address}</p>
+            <p>{listing?.city}, {listing?.country}</p>
+        </div>
+
+        <div className="viewMap">
+          View Map
+          <img src={MyArrowSVG} style={{ width: '14px', marginLeft: "10px", marginRight: "0px" }}/>
+        </div>
+      </div>
+
+      <div className="footer">
+      </div>
 
 
     </>
