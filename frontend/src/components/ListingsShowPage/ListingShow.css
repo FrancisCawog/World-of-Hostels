@@ -105,4 +105,18 @@
     box-shadow: 5px 0 7px lightgray;
     border-radius: 9%;
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.review-rating-box {
+    border: 1px solid black;
+    width: 250px;
+    height: 70px;
+    margin-top: 20px;
+}
+
+.rating-cats {
+    
 }

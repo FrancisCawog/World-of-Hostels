@@ -95,7 +95,20 @@ function ListingsShowPage() {
               <div className="skewed-wrapper">
                   <div>
                       <span id="reviews">Reviews</span>
-                      <div id="review-box"></div>
+                      <div id="review-box">
+                        <div className="review-rating-box"> 
+
+                        </div>
+                        <ul className="rating-cats">
+                          <li>Security</li>
+                          <li>Location</li>
+                          <li>Staff</li>
+                          <li>Atmosphere</li>
+                          <li>Cleanliness</li>
+                          <li>Facilities</li>
+                          <li>Value for Money</li>
+                        </ul>
+                      </div>
                   </div>
               </div>
           </div>
