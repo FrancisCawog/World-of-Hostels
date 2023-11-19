@@ -58,7 +58,7 @@ require "open-uri"
         check_out: "12:00",
         description: "Discover the best of Bangkok with Mad Monkey! The bustling capital of Thailand, Bangkok is a place where ancient temples, modern skyscrapers, vibrant street markets, and a rich cultural heritage blend into a captivating urban tapestry. We'll take your hostel experience to the next level with our signature Pub Crawls to the famous Khaosan Road and unforgettable Madventures city tours that will allow you to discover Bangkok like you never imagined! 
  
-        Enjoy a free welcome drink as soon as you arrive and indulge in a delectable offering of high-quality international cuisine and local flavors at Mad Monkey Bangkok. From smoothie bowls and delicious paninis to juicy burgers and authentic pad thai, we’ll be sure to satiate your every craving! BONUS: our bar is also the best place to start your night — listen to your favorite tunes, join in on some drinking games (see our nightly events below!) and meet other travelers from around the world!
+Enjoy a free welcome drink as soon as you arrive and indulge in a delectable offering of high-quality international cuisine and local flavors at Mad Monkey Bangkok. From smoothie bowls and delicious paninis to juicy burgers and authentic pad thai, we’ll be sure to satiate your every craving! BONUS: our bar is also the best place to start your night — listen to your favorite tunes, join in on some drinking games (see our nightly events below!) and meet other travelers from around the world!
         
         PERKS, AMENITIES & FACILITIES
         - FREE welcome drink
@@ -87,12 +87,20 @@ require "open-uri"
         SUN: Chatuchak Market + Karaoke + Pub Crawl
         
         LOCATION
-        Our hostel is located right in the heart of the action for backpackers in Bangkok, just minutes away from the legendary Khao San Road. The hostel itself sits on a peaceful bend of Phra Sumen Road overlooking the canal and a few metres from a historic fort and a park on the Phra Sumen River. Our vibrant neighbourhood is full of restaurants, cafes, shops, convenience stores, and more!
+Our hostel is located right in the heart of the action for backpackers in Bangkok, just minutes away from the legendary Khao San Road. The hostel itself sits on a peaceful bend of Phra Sumen Road overlooking the canal and a few metres from a historic fort and a park on the Phra Sumen River. Our vibrant neighbourhood is full of restaurants, cafes, shops, convenience stores, and more!
         
         WHY CHOOSE MAD MONKEY?
-        Our goal at Mad Monkey is to create meaningful and sustainable travel experiences for our guests — we want to show you an epic time but also immerse you in the local culture and connect you to the communities you're exploring. Our socially responsible hostel has projects around Asia that directly supports the locals — building water wells, creating education funds, providing fair employment for our team, and so on. Your stay with us contributes to these efforts.", 
+Our goal at Mad Monkey is to create meaningful and sustainable travel experiences for our guests — we want to show you an epic time but also immerse you in the local culture and connect you to the communities you're exploring. Our socially responsible hostel has projects around Asia that directly supports the locals — building water wells, creating education funds, providing fair employment for our team, and so on. Your stay with us contributes to these efforts.", 
         facilities: "[Security Lockers, Swimming Pool, Air Conditioning, Hot Showers, Towels Not Included, Luggage Storage, 24 Hour Reception, Tours/Travel Desk, 24 Hour Security Housekeeping, restaurant, bar, Follows Covid-19 sanitation guidance]",
-        house_rules: "1. Check-in Time: from 14:00 to 23:00. 2. Check-out Time: before 12:00 (noon). 3. Payment: Full balance must be paid in cash (THB) only upon checking in. Credit card processing fee is applicable when making a payment during check-in using a guest's credit card. 4. Cancellation Policy: Cancellation: 7 Days advance notice is before arrival date is required.  5. Age Restriction: Minors are not allowed.  6. Reception working hours: 24 hours. 7. No smoking inside the building. 8. Pets are not allowed.",
+        house_rules: "
+1. Check-in Time: from 14:00 to 23:00. 
+2. Check-out Time: before 12:00 (noon). 
+3. Payment: Full balance must be paid in cash (THB) only upon checking in. Credit card processing fee is applicable when making a payment during check-in using a guest's credit card. 
+4. Cancellation Policy: Cancellation: 7 Days advance notice is before arrival date is required.  
+5. Age Restriction: Minors are not allowed.  
+6. Reception working hours: 24 hours. 
+7. No smoking inside the building. 
+8. Pets are not allowed.",
         latitude: 13.763240,
         longitude: 100.496986,
         has_wifi?: true,

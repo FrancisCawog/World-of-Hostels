@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListing } from "../../store/listings";
@@ -9,12 +9,17 @@ import MapSVG from "../../assets/pictures/icons/map-icon.svg"
 import MyArrowSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import checkIn from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png"
 import checkOut from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png"
+import person from "../../assets/pictures/icons/user-128.svg"
+import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
+import ListingsModal from "../ListingsModal";
 
 function ListingsShowPage() {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
   const rooms = useSelector((state) => Object.values(state.rooms))
+  const [showAboutModal, setShowAboutModal] = useState(false);
+  const [tabName, settabName] = useState();
 
   useEffect(() => {
     dispatch(fetchListing(listingId))
@@ -24,8 +29,23 @@ function ListingsShowPage() {
   }, [listingId, dispatch]);
 
   function handleTabClick(tabName) {
-    // Blank function
+    if (tabName === 'Rooms') {
+      const chooseRoomDiv = document.getElementById('choose-room');
+      if (chooseRoomDiv) {
+        chooseRoomDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (tabName === 'About'){
+      settabName('About');
+      setShowAboutModal(true);
+    } else if (tabName === 'House Rules'){
+      settabName('HouseRules');
+      setShowAboutModal(true);
+    }
   }
+
+  const closeModal = () => {
+    setShowAboutModal(false);
+  };
   
   return (
     <>
@@ -74,9 +94,9 @@ function ListingsShowPage() {
           <span className="tabs-name" onClick={() => handleTabClick('Reviews')} style={{ cursor: 'pointer' }}>Reviews</span>
         </div>
       </div>
-
+      {showAboutModal && <ListingsModal tabName={tabName} onClose={closeModal} />}
       <div>
-  <div className="choose-room">Choose your room</div>
+  <div id="choose-room" className="choose-room">Choose your room</div>
     {rooms && (
       <>
         {rooms.some(room => room.room_type === "private") && (
@@ -86,8 +106,39 @@ function ListingsShowPage() {
               .filter(room => room.room_type === "private")
               .map((privateRoom, index) => (
                 <div key={index}>
-                  <div className="dorm-bed-div">
-                    {/* Content for the private rooms */}
+                  <div className="private-room-div">
+                    <div className="private-picture-box"></div>
+                    <div className="room-description-box">
+                      <p className="room-title">{privateRoom.room_title}</p>
+                      <p className="room-description">{privateRoom.description}</p>
+                      <div className="sleeps-info">
+                        <img src={person} style={{ width: "24px" }} alt="Person icon" />
+                        <p>Sleeps {privateRoom.num_beds}</p>
+                      </div>
+                      <hr className="line" />
+                      <p className="room-info">Prices are per room</p>
+                      <br/>
+                      <p className="room-info">Taxes Not Included</p>
+                    </div>
+                    <div className="price-box">
+                      <div>
+                        <div>
+                          <p style={{marginTop: "0px"}}>Free Cancellation</p>
+                          <p style={{fontFamily: "Poppins-bold"}}>US${privateRoom.price.toFixed(2)} </p>
+                        </div>
+
+                        <div className="add-cart"><img src={add} style={{ width: "20px", marginLeft: "-10px", marginRight: "2px", marginBottom: "-3px" }} alt="add icon" /> Add</div>
+                      </div>
+                      <hr className="price-line" />
+                      <div>
+                        <div style={{marginTop: "-10px"}}>
+                          <p>Non-refundable</p>
+                          <p style={{fontFamily: "Poppins-bold"}}>US${(privateRoom.price * 0.95).toFixed(2)} </p>
+                        </div>
+
+                        <div className="add-cart"><img src={add} style={{ width: "20px", marginLeft: "-10px", marginRight: "2px", marginBottom: "-3px" }} alt="add icon" /> Add</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -102,7 +153,38 @@ function ListingsShowPage() {
               .map((sharedRoom, index) => (
                 <div key={index}>
                   <div className="dorm-bed-div">
-                    {/* Content for the shared rooms */}
+                    <div className="shared-picture-box"></div>
+                    <div className="room-description-box">
+                      <p className="room-title">{sharedRoom.room_title}</p>
+                      <p className="room-description">{sharedRoom.description}</p>
+                      <div className="sleeps-info">
+                        <img src={person} style={{ width: "24px" }} alt="Person icon" />
+                        <p>Sleeps {sharedRoom.num_beds}</p>
+                      </div>
+                      <hr className="line" />
+                      <p className="room-info">Prices are per bed</p>
+                      <br/>
+                      <p className="room-info">Taxes Not Included</p>
+                    </div>
+                    <div className="price-box">
+                      <div>
+                        <div>
+                          <p style={{marginTop: "0px"}}>Free Cancellation</p>
+                          <p style={{fontFamily: "Poppins-bold"}}>US${sharedRoom.price.toFixed(2)} </p>
+                        </div>
+
+                        <div className="add-cart"><img src={add} style={{ width: "20px", marginLeft: "-10px", marginRight: "2px", marginBottom: "-3px" }} alt="add icon" /> Add</div>
+                      </div>
+                      <hr className="price-line" />
+                      <div>
+                        <div style={{marginTop: "-10px"}}>
+                          <p>Non-refundable</p>
+                          <p style={{fontFamily: "Poppins-bold"}}>US${(sharedRoom.price * 0.95).toFixed(2)} </p>
+                        </div>
+
+                        <div className="add-cart"><img src={add} style={{ width: "20px", marginLeft: "-10px", marginRight: "2px", marginBottom: "-3px" }} alt="add icon" /> Add</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -117,7 +199,7 @@ function ListingsShowPage() {
       <div className="about"> About
           <p className="about-description"> {listing?.description} </p>
       </div>
-          <div className="read-more-hov">
+          <div className="read-more-hov"  onClick={() => handleTabClick('About')}>
             <p className="read-more">Read more</p>
             <img src={MyArrowSVG} style={{ width: '14px' }}/>
           </div>
@@ -149,7 +231,7 @@ function ListingsShowPage() {
       <br/>
       <br/>
       <br/>
-      <div className="view-house-rules">
+      <div className="view-house-rules"  onClick={() => handleTabClick('House Rules')}>
             <p className="read-more">View all the house rules</p>
             <img src={MyArrowSVG} style={{ width: '14px' }}/>
           </div>

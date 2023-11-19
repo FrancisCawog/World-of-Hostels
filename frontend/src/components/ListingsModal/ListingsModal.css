@@ -1,0 +1,103 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(99,108,125,.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    height: 80%;
+    width: 48%;
+    overflow: auto;
+    position: relative; 
+  }
+  
+  .close {
+    position: absolute;
+    font-size: 26px;
+    top: 16px;
+    right: 25.5px;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    font-family: Poppins-bold;
+    margin-top: -7px;
+    margin-left: 5px;
+    font-size: 28px;
+  }
+
+  .horizontal-line {
+    border-top: .5px solid #ccc; 
+    margin: -12.5px;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .tabs-container {
+    font-family: Poppins;
+    font-size: 14px;
+    display: flex; 
+    justify-content: center;
+    padding-top: 18px;
+  }
+  
+  .tab {
+    cursor: pointer;
+    padding: 14px;
+    border-radius: 5px;
+    margin: 0 10px;
+    position: relative;
+  }
+
+  .tab.active {
+    font-family: Poppins-bold;
+  }
+
+  .tab-underline {
+    border-bottom: .5px solid #e4e4e4;
+    margin: 0 10px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-tabs {
+    display: flex; 
+    justify-content: center; 
+  }
+  
+  .tab {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 10px;
+  }
+  
+  .tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 30%;
+    height: 2px;
+    background-color: black;
+  }
+  
+  .tab-content {
+    white-space: pre-wrap;
+    font-family: Poppins;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  #modal-check {
+    margin-left: 3.2%;
+  }
