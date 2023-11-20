@@ -1,8 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as sessionActions from "../../store/session";
 import './Homepage.css';
-import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png";
 import groupPhoto from "../../assets/pictures/hero.chats.webp"
 import arrow from "../../assets/pictures/icons/arrow.webp"
 import locationPic from "../../assets/pictures/icons/Screenshot 2023-11-13 at 4.48.41 PM.png"
@@ -11,16 +8,10 @@ import CalenderSVG from "../../assets/pictures/icons/calendar-confirmation.svg"
 import profile from "../../assets/pictures/profileusp.webp"
 import message from "../../assets/pictures/messageusp.webp"
 import walking from "../../assets/pictures/walkingusp.webp"
-import userIcon from "../../assets/pictures/icons/user-128.svg"
-import { Link } from "react-router-dom";
+import Navigation from "../Navigation";
+import Footer from "../Footer";
 
 export default function HomePage() {
-  const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
-
-  const handleLogout = () => {
-    dispatch(sessionActions.logout());
-  };
 
   const [searchInputs, setSearchInputs] = useState({
     location: "",
@@ -43,24 +34,8 @@ export default function HomePage() {
 
   return (
     <>
-    <div className="container">
-      <header>
-        <div className="left-content">
-          <img src={logo} style={{ width: '50px' }} alt="Logo" />
-          <p className="WOF" >World of Hostels</p>
-        </div>
-        
-          <div className="circles">
-            <Link to="/login">
-              <div className="circle"> <img src={userIcon} ></img></div>
-            </Link>
-            <div className="circle" ></div>
-          </div>
-      </header>
-
-      {sessionUser && (
-        <button onClick={handleLogout}>Logout</button>
-      )}
+    <Navigation/>
+    <div className="home-container">
       
       <div className="background">
         <h1>Meet your people.</h1>
@@ -117,7 +92,6 @@ export default function HomePage() {
         <span className="bold">Free Cancellation</span> & <span className="bold">Flexible Booking</span> available
       </p>
 
-      {/* <body> */}
         <br/>
         <br/>
         <br/>
@@ -152,8 +126,9 @@ export default function HomePage() {
             <div className="card-tag"></div>
           </div>
         </div>
-      {/* </body> */}
     </div>
+    <br/>
+    <Footer/>
     </>
   );
 }

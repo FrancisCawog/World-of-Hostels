@@ -5,3 +5,16 @@ json.listings do
     end
   end
 end
+
+json.rooms do
+  @listings.each do |listing|
+   listing.rooms.each do |room|
+     json.set! room.id do
+       json.extract! room, :listing_id, :id, :room_type, :room_title, :description, :num_beds, :price
+       json.available_beds do
+         room.available_beds(@start_date, @end_date)
+        end
+      end
+    end
+  end 
+end

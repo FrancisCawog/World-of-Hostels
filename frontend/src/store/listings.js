@@ -17,7 +17,7 @@ export const fetchListings = () => async (dispatch) => {
     const response = await csrfFetch("/api/listings");
     if (response.ok) {
         const data = await response.json();
-        dispatch(setListings(data.listings));
+        dispatch(setListings(data));
     } else {
         throw response;
     }
@@ -37,20 +37,17 @@ export const fetchListing = (listingId) => async (dispatch) => {
 
 const listingReducer = (state = {}, action) => {
     Object.freeze(state);
-    const newState = {...state};
+    const newState = { ...state };
 
     switch (action.type) {
         case SET_LISTINGS:
-            action.payload.forEach(listing => {
-                newState[listing.id] = listing;
-            });
-            return newState;
+            return {...action.payload.listings}
         case SET_LISTING:
-            newState[action.payload.listing.id] = action.payload.listing
+            newState[action.payload.listing.id] = action.payload.listing;
             return newState;
         default:
             return state;
     }
-}
+};
 
 export default listingReducer;

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { CSSTransition } from 'react-transition-group';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListing } from "../../store/listings";
@@ -13,12 +12,14 @@ import checkOut from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.
 import person from "../../assets/pictures/icons/user-128.svg"
 import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
 import ListingsModal from "../ListingsModal";
+import Navigation from "../Navigation";
+import Footer from "../Footer"
 
 function ListingsShowPage() {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
-  const rooms = useSelector((state) => Object.values(state.rooms))
+  const rooms = useSelector((state) => Object.values(state.rooms));
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [tabName, settabName] = useState();
 
@@ -64,6 +65,7 @@ function ListingsShowPage() {
   
   return (
     <>
+      <Navigation/>
       <div className="top-picture"></div>
       <h1 className="title">{listing?.property_name}</h1>
       <p className="listings-p">
@@ -157,7 +159,7 @@ function ListingsShowPage() {
                   </div>
                 </div>
               ))}
-          </>
+            </>
         )}
 
         {rooms.some(room => room.room_type === "shared") && (
@@ -299,11 +301,7 @@ function ListingsShowPage() {
           <img src={MyArrowSVG} style={{ width: '14px', marginLeft: "10px", marginRight: "0px" }}/>
         </div>
       </div>
-
-      <div className="footer">
-      </div>
-
-
+      <Footer/>
     </>
   );
   

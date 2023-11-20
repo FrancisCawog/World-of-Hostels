@@ -4,18 +4,20 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import HomePage from "./components/HomePage"
 import ListingsShowPage from "./components/ListingsShowPage";
-// import Navigation from "./components/Navigation";
+import ListingsIndexPage from "./components/ListingsIndexPage";
 
 function App() {
   return (
     <>
-      {/* <Navigation /> */}
         <Switch>
           <Route exact path="/">
             <HomePage/>
           </Route>
           <Route path="/listings/:listingId" exact>
             <ListingsShowPage />
+          </Route>
+          <Route path="/listings/" exact>
+            <ListingsIndexPage />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
