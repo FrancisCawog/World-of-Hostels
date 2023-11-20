@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CSSTransition } from 'react-transition-group';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListing } from "../../store/listings";
@@ -40,8 +41,22 @@ function ListingsShowPage() {
     } else if (tabName === 'House Rules'){
       settabName('HouseRules');
       setShowAboutModal(true);
+    } else if(tabName === 'Facilities'){
+      settabName('Facilities');
+      setShowAboutModal(true);
     }
   }
+
+  useEffect(() => {
+    if (showAboutModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto'; 
+    };
+  }, [showAboutModal]);
 
   const closeModal = () => {
     setShowAboutModal(false);
@@ -79,7 +94,7 @@ function ListingsShowPage() {
           </>
         )}
 
-        <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>View all facilities</span>
+        <span onClick={() => handleTabClick('Facilities')} style={{ textDecoration: 'underline', cursor: 'pointer' }}>View all facilities</span>
       </div>
 
       <br/>

@@ -11,7 +11,7 @@ import CalenderSVG from "../../assets/pictures/icons/calendar-confirmation.svg"
 import profile from "../../assets/pictures/profileusp.webp"
 import message from "../../assets/pictures/messageusp.webp"
 import walking from "../../assets/pictures/walkingusp.webp"
-import userIcon from "../../assets/pictures/icons/Screenshot 2023-11-13 at 4.49.20 PM.png"
+import userIcon from "../../assets/pictures/icons/user-128.svg"
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
@@ -54,7 +54,7 @@ export default function HomePage() {
             <Link to="/login">
               <div className="circle"> <img src={userIcon} ></img></div>
             </Link>
-            {/* <div className="circle" onClick={() => handleCircleClick(2)}></div> */}
+            <div className="circle" ></div>
           </div>
       </header>
 
@@ -117,7 +117,7 @@ export default function HomePage() {
         <span className="bold">Free Cancellation</span> & <span className="bold">Flexible Booking</span> available
       </p>
 
-      <body>
+      {/* <body> */}
         <br/>
         <br/>
         <br/>
@@ -152,7 +152,7 @@ export default function HomePage() {
             <div className="card-tag"></div>
           </div>
         </div>
-      </body>
+      {/* </body> */}
     </div>
     </>
   );

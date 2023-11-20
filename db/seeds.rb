@@ -150,7 +150,15 @@ Our goal at Mad Monkey is to create meaningful and sustainable travel experience
         WHY CHOOSE BANGKOK BACKPACKER HAVEN?
         At Bangkok Backpacker Haven, we aim to provide not just a place to stay but a memorable travel experience. Join our community, connect with like-minded travelers, and create lasting memories in the enchanting city of Bangkok.", 
         facilities: "[Free WiFi, Air Conditioning, 24-Hour Reception, Luggage Storage, Tours/Travel Desk, Rooftop Lounge, Common Area, Smoking Area]",
-        house_rules: "1. Check-in Time: from 14:00 to 23:00. 2. Check-out Time: before 12:00 (noon). 3. Payment: Full balance must be paid in cash (THB) upon check-in. Credit card processing fee is applicable. 4. Cancellation Policy: 7 days advance notice required. 5. Age Restriction: Minors are not allowed. 6. Reception working hours: 24 hours. 7. No smoking inside the building. 8. Pets are not allowed.",
+        house_rules: "
+1. Check-in Time: from 14:00 to 23:00.
+2. Check-out Time: before 12:00 (noon).
+3. Payment: Full balance must be paid in cash (THB) upon check-in. Credit card processing fee is applicable.
+4. Cancellation Policy: 7 days advance notice required.
+5. Age Restriction: Minors are not allowed.
+6. Reception working hours: 24 hours.
+7. No smoking inside the building.
+8. Pets are not allowed.",
         latitude: 13.731979,
         longitude: 100.569214,
         has_wifi?: true,
@@ -163,11 +171,19 @@ Our goal at Mad Monkey is to create meaningful and sustainable travel experience
         address: "45 Ratchadaphisek Road",
         city: "Bangkok",
         country: "Thailand",
-        check_in: "14:00 - 22:00",
+        check_in: "15:00 - 22:00",
         check_out: "11:00",
         description: "Discover the vibrant energy of Bangkok at Urban Oasis Hostel! Our modern and stylish hostel is located in the heart of Ratchadaphisek, offering a perfect blend of comfort and convenience. Immerse yourself in the local culture, explore nearby attractions, and enjoy the lively atmosphere of this urban oasis.",
         facilities: "[Free WiFi, Air Conditioning, 24-Hour Reception, Rooftop Garden, Shared Kitchen, Lounge Area, Luggage Storage]",
-        house_rules: "1. Check-in Time: from 15:00 to 22:00. 2. Check-out Time: before 11:00. 3. Payment: Credit cards accepted. 4. Cancellation Policy: 48 hours advance notice required. 5. Age Restriction: Adults only. 6. No loud noises after 10:00 PM. 7. Respect fellow guests and staff. 8. Smoking allowed only in designated areas.",
+        house_rules: "
+1. Check-in Time: from 15:00 to 22:00.
+2. Check-out Time: before 11:00.
+3. Payment: Credit cards accepted.
+4. Cancellation Policy: 48 hours advance notice required.
+5. Age Restriction: Adults only.
+6. No loud noises after 10:00 PM.
+7. Respect fellow guests and staff.
+8. Smoking allowed only in designated areas.",
         latitude: 13.776908,
         longitude: 100.564695,
         has_wifi?: true,
@@ -180,11 +196,19 @@ Our goal at Mad Monkey is to create meaningful and sustainable travel experience
         address: "19 Sukhumvit Road",
         city: "Bangkok",
         country: "Thailand",
-        check_in: "14:00 - 23:00",
+        check_in: "14:00 - 22:00",
         check_out: "12:00",
         description: "Welcome to Cosmic Traveler Hostel, where the charm of Bangkok meets the comfort of home. Nestled in the heart of Sukhumvit, our hostel offers a unique blend of modern amenities and a vibrant atmosphere. Immerse yourself in the city's diverse culture, explore nearby markets, and make memories with fellow travelers.",
         facilities: "[Free WiFi, Air Conditioning, 24-Hour Reception, Cozy Lounge, Shared Kitchen, Cultural Events]",
-        house_rules: "1. Check-in Time: from 14:00 to 22:00. 2. Check-out Time: before 12:00. 3. Payment: Credit cards accepted. 4. Cancellation Policy: 72 hours advance notice required. 5. Age Restriction: 18 and above. 6. Quiet hours from 10:00 PM to 7:00 AM. 7. No pets allowed. 8. Eco-friendly practices encouraged.",
+        house_rules: "
+1. Check-in Time: from
+14:00 to 22:00. 2. Check-out Time: before 12:00.
+3. Payment: Credit cards accepted.
+4. Cancellation Policy: 72 hours advance notice required.
+5. Age Restriction: 18 and above.
+6. Quiet hours from 10:00 PM to 7:00 AM.
+7. No pets allowed.
+8. Eco-friendly practices encouraged.",
         latitude: 13.726850,
         longitude: 100.576904,
         has_wifi?: true,
@@ -197,11 +221,19 @@ Our goal at Mad Monkey is to create meaningful and sustainable travel experience
         address: "8 Silom Road",
         city: "Bangkok",
         country: "Thailand",
-        check_in: "14:00 - 23:00",
+        check_in: "15:00 - 23:00",
         check_out: "12:00",
         description: "Indulge in luxury at Serenity Suites, a boutique hotel in the heart of Silom. Impeccable design, personalized service, and a tranquil ambiance await you. Whether you're here for business or leisure, our sophisticated rooms and amenities will make your stay in Bangkok truly memorable.",
         facilities: "[Free High-Speed WiFi, Spa & Wellness Center, Rooftop Pool, 24-Hour Concierge, Gourmet Restaurant, Conference Facilities]",
-        house_rules: "1. Check-in Time: from 15:00 to 23:00. 2. Check-out Time: before 12:00. 3. Payment: All major credit cards accepted. 4. Cancellation Policy: 48 hours advance notice required. 5. No smoking in rooms. 6. Pets are not allowed. 7. Dress code for dining areas. 8. Respectful behavior is expected.",
+        house_rules: "
+1. Check-in Time: from 15:00 to 23:00.
+2. Check-out Time: before 12:00.
+3. Payment: All major credit cards accepted.
+4. Cancellation Policy: 48 hours advance notice required.
+5. No smoking in rooms.
+6. Pets are not allowed.
+7. Dress code for dining areas.
+8. Respectful behavior is expected.",
         latitude: 13.729023,
         longitude: 100.532332,
         has_wifi?: true,

@@ -1,24 +1,43 @@
 // import React from 'react';
-// import { NavLink } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import ProfileButton from './ProfileButton';
+// import { Link, useLocation } from 'react-router-dom';
+// import logo from 'path/to/your/logo'; // Import your logo
+// import userIcon from 'path/to/your/userIcon'; // Import your user icon
 // import './Navigation.css';
 
 // function Navigation() {
-//   const sessionUser = useSelector(state => state.session.user);
+//   const location = useLocation();
+//   const sessionUser = null; // Replace null with your session user logic
 
-//   let sessionLinks;
-//   if (sessionUser) {
-//     sessionLinks = (
-//       <ProfileButton user={sessionUser} />
-//     );
-//   }
+//   const handleLogout = () => {
+//     // Logic for handling logout
+//   };
 
 //   return (
-//     <ul>
-//         <NavLink exact to="/">Back</NavLink>
-//         {sessionLinks}
-//     </ul>
+//     <div className="container">
+//       <header>
+//         <div className="left-content">
+//           <img src={logo} style={{ width: '50px' }} alt="Logo" />
+//           <p className="WOF">World of Hostels</p>
+//         </div>
+        
+//         <div className="circles">
+//           {location.pathname === '/' && (
+//             <>
+//               <Link to="/login">
+//                 <div className="circle">
+//                   <img src={userIcon} alt="User" />
+//                 </div>
+//               </Link>
+//               <div className="circle"></div>
+//             </>
+//           )}
+//         </div>
+//       </header>
+
+//       {sessionUser && (
+//         <button onClick={handleLogout}>Logout</button>
+//       )}
+//     </div>
 //   );
 // }
 

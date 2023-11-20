@@ -101,3 +101,32 @@
   #modal-check {
     margin-left: 3.2%;
   }
+
+  .smaller-horizontal-line {
+    margin-top: 5.5%;
+    border-top: 1px solid #ccc;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
+
+  .cancellation-policy {
+    display: flex;
+    margin-bottom: -35px;
+  }
+  
+  .free-cancellation-rates,
+  .non-refundable-rates {
+    width: 50%;
+  }
+
+  .free-cancellation-rates h2,
+  .non-refundable-rates h2 {
+    font-family: Poppins-bold;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+  .free-cancellation-rates p,
+  .non-refundable-rates p {
+    font-family: Poppins;
+  }
