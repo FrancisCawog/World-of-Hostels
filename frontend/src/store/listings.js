@@ -1,7 +1,7 @@
 import csrfFetch from "./csrf";
 
 const SET_LISTINGS = "listings/setListings";
-const SET_LISTING = "listings/setListing";
+export const SET_LISTING = "listings/setListing";
 
 const setListings = (listings) => ({
     type: SET_LISTINGS,

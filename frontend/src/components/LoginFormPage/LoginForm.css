@@ -1,34 +1,26 @@
-#ele {
-    display: inline-block;
-    width: 50%;
-}
-
-.page-container {
+.log-container {
     display: flex;
-}
-
-.element {
-    width: 50%;
-    box-sizing: border-box;
-    margin-top: 35px;
-    transform: translateX(5%);
-}
-
-#loginContainer {
-    max-width: 350px;
-    padding: 20px;
+  }
+  
+  .loginContainer,
+  .car-container {
+    flex: 1;
+  }
+  
+  .loginContainer {
     background-color: white;
-    box-sizing: border-box;
-    margin: auto;
-    position: relative;
-    top: 50%;
-}
+    max-width: 50%; 
+  }
+  
+  .car-container {
+    margin-top: 2%;
+  }
 
-body {
-    font-family: Inter;
-    margin: 0;
-    padding: 0;
-}
+  .loginBox {
+    margin-left: 30%;
+    width: 40%;
+    margin-top: 15%;
+  }
 
 h1 {
     color: black;

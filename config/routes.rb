@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show, :update]
     resources :listings, only: [:index, :show]
     resource :session, only: [:create, :destroy, :show]
+    resources :reservations, only: [:show, :create, :update, :destroy]
   end
 
   get '*path', to: "static_pages#frontend_index"

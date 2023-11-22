@@ -1,11 +1,12 @@
 import csrfFetch from "./csrf.js";
 
-const RECEIVE_USER = 'session/receiveUser';
+export const RECEIVE_USER = 'session/receiveUser';
 const REMOVE_USER = 'session/removeUser';
 
-const receiveUser = (user) => ({
+const receiveUser = (data) => ({
   type: RECEIVE_USER,
-  payload: user
+  user: data.user,
+  reservations: data.reservations
 });
 
 const removeUser = () => ({
@@ -27,7 +28,7 @@ export const restoreSession = () => async (dispatch) => {
   storeCSRFToken(response);
   const data = await response.json();
   storeCurrentUser(data.user);
-  dispatch(receiveUser(data.user));
+  dispatch(receiveUser(data));
   return response;
 };
 
@@ -38,7 +39,7 @@ export const login = ({ email, password }) => async dispatch => {
   });
   const data = await response.json();
   storeCurrentUser(data.user);
-  dispatch(receiveUser(data.user));
+  dispatch(receiveUser(data));
   return response;
 };
 
@@ -54,7 +55,7 @@ export const signup = (user) => async (dispatch) => {
   });
   const data = await response.json();
   storeCurrentUser(data.user);
-  dispatch(receiveUser(data.user));
+  dispatch(receiveUser(data));
   return response;
 };
 
@@ -75,7 +76,7 @@ const initialState = {
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_USER:
-      return { ...state, user: action.payload };
+      return { ...state, user: action.user };
     case REMOVE_USER:
       return { ...state, user: null };
     default:

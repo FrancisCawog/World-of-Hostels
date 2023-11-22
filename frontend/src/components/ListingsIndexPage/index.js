@@ -50,72 +50,72 @@ function ListingsIndexPage() {
         <div className="listing-review"></div>
         <p className="single-listing-p">{listing.property_type.charAt(0).toUpperCase() + listing.property_type.slice(1)}</p>
 
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: "-3%" }}>
-                        {listing['has_wifi?'] && (
-                        <>
-                            <div className="listing-wifi" style={{ display: 'inline-block', borderRadius: '50%', padding: '5px', marginRight: '5px' }}  onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-                            <img src={WifiSVG} alt="WiFi Icon" className="wifi-icon" style={{ marginLeft: '1px', marginTop: '2px' }} />
-                            {isHovered && (
-                            <div className="hover-box" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                <img src={WhiteWifiSVG} alt="WiFi Icon" style={{ width: '20px', height: '20px', marginRight: '5px', verticalAlign: 'middle'}} />
-                                <p style={{ display: 'inline-block', verticalAlign: 'middle', margin: '0', color: "white" }}>Free Wifi</p>
-                            </div>
-                            )}
-                            </div>
-                        </>
-                        )}
-
-                        {listing['has_breakfast?'] && (
-                        <>
-                            <div className="listing-coffee" style={{ display: 'inline-block', borderRadius: '50%', padding: '5px', marginRight: '5px' }} onMouseEnter={() => setIsHovered2(true)} onMouseLeave={() => setIsHovered2(false)}>
-                            <img src={CoffeeSVG} alt="Coffee Icon" className="coffee-icon"style={{ marginLeft: '2px', marginTop: '2px' }}/>
-                            {isHovered2 && (
-                            <div className="hover-box2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                <img src={WhiteCoffeeSVG} alt="Coffee Icon" style={{ width: '20px', height: '20px', marginRight: '5px', verticalAlign: 'middle'}} />
-                                <p style={{ display: 'inline-block', verticalAlign: 'middle', margin: '0', color: "white" }}>Free Breakfast</p>
-                            </div>
-                            )}
-                            </div>
-                        </>
-                        )}
+            <div style={{ display: 'flex', alignItems: 'center', marginTop: "-3%" }}>
+                {listing['has_wifi?'] && (
+                <>
+                    <div className="listing-wifi" style={{ display: 'inline-block', borderRadius: '50%', padding: '5px', marginRight: '5px' }}  onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+                    <img src={WifiSVG} alt="WiFi Icon" className="wifi-icon" style={{ marginLeft: '1px', marginTop: '2px' }} />
+                    {isHovered && (
+                    <div className="hover-box" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <img src={WhiteWifiSVG} alt="WiFi Icon" style={{ width: '20px', height: '20px', marginRight: '5px', verticalAlign: 'middle'}} />
+                        <p style={{ display: 'inline-block', verticalAlign: 'middle', margin: '0', color: "white" }}>Free Wifi</p>
                     </div>
-
-                    <div className="private-and-dorm" style={{ position: 'absolute', bottom: '5px', right: '5px', padding: '5px', borderRadius: '5px', fontFamily: "Poppins", display: "flex", alignItems: "center" }}>
-                    {(() => {
-                        const prices = Object.values(rooms).filter(room => room.listing_id === listing.id).reduce((acc, room) => {
-                        if (room.room_type === 'shared' && (!acc.sharedPrice || room.price < acc.sharedPrice)) {
-                            acc.sharedPrice = room.price;
-                        } else if (room.room_type === 'private' && (!acc.privatePrice || room.price < acc.privatePrice)) {
-                            acc.privatePrice = room.price;
-                        }
-                        return acc;
-                        }, { sharedPrice: null, privatePrice: null });
-
-                        const formatPrice = price => `$${(price * 0.95).toFixed(2)}`;
-
-                        return (
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                            {prices.privatePrice ? (
-                            <div style={{ marginRight: '10px', textAlign: 'right', marginTop: "5%" }}>
-                                <p style={{ margin: 0 }}>Privates From</p>
-                                <p style={{ margin: 0, fontFamily: "Poppins-bold" }}>{formatPrice(prices.privatePrice)}</p>
-                            </div>
-                            ) : (
-                                <p style={{ margin: 0, color: 'gray', alignSelf: 'flex-end' }}>No privates available</p>
-                            )}
-                            <div style={{ height: '50px', borderLeft: '1px solid gray', margin: '0 10px' }}></div>
-                            {prices.sharedPrice ? (
-                            <div style={{textAlign: 'right', marginTop: "5%" }}>
-                                <p style={{ margin: 0 }}>Dorms From</p>
-                                <p style={{ margin: 0, fontFamily: "Poppins-bold" }}>{formatPrice(prices.sharedPrice)}</p>
-                            </div>
-                            ) : (
-                                <p style={{ margin: 0, color: 'gray', alignSelf: 'flex-end' }}>No dorms available</p>
-                            )}
-                        </div>
-                        );
-                    })()}
+                    )}
                     </div>
+                </>
+                )}
+
+                {listing['has_breakfast?'] && (
+                <>
+                    <div className="listing-coffee" style={{ display: 'inline-block', borderRadius: '50%', padding: '5px', marginRight: '5px' }} onMouseEnter={() => setIsHovered2(true)} onMouseLeave={() => setIsHovered2(false)}>
+                    <img src={CoffeeSVG} alt="Coffee Icon" className="coffee-icon"style={{ marginLeft: '2px', marginTop: '2px' }}/>
+                    {isHovered2 && (
+                    <div className="hover-box2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <img src={WhiteCoffeeSVG} alt="Coffee Icon" style={{ width: '20px', height: '20px', marginRight: '5px', verticalAlign: 'middle'}} />
+                        <p style={{ display: 'inline-block', verticalAlign: 'middle', margin: '0', color: "white" }}>Free Breakfast</p>
+                    </div>
+                    )}
+                    </div>
+                </>
+                )}
+            </div>
+
+            <div className="private-and-dorm" style={{ position: 'absolute', bottom: '5px', right: '5px', padding: '5px', borderRadius: '5px', fontFamily: "Poppins", display: "flex", alignItems: "center" }}>
+            {(() => {
+                const prices = Object.values(rooms).filter(room => room.listing_id === listing.id).reduce((acc, room) => {
+                if (room.room_type === 'shared' && (!acc.sharedPrice || room.price < acc.sharedPrice)) {
+                    acc.sharedPrice = room.price;
+                } else if (room.room_type === 'private' && (!acc.privatePrice || room.price < acc.privatePrice)) {
+                    acc.privatePrice = room.price;
+                }
+                return acc;
+                }, { sharedPrice: null, privatePrice: null });
+
+                const formatPrice = price => `$${(price * 0.95).toFixed(2)}`;
+
+                return (
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    {prices.privatePrice ? (
+                    <div style={{ marginRight: '10px', textAlign: 'right', marginTop: "5%" }}>
+                        <p style={{ margin: 0 }}>Privates From</p>
+                        <p style={{ margin: 0, fontFamily: "Poppins-bold" }}>{formatPrice(prices.privatePrice)}</p>
+                    </div>
+                    ) : (
+                        <p style={{ margin: 0, color: 'gray', alignSelf: 'flex-end' }}>No privates available</p>
+                    )}
+                    <div style={{ height: '50px', borderLeft: '1px solid gray', margin: '0 10px' }}></div>
+                    {prices.sharedPrice ? (
+                    <div style={{textAlign: 'right', marginTop: "5%" }}>
+                        <p style={{ margin: 0 }}>Dorms From</p>
+                        <p style={{ margin: 0, fontFamily: "Poppins-bold" }}>{formatPrice(prices.sharedPrice)}</p>
+                    </div>
+                    ) : (
+                        <p style={{ margin: 0, color: 'gray', alignSelf: 'flex-end' }}>No dorms available</p>
+                    )}
+                </div>
+                );
+            })()}
+            </div>
         </div>
         </a>
         ))}

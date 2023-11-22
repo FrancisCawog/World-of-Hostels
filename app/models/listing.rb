@@ -8,6 +8,8 @@
 #  address        :string           not null
 #  city           :string           not null
 #  country        :string           not null
+#  check_in       :string           not null
+#  check_out      :string           not null
 #  description    :text
 #  facilities     :text
 #  house_rules    :text
@@ -26,8 +28,8 @@ class Listing < ApplicationRecord
     validate :valid_coordinates
 
     has_many :rooms, dependent: :destroy
-    has_many :reservations
-    has_many_attached :photo
+    has_many :reservations, dependent: :destroy
+    has_many_attached :photos
 
     private
 

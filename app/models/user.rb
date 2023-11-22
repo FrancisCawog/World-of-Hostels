@@ -25,6 +25,8 @@ class User < ApplicationRecord
     validates_format_of :phone, allow_nil: true, uniqueness: true, with: /\A[0-9+\(\)#\.\s\/ext-]+\z/, message: "is not a valid phone number"
 
     has_one_attached :photo
+    has_many :reservations, dependent: :destroy
+    has_many :reviews, dependent: :destroy
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

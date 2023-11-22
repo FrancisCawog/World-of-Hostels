@@ -40,76 +40,78 @@ function SignupFormPage() {
 
   return (
     <>
-    <div className="page-container" id="ele">
-      <div className="element" id="loginContainer" style={{transform: 'translateY(-5%)'}}>
-        <Link to="/" exact="true">
-          <img src={MyArrowSVG} alt="Back" style={{ width: '10px' }}/> Back
-        </Link>
-        <br/>
-        <br/>
-        <img src={logo} style={{ width: '50px' }}/>
-          <h1>Sign up to add more adventure!</h1> 
-          <p> See who else is staying in your hostel and let others know you are staying too. Get to know the names and ages of your fellow travellers and message to say hello before you go. Meet other travellers by joining or organising events to explore together.</p>
-          <p> Sign up to agree to the use of your information. To learn more, visit our social terms of service and privacy policy pages. </p>
-          <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error) => <li key={error}>{error}</li>)}
-            </ul>
+    <div className="sign-container">
+        <div className="signupContainer">
+          <div className="signupBox">
+            <Link to="/" exact="true">
+              <img src={MyArrowSVG} alt="Back" style={{ width: '10px' }}/> Back
+            </Link>
+            <br/>
+            <br/>
+            <img src={logo} style={{ width: '50px' }}/>
+              <h1>Sign up to add more adventure!</h1> 
+              <p> See who else is staying in your hostel and let others know you are staying too. Get to know the names and ages of your fellow travellers and message to say hello before you go. Meet other travellers by joining or organising events to explore together.</p>
+              <p> Sign up to agree to the use of your information. To learn more, visit our social terms of service and privacy policy pages. </p>
+              <form onSubmit={handleSubmit}>
+            <ul>
+              {errors.map((error) => <li key={error}>{error}</li>)}
+                </ul>
 
-            <label>
-              <input
-                type="text"
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-              />
-            </label>
+                <label>
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                  />
+                </label>
 
-            <label>
-              <input
-                type="text"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-              />
-            </label>
+                <label>
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                  />
+                </label>
 
-            <label>
-              <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </label>
+                <label>
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </label>
 
-            <label>
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
+                <label>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </label>
 
-            <button type="submit" >Sign Up</button>
-          </form>
+                <button className="sign-up-button" type="submit" >Sign Up</button>
+              </form>
 
-          <br/>
-          <p id="bottom">Already have an account?</p>
-          <Link id="bottom" className="link" to="/login">
-            <img src={UserSVG} alt="Back" style={{ width: '14px' }}/> Login
-          </Link>
-          <p>If you do not want to participate in social features continue as a guest and do not sign in above. You can always turn off social features in your settings.</p>
-        </div>
-      </div>
+              <br/>
+              <p id="bottom">Already have an account?</p>
+              <Link id="bottom" className="link" to="/login">
+                <img src={UserSVG} alt="Back" style={{ width: '14px' }}/> Login
+              </Link>
+              <p>If you do not want to participate in social features continue as a guest and do not sign in above. You can always turn off social features in your settings.</p>
+            </div>
+          </div>
 
-        <div className="element" id="ele">
-          <img src={car} ></img>
+            <div className="car-container">
+            <img src={car} ></img>
+          </div>
         </div>
       </>
   );

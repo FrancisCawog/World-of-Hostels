@@ -10,6 +10,7 @@ import message from "../../assets/pictures/messageusp.webp"
 import walking from "../../assets/pictures/walkingusp.webp"
 import Navigation from "../Navigation";
 import Footer from "../Footer";
+import { useHistory } from 'react-router-dom';
 
 export default function HomePage() {
 
@@ -28,9 +29,11 @@ export default function HomePage() {
     }));
   };
 
-  const handleSearch = () => {
-    // console.log("Search clicked with inputs:", searchInputs);
-  };
+  
+    const history = useHistory();
+    const handleSearch = () => {
+      history.push('/listings');
+    };
 
   return (
     <>
@@ -77,7 +80,7 @@ export default function HomePage() {
             value={searchInputs.guests}
             onChange={handleInputChange}
           />
-          <button type="button" onClick={handleSearch}>Let's Go!</button>
+          <button className="let-go-button" type="button" onClick={handleSearch}>Let's Go!</button>
         </div>
       </div>
     </div>

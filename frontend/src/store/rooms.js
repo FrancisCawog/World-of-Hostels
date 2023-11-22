@@ -1,5 +1,5 @@
 const SET_ROOMS = "listings/setListing";
-const SET_ALL_ROOMS = "listings/setListings"
+const SET_ALL_ROOMS = "listings/setListings";
 
 const roomReducer = (state = {}, action) => {
     switch (action.type) {

@@ -20,7 +20,10 @@ require "open-uri"
   
     puts "Resetting primary keys..."
     # For easy testing, so that after seeding, the first `User` has `id` of 1
+    ApplicationRecord.connection.reset_pk_sequence!('listings')
     ApplicationRecord.connection.reset_pk_sequence!('users')
+    ApplicationRecord.connection.reset_pk_sequence!('reservation')
+    ApplicationRecord.connection.reset_pk_sequence!('rooms')
   
     puts "Creating users..."
     # Create one user with an easy to remember username, email, and password:
@@ -106,6 +109,14 @@ Our goal at Mad Monkey is to create meaningful and sustainable travel experience
         has_wifi?: true,
         has_breakfast?: false,
     )
+
+    l1.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Mad+Monkey+Pics/174.webp"), filename: "/174.webp")
+    l1.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Mad+Monkey+Pics/mp5y0nivmoqoqiubyxul.jpeg"), filename: "/mp5y0nivmoqoqiubyxul.jpeg")
+    l1.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Mad+Monkey+Pics/r7xo3qa9tjp0uagmvi8b.jpeg"), filename: "/r7xo3qa9tjp0uagmvi8b.jpeg")
+    l1.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Mad+Monkey+Pics/174.webp"), filename: "/174.webp")
+    l1.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Mad+Monkey+Pics/reznmebvzcrx7tdmrxpb.jpeg"), filename: "/reznmebvzcrx7tdmrxpb.jpeg")
+    l1.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Mad+Monkey+Pics/rrkqevybhnv8ljqy1j61.jpeg"), filename: "/rrkqevybhnv8ljqy1j61.jpeg")
+
 
     l2 = Listing.create!(
         property_name: "Bangkok Backpacker Haven",
@@ -308,10 +319,9 @@ Our goal at Mad Monkey is to create meaningful and sustainable travel experience
         user_id: 1,
         room_id: 1,
         num_guests: 2,
-        num_nights: 2,
-        start_date: "2023-11-18",
-        end_date: "2023-11-20",
-        total_price: 40.00
+        start_date: "2023-11-21",
+        end_date: "2023-11-24",
+        refundable: true
     )
 
     RE2 = Reservation.create!(
@@ -319,10 +329,9 @@ Our goal at Mad Monkey is to create meaningful and sustainable travel experience
         user_id: 2,
         room_id: 1,
         num_guests: 1,
-        num_nights: 3,
-        start_date: "2023-11-18",
-        end_date: "2023-11-21",
-        total_price: 60.00
+        start_date: "2023-11-21",
+        end_date: "2023-11-23",
+        refundable: false
     )
     
     puts "Done!"

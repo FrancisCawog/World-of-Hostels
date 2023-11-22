@@ -67,10 +67,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_144908) do
     t.bigint "user_id", null: false
     t.bigint "room_id", null: false
     t.integer "num_guests", null: false
-    t.integer "num_nights", null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
-    t.bigint "total_price", null: false
+    t.boolean "refundable", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["listing_id"], name: "index_reservations_on_listing_id"

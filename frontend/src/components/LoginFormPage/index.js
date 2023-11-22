@@ -58,53 +58,56 @@ const handleDemoLogin = async () => {
 
   return (
     <>
-    <div className="page-container" id="ele">
-      <div className="element" id="loginContainer" style={{transform: 'translateY(-65%)'}}>
-      <Link to="/" exact="true">
-        <img src={MyArrowSVG} alt="Back" style={{ width: '10px' }}/> Back
-      </Link>
-      <br/>
-      <br/>
-      <img src={logo} style={{ width: '50px' }}/>
-      <h1>Welcome traveller!</h1>
-      <p>Log in to unlock extras and start connecting with travelers heading to your hostel</p>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map(error => <li key={error}>{error}</li>)}
-        </ul>
-        <label>
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button id="loginButton" type="submit" >Login</button>
-      </form>
+      <div className="log-container">
+        <div className="loginContainer">
+          <div className="loginBox">
+          <Link to="/" exact="true">
+            <img src={MyArrowSVG} alt="Back" style={{ width: '10px' }}/> Back
+          </Link>
+          <br/>
+          <br/>
+          <img src={logo} style={{ width: '50px' }}/>
+          <h1>Welcome traveller!</h1>
+          <p>Log in to unlock extras and start connecting with travelers heading to your hostel</p>
+          <form onSubmit={handleSubmit}>
+            <ul>
+              {errors.map(error => <li key={error}>{error}</li>)}
+            </ul>
+            <label>
+              <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+            <button id="loginButton" type="submit" >Login</button>
+          </form>
 
-      <br/>
-      <p id="bottom">Don't have an account?</p>
-      <span id="bottom" className="link" onClick={handleDemoLogin}>
-        Demo User
-      </span>
-      <Link id="bottom" className="link" to="/signup">
-      <img src={PencilSVG} alt="Back" style={{ width: '14px' }}/> Sign Up
-      </Link>
-    </div>
-  </div>
-    <div className="element" id="ele">
-        <img src={car} ></img>
+          <br/>
+          <p id="bottom">Don't have an account?</p>
+          <span id="bottom" className="link" onClick={handleDemoLogin}>
+            Demo User
+          </span>
+          <Link id="bottom" className="link" to="/signup">
+          <img src={PencilSVG} alt="Back" style={{ width: '14px' }}/> Sign Up
+          </Link>
+        </div>
+      </div>
+
+      <div className="car-container">
+          <img src={car} ></img>
+      </div>
     </div>
     </>
   );

@@ -1,0 +1,68 @@
+.checkout-choose,
+.checkout-check {
+    border-radius: 25px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.1);
+    padding: 1rem;
+}
+
+.checkout-choose {
+    height: 250px;
+    width: 300px;
+}
+
+.checkout-check {
+    height: 350px;
+    width: 300px;
+}
+
+.checkout-check button, 
+.checkout-choose button {
+    width: 150px;
+    height: 45px;
+    background-color: #F25621;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-family: Poppins-bold;
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.checkout-check button:hover, 
+.checkout-choose button:hover {
+    box-shadow: 0 0 10px 3px rgba(242, 86, 33, 0.7);
+}
+
+.choose-top {
+    margin-top: -1px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.choose-top p {
+    margin-right: 10px;
+}
+
+.choose-middle {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(211, 211, 211, 0.713);
+    border-radius: 15px;
+    height: 60px;
+    width: 100%;
+}
+
+.checkout-info img {
+    margin-top: 7%;
+    height: 100px;
+    width: auto;
+}
+
+.choose-top p {
+    font-family: Poppins;
+    font-size: 14px;
+}
