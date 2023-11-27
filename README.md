@@ -21,12 +21,8 @@ https://world-of-hostels.onrender.com
 - Upon searching for a location, all available rooms are shown on an index page together
 - When an accomodation is selected, the user is brought to the listing show page where different room options are shown.
 
-![](./frontend/src/assets/read-me-pictures/Screenshot 2023-11-26 at 11.29.13 PM.png)
-- World of Hostels homepage
+![World of Hostels homepage](./frontend/src/assets/read-me-pictures/Screenshot%202023-11-26%20at%2011.29.13%20PM.png)
 
-![](./frontend/src/assets/read-me-pictures/Screenshot 2023-11-26 at 11.28.33 PM.png)
-- Sign up page for new users
+![Sign up page for new users](./frontend/src/assets/read-me-pictures/Screenshot%202023-11-26%20at%2011.28.33%20PM.png)
 
-![](./frontend/src/assets/read-me-pictures/Screenshot 2023-11-26 at 11.29.42 PM.png)
-- Property details on the listings show page
-
+![Property details on the listings show page](./frontend/src/assets/read-me-pictures/Screenshot%202023-11-26%20at%2011.29.42%20PM.png)
