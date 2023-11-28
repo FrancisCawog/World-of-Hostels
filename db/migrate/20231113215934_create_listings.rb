@@ -6,8 +6,6 @@ class CreateListings < ActiveRecord::Migration[7.0]
       t.string :address, null: false
       t.string :city, null: false
       t.string :country, null: false
-      t.string :check_in, null: false
-      t.string :check_out, null: false
       t.text :description
       t.text :facilities
       t.text :house_rules
