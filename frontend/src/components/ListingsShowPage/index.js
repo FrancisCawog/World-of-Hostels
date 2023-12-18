@@ -66,6 +66,9 @@ function ListingsShowPage() {
     } else if(tabName === 'Facilities'){
       settabName('Facilities');
       setShowAboutModal(true);
+    } else if(tabName === 'Map'){
+      settabName('Map');
+      setShowAboutModal(true);
     }
   }
 
@@ -96,7 +99,7 @@ function ListingsShowPage() {
         <span style={{ margin: '0 5px', color: 'black' }}>•</span>
         {listing?.city}, {listing?.country}
         <span style={{ margin: '0 5px' }}>•</span>
-        <a href="#" style={{ textDecoration: 'underline', color: "black" }}>View Map</a>
+        <a href="#" style={{ textDecoration: 'underline', color: "black" }} onClick={() => handleTabClick('Map')}>View Map</a>
       </p>
 
       <div className="wifi-text" style={{ display: 'flex', alignItems: 'center' }}>
@@ -129,7 +132,7 @@ function ListingsShowPage() {
           <span className="tabs-name" onClick={() => handleTabClick('Rooms')} style={{ cursor: 'pointer' }}>Rooms</span>
           <span className="tabs-name" onClick={() => handleTabClick('About')} style={{ cursor: 'pointer' }}>About</span>
           <span className="tabs-name" onClick={() => handleTabClick('House Rules')} style={{ cursor: 'pointer' }}>House Rules</span>
-          <span className="tabs-name" onClick={() => handleTabClick('Location')} style={{ cursor: 'pointer' }}>Location</span>
+          <span className="tabs-name" onClick={() => handleTabClick('Map')} style={{ cursor: 'pointer' }}>Location</span>
           <span className="tabs-name" onClick={() => handleTabClick('Reviews')} style={{ cursor: 'pointer' }}>Reviews</span>
         </div>
       </div>
@@ -375,7 +378,7 @@ function ListingsShowPage() {
                 <p>{listing?.city}, {listing?.country}</p>
             </div>
 
-            <div className="viewMap">
+            <div className="viewMap" onClick={() => handleTabClick('Map')}>
               View Map
               <img src={MyArrowSVG} style={{ width: '14px', marginLeft: "10px", marginRight: "0px" }}/>
             </div>

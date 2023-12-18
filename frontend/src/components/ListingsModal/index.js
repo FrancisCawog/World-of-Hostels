@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import './ListingsModal.css';
 import checkIn from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png';
 import checkOut from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png';
+import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 
 
 const ListingsModal = ({ tabName, onClose }) => {
@@ -23,11 +24,54 @@ const ListingsModal = ({ tabName, onClose }) => {
     setActiveTab(tabName);
   };
 
+  const mapStyles = {
+    height: '700px',
+    width: '100%',
+  };
+
+  const [infoWindowVisible, setInfoWindowVisible] = useState(false);
+  
+  const handleMarkerClick = () => {
+    setInfoWindowVisible(!infoWindowVisible);
+  };
+
     return (
         <div className="modal-overlay">
         <div className="modal">
             <div className="modal-content">
             <span className="close" onClick={onClose}>&times;</span>
+
+            {tabName === 'Map' ? (
+                <>
+                <h2 className='modal-header'>Location</h2>
+                <GoogleMap
+                mapContainerStyle={mapStyles}
+                zoom={14}
+                center={{
+                  lat: listing?.latitude,
+                  lng: listing?.longitude,
+                }}
+              >
+                <Marker position={{
+                  lat: listing?.latitude,
+                  lng: listing?.longitude,
+                }}
+                  onClick={handleMarkerClick}
+                />
+                {infoWindowVisible && (
+                  <InfoWindow
+                    position={{
+                      lat: listing?.latitude,
+                      lng: listing?.longitude,
+                    }}
+                    onCloseClick={() => setInfoWindowVisible(false)}
+                  >
+                  </InfoWindow>
+                )}
+              </GoogleMap>
+              </>
+                ) : (
+            <>
             <h2 className='modal-header'>Property details</h2>
             <div className="horizontal-line"></div>
             <div className="tabs-container">
@@ -101,6 +145,9 @@ const ListingsModal = ({ tabName, onClose }) => {
                 <h2 style={{fontFamily: "Poppins-bold", fontSize: "20px", marginTop: "15px", marginBottom: "-25px"}}>Things to Note</h2>
                 <p> {listing.house_rules}</p> 
                 </div> 
+                </>
+                
+                )}
                 </>
             )}
             </div>

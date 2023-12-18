@@ -4,7 +4,7 @@
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "engines": {
     "node": "18.x"
-  }, 
+  },
   "directories": {
     "lib": "lib"
   },
@@ -13,5 +13,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@react-google-maps/api": "^2.19.2",
+    "use-places-autocomplete": "^4.0.1"
+  }
 }
