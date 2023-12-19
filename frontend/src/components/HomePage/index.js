@@ -2,38 +2,15 @@ import React from "react";
 import './Homepage.css';
 import groupPhoto from "../../assets/pictures/hero.chats.webp"
 import arrow from "../../assets/pictures/icons/arrow.webp"
-import locationPic from "../../assets/pictures/icons/Screenshot 2023-11-13 at 4.48.41 PM.png"
-import { useState } from "react";
 import CalenderSVG from "../../assets/pictures/icons/calendar-confirmation.svg"
 import profile from "../../assets/pictures/profileusp.webp"
 import message from "../../assets/pictures/messageusp.webp"
 import walking from "../../assets/pictures/walkingusp.webp"
 import Navigation from "../Navigation";
 import Footer from "../Footer";
-import { useHistory } from 'react-router-dom';
+import SearchBar from "../SearchBar";
 
 export default function HomePage() {
-
-  const [searchInputs, setSearchInputs] = useState({
-    location: "",
-    checkInDate: "",
-    checkOutDate: "",
-    guests: ""
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSearchInputs((prevInputs) => ({
-      ...prevInputs,
-      [name]: value
-    }));
-  };
-
-  
-    const history = useHistory();
-    const handleSearch = () => {
-      history.push('/listings');
-    };
 
   return (
     <>
@@ -46,42 +23,7 @@ export default function HomePage() {
         <img className="group-photo" src={groupPhoto} alt="Group" />
         <img className="arrow-photo" src={arrow} alt="arrow" />
 
-        <div className="search-bar">
-        <img src={locationPic} style={{ width: '50px' }}/>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            placeholder="Where do you want to go?"
-            value={searchInputs.location}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="checkInDate"
-            id="checkInDate"
-            placeholder="Check in"
-            value={searchInputs.checkInDate}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="checkOutDate"
-            id="checkOutDate"
-            placeholder="Check out"
-            value={searchInputs.checkOutDate}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="guests"
-            id="guests"
-            placeholder="Guests"
-            value={searchInputs.guests}
-            onChange={handleInputChange}
-          />
-          <button className="let-go-button" type="button" onClick={handleSearch}>Let's Go!</button>
-        </div>
+       <SearchBar/>
       </div>
     </div>
 

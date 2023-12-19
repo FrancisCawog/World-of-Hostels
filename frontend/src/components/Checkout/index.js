@@ -8,13 +8,15 @@ import { clearCart } from "../../store/cart";
 function CheckoutForm() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    const cartItems = useSelector((state) => Object.values(state.cart));
+    const cartItems = useSelector((state) => Object.values(state.cart.cart));
     const rooms = useSelector((state) => Object.values(state.rooms));
     const availableRooms = rooms.filter(room => room.available_beds > 0);
     const cheapestPrice = Math.min(...availableRooms.map(room => room.price));
     const shouldRenderCheckoutChoose = cartItems.length === 0 || cartItems.every(item => item === 0);
     const [totalPrice, setTotalPrice] = useState(0);
-    const cart = useSelector((state) => state.cart);
+    const cart = useSelector((state) => state.cart.cart);
+    const cartEffect = useSelector((state) => state.cart);
+    const refundable = useSelector((state) => state.cart.refundable)
 
 
     const handleScroll = () => {
@@ -37,14 +39,19 @@ function CheckoutForm() {
                 const room = rooms.find(room => room.id === parseInt(roomId));
     
                 if (room) {
+                    if (!refundable){
+                        const itemTotal = quantity * room.price;
+                        totalPriceCalculation += (itemTotal * .95);
+                    } else {
                     const itemTotal = quantity * room.price;
                     totalPriceCalculation += itemTotal;
+                    }
                 }
             }
         }
     
         setTotalPrice(totalPriceCalculation);
-    },[cart]);
+    },[cartEffect]);
     
 
     return (
@@ -55,7 +62,7 @@ function CheckoutForm() {
                     <div className="choose-top">
                         <div style={{marginTop: "-10px"}}>
                             <p>Rooms from</p>
-                            <p style={{marginTop: "-12px", fontFamily: "Poppins-bold", fontSize: "18px", marginLeft: "7px"}}>US${(cheapestPrice * 0.95).toFixed(2)}</p>
+                            <p style={{marginTop: "-12px", fontFamily: "Poppins-bold", fontSize: "18px", marginLeft: "7px"}}>US ${(cheapestPrice * 0.95).toFixed(2)}</p>
                         </div>
                         <button onClick={handleScroll}>
                             Choose a room

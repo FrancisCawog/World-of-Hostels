@@ -26,7 +26,8 @@ function ListingsShowPage() {
   const rooms = useSelector((state) => Object.values(state.rooms));
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [tabName, settabName] = useState();
-  const cartItems = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+  const cartItems = useSelector((state) => state.cart.cart);
   const [refundable, setRefundable] = useState();
   // const availableRooms = rooms.filter(room => room.available_beds > 0);
 
@@ -38,14 +39,14 @@ function ListingsShowPage() {
   }, [listingId, dispatch]);
 
   const handleAddToCart = useCallback((index, value) => {
-    dispatch(setCart(index));
+    dispatch(setCart(index, value));
     setRefundable(value);
   }, [dispatch]);
 
   useEffect(() => {
     if (cartItems && Object.keys(cartItems).length === 0) {
       setRefundable(null); 
-    }}, [cartItems]);
+    }}, [cart]);
 
   const handleRemoveFromCart = useCallback((index) => {
     dispatch(removeCart(index));

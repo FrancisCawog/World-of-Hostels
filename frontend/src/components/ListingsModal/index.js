@@ -6,6 +6,7 @@ import './ListingsModal.css';
 import checkIn from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png';
 import checkOut from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+// import { LoadScript } from '@react-google-maps/api';
 
 
 const ListingsModal = ({ tabName, onClose }) => {
@@ -25,7 +26,7 @@ const ListingsModal = ({ tabName, onClose }) => {
   };
 
   const mapStyles = {
-    height: '700px',
+    height: '40rem',
     width: '100%',
   };
 
@@ -44,9 +45,11 @@ const ListingsModal = ({ tabName, onClose }) => {
             {tabName === 'Map' ? (
                 <>
                 <h2 className='modal-header'>Location</h2>
+                {/* <LoadScript
+                  googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}> */}
                 <GoogleMap
                 mapContainerStyle={mapStyles}
-                zoom={14}
+                zoom={18}
                 center={{
                   lat: listing?.latitude,
                   lng: listing?.longitude,
@@ -69,6 +72,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                   </InfoWindow>
                 )}
               </GoogleMap>
+              {/* </LoadScript> */}
               </>
                 ) : (
             <>

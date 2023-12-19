@@ -1,10 +1,14 @@
-const SET_CART = "rooms/setRooms"
-const REMOVE_CART = "rooms/removeRooms"
-const CLEAR_CART = "rooms/clearRooms"
+const SET_CART = "rooms/setRooms";
+const REMOVE_CART = "rooms/removeRooms";
+const CLEAR_CART = "rooms/clearRooms";
+const UPDATE_GUESTS = "rooms/updateGuests";
+const SET_CHECK_IN = "rooms/setCheckIn";
+const SET_CHECK_OUT = "rooms/setCheckOut";
 
-export const setCart = (roomId) => ({
+export const setCart = (roomId, refundable) => ({
     type: SET_CART,
-    payload: roomId
+    payload: roomId,
+    refundable
 });
 
 export const removeCart = (roomId) => ({
@@ -14,23 +18,51 @@ export const removeCart = (roomId) => ({
 
 export const clearCart = () => ({
     type: CLEAR_CART,
-  });
+});
 
-const cartReducer = (state = {}, action) => {
-    const newState = {...state}
+export const updateGuests = (numGuests) => ({
+    type: UPDATE_GUESTS,
+    payload: numGuests,
+});
+
+export const setCheckIn = (date) => ({
+    type: SET_CHECK_IN,
+    payload: date
+});
+
+export const setCheckOut = (date) => ({
+    type: SET_CHECK_OUT,
+    payload: date
+});
+
+const cartReducer = (state = { cart: {}, guests: 0, checkIn: null, checkOut: null, refundable: true }, action) => {
+    const newState = { ...state };
+
     switch (action.type) {
         case SET_CART:
-            newState[action.payload] ||= 0;
-            newState[action.payload]++;
-            return {...newState}
+            newState.cart[action.payload] ||= 0;
+            newState.cart[action.payload]++;
+            return { ...newState, guests: newState.guests + 1, refundable: action.refundable };
+
         case REMOVE_CART:
-            newState[action.payload]--;
-            if (newState[action.payload] === 0){
-                delete newState[action.payload]
+            newState.cart[action.payload]--;
+            if (newState.cart[action.payload] === 0) {
+                delete newState.cart[action.payload];
             }
-            return {...newState}
+            return { ...newState, guests: Math.max(0, newState.guests - 1) };
+
         case CLEAR_CART:
-                return {};
+            return { cart: {}, guests: 1, checkIn: null, checkOut: null };
+
+        case UPDATE_GUESTS:
+            return { ...newState, guests: action.payload };
+
+        case SET_CHECK_IN:
+            return { ...newState, checkIn: action.payload };
+
+        case SET_CHECK_OUT:
+            return { ...newState, checkOut: action.payload };
+
         default:
             return state;
     }
