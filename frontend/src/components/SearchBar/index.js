@@ -1,5 +1,5 @@
 import locationPic from "../../assets/pictures/icons/Screenshot 2023-11-13 at 4.48.41 PM.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
 import { useDispatch } from "react-redux";
@@ -34,10 +34,32 @@ function SearchBar() {
 
   const history = useHistory();
 
+  useEffect(() => {
+    const storedCheckInDate = localStorage.getItem('checkInDate');
+    const storedCheckOutDate = localStorage.getItem('checkOutDate');
+    const storedGuests = localStorage.getItem('guests');
+  
+    if (storedCheckInDate) {
+      setCheckInDate(storedCheckInDate);
+    }
+  
+    if (storedCheckOutDate) {
+      setCheckOutDate(storedCheckOutDate);
+    }
+  
+    if (storedGuests) {
+      setGuests(storedGuests);
+    }
+  }, []);
+
   const handleSearch = () => {
     dispatch(setCheckIn(checkInDate));
     dispatch(setCheckOut(checkOutDate));
     dispatch(updateGuests(guests));
+    
+    localStorage.setItem('checkInDate', checkInDate);
+    localStorage.setItem('checkOutDate', checkOutDate);
+    localStorage.setItem('guests', guests);
     history.push("/listings");
   };
 

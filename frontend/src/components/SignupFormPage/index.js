@@ -37,7 +37,6 @@ function SignupFormPage() {
       });
   };
 
-
   return (
     <>
     <div className="sign-container">

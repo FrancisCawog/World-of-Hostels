@@ -464,3 +464,7 @@ li {
     pointer-events: none;
   }
   
+.add-remove-cart {
+    display: flex;
+    flex-direction: row;
+}

@@ -8,6 +8,7 @@ import WifiSVG from "../../assets/pictures/icons/wifi.svg"
 import WhiteWifiSVG from "../../assets/pictures/icons/wifi-white.svg"
 import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
 import WhiteCoffeeSVG from "../../assets/pictures/icons/white-coffee.svg"
+import { useHistory } from 'react-router-dom';
 
 function ListingsIndexPage() {
   const dispatch = useDispatch();
@@ -15,12 +16,19 @@ function ListingsIndexPage() {
   const rooms = useSelector((state) => Object.values(state.rooms));
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered2, setIsHovered2] = useState(false);
+  const history = useHistory();
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(fetchListings()).catch((error) => {
       console.error("Error fetching listing:", error);
     });
   }, [dispatch]);
+
+  const handleRedirect = (listingId) => {
+    const queryString = new URLSearchParams(cart).toString();
+    history.push(`/listings/${listingId}?${queryString}`);
+  };
 
   return (
     <>
@@ -42,7 +50,7 @@ function ListingsIndexPage() {
 
     <div>
     {Object.values(listings).map((listing) => (
-    <a key={listing.id} href={`listings/${listing.id}`} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black" }}>
+    <a key={listing.id} href={`listings/${listing.id}`} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id);}} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black" }}>
       <div className="index-picture"></div>
 
       <div className="single-listing">

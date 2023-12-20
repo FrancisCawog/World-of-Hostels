@@ -7,8 +7,8 @@ import WifiSVG from "../../assets/pictures/icons/wifi.svg"
 import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
 import MapSVG from "../../assets/pictures/icons/map-icon.svg"
 import MyArrowSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
-import checkIn from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png"
-import checkOut from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png"
+import checkInPic from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png"
+import checkOutPic from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png"
 import person from "../../assets/pictures/icons/user-128.svg"
 import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
 import minus from "../../assets/pictures/icons/minus.svg"
@@ -18,6 +18,7 @@ import Footer from "../Footer"
 import CheckoutForm from "../Checkout"
 import { setCart } from "../../store/cart";
 import { removeCart } from "../../store/cart";
+import { useLocation } from 'react-router-dom';
 
 function ListingsShowPage() {
   const dispatch = useDispatch();
@@ -29,14 +30,23 @@ function ListingsShowPage() {
   const cart = useSelector((state) => state.cart);
   const cartItems = useSelector((state) => state.cart.cart);
   const [refundable, setRefundable] = useState();
+  const checkIn = cart.checkIn
+  const checkOut = cart.checkOut
+  const start_date = new Date(checkIn).toISOString();
+  const end_date = new Date(checkOut).toISOString();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const cartInfo = Object.fromEntries(queryParams.entries());
+  
+
   // const availableRooms = rooms.filter(room => room.available_beds > 0);
 
   useEffect(() => {
-    dispatch(fetchListing(listingId))
+    dispatch(fetchListing(listingId, start_date, end_date))
       .catch((error) => {
         console.error("Error fetching listing:", error);
       });
-  }, [listingId, dispatch]);
+  }, [listingId, dispatch, start_date, end_date]);
 
   const handleAddToCart = useCallback((index, value) => {
     dispatch(setCart(index, value));
@@ -176,6 +186,9 @@ function ListingsShowPage() {
                                   <div className={`minus-div ${refundable ? '' : 'disabled'}`} onClick={() => refundable && handleRemoveFromCart(privateRoom.id, true)}>
                                     <img className="minus-image" src={minus} alt="minus icon" />
                                   </div>
+                                  <div style={{marginRight: ".5rem"}}>
+                                    <p style={{ fontFamily: "Poppins-bold"}}>{cartItems[privateRoom.id]}</p>
+                                  </div>
                                   <div className={`add-div ${refundable ? '' : 'disabled'}`} onClick={() => refundable && handleAddToCart(privateRoom.id, true)}>
                                     <img src={add} className="add-image" alt="add icon" />
                                   </div>
@@ -199,6 +212,9 @@ function ListingsShowPage() {
                                   <div className="add-remove-cart" style={{ marginRight: "2%" }}>
                                   <div className={`minus-div ${!refundable ? '' : 'disabled'}`} onClick={() => !refundable && handleRemoveFromCart(privateRoom.id, false)}>
                                     <img className="minus-image" src={minus} alt="minus icon" />
+                                  </div>
+                                  <div style={{marginRight: ".5rem"}}>
+                                    <p style={{ fontFamily: "Poppins-bold"}}>{cartItems[privateRoom.id]}</p>
                                   </div>
                                   <div className={`add-div ${!refundable ? '' : 'disabled'}`} onClick={() => !refundable && handleAddToCart(privateRoom.id, false)}>
                                     <img src={add} className="add-image" alt="add icon" />
@@ -251,6 +267,9 @@ function ListingsShowPage() {
                                   <div className={`minus-div ${refundable ? '' : 'disabled'}`} onClick={() => refundable && handleRemoveFromCart(sharedRoom.id, true)}>
                                     <img className="minus-image" src={minus} alt="minus icon" />
                                   </div>
+                                  <div style={{marginRight: ".5rem"}}>
+                                    <p style={{ fontFamily: "Poppins-bold"}}>{cartItems[sharedRoom.id]}</p>
+                                  </div>
                                   <div className={`add-div ${refundable ? '' : 'disabled'}`} onClick={() => refundable && handleAddToCart(sharedRoom.id, true)}>
                                     <img src={add} className="add-image" alt="add icon" />
                                   </div>
@@ -274,6 +293,9 @@ function ListingsShowPage() {
                                   <div className="add-remove-cart" style={{ marginRight: "2%" }}>
                                   <div className={`minus-div ${!refundable ? '' : 'disabled'}`} onClick={() => !refundable && handleRemoveFromCart(sharedRoom.id, false)}>
                                     <img className="minus-image" src={minus} alt="minus icon" />
+                                  </div>
+                                  <div style={{marginRight: ".5rem"}}>
+                                    <p style={{ fontFamily: "Poppins-bold"}}>{cartItems[sharedRoom.id]}</p>
                                   </div>
                                   <div className={`add-div ${!refundable ? '' : 'disabled'}`} onClick={() => !refundable && handleAddToCart(sharedRoom.id, false)}>
                                     <img src={add} className="add-image" alt="add icon" />
@@ -310,7 +332,7 @@ function ListingsShowPage() {
 
           <div className="checkInandOut">
             <div className="checkInContainer">
-              <img className="checkIn" src={checkIn} style={{ width: '18px' }}/>
+              <img className="checkIn" src={checkInPic} style={{ width: '18px' }}/>
               <div className="checkInText">
                 Check In
                 <div className="check_in"> {listing?.check_in}
@@ -319,7 +341,7 @@ function ListingsShowPage() {
             </div>
             <div className="separator"></div>
             <div className="checkOutContainer">
-              <img className="checkOut" src={checkOut} style={{ width: '18px' }}/>
+              <img className="checkOut" src={checkOutPic} style={{ width: '18px' }}/>
               <div className="checkOutText">
                 Check Out
                 <div className="check_out"> until {listing?.check_out}
@@ -385,7 +407,7 @@ function ListingsShowPage() {
             </div>
           </div>
         </div>
-        <CheckoutForm/>
+        <CheckoutForm listingId={listingId}/>
     </div>
     <Footer/>
     </>

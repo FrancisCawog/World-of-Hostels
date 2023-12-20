@@ -24,8 +24,8 @@ export const fetchListings = () => async (dispatch) => {
     return response;
 }
 
-export const fetchListing = (listingId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/listings/${listingId}`);
+export const fetchListing = (listingId, start_date, end_date) => async (dispatch) => {
+    const response = await csrfFetch(`/api/listings/${listingId}?start_date=${start_date}&end_date=${end_date}`);
     if (response.ok) {
         const data = await response.json();
         dispatch(setListing(data));
@@ -33,7 +33,7 @@ export const fetchListing = (listingId) => async (dispatch) => {
         throw response;
     }
     return response;
-}
+};
 
 const listingReducer = (state = {}, action) => {
     Object.freeze(state);

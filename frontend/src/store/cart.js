@@ -42,14 +42,14 @@ const cartReducer = (state = { cart: {}, guests: 0, checkIn: null, checkOut: nul
         case SET_CART:
             newState.cart[action.payload] ||= 0;
             newState.cart[action.payload]++;
-            return { ...newState, guests: newState.guests + 1, refundable: action.refundable };
+            return { ...newState, refundable: action.refundable };
 
         case REMOVE_CART:
             newState.cart[action.payload]--;
             if (newState.cart[action.payload] === 0) {
                 delete newState.cart[action.payload];
             }
-            return { ...newState, guests: Math.max(0, newState.guests - 1) };
+            return { ...newState };
 
         case CLEAR_CART:
             return { cart: {}, guests: 1, checkIn: null, checkOut: null };
