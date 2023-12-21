@@ -5,6 +5,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import HomePage from "./components/HomePage"
 import ListingsShowPage from "./components/ListingsShowPage";
 import ListingsIndexPage from "./components/ListingsIndexPage";
+import UserShow from "./components/UserShow";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/users/:listingId">
+            <UserShow />
           </Route>
         </Switch>
     </>

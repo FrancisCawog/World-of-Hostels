@@ -3,22 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchListing } from '../../store/listings';
 import { useParams } from 'react-router-dom';
 import './ListingsModal.css';
-import checkIn from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png';
-import checkOut from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png';
+import checkInPic from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png';
+import checkOutPic from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 // import { LoadScript } from '@react-google-maps/api';
 
 
 const ListingsModal = ({ tabName, onClose }) => {
+  const cart = useSelector((state) => state.cart);
+  const checkIn = cart.checkIn
+  const checkOut = cart.checkOut
+  const start_date = new Date(checkIn).toISOString();
+  const end_date = new Date(checkOut).toISOString();
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
   const [activeTab, setActiveTab] = useState(tabName);
 
   useEffect(() => {
-    dispatch(fetchListing(listingId)).catch((error) => {
+    if (start_date !== undefined && end_date !== undefined) {
+    dispatch(fetchListing(listingId, start_date, end_date)).catch((error) => {
       console.error('Error fetching listing:', error);
-    });
+    })};
   }, [listingId, dispatch]);
 
   const handleTabClick = (tabName) => {
@@ -114,7 +120,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                 <h2 style={{fontFamily: "Poppins-bold", fontSize: "20px", marginLeft: "2%", marginTop: "-.5%"}}>Hostel Policies</h2>
                     <div id='modal-check' className="checkInandOut">
                         <div className="checkInContainer">
-                        <img className="checkIn" src={checkIn} style={{ width: '18px' }}/>
+                        <img className="checkIn" src={checkInPic} style={{ width: '18px' }}/>
                         <div className="checkInText">
                             Check In
                             <div className="check_in"> {listing?.check_in}
@@ -123,7 +129,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                         </div>
                         <div className="separator"></div>
                         <div className="checkOutContainer">
-                            <img className="checkOut" src={checkOut} style={{ width: '18px' }}/>
+                            <img className="checkOut" src={checkOutPic} style={{ width: '18px' }}/>
                             <div className="checkOutText">
                                 Check Out
                                 <div className="check_out"> until {listing?.check_out}

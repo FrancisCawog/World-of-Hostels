@@ -67,9 +67,35 @@ function Navigation() {
           </div>
         </header>
       </div>
+    )
+  } else if (location.pathname.startsWith('/users')) {
+    contentToRender = (
+      <div className="listings-header2">
+        <header>
+          <div className="left-content">
+            <img src={MyArrowSVG} alt="Back" style={{ width: '16px' }}/>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src={logo} style={{ width: '25px'}} alt="Logo" />
+                    <p className="LWOF" style={{ display: 'inline-block'}}>World of Hostels</p>
+                </div>
+            </Link>
+          </div>
+          
+          <div className="circles">
+            <Link to="/login">
+              <div className="lcircle">
+                <img src={userIcon} alt="User" />
+              </div>
+            </Link>
+            <div className="lcircle">
+            <img src={navIcon} style={{width: "15px", marginLeft: "25%"}} alt="Nav" />
+            </div>
+          </div>
+        </header>
+      </div>
     );
   }
-
   return (
     <div>
       {contentToRender}

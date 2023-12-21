@@ -42,10 +42,11 @@ function ListingsShowPage() {
   // const availableRooms = rooms.filter(room => room.available_beds > 0);
 
   useEffect(() => {
+    if(start_date !== undefined && end_date !== undefined){
     dispatch(fetchListing(listingId, start_date, end_date))
       .catch((error) => {
         console.error("Error fetching listing:", error);
-      });
+      })};
   }, [listingId, dispatch, start_date, end_date]);
 
   const handleAddToCart = useCallback((index, value) => {

@@ -33,7 +33,7 @@ require "open-uri"
         email: "demo_user@gmail.com",
         phone: "3479998980",
         password: "Password123!",
-        nationality: "American",
+        nationality: "USA",
         date_of_birth: "2010-10-10",
         age: 13
     )
@@ -46,7 +46,7 @@ require "open-uri"
         email: "franciscawog@gmail.com",
         phone: "3479999999",
         password: "Password123!",
-        nationality: "American",
+        nationality: "USA",
         date_of_birth: "1997-05-11",
         age: 26
     )
