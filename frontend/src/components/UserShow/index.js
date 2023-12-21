@@ -95,6 +95,9 @@ function UserShow() {
     const conditionalColor = {
         backgroundColor: activeTab === 'Home' ? "#f6a90e" : "white"
     }
+
+    const [year, month, day] = sessionUser.date_of_birth.split('-');
+    const formattedDate = `${month}/${day}/${year}`;
     
 
     return (
@@ -138,14 +141,22 @@ function UserShow() {
                     <div className="four-inputs-div">
                         <div className="input-with-label">
                             <label htmlFor="fullName">Full Name</label>
-                            <input id="fullName" placeholder={sessionUser.first_name + " " + sessionUser.last_name} />
+                            <input id="fullName"  value={sessionUser.first_name + " " + sessionUser.last_name} />
                         </div>
-                        <input placeholder={sessionUser.date_of_birth}/>
-                        <input placeholder={sessionUser.nationality}/>
-                        <input placeholder={sessionUser.email}/>
+                        <div className="input-with-label">
+                            <label htmlFor="dateofBirth">Date of Birth </label>
+                            <input id="dateofBirth"  value={formattedDate} />
+                        </div>
+                        <div className="input-with-label">
+                            <label htmlFor="nationality">Nationality</label>
+                            <input id="nationality"  value={sessionUser.nationality} />
+                        </div>
+                        <div className="input-with-label">
+                            <label htmlFor="email">Email</label>
+                            <input id="email"  value={sessionUser.email} disabled />
+                        </div>
                     </div>
                 </div>
-
                 </>
             )}
 
@@ -162,13 +173,7 @@ function UserShow() {
         )}
 
         {activeTab === 'Edit Details' && (
-            <div className="travel-stats">
-                <div >
-                    <p>My Travel Stats</p>
-                    <p>I've explored <strong>{countryCount} {countryWord}</strong></p>
-                    <p>and stayed in <strong>{propertyCount} {propertyWord}</strong></p>
-                </div>
-            </div>
+            <button className="edit-user-button"> Save Changes</button>
         )}
 
 

@@ -26,7 +26,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/users/:listingId">
+          <Route path="/users/:userId" exact>
             <UserShow />
           </Route>
         </Switch>
