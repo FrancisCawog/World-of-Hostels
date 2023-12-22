@@ -50,11 +50,27 @@ export const signup = (user) => async (dispatch) => {
       first_name: user.firstName,
       last_name: user.lastName,
       email: user.email,
-      password: user.password,
+      password: user.password
     }),
   });
   const data = await response.json();
   storeCurrentUser(data.user);
+  dispatch(receiveUser(data));
+  return response;
+};
+
+export const updateUser = (user) => async (dispatch) => {
+  const response = await csrfFetch(`/api/users/${user.id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      first_name: user.first_name,
+      last_name: user.last_name,
+      nationality: user.nationality,
+      date_of_birth: user.date_of_birth,
+      age: user.age
+    }),
+  });
+  const data = await response.json();
   dispatch(receiveUser(data));
   return response;
 };

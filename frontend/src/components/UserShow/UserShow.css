@@ -1,9 +1,16 @@
 .user-yellow-box {
     clip-path: polygon(0 0,100% 0,100% calc(100% - 3rem),0 100%);
     padding-top: 5rem;
-    min-height: 17.5rem;
     display: flex;
     align-items: center;
+    box-shadow: inset 0 100px 32px -100px rgba(0,0,0,.1);
+}
+
+.mid-div{
+    margin-left: 5%;
+    width: 75%;
+    display: flex;
+    flex-direction: row; 
 }
 
 .user-tabs {
@@ -12,12 +19,11 @@
     box-shadow: 0 4px 24px rgba(0,0,0,.15);
     padding: 0.5rem;
     position: sticky;
-    width: 12.5%;
+    width: 17.5%;
     z-index: 1;
-    margin-top: -7rem;
-    margin-left: 2%;
+    margin-top: -2rem;
     height: 12rem;
-    margin-left: 11.5%;
+    margin-left: 8%;
     display: flex;
     flex-direction: column;
 }
@@ -75,7 +81,7 @@
 .travel-stats {
     margin-top: 4rem;
     margin-bottom: 4rem;
-    margin-left: 27.5%;
+    margin-left: 30%;
 }
 
 .travel-stats p:nth-of-type(1) {
@@ -98,8 +104,8 @@
     height: 10rem;
     width: 15%;
     padding-left: 22rem;
-    margin-left: 2.5%;
-    margin-top: -4rem;
+    margin-left: 5%;
+    margin-top: 2rem;
     display: flex;
     align-items: center;
     position: relative;
@@ -143,10 +149,9 @@
   }
 
   .edit-about {
-    margin-left: 2.5%;
-    top: 0;
-    margin-top: -7.5rem;
-    width: 33.5%;
+    margin-left: 3.5%;
+    margin-top: -4.5rem;
+    width: 45%;
   }
 
   .edit-picture-circle {
@@ -159,7 +164,8 @@
     margin-bottom: 1rem;
   }
 
-  .edit-about p {
+  .edit-about p,
+  .my-trips p {
     font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 1.8rem;
     font-weight: 800;
@@ -233,28 +239,122 @@
 
 .edit-user-button {
     margin-left: 27.5%;
-    /* fill: #fff; */
-    /* align-items: center; */
     background: #f25621;
     border: none;
     border-radius: 1rem;
-    /* box-sizing: border-box; */
     color: #fff;
     cursor: pointer;
-    /* display: flex; */
-    /* flex-direction: row; */
     font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 1rem;
-    /* font-weight: 800; */
     font-weight: 700;
-    /* height: 3rem; */
-    /* justify-content: center; */
-    /* letter-spacing: 0; */
     line-height: 1.5rem;
     outline: none;
     padding: 0.75rem 1.5rem;
-    /* -webkit-text-decoration: none; */
-    /* text-decoration: none; */
-    /* width: -moz-fit-content; */
     width: 16.25%;
 }
+
+.confirmation-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgb(1, 164, 1);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    animation: fadeInRight 0.5s ease-in-out;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .edit-user-button.disabled {
+    pointer-events: none; 
+    opacity: 0.5;
+  }
+
+  .my-trips {
+    margin-left: 5%;
+    width: 40%;
+    margin-top: -4rem;
+  }
+
+  .my-trips :nth-of-type(2) {
+    margin-top: -.5rem;
+  }
+
+  .bus-div img {
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .bus-div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .other-ready {
+    margin-left: 2%;
+  }
+
+  #other {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    letter-spacing: -.00625rem;
+  }
+
+  #ready {
+    font-size: .875rem;
+    font-family: Poppins,Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+    font-weight: 300;
+    letter-spacing: -.00625rem;
+    margin-top: -1rem;
+  }
+
+  .future-booking {
+    grid-gap: 0.5rem;
+    border-radius: 1.5rem;
+    box-shadow: inset 0 0 0 0.0625rem #dddfe4;
+    display: grid;
+    grid-template-rows: 7.5rem auto auto;
+    padding: 0.5rem;
+    width: 57.5%;
+    margin-bottom: 1.5rem;
+  }
+
+  .future-picture {
+    border-radius: 1rem;
+    background-color: #f1f2f4;
+  }
+
+  .future-booking p:nth-of-type(1) {
+    font-size: 1.25rem;
+    margin-top: .5rem;
+    margin-left: 2%;
+  }
+
+  .future-booking p:nth-of-type(2) {
+    font-size: 1rem;
+    margin-top: -1rem;
+    margin-left: 2%;
+    font-weight: 300;
+    font-family: Poppins,Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+
+  .future-booking p:nth-of-type(3) {
+    font-size: 1rem;
+    margin-top: -1.5rem;
+    margin-left: 2%;
+    font-weight: 300;
+    font-family: Poppins,Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+    margin-bottom: 0rem;
+  }
