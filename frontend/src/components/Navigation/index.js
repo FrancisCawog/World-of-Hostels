@@ -7,14 +7,17 @@ import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import navIcon from "../../assets/pictures/icons/Screenshot 2023-11-19 at 9.22.41 PM.png";
 import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
+import { useHistory } from 'react-router-dom';
 
 function Navigation() {
   const dispatch = useDispatch();
   const location = useLocation();
   const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
 
   const handleLogout = () => {
     dispatch(sessionActions.logout());
+    history.push('/');
   };
 
   let contentToRender = null;

@@ -11,6 +11,7 @@
     width: 75%;
     display: flex;
     flex-direction: row; 
+    margin-bottom: 5rem;
 }
 
 .user-tabs {
@@ -342,7 +343,7 @@
     margin-left: 2%;
   }
 
-  .future-booking p:nth-of-type(2) {
+  .icon-and-text p:nth-of-type(1) {
     font-size: 1rem;
     margin-top: -1rem;
     margin-left: 2%;
@@ -350,7 +351,7 @@
     font-family: Poppins,Inter,-apple-system,BlinkMacSystemFont,sans-serif;
   }
 
-  .future-booking p:nth-of-type(3) {
+  .icon-and-text p:nth-of-type(2) {
     font-size: 1rem;
     margin-top: -1.5rem;
     margin-left: 2%;
@@ -358,3 +359,102 @@
     font-family: Poppins,Inter,-apple-system,BlinkMacSystemFont,sans-serif;
     margin-bottom: 0rem;
   }
+
+.icon-and-text{
+    display: flex;
+    flex-direction: row;
+}
+
+.icon {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    margin-top: -.75rem;
+    margin-left: .5rem;
+  }
+
+.outer-past-div {
+    display: flex;
+}
+
+.past-booking {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 1.5rem;
+    box-shadow: inset 0 0 0 0.0625rem #dddfe4;
+    padding: 0.5rem;
+    width: 120%;
+    margin-bottom: 1.5rem;
+}
+
+  .past-picture {
+    border-radius: 1rem;
+    background-color: #f1f2f4;
+    width: 20%;
+    height: 7rem;
+  }
+
+  .past-booking p:nth-of-type(1) {
+    font-size: 1.25rem;
+    margin-top: .5rem;
+    margin-left: 2%;
+  }
+
+  .past-icon-and-text p:nth-of-type(1) {
+    font-size: 1rem;
+    margin-top: 0rem;
+    margin-left: 2%;
+    font-weight: 300;
+    font-family: Poppins,Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+
+  .past-icon-and-text:nth-of-type(2){
+    margin-top: -1rem;
+  }
+
+.past-icon-and-text{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.past-icon {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    margin-top: .25rem;
+    margin-left: .5rem;
+}
+
+  .past-trip-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    margin-left: 5%;
+    width: 70%;
+}
+
+  .past-review-div {
+    display: flex;
+    align-items: center;
+    background-color: #f1f2f4;
+    border: 0.0625rem solid #dddfe4;
+    border-radius: 0 0 1.4375rem 1.4375rem;
+    border-top-width: 0;
+    grid-area: footer;
+    justify-content: space-between;
+    margin: 0 -0.5rem -0.5rem;
+    height: 3rem;
+}
+
+.past-num-div{
+    margin-left: 2%;
+    margin-top: .5rem;
+}
+
+.leave-review{
+    width: 20%;
+    padding-top: 1rem;
+    margin-left: 82.5%;
+}

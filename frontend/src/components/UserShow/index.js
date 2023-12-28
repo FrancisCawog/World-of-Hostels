@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchListings } from "../../store/listings";
 import { updateUser } from "../../store/session";
+import LocationSVG from "../../assets/pictures/icons/location-pin-svgrepo-com.svg"
+import CalendarSVG from "../../assets/pictures/icons/calendar-alt-svgrepo-com.svg"
 
 function UserShow() {
     const sessionUser = useSelector(state => state.session.user);
@@ -18,8 +20,11 @@ function UserShow() {
     const [countryCount, setcountryCount] = useState(0);
     const [propertyCount, setpropertyCount] = useState(0);
     const [age, setAge] = useState(0);
-    const [year, month, day] = sessionUser.date_of_birth.split('-');
-    const formattedDate = `${month}/${day}/${year}`;
+    let formattedDate = null;
+    if (sessionUser.date_of_birth) {
+        const [year, month, day] = sessionUser.date_of_birth.split('-');
+        formattedDate = `${month}/${day}/${year}`;
+    }
     const [fullName, setFullName] = useState(
         sessionUser.first_name + " " + sessionUser.last_name
       );
@@ -27,6 +32,7 @@ function UserShow() {
     const [userNationality, setUserNationality] = useState(sessionUser.nationality);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(true)
+
 
     let propertyWord;
 
@@ -89,6 +95,7 @@ function UserShow() {
     }, [reservations, listings]);
 
     useEffect(() => {
+        if (sessionUser.date_of_birth !== null) {
         const dob = new Date(sessionUser.date_of_birth);
         const now = new Date();
     
@@ -100,14 +107,11 @@ function UserShow() {
         }
     
         setAge(ages);
+        }
     }, [sessionUser.date_of_birth]);
 
     const conditionalColor = {
         backgroundColor: activeTab === 'Home' ? "#f6a90e" : "white"
-    }
-
-    const conditionalMargin = {
-        marginBottom: activeTab === 'Home' ||  activeTab === 'Edit Details' ? "5rem" : ""
     }
 
     const handleSaveChanges = () => {
@@ -196,7 +200,7 @@ function UserShow() {
       )}
 
         <div className="user-yellow-box" style={conditionalColor}>
-            <div className="mid-div" style={conditionalMargin}>
+            <div className="mid-div">
             <div className="user-tabs">
                 <div className={`user-tabs-cont ${activeTab === 'Home' && 'active'}`} onClick={() => handleTabClick('Home')}>
                     <img src={houseIcon} alt="Home Icon" />
@@ -219,7 +223,15 @@ function UserShow() {
                     </div>
                     <div className="name-and-age">
                         <p>{sessionUser.first_name}</p>
-                        <p style={{fontSize: "26px"}}>{age} years old, {sessionUser.nationality}</p>
+                        {sessionUser.date_of_birth !== null && sessionUser.nationality !== "" && (
+                            <p style={{ fontSize: "26px" }}>{age} years old, {sessionUser.nationality}</p>
+                        )}
+                        {sessionUser.date_of_birth !== null && sessionUser.nationality === "" && (
+                            <p style={{ fontSize: "26px" }}>{age} years old</p>
+                        )}
+                        {sessionUser.date_of_birth === null && sessionUser.nationality !== "" && (
+                            <p style={{ fontSize: "26px" }}>{sessionUser.nationality}</p>
+                        )}
                     </div>
                 </div>
             )}
@@ -294,8 +306,14 @@ function UserShow() {
 
                                         </div >
                                         <p>{correspondingListing.property_name}</p>
-                                        <p>{correspondingListing.city}</p>
-                                        <p>{startDate} - {endDate}</p>
+                                        <div className="icon-and-text">
+                                            <img src={LocationSVG} alt="Location Icon" className="icon" />
+                                            <p>{correspondingListing.city}</p>
+                                            </div>
+                                        <div className="icon-and-text">
+                                            <img src={CalendarSVG} alt="Calendar Icon" className="icon" />
+                                            <p>{startDate} - {endDate}</p>
+                                        </div>
                                     </div>
                                 );
                                 })}
@@ -314,13 +332,29 @@ function UserShow() {
                             );
 
                             return (
-                                <div key={reservation.id} className="future-booking">
-                                    <div className="future-picture">
-
-                                    </div >
-                                    <p>{correspondingListing.property_name}</p>
-                                    <p>{correspondingListing.city}</p>
-                                    <p>{startDate} - {endDate}</p>
+                                <div key={reservation.id} className="past-booking">
+                                    <div className="outer-past-div">
+                                        <div className="past-picture"></div>
+                                        <div className="past-trip-info">
+                                            <p>{correspondingListing.property_name}</p>
+                                            <div className="past-icon-and-text">
+                                                <img src={LocationSVG} alt="Location Icon" className="past-icon" />
+                                                <p>{correspondingListing.city}</p>
+                                            </div>
+                                            <div className="past-icon-and-text">
+                                                <img src={CalendarSVG} alt="Calendar Icon" className="past-icon" />
+                                                <p>{startDate} - {endDate}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="past-review-div">
+                                        <div className="past-num-div">
+                                            <p style={{fontSize: "16px"}}>5</p>
+                                        </div>
+                                        <div className="leave-review">
+                                            <p style={{fontSize: "16px"}}>see review</p>
+                                        </div>
+                                    </div>
                                 </div>
                             );
                             })}
