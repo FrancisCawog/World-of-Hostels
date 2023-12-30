@@ -21,6 +21,7 @@ class Api::ReservationsController < ApplicationController
     end
 
     def update
+        @reservation = Reservation.find(params[:id])
         if @reservation
             if(@reservation.user_id == current_user.id)
                 if @reservation.update(reservation_params)
@@ -37,11 +38,8 @@ class Api::ReservationsController < ApplicationController
     end
 
     def destroy
-        if(@reservation.guest_id == current_user.id)
-            @reservation.destroy
-        else
-            render json: {errors: @reservation.errors.full_messages}
-        end
+        @reservation = Reservation.find(params[:id])
+        @reservation.destroy
     end
 
     private

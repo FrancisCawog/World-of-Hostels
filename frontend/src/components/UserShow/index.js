@@ -7,15 +7,24 @@ import mapIcon from "../../assets/pictures/icons/clipart2731071.png"
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchListings } from "../../store/listings";
+import { deleteReservation } from "../../store/reservations";
 import { updateUser } from "../../store/session";
 import LocationSVG from "../../assets/pictures/icons/location-pin-svgrepo-com.svg"
 import CalendarSVG from "../../assets/pictures/icons/calendar-alt-svgrepo-com.svg"
+import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
+import BuildingSVG from "../../assets/pictures/icons/921-200.png"
+import ChangeSVG from "../../assets/pictures/icons/2831588-200.png"
+import CancelSVG from "../../assets/pictures/icons/728248.webp"
+import RightSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
+import ReservationMapModal from "../ReservationMapModal";
+import { useHistory } from 'react-router-dom';
 
 function UserShow() {
+    const history = useHistory();
+    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const reservations = useSelector(state => state.reservations);
     const listings = useSelector(state => state.listings);
-    const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState('Home');
     const [countryCount, setcountryCount] = useState(0);
     const [propertyCount, setpropertyCount] = useState(0);
@@ -31,7 +40,30 @@ function UserShow() {
     const [dateOfBirth, setDateOfBirth] = useState(formattedDate);
     const [userNationality, setUserNationality] = useState(sessionUser.nationality);
     const [showConfirmation, setShowConfirmation] = useState(false);
-    const [buttonDisabled, setButtonDisabled] = useState(true)
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [showReservation, setShowReservation] = useState(false);
+    const [ReservationId, setReservationId] = useState();
+    const [showMapModal, setShowMapModal] = useState(false);
+
+    useEffect(() => {
+        if (showMapModal) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+        return () => {
+          document.body.style.overflow = 'auto'; 
+        };
+      }, [showMapModal]);
+    
+      const closeModal = () => {
+        setShowMapModal(false);
+      };
+
+     function handleMapClick() {
+        setShowMapModal(true);
+     } 
 
 
     let propertyWord;
@@ -114,6 +146,12 @@ function UserShow() {
         backgroundColor: activeTab === 'Home' ? "#f6a90e" : "white"
     }
 
+    useEffect(() => {
+        if (activeTab === 'My Trips'){
+            setShowReservation(false);
+        }
+    }, [activeTab]);
+
     const handleSaveChanges = () => {
         const fullName = document.getElementById('fullName').value;
         const [firstName, lastName] = fullName.split(' ');
@@ -156,6 +194,15 @@ function UserShow() {
       }, [showConfirmation]);
 
       useEffect(() => {
+        if (showDeleteConfirmation) {
+          const timer = setTimeout(() => {
+            setShowDeleteConfirmation(false);
+          }, 3000);
+          return () => clearTimeout(timer);
+        }
+      }, [showDeleteConfirmation]);
+
+      useEffect(() => {
         const [firstName, lastName] = fullName.split(' ');
       
         if (
@@ -185,19 +232,54 @@ function UserShow() {
       function formatDate(dateString) {
         const options = { day: 'numeric', month: 'short', year: 'numeric' };
         const date = new Date(dateString);
-        const formattedDate = date.toLocaleDateString('en-US', options);
+        const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+        const formattedDate = utcDate.toLocaleDateString('en-US', options);
         return formattedDate;
       }
+      
+
+      const handleReservation = (id) => {
+        setShowReservation(true);
+        setReservationId(id);
+      };
+
+      let foundReservation = null;
+      let foundListing = null;
+
+    if (ReservationId) {
+        foundReservation = Object.values(reservations).find(
+            (reservation) => reservation.id === ReservationId
+        );
+    
+        if (foundReservation) {
+        foundListing = Object.values(listings).find(
+            (listing) => listing.id === foundReservation.listing_id
+        )}
+    }
+
+    const handleDeleteReservation = (ReservationId) => {
+        handleTabClick('My Trips');
+        setShowReservation(false);
+        dispatch(deleteReservation(ReservationId));
+        setShowDeleteConfirmation(true);
+    };    
 
     return (
         <>
+        {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} onClose={closeModal} />}
+
         <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
           <Navigation />
         </div>
 
         {showConfirmation && (
-        <div className="confirmation-box">Changes saved successfully</div>
-      )}
+            <div className="confirmation-box">Changes saved successfully</div>
+        )}
+
+        {showDeleteConfirmation && (
+            <div className="confirmation-box">Reservation cancelled</div>
+        )}
+
 
         <div className="user-yellow-box" style={conditionalColor}>
             <div className="mid-div">
@@ -210,7 +292,13 @@ function UserShow() {
                     <img src={userIcon} alt="Edit Details Icon" />
                     <p>Edit Details</p>
                 </div>
-                <div className={`user-tabs-cont ${activeTab === 'My Trips' && 'active'}`} onClick={() => handleTabClick('My Trips')}>
+                <div
+                    className={`user-tabs-cont ${activeTab === 'My Trips' && 'active'}`}
+                    onClick={() => {
+                        handleTabClick('My Trips');
+                        setShowReservation(false);
+                    }}
+                >
                     <img src={mapIcon} alt="My Trips Icon" />
                     <p>My Trips</p>
                 </div>
@@ -276,7 +364,7 @@ function UserShow() {
                 </>
             )}
 
-            {activeTab === "My Trips" && (
+            {activeTab === "My Trips" && !showReservation && (
                 <>
                     <div className="my-trips">
                         <p>My Trips</p>
@@ -301,7 +389,7 @@ function UserShow() {
                                 );
 
                                 return (
-                                    <div key={reservation.id} className="future-booking">
+                                    <div key={reservation.id} className="future-booking" onClick={() => handleReservation(reservation.id)}>
                                         <div className="future-picture">
 
                                         </div >
@@ -332,7 +420,7 @@ function UserShow() {
                             );
 
                             return (
-                                <div key={reservation.id} className="past-booking">
+                                <div key={reservation.id} className="past-booking" onClick={() => handleReservation(reservation.id)}>
                                     <div className="outer-past-div">
                                         <div className="past-picture"></div>
                                         <div className="past-trip-info">
@@ -363,6 +451,42 @@ function UserShow() {
                     </div>
                 </>
             )}
+
+            {activeTab === "My Trips" && showReservation  && (
+            <div className="reservation-container">
+                <div className="back-to-trips" onClick={() => {
+                    handleTabClick('My Trips');
+                    setShowReservation(false);
+                }}
+                >
+                    <div className="back-to-my-trips">
+                        <img src={MyArrowSVG} alt="Back" style={{ width: '12px' }}/>
+                        <p>Back to My Trips</p>
+                    </div>
+                </div>
+
+                <div className="reservation-picture">
+                </div>
+
+                <p className="found-listing-name">{foundListing.property_name}</p>
+                <div className="icon-and-text">
+                    <img src={LocationSVG} alt="Location Icon" className="icon" />
+                    <p>{foundListing.address}, {foundListing.city}, {foundListing.country}</p>
+                    </div>
+                <div className="icon-and-text" style={{marginTop: "5px"}}>
+                    <img src={CalendarSVG} alt="Calendar Icon" className="icon" />
+                    <p>{formatDate(foundReservation.start_date)} - {formatDate(foundReservation.end_date)}</p>
+                </div>
+
+                <div className="trips-maps-button" onClick={() => handleMapClick()}>
+                    <img src={mapIcon} alt="My Trips Icon" />
+                    <p>Map</p>
+                </div>
+                
+
+            </div>
+            )}
+
             </div>
         </div>
 
@@ -380,6 +504,43 @@ function UserShow() {
             <button className={`edit-user-button ${buttonDisabled ? 'disabled' : ''}`} onClick={!buttonDisabled ? handleSaveChanges : undefined} disabled={buttonDisabled} > Save Changes</button>
         )}
 
+        {activeTab === 'My Trips' && showReservation && (
+            <>
+                <div className="reservation-info">
+                    <div className="reservation-info-buttons">
+                        <div className="reservation-info-button">
+                            <div className="reservation-info-button-inner">
+                                <img src={CalendarSVG} alt="Calendar Icon" className="trip-icon" />
+                                <p>Booking Details</p>
+                            </div>
+                            <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
+                        </div>
+                        <div className="reservation-info-button">
+                            <div className="reservation-info-button-inner" onClick={() => {history.push(`/listings/${foundListing.id}`)}}>
+                                <img src={BuildingSVG} alt="Calendar Icon" className="trip-icon" />
+                                <p>View Booking</p>
+                            </div>
+                            <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
+                        </div>
+                        <div className="reservation-info-button">
+                            <div className="reservation-info-button-inner">
+                                    <img src={ChangeSVG} alt="Calendar Icon" className="trip-icon"/>
+                                    <p>Change Booking</p>
+                                </div>
+                                <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
+                            </div>
+                        <div className="reservation-info-button" onClick={() => handleDeleteReservation(ReservationId)}>
+                            <div className="reservation-info-button-inner">
+                                        <img src={CancelSVG} alt="Calendar Icon" className="trip-icon"/>
+                                        <p>Cancel Booking</p>
+                                </div>
+                                <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
+                        </div>
+                    </div>
+                </div>
+                <div className="reservation-info2"></div>
+            </>
+        )}
 
         <Footer />
         </>

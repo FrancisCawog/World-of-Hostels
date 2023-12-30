@@ -3,10 +3,16 @@ import { SET_LISTING } from "./listings";
 import { RECEIVE_USER } from "./session";
 
 const SET_RESERVATION = "listings/setReservation";
+const REMOVE_RESERVATION = 'listings/removeReservation';
 
 const setReservation = (listings) => ({
     type: SET_RESERVATION,
     payload: listings
+});
+
+const removeReservation = (reservationId) => ({
+  type: REMOVE_RESERVATION,
+  payload: reservationId,
 });
 
 export const createReservation = (reservation) => async (dispatch) => {
@@ -26,6 +32,21 @@ export const createReservation = (reservation) => async (dispatch) => {
       }
 }
 
+export const deleteReservation = (ReservationId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reservations/${ReservationId}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    dispatch(removeReservation(ReservationId));
+  } else {
+    throw response;
+  }
+
+  return response;
+};
+
+
 const reservationReducer = (state = {}, action) => {
     Object.freeze(state);
     const newState = { ...state };
@@ -36,34 +57,15 @@ const reservationReducer = (state = {}, action) => {
             return newState;
         case RECEIVE_USER:
             return {...newState, ...action.reservations}
-            case SET_LISTING:
+        case SET_LISTING:
             return {...newState, ...action.payload.reservations}
+        case REMOVE_RESERVATION:
+            const reservationIdToRemove = action.payload;
+            const { [reservationIdToRemove]: _, ...updatedState } = { ...state };
+            return updatedState;
         default:
             return state;
     }
 };
 
 export default reservationReducer;
-
-
-// export const fetchListings = () => async (dispatch) => {
-//     const response = await csrfFetch("/api/listings");
-//     if (response.ok) {
-//         const data = await response.json();
-//         dispatch(setListings(data));
-//     } else {
-//         throw response;
-//     }
-//     return response;
-// }
-
-// export const fetchReservation = () => async (dispatch) => {
-//     const response = await csrfFetch(`/api/listings/${listingId}`);
-//     if (response.ok) {
-//         const data = await response.json();
-//         dispatch(setListing(data));
-//     } else {
-//         throw response;
-//     }
-//     return response;
-// }

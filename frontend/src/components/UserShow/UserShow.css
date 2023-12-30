@@ -263,8 +263,9 @@
     padding: 20px 40px;
     border-radius: 10px;
     animation: fadeInRight 0.5s ease-in-out;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 1rem;
+    z-index: 100;
   }
   
   @keyframes fadeInRight {
@@ -388,6 +389,11 @@
     margin-bottom: 1.5rem;
 }
 
+.past-booking:hover,
+.future-booking:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+}
+
   .past-picture {
     border-radius: 1rem;
     background-color: #f1f2f4;
@@ -457,4 +463,142 @@
     width: 20%;
     padding-top: 1rem;
     margin-left: 82.5%;
+}
+
+.reservation-info {
+  background-color: #ebfffd;
+  clip-path: polygon(0 0,100% 3rem,100% 100%, 0px 100%);
+  padding: 1.75rem 1rem 2rem;
+  position: relative;
+}
+
+.reservation-info2 {
+  background-color: #ebfffd;;
+  padding: 1.75rem 1rem 6rem;
+  width: 95%;
+  position: absolute;
+  z-index: -1;
+}
+
+.back-to-my-trips {
+  align-items: center;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  height: 3rem;
+  letter-spacing: .00625rem;
+  line-height: 1.25rem;
+  padding: 0.875rem 1.5rem;
+  width: 30%;
+  text-align: center;
+}
+
+.back-to-my-trips:hover{
+  background: #f1f2f4;
+}
+
+.back-to-my-trips p {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-size: .875rem;
+}
+
+.reservation-picture {
+  margin-top: 1rem;
+  border-radius: 1.5rem;
+  height: 15.5rem;
+  width: 650px;
+  background-color: #f1f2f4;;
+}
+
+.reservation-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 4%;
+  margin-top: -3rem;
+}
+
+.found-listing-name {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -.0125rem;
+  font-size: 1.75rem;
+  line-height: 2.125rem;
+}
+
+.trips-maps-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2rem;
+  flex: 1;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  background: #fff;
+  border-radius: 1.25rem;
+  box-shadow: inset 0 0 0 0.125rem #dddfe4;
+  box-sizing: border-box;
+  width: 15%;
+}
+
+.trips-maps-button:hover {
+  background: #f1f2f4;
+}
+
+
+.trips-maps-button p {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+}
+
+.trips-maps-button img {
+  margin-left: -1rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+.reservation-info-buttons {
+  margin-top: 5rem;
+  margin-left: 27.5%;
+}
+.reservation-info-button {
+  align-items: center;
+  border-radius: 1rem;
+  cursor: pointer;
+  justify-content: space-between;
+  outline: none;
+  width: 21.5%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.reservation-info-button-inner {
+  align-items: center;
+  margin-left: 2%;
+  display: flex;
+  flex-direction: row;
+}
+
+.reservation-info-button-inner img {
+  margin-right: 5px;
+  margin-top: 0px;
+}
+
+.reservation-info-button:hover{
+  background-color: rgba(0,224,206,.1);
+}
+
+.reservation-info-button p {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+}
+
+.trip-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0;
+    margin-top: -.75rem;
+    margin-left: .5rem;
 }
