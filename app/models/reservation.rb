@@ -21,6 +21,8 @@ class Reservation < ApplicationRecord
     belongs_to :listing
     belongs_to :room
 
+    has_one :review, dependent: :destroy
+
     def num_nights
         return end_date - start_date
     end
