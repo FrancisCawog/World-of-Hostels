@@ -9,6 +9,7 @@ import MapSVG from "../../assets/pictures/icons/map-icon.svg"
 import MyArrowSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import checkInPic from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png"
 import checkOutPic from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png"
+import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
 import person from "../../assets/pictures/icons/user-128.svg"
 import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
 import minus from "../../assets/pictures/icons/minus.svg"
@@ -24,6 +25,7 @@ function ListingsShowPage() {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
+  const reviews = useSelector((state) => state.reviews);
   const rooms = useSelector((state) => Object.values(state.rooms));
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [tabName, settabName] = useState();
@@ -81,6 +83,11 @@ function ListingsShowPage() {
     } else if(tabName === 'Map'){
       settabName('Map');
       setShowAboutModal(true);
+    } else if (tabName === 'Reviews') {
+      const chooseRoomDiv = document.getElementById('show-reviews');
+      if (chooseRoomDiv) {
+        chooseRoomDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   }
 
@@ -98,6 +105,54 @@ function ListingsShowPage() {
   const closeModal = () => {
     setShowAboutModal(false);
   };
+
+  const averageTotalScore = (listingId) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    
+    if (!listingReviews.length) {
+      return 0.0;
+    }
+  
+    const totalScoreSum = listingReviews.reduce(
+      (accumulator, review) => accumulator + review.total_score,
+      0
+    );
+    return totalScoreSum / listingReviews.length;
+  };  
+
+  const numberOfReviews = (listingId) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    return listingReviews.length
+  }
+
+  const reviewWordRating = (listingId) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    const totalScoreSum = listingReviews.reduce(
+      (accumulator, review) => accumulator + review.total_score,
+      0
+    );
+    const average = totalScoreSum / listingReviews.length;
+    if (average >= 9){
+      return "Superb"
+    } else if (average >= 8.0 && average < 9.0) {
+      return "Fabulous"
+    } else if (average >= 7.0 && average < 6.0) {
+      return "Very Good"
+    } else if (average >= 6.0 && average < 7.0) {
+      return "Good"
+    } else {
+      return ""
+    }
+  }
+
+  const catRating = (listingId, category) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    const totalCategorySum = listingReviews.reduce(
+      (accumulator, review) => accumulator + review[category], 
+      0
+    );
+    return totalCategorySum / listingReviews.length;
+  }
   
   return (
     <>
@@ -145,7 +200,9 @@ function ListingsShowPage() {
           <span className="tabs-name" onClick={() => handleTabClick('About')} style={{ cursor: 'pointer' }}>About</span>
           <span className="tabs-name" onClick={() => handleTabClick('House Rules')} style={{ cursor: 'pointer' }}>House Rules</span>
           <span className="tabs-name" onClick={() => handleTabClick('Map')} style={{ cursor: 'pointer' }}>Location</span>
-          <span className="tabs-name" onClick={() => handleTabClick('Reviews')} style={{ cursor: 'pointer' }}>Reviews</span>
+          {numberOfReviews(listing?.id) !== 0 &&
+            <span className="tabs-name" onClick={() => handleTabClick('Reviews')} style={{ cursor: 'pointer' }}>Reviews</span>
+          }
         </div>
       </div>
   <div style={{display: "flex", marginRight: "10%"}}>
@@ -363,24 +420,126 @@ function ListingsShowPage() {
 
           </div>
 
-          <div className="show-reviews">
+          {numberOfReviews(listing?.id) !== 0 &&
+          <div id="show-reviews" className="show-reviews">
             <div className="purple-container">
                 <div className="angled-box">
                     <div className="skewed-wrapper">
                         <div>
+                          {numberOfReviews(listing?.id) > 1 &&
                             <span id="reviews">Reviews</span>
+                          }
+                          {numberOfReviews(listing?.id) === 1 &&
+                            <span id="reviews">Review</span>
+                          }
                             <div id="review-box">
                               <div className="review-rating-box"> 
-
+                                <div className="listing-review-star-and-rating" style={{marginTop: "10px"}}>
+                                  <img style={{width: "24px", height: "24px"}} src={StarSVG}/>
+                                  <p>
+                                    <span className="total-score" style={{marginRight: "10px", fontFamily: "Poppins-bold"}}>
+                                      {averageTotalScore(listing?.id).toFixed(1)}
+                                    </span>
+                                    <span style={{ fontSize: '16px' }}>
+                                      {reviewWordRating(listing?.id)}
+                                    </span>
+                                  </p>
+                                </div>
+                                <p style={{ fontSize: '20px', marginTop: "5px" }}>({numberOfReviews(listing?.id)} Reviews)</p>
                               </div>
                               <ul className="rating-cats">
-                                <li>Security</li>
-                                <li>Location</li>
-                                <li>Staff</li>
-                                <li>Atmosphere</li>
-                                <li>Cleanliness</li>
-                                <li>Facilities</li>
-                                <li>Value for Money</li>
+
+                                <div className="rating-cats-tab">
+                                  <div className="category-label">
+                                    <p>Security</p>
+                                  </div>
+                                  <div className="rating-bar-and-score">
+                                    <div className="rating-bars">
+                                      <div className="gray-bar"></div>
+                                      <div className="yellow-bar" style={{ width: `${catRating(listing?.id, 'security') * 0.475}rem` }}></div>
+                                    </div>
+                                    <p>{catRating(listing?.id, 'security').toFixed(1)}</p>
+                                  </div>
+                                </div>
+
+                                <div className="rating-cats-tab">
+                                  <div className="category-label">
+                                    <p>Location</p>
+                                  </div>
+                                  <div className="rating-bar-and-score">
+                                    <div className="rating-bars">
+                                      <div className="gray-bar"></div>
+                                      <div className="yellow-bar" style={{ width: `${catRating(listing?.id, 'location') * 0.475}rem` }}></div>
+                                    </div>
+                                    <p>{catRating(listing?.id, 'location').toFixed(1)}</p>
+                                  </div>
+                                </div>
+
+                                <div className="rating-cats-tab">
+                                  <div className="category-label">
+                                    <p>Staff</p>
+                                  </div>
+                                  <div className="rating-bar-and-score">
+                                    <div className="rating-bars">
+                                      <div className="gray-bar"></div>
+                                      <div className="yellow-bar" style={{ width: `${catRating(listing?.id, 'staff') * 0.475}rem` }}></div>
+                                    </div>
+                                    <p>{catRating(listing?.id, 'staff').toFixed(1)}</p>
+                                  </div>
+                                </div>
+
+                                <div className="rating-cats-tab">
+                                  <div className="category-label">
+                                    <p>Atmosphere</p>
+                                  </div>
+                                  <div className="rating-bar-and-score">
+                                    <div className="rating-bars">
+                                      <div className="gray-bar"></div>
+                                      <div className="yellow-bar" style={{ width: `${catRating(listing?.id, 'atmosphere') * 0.475}rem` }}></div>
+                                    </div>
+                                    <p>{catRating(listing?.id, 'atmosphere').toFixed(1)}</p>
+                                  </div>
+                                </div>
+
+                                <div className="rating-cats-tab">
+                                  <div className="category-label">
+                                    <p>Cleanliness</p>
+                                  </div>
+                                  <div className="rating-bar-and-score">
+                                    <div className="rating-bars">
+                                      <div className="gray-bar"></div>
+                                      <div className="yellow-bar" style={{ width: `${catRating(listing?.id, 'cleanliness') * 0.475}rem` }}></div>
+                                    </div>
+                                    <p>{catRating(listing?.id, 'cleanliness').toFixed(1)}</p>
+                                  </div>
+                                </div>
+
+                                <div className="rating-cats-tab">
+                                  <div className="category-label">
+                                    <p>Facilities</p>
+                                  </div>
+                                  <div className="rating-bar-and-score">
+                                    <div className="rating-bars">
+                                      <div className="gray-bar"></div>
+                                      <div className="yellow-bar" style={{ width: `${catRating(listing?.id, 'facilities') * 0.475}rem` }}></div>
+                                    </div>
+                                    <p>{catRating(listing?.id, 'facilities').toFixed(1)}</p>
+                                  </div>
+                                </div>
+
+                                <div className="rating-cats-tab">
+                                  <div className="category-label">
+                                    <p>Value for Money</p>
+                                  </div>
+                                  <div className="rating-bar-and-score">
+                                    <div className="rating-bars">
+                                      <div className="gray-bar"></div>
+                                      <div className="yellow-bar" style={{ width: `${catRating(listing?.id, 'value_for_money') * 0.475}rem` }}></div>
+                                    </div>
+                                    <p>{catRating(listing?.id, 'value_for_money').toFixed(1)}</p>
+                                  </div>
+                                </div>
+
                               </ul>
                             </div>
                         </div>
@@ -393,6 +552,8 @@ function ListingsShowPage() {
                 <div className="side-div"></div>
             </div>
           </div>
+
+        }
 
           <div className="fakemap">
             <p className="location-text">Location</p>

@@ -320,11 +320,14 @@
 }
 
 .review-rating-box {
-    border: 1px solid black;
     width: 250px;
     height: 70px;
-    margin-left: 6%;
+    margin-left: 10%;
     margin-bottom: 1%;
+}
+
+.total-score {
+    font-size: 26px;
 }
 
 .rating-cats {
@@ -332,6 +335,43 @@
     margin-right: 45%;
     font-family: Poppins;
     margin-bottom: 10px;
+}
+
+.rating-cats-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 220px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+
+.rating-bar-and-score {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.rating-bar-and-score p {
+    font-family: Poppins-bold;
+}
+
+.gray-bar {
+    background-color: #f1f2f4;
+    border-radius: 0.75rem;
+    flex-grow: 1;
+    height: 0.5rem;
+    width: 4.75rem;
+    position: absolute;
+    margin-top: 20px;
+}
+
+.yellow-bar {
+    background-color: #f6a90e;
+    border-radius: 0.75rem;
+    height: 0.5rem;
+    position: absolute;
+    margin-top: 20px;
 }
 
 li {
