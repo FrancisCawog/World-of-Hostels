@@ -46,10 +46,30 @@
     margin-left: 3%;
 }
 
+.single-listing h3 {
+    margin-bottom: 0px;
+}
+
 .listing-review {
-    border: 1px solid black;
+    /* border: 1px solid black; */
+}
+
+.listing-review-star-and-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1.5rem;
+}
+
+.listing-review-star-and-rating img {
     height: 18px;
-    margin-top: -5%;
+    width: 18px;
+}
+
+.listing-review-star-and-rating p {
+    font-family: Poppins,Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size: 18px;
+    font-weight: bolder;
 }
 
 .single-listing-p {

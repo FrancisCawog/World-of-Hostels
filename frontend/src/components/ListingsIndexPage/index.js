@@ -5,6 +5,7 @@ import { fetchListings } from "../../store/listings";
 import "./ListingsIndex.css";
 import Footer from "../Footer";
 import WifiSVG from "../../assets/pictures/icons/wifi.svg"
+import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
 import WhiteWifiSVG from "../../assets/pictures/icons/wifi-white.svg"
 import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
 import WhiteCoffeeSVG from "../../assets/pictures/icons/white-coffee.svg"
@@ -13,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 function ListingsIndexPage() {
   const dispatch = useDispatch();
   const listings = useSelector((state) => state.listings);
+  const reviews = useSelector((state) => state.reviews);
   const rooms = useSelector((state) => Object.values(state.rooms));
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered2, setIsHovered2] = useState(false);
@@ -29,6 +31,45 @@ function ListingsIndexPage() {
     const queryString = new URLSearchParams(cart).toString();
     history.push(`/listings/${listingId}?${queryString}`);
   };
+
+  const averageTotalScore = (listingId) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    
+    if (!listingReviews.length) {
+      return 0.0;
+    }
+  
+    const totalScoreSum = listingReviews.reduce(
+      (accumulator, review) => accumulator + review.total_score,
+      0
+    );
+    return totalScoreSum / listingReviews.length;
+  };  
+
+  const numberOfReviews = (listingId) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    return listingReviews.length
+  }
+
+  const reviewWordRating = (listingId) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    const totalScoreSum = listingReviews.reduce(
+      (accumulator, review) => accumulator + review.total_score,
+      0
+    );
+    const average = totalScoreSum / listingReviews.length;
+    if (average >= 9){
+      return "Superb"
+    } else if (average >= 8.0 && average < 9.0) {
+      return "Fabulous"
+    } else if (average >= 7.0 && average < 6.0) {
+      return "Very Good"
+    } else if (average >= 6.0 && average < 7.0) {
+      return "Good"
+    } else {
+      return ""
+    }
+  }
 
   return (
     <>
@@ -50,12 +91,30 @@ function ListingsIndexPage() {
 
     <div>
     {Object.values(listings).map((listing) => (
-    <a key={listing.id} href={`listings/${listing.id}`} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id);}} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black" }}>
+    <a key={listing.id} href={`listings/${listing.id}`} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id)}} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black" }}>
       <div className="index-picture"></div>
 
       <div className="single-listing">
         <h3>{listing.property_name}</h3>
-        <div className="listing-review"></div>
+
+        {numberOfReviews(listing.id) !== 0 &&
+        <div className="listing-review">
+          
+          <div className="listing-review-star-and-rating">
+            <img src={StarSVG}/>
+            <p>
+              <span style={{marginRight: "10px"}}>
+                {averageTotalScore(listing.id).toFixed(1)}
+              </span>
+              <span style={{ fontSize: '14px' }}>
+                {reviewWordRating(listing.id)} ({numberOfReviews(listing.id)})
+              </span>
+            </p>
+          </div>
+
+        </div>
+        }
+        
         <p className="single-listing-p">{listing.property_type.charAt(0).toUpperCase() + listing.property_type.slice(1)}</p>
 
             <div style={{ display: 'flex', alignItems: 'center', marginTop: "-3%" }}>
