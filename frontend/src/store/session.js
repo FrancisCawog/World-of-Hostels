@@ -6,7 +6,8 @@ const REMOVE_USER = 'session/removeUser';
 const receiveUser = (data) => ({
   type: RECEIVE_USER,
   user: data.user,
-  reservations: data.reservations
+  reservations: data.reservations,
+  reviews: data.reviews
 });
 
 const removeUser = () => ({

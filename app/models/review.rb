@@ -22,7 +22,7 @@
 #  updated_at      :datetime         not null
 #
 class Review < ApplicationRecord
-    validates :listing_id, :user_id, :reservation_id, :security, :cleanliness, :location, :facilities, :staff, :value_for_money, :atmosphere, :about_you, :age_group, :trip_type, presence: true
+    validates :listing_id, :user_id, :reservation_id, :security, :cleanliness, :location, :facilities, :staff, :value_for_money, :atmosphere, :total_score, :about_you, :age_group, :trip_type, presence: true
     validates :security, :cleanliness, :location, :facilities, :staff, :value_for_money, :atmosphere, :total_score, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10}
 
     belongs_to :listing

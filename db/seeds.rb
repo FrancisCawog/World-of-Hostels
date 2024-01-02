@@ -16,7 +16,7 @@ require "open-uri"
     Room.destroy_all
     Reservation.destroy_all
     User.destroy_all
-    # Reviews.destroy_all
+    Review.destroy_all
   
     puts "Resetting primary keys..."
     # For easy testing, so that after seeding, the first `User` has `id` of 1
@@ -330,6 +330,98 @@ Our goal at Mad Monkey is to create meaningful and sustainable travel experience
         start_date: "2023-11-21",
         end_date: "2023-11-23",
         refundable: false
+    )
+
+    RE3 = Reservation.create!(
+        listing_id: 1,
+        user_id: 1,
+        room_id: 6,
+        num_guests: 2,
+        start_date: "2023-11-22",
+        end_date: "2023-11-26",
+        refundable: false
+    )
+
+    RE4 = Reservation.create!(
+        listing_id: 2,
+        user_id: 2,
+        room_id: 2,
+        num_guests: 1,
+        start_date: "2023-11-28",
+        end_date: "2023-12-20",
+        refundable: false
+    )
+
+    rev1 = Review.create!(
+        user_id: 1,
+        listing_id: 1,
+        reservation_id: 1,
+        security: 10,
+        cleanliness: 8,
+        location: 10,
+        facilities: 6,
+        staff: 8,
+        value_for_money: 6, 
+        atmosphere: 10,
+        total_score: 8.3,
+        about_you: "male",
+        age_group: "25-30",
+        trip_type: "weekend away",
+        feedback: "Good hostel. Great atmosphere"
+    )
+
+    rev2 = Review.create!(
+        user_id: 2,
+        listing_id: 1,
+        reservation_id: 2,
+        security: 8,
+        cleanliness: 10,
+        location: 10,
+        facilities: 6,
+        staff: 10,
+        value_for_money: 10, 
+        atmosphere: 10,
+        total_score: 9.1,
+        about_you: "male",
+        age_group: "25-30",
+        trip_type: "weekend away",
+        feedback: "Time here was good. Enjoyed the accommodation"
+    )
+
+    rev3 = Review.create!(
+        user_id: 1,
+        listing_id: 1,
+        reservation_id: 3,
+        security: 10,
+        cleanliness: 10,
+        location: 10,
+        facilities: 10,
+        staff: 10,
+        value_for_money: 10, 
+        atmosphere: 10,
+        total_score: 10,
+        about_you: "male",
+        age_group: "25-30",
+        trip_type: "weekend away",
+        feedback: "Enjoyed my stay here. Francis was great"
+    )
+
+    rev4 = Review.create!(
+        user_id: 2,
+        listing_id: 2,
+        reservation_id: 4,
+        security: 8,
+        cleanliness: 8,
+        location: 8,
+        facilities: 8,
+        staff: 8,
+        value_for_money: 8, 
+        atmosphere: 8,
+        total_score: 8,
+        about_you: "male",
+        age_group: "25-30",
+        trip_type: "weekend away",
+        feedback: "Time here was alright. No complaints but could've been better"
     )
     
     puts "Done!"
