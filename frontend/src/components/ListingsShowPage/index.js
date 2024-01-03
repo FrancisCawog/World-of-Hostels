@@ -20,12 +20,15 @@ import CheckoutForm from "../Checkout"
 import { setCart } from "../../store/cart";
 import { removeCart } from "../../store/cart";
 import { useLocation } from 'react-router-dom';
+import { fetchUsers } from "../../store/users";
 
 function ListingsShowPage() {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
   const reviews = useSelector((state) => state.reviews);
+  const users = useSelector((state) => state.users);
+  const reservations = useSelector((state) => state.reservations);
   const rooms = useSelector((state) => Object.values(state.rooms));
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [tabName, settabName] = useState();
@@ -42,6 +45,12 @@ function ListingsShowPage() {
   
 
   // const availableRooms = rooms.filter(room => room.available_beds > 0);
+
+  useEffect(() => {
+    dispatch(fetchUsers()).catch((error) => {
+      console.error("Error fetching users:", error);
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     if(start_date !== undefined && end_date !== undefined){
@@ -160,6 +169,51 @@ function ListingsShowPage() {
     } else if (numberOfReviews(listing?.id) > 2){
       return {height: "900px"}
     }
+  }
+
+  const extractDate = (listingId, num) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    const numberedElement = listingReviews[num]
+    const reservationId = numberedElement.reservation_id;
+    const reservation = Object.values(reservations).find(reservation => reservation.id === reservationId);
+    const date = new Date(reservation.start_date);
+    const options = { year: 'numeric', month: 'short' };
+    return date.toLocaleDateString('en-US', options);
+  }
+
+  const extractRating = (listingId, num) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    const numberedElement = listingReviews[num]
+    return numberedElement.total_score
+  }
+
+  const extractName = (listingId, num) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    const numberedElement = listingReviews[num]
+    const userId = numberedElement.user_id;
+    const user = Object.values(users).find(user => user.id === userId);
+    const abbreviatedLastName = user.last_name.charAt(0);
+    const firstName = user.first_name
+    return `${firstName} ${abbreviatedLastName}.`;
+  }
+
+  const extractDemographic = (listingId, num) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    const numberedElement = listingReviews[num];
+    const userId = numberedElement.user_id;
+    const user = Object.values(users).find(user => user.id === userId);
+    const nationality = user.nationality;
+    const ageGroup = numberedElement.age_group;
+    let gender = numberedElement.about_you;
+    gender = gender.charAt(0).toUpperCase() + gender.slice(1);
+  
+    return `${gender}, ${ageGroup}, ${nationality}`;
+  };
+  
+  const extractFeedback = (listingId, num) => {
+    const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+    const numberedElement = listingReviews[num]
+    return numberedElement.feedback
   }
   
   return (
@@ -556,13 +610,73 @@ function ListingsShowPage() {
             </div>
             <div className="side-divs">
                 {numberOfReviews(listing?.id) >= 1 &&
-                <div className="side-div"></div>
+                <div className="side-div">
+                  <div className="date-and-rating">
+                    <p style={{marginTop: "25px"}}>Stayed in {extractDate(listing?.id, (numberOfReviews(listing?.id) - 1))}</p>
+                    <div className="star-and-rating">
+                      <img src={StarSVG} style={{width: "20px", height: "20px"}}/>
+                      <p>{extractRating(listing?.id, (numberOfReviews(listing?.id) - 1))}</p>
+                    </div>
+                  </div>
+
+                  <div className="pic-name-and-info">
+                    <div className="review-profile-pic"></div>
+                    <div className="review-name-info">
+                      <p>{extractName(listing?.id, (numberOfReviews(listing?.id) - 1))}</p>
+                      <p>{extractDemographic(listing?.id, (numberOfReviews(listing?.id) - 1))}</p>
+                    </div>
+                  </div>
+
+                  <div className="review-feedback">
+                    <p>{extractFeedback(listing?.id, (numberOfReviews(listing?.id) - 1))}</p>
+                  </div>
+                </div>
                 }
                 {numberOfReviews(listing?.id) >= 2 &&
-                <div className="side-div"></div>
+                <div className="side-div">
+                <div className="date-and-rating">
+                  <p style={{marginTop: "25px"}}>Stayed in {extractDate(listing?.id, (numberOfReviews(listing?.id) - 2))}</p>
+                  <div className="star-and-rating">
+                    <img src={StarSVG} style={{width: "20px", height: "20px"}}/>
+                    <p>{extractRating(listing?.id, (numberOfReviews(listing?.id) - 2))}</p>
+                  </div>
+                </div>
+
+                <div className="pic-name-and-info">
+                  <div className="review-profile-pic"></div>
+                  <div className="review-name-info">
+                    <p>{extractName(listing?.id, (numberOfReviews(listing?.id) - 2))}</p>
+                    <p>{extractDemographic(listing?.id, (numberOfReviews(listing?.id) - 2))}</p>
+                  </div>
+                </div>
+
+                <div className="review-feedback">
+                  <p>{extractFeedback(listing?.id, (numberOfReviews(listing?.id) - 2))}</p>
+                </div>
+              </div>
                 }
                 {numberOfReviews(listing?.id) >= 3 &&
-                <div className="side-div"></div>
+                <div className="side-div">
+                <div className="date-and-rating">
+                  <p style={{marginTop: "25px"}}>Stayed in {extractDate(listing?.id, (numberOfReviews(listing?.id) - 3))}</p>
+                  <div className="star-and-rating">
+                    <img src={StarSVG} style={{width: "20px", height: "20px"}}/>
+                    <p>{extractRating(listing?.id, (numberOfReviews(listing?.id) - 3))}</p>
+                  </div>
+                </div>
+
+                <div className="pic-name-and-info">
+                  <div className="review-profile-pic"></div>
+                  <div className="review-name-info">
+                    <p>{extractName(listing?.id, (numberOfReviews(listing?.id) - 3))}</p>
+                    <p>{extractDemographic(listing?.id, (numberOfReviews(listing?.id) - 3))}</p>
+                  </div>
+                </div>
+
+                <div className="review-feedback">
+                  <p>{extractFeedback(listing?.id, (numberOfReviews(listing?.id) - 3))}</p>
+                </div>
+              </div>
                 }
                 {numberOfReviews(listing?.id) >= 4 &&
                 <div className="view-reviews">

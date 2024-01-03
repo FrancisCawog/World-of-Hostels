@@ -6,6 +6,7 @@ import roomReducer from './rooms';
 import cartReducer from './cart'
 import reservationReducer from './reservations';
 import reviewReducer from './review';
+import userReducer from './users';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     rooms: roomReducer,
     cart: cartReducer,
     reservations: reservationReducer,
-    reviews: reviewReducer
+    reviews: reviewReducer,
+    users: userReducer
 })
 
 let enhancer;
