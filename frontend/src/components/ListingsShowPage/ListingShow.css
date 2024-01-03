@@ -249,7 +249,8 @@
 }
 
 .read-more-hov:hover,
-.view-house-rules:hover {
+.view-house-rules:hover,
+.view-reviews:hover {
     background-color: rgb(245, 243, 243);
     border-radius: 15px 15px 15px 15px;
 }
@@ -275,7 +276,6 @@
     padding: 20px;
     transform-origin: top right;
     transform: skew(-6deg);
-    height: 900px;
     width: 260px;
     margin-bottom: 5px;
 }
@@ -507,4 +507,14 @@ li {
 .add-remove-cart {
     display: flex;
     flex-direction: row;
+}
+
+.view-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;
+    margin-left: 82.5%;
+    width: 160px;
+    padding-left: 1.5%;
 }

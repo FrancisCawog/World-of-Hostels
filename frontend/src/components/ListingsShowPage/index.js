@@ -153,6 +153,14 @@ function ListingsShowPage() {
     );
     return totalCategorySum / listingReviews.length;
   }
+
+  const conditionalHeight = () => {
+    if (numberOfReviews(listing?.id) <= 2) {
+      return {height: "520px"}
+    } else if (numberOfReviews(listing?.id) > 2){
+      return {height: "900px"}
+    }
+  }
   
   return (
     <>
@@ -414,7 +422,7 @@ function ListingsShowPage() {
           <div className="view-house-rules"  onClick={() => handleTabClick('House Rules')}>
                 <p className="read-more">View all the house rules</p>
                 <img src={MyArrowSVG} style={{ width: '14px' }}/>
-              </div>
+          </div>
 
           <div className="facilities"> Facilities
 
@@ -423,7 +431,7 @@ function ListingsShowPage() {
           {numberOfReviews(listing?.id) !== 0 &&
           <div id="show-reviews" className="show-reviews">
             <div className="purple-container">
-                <div className="angled-box">
+                <div className="angled-box" style={conditionalHeight()}>
                     <div className="skewed-wrapper">
                         <div>
                           {numberOfReviews(listing?.id) > 1 &&
@@ -547,9 +555,21 @@ function ListingsShowPage() {
                 </div>
             </div>
             <div className="side-divs">
+                {numberOfReviews(listing?.id) >= 1 &&
                 <div className="side-div"></div>
+                }
+                {numberOfReviews(listing?.id) >= 2 &&
                 <div className="side-div"></div>
+                }
+                {numberOfReviews(listing?.id) >= 3 &&
                 <div className="side-div"></div>
+                }
+                {numberOfReviews(listing?.id) >= 4 &&
+                <div className="view-reviews">
+                  <p className="read-more">View all reviews</p>
+                  <img src={MyArrowSVG} style={{ width: '14px' }}/>
+                </div>
+                }
             </div>
           </div>
 
