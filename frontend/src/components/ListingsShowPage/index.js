@@ -176,7 +176,7 @@ function ListingsShowPage() {
     const numberedElement = listingReviews[num]
     const reservationId = numberedElement.reservation_id;
     const reservation = Object.values(reservations).find(reservation => reservation.id === reservationId);
-    const date = new Date(reservation.start_date);
+    const date = new Date(reservation?.start_date);
     const options = { year: 'numeric', month: 'short' };
     return date.toLocaleDateString('en-US', options);
   }
@@ -192,8 +192,8 @@ function ListingsShowPage() {
     const numberedElement = listingReviews[num]
     const userId = numberedElement.user_id;
     const user = Object.values(users).find(user => user.id === userId);
-    const abbreviatedLastName = user.last_name.charAt(0);
-    const firstName = user.first_name
+    const abbreviatedLastName = user?.last_name.charAt(0);
+    const firstName = user?.first_name
     return `${firstName} ${abbreviatedLastName}.`;
   }
 
@@ -202,7 +202,7 @@ function ListingsShowPage() {
     const numberedElement = listingReviews[num];
     const userId = numberedElement.user_id;
     const user = Object.values(users).find(user => user.id === userId);
-    const nationality = user.nationality;
+    const nationality = user?.nationality;
     const ageGroup = numberedElement.age_group;
     let gender = numberedElement.about_you;
     gender = gender.charAt(0).toUpperCase() + gender.slice(1);

@@ -12,14 +12,19 @@ import { updateUser } from "../../store/session";
 import LocationSVG from "../../assets/pictures/icons/location-pin-svgrepo-com.svg"
 import CalendarSVG from "../../assets/pictures/icons/calendar-alt-svgrepo-com.svg"
 import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
+import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import BuildingSVG from "../../assets/pictures/icons/921-200.png"
 import ChangeSVG from "../../assets/pictures/icons/2831588-200.png"
 import CancelSVG from "../../assets/pictures/icons/728248.webp"
 import RightSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
+import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
 import ReservationMapModal from "../ReservationMapModal";
 import { useHistory } from 'react-router-dom';
+import ReviewModal from "../ReviewModal";
+import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 
 function UserShow() {
+    const reviews = useSelector((state) => state.reviews);
     const history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
@@ -45,6 +50,9 @@ function UserShow() {
     const [showReservation, setShowReservation] = useState(false);
     const [ReservationId, setReservationId] = useState();
     const [showMapModal, setShowMapModal] = useState(false);
+    const [showReviewModal, setShowReviewModal] = useState(false);
+    const [modalReviewId, setModalReviewId] = useState("");
+    const [modalPropertyName,setModalPropertyName] = useState("");
 
     useEffect(() => {
         if (showMapModal) {
@@ -57,12 +65,34 @@ function UserShow() {
         };
       }, [showMapModal]);
     
-      const closeModal = () => {
+      const closeMapModal = () => {
         setShowMapModal(false);
+      };
+
+      useEffect(() => {
+        if (showReviewModal) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+        return () => {
+          document.body.style.overflow = 'auto'; 
+        };
+      }, [showReviewModal]);
+    
+      const closeReviewModal = () => {
+        setShowReviewModal(false);
       };
 
      function handleMapClick() {
         setShowMapModal(true);
+     } 
+
+     function handleReviewClick(reservationId, property_name) {
+        handleReservation(reservationId)
+        setModalReviewId(reservationId)
+        setModalPropertyName(property_name)
+        setShowReviewModal(true);
      } 
 
 
@@ -220,14 +250,16 @@ function UserShow() {
       const currentDate = new Date();
 
       const futureReservations = Object.values(reservations).filter(reservation => {
-        const endDate = new Date(reservation.end_date); 
-        return endDate > currentDate;
+        const startDate = new Date(reservation.start_date); 
+        return startDate > currentDate;
       });
 
       const pastReservations = Object.values(reservations).filter(reservation => {
-        const endDate = new Date(reservation.end_date); 
-        return endDate < currentDate;
+        const startDate = new Date(reservation.start_date); 
+        return startDate < currentDate;
       });
+
+      const isReservationInPast = pastReservations.some(reservation => reservation.id === ReservationId);
 
       function formatDate(dateString) {
         const options = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -264,9 +296,25 @@ function UserShow() {
         setShowDeleteConfirmation(true);
     };    
 
+    const extractRating = (reservationId) => {
+        const listingReviews = Object.values(reviews).filter(review => review.reservation_id === reservationId);
+        const review = listingReviews[0]
+        return review?.total_score
+      }
+
+    const listingReview = (reservationId) => {
+        const review = Object.values(reviews).filter(review => review.reservation_id === reservationId);
+        if (review.length === 1) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     return (
         <>
-        {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} onClose={closeModal} />}
+        {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} onClose={closeMapModal} />}
+        {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReviewId= {modalReviewId} modalPropertyName= {modalPropertyName}/>}
 
         <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
           <Navigation />
@@ -437,10 +485,25 @@ function UserShow() {
                                     </div>
                                     <div className="past-review-div">
                                         <div className="past-num-div">
-                                            <p style={{fontSize: "16px"}}>5</p>
+                                            {[extractRating(reservation.id)] &&
+                                            <>
+                                            <img src={StarSVG}/>
+                                            <p style={{fontSize: "16px"}}>{extractRating(reservation.id)}</p>
+                                            </>
+                                            }
                                         </div>
                                         <div className="leave-review">
-                                            <p style={{fontSize: "16px"}}>see review</p>
+                                            {[extractRating(reservation.id)] ? (
+                                            <>
+                                                <p style={{fontSize: "14px"}} onClick={() => handleReviewClick(reservation.id, correspondingListing.property_name)}>See review</p>
+                                                <img src={ArrowRight}/>
+                                            </>
+                                            ) : (
+                                            <>
+                                                <p style={{fontSize: "14px"}}>Leave a review</p>
+                                                <img src={ArrowRight}/>
+                                            </>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -452,7 +515,7 @@ function UserShow() {
                 </>
             )}
 
-            {activeTab === "My Trips" && showReservation  && (
+            {activeTab === "My Trips" && showReservation && (
             <div className="reservation-container">
                 <div className="back-to-trips" onClick={() => {
                     handleTabClick('My Trips');
@@ -522,6 +585,9 @@ function UserShow() {
                             </div>
                             <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
                         </div>
+
+                        {!isReservationInPast ? (
+                        <>
                         <div className="reservation-info-button">
                             <div className="reservation-info-button-inner">
                                     <img src={ChangeSVG} alt="Calendar Icon" className="trip-icon"/>
@@ -536,6 +602,20 @@ function UserShow() {
                                 </div>
                                 <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
                         </div>
+                        </>
+                        ) : (
+                            !listingReview(ReservationId) ? (
+                                <button className="review-button"> 
+                                    <img src={transpartstar}/>
+                                    <span>Leave a review</span>
+                                </button>
+                            ) : (
+                                <button className="review-button" onClick={() => handleReviewClick(ReservationId, foundListing.property_name)}> 
+                                    <img src={transpartstar}/>
+                                    <span>View Review</span>
+                                </button>
+                            )
+                        )}
                     </div>
                 </div>
                 <div className="reservation-info2"></div>

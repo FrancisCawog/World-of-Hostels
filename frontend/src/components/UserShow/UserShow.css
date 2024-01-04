@@ -457,12 +457,31 @@
 .past-num-div{
     margin-left: 2%;
     margin-top: .5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.past-num-div img{
+  width: 16px;
+  height: 16px;
+  margin-top: -7px;
+  margin-right: 5px;
 }
 
 .leave-review{
     width: 20%;
     padding-top: 1rem;
-    margin-left: 82.5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.leave-review img {
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+  margin-bottom: 5px;
 }
 
 .reservation-info {
@@ -601,4 +620,36 @@
     margin: 0;
     margin-top: -.75rem;
     margin-left: .5rem;
+}
+
+.review-button {
+  margin-top: 10px;
+  fill: #fff;
+  align-items: center;
+  background: #f25621;
+  border: none;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 3rem;
+  padding: 0.75rem 1.5rem;
+  width: 21.5%;
+  flex-direction: row;
+  display: inline-flex;
+  justify-content: center;
+}
+
+
+.review-button img {
+    height: 20px;
+    width: 20px;
+}
+
+.review-button:hover {
+  box-shadow: 0 8px 24px rgba(242,85,33,.35);
+  color: #fff;
 }

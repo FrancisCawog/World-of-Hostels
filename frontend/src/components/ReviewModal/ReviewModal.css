@@ -1,0 +1,124 @@
+.review-modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    height: 76%;
+    width: 32%;
+    overflow: auto;
+    position: relative;
+  }
+
+.modal-review-label{
+    font-family: Poppins-bold;
+    font-size: 1.75rem;
+    letter-spacing: -.0125rem;
+    margin-top: -7.5px;
+    margin-left: 1%;
+}
+
+.review-content-box {
+    margin: 5%;
+}
+
+.property-tag {
+    font-family: Poppins-bold;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+    margin: 0px;
+}
+
+.property-name {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .00625rem;
+    margin-top: 5px;
+}
+
+.hotel-img {
+    height: 48px;
+    width: 48px;
+}
+
+.property-info,
+.category-rating  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-rating  {
+    margin-top: -7.5px;
+    margin-bottom: -17.5px;
+}
+
+.category-rating p {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+}
+
+.star-rating {
+    display: flex;
+    align-items: center;
+}
+
+.star-rating img {
+    width: 24px;
+    height: 24px;
+}
+
+.overall-rating {
+    display: flex;
+    align-items: center;
+    flex-direction: row; 
+    margin-right: 5%;
+}
+
+.overall-rating img {
+    height: 24px;
+    width: 24px;
+}
+
+#total-score {
+    font-family: Poppins-bold;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -.0125rem;
+    line-height: 2.125rem;
+    margin-right: 10%;
+}
+
+#review-word {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: -.00625rem;
+    line-height: 1.5rem;
+}
+
+.my-review {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .00625rem;
+    line-height: 1.25rem;
+    color: #636c7d;
+    margin-bottom: 0px;
+}
+
+.my-feedback {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    margin-top: 0px;
+}
+
+.my-review-desc {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
