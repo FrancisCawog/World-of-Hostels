@@ -21,6 +21,7 @@ import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.
 import ReservationMapModal from "../ReservationMapModal";
 import { useHistory } from 'react-router-dom';
 import ReviewModal from "../ReviewModal";
+import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 
 function UserShow() {
@@ -51,6 +52,7 @@ function UserShow() {
     const [ReservationId, setReservationId] = useState();
     const [showMapModal, setShowMapModal] = useState(false);
     const [showReviewModal, setShowReviewModal] = useState(false);
+    const [showReviewForm, setShowReviewForm] = useState(false);
     const [modalReviewId, setModalReviewId] = useState("");
     const [modalPropertyName,setModalPropertyName] = useState("");
 
@@ -84,6 +86,21 @@ function UserShow() {
         setShowReviewModal(false);
       };
 
+      useEffect(() => {
+        if (showReviewForm) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+        return () => {
+          document.body.style.overflow = 'auto'; 
+        };
+      }, [showReviewForm]);
+    
+      const closeReviewForm = () => {
+        setShowReviewForm(false);
+      };
+
      function handleMapClick() {
         setShowMapModal(true);
      } 
@@ -94,6 +111,12 @@ function UserShow() {
         setModalPropertyName(property_name)
         setShowReviewModal(true);
      } 
+
+     function handleReviewForm(reservationId, property_name) {
+        setModalPropertyName(property_name);
+        setModalReviewId(reservationId);
+        setShowReviewForm(true);
+     }
 
 
     let propertyWord;
@@ -247,20 +270,6 @@ function UserShow() {
         }
       }, [dateOfBirth, userNationality, fullName, sessionUser]);
       
-      const currentDate = new Date();
-
-      const futureReservations = Object.values(reservations).filter(reservation => {
-        const startDate = new Date(reservation.start_date); 
-        return startDate > currentDate;
-      });
-
-      const pastReservations = Object.values(reservations).filter(reservation => {
-        const startDate = new Date(reservation.start_date); 
-        return startDate < currentDate;
-      });
-
-      const isReservationInPast = pastReservations.some(reservation => reservation.id === ReservationId);
-
       function formatDate(dateString) {
         const options = { day: 'numeric', month: 'short', year: 'numeric' };
         const date = new Date(dateString);
@@ -268,7 +277,21 @@ function UserShow() {
         const formattedDate = utcDate.toLocaleDateString('en-US', options);
         return formattedDate;
       }
-      
+
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+
+      const futureReservations = Object.values(reservations).filter(reservation => {
+        const startDate = new Date(reservation.start_date);
+        return startDate > currentDate;
+      });
+
+      const pastReservations = Object.values(reservations).filter(reservation => {
+        const startDate = new Date(reservation.start_date);
+        return startDate < currentDate;
+      });
+
+      const isReservationInPast = pastReservations.some(reservation => reservation.id === ReservationId);
 
       const handleReservation = (id) => {
         setShowReservation(true);
@@ -315,6 +338,7 @@ function UserShow() {
         <>
         {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} onClose={closeMapModal} />}
         {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReviewId= {modalReviewId} modalPropertyName= {modalPropertyName}/>}
+        {showReviewForm && <ReviewForm onClose={closeReviewForm} modalReviewId= {modalReviewId} modalPropertyName= {modalPropertyName}/>}
 
         <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
           <Navigation />
@@ -485,7 +509,7 @@ function UserShow() {
                                     </div>
                                     <div className="past-review-div">
                                         <div className="past-num-div">
-                                            {[extractRating(reservation.id)] &&
+                                            {listingReview(reservation.id) &&
                                             <>
                                             <img src={StarSVG}/>
                                             <p style={{fontSize: "16px"}}>{extractRating(reservation.id)}</p>
@@ -493,14 +517,14 @@ function UserShow() {
                                             }
                                         </div>
                                         <div className="leave-review">
-                                            {[extractRating(reservation.id)] ? (
+                                            {listingReview(reservation.id) ? (
                                             <>
                                                 <p style={{fontSize: "14px"}} onClick={() => handleReviewClick(reservation.id, correspondingListing.property_name)}>See review</p>
                                                 <img src={ArrowRight}/>
                                             </>
                                             ) : (
                                             <>
-                                                <p style={{fontSize: "14px"}}>Leave a review</p>
+                                                <p style={{fontSize: "14px"}} onClick={() => handleReviewForm(reservation.id, correspondingListing.property_name)}>Leave a review</p>
                                                 <img src={ArrowRight}/>
                                             </>
                                             )}
@@ -605,7 +629,7 @@ function UserShow() {
                         </>
                         ) : (
                             !listingReview(ReservationId) ? (
-                                <button className="review-button"> 
+                                <button className="review-button" onClick={() => handleReviewForm(ReservationId, foundListing.property_name)}> 
                                     <img src={transpartstar}/>
                                     <span>Leave a review</span>
                                 </button>

@@ -1,0 +1,399 @@
+.review-modal-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    height: 70%;
+    width: 31%;
+    position: relative;
+  }
+
+.modal-review-label-form,
+.modal-review-label-form-with-picure {
+    font-family: Poppins-bold;
+    font-size: 1.75rem;
+    letter-spacing: -.0125rem;
+    margin-top: -7.5px;
+    margin-left: 1%;
+    margin-bottom: 10px;
+}
+
+.modal-review-label-form-with-picure {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.modal-review-label-form-with-picure img {
+    width: 16px;
+    height: 16px;
+    margin-left: -2.5%;
+    border-radius: 1rem;
+    left: 0.5rem;
+    padding: 1rem;
+    top: 0.5rem;
+}
+
+.modal-review-label-form-with-picure img:hover {
+    cursor: pointer;
+    background: #f1f2f4;
+}
+
+.modal-review-label-form-with-picure p {
+    margin: 0px;
+}
+
+.progress-wrapper{
+    position: relative;
+    background-color: #f1f2f4;
+    height: 0.25rem;
+    width: 98%;
+    margin-left: 1%;
+}
+
+.progress {
+    background-color: #ba90e4;
+    height: 0.25rem;
+    transition: width .4s;
+}
+
+.modalPropertyName {
+    font-family: Poppins-bold;
+    letter-spacing: -.00625rem;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+    margin: 2rem 2rem 0;
+}
+
+.review-disclaimer {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    opacity: 1;
+    visibility: visible; 
+    transition: opacity .4s,visibility .4s;
+    margin: 0 2rem;
+    margin-right: 10%;
+    color: #636c7d;
+    box-sizing: inherit;
+    margin: 0;
+}
+
+.review-square {
+    align-items: center;
+    bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    height: 25rem;
+    right: 0;
+    top: 4rem;
+}
+
+.review-inner-square {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    width: 100%;
+}
+
+.review-helper {
+    opacity: 1;
+    visibility: visible;    
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .00625rem;
+    line-height: 1.25rem;
+    color: #121417;
+    margin: 0 2rem;
+    transition: opacity .4s,visibility .4s;
+}
+
+.review-pic-and-print {
+    margin-top: -25px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.review-inner-square img {
+    width: 24px;
+    height: 24px;
+}
+
+.review-inner-square p {
+    margin: 0px;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    letter-spacing: -.0125rem;
+    font-family: Poppins-bold;
+}
+
+.review-overall p {
+    margin: 0px;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    letter-spacing: -.00625rem;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.review-stars {
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.review-stars img {
+    transition: color .4s;
+    width: 28px;
+    height: 28px;
+}
+
+.feedback-input {
+    height: 100%;
+    margin-top: 0.5rem;
+    max-height: 11.25rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: inherit;
+    margin: 0;
+}
+
+.feedback-box {
+    align-items: flex-start;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: inset 0 0 0 0.0625rem #a9afbb;
+    display: flex;
+    flex-direction: column;
+    min-height: 4.875rem;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    box-sizing: inherit;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.feedback-box:hover {
+    box-shadow: inset 0 0 0 0.125rem #a9afbb;
+}
+
+.review-label {
+    color: #636c7d;
+    overflow-x: hidden;
+    pointer-events: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: .75rem;
+    letter-spacing: .0125rem;
+    line-height: 1rem;
+}
+
+#reviewInput {
+    /* appearance: none; */
+    background: none;
+    border: none;
+    /* box-sizing: content-box; */
+    /* color: currentColor; */
+    /* display: block; */
+    margin: 0;
+    /* max-height: 17.5rem; */
+    outline: none;
+    padding-bottom: 1rem;
+    /* resize: none; */
+    /* width: 100%; */
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    margin-top: -15px;
+    margin-left: -2%;
+    padding-bottom: 0px;
+}
+
+.review-footer {
+    margin-left: 4%;
+    margin-right: 4%;
+    align-items: center;
+    border-top: 1px solid #dddfe4;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    bottom: -5px;
+    display: flex;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+.review-footer-score {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.review-footer-score p {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .00625rem;
+    line-height: 1.25rem;
+    color: #636c7d;
+    display: flex;
+    margin-right: 1%;
+}
+
+.review-footer-score img{
+    width: 18px;
+    height: 18px;
+}
+
+#rounded-average {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    color: black;
+}
+
+.review-button-skip {
+    fill: #fff;
+    align-items: center;
+    background: #f25621;
+    border: none;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    height: 3rem;
+    justify-content: center;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    outline: none;
+    padding: 0.75rem 1.5rem;
+    width: fit-content;
+}
+
+.review-button-skip:hover{
+    box-shadow: 0 8px 24px rgba(242,85,33,.35);
+    color: #fff;
+}
+
+.next-or-skip {
+    color: white;
+}
+
+.review-button-skip img {
+    margin-right: 0px;
+    width: 24px;
+    height: 24px;
+}
+
+.about-you-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: inset 0 0 0 0.0625rem #a9afbb;
+    cursor: pointer;
+    display: flex;
+    padding: 0.25rem 0;
+    margin: 0.5rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: relative;
+    width: 55%;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.about-you-button:hover {
+    box-shadow: inset 0 0 0 0.125rem #a9afbb;
+}
+
+.value-wrapper {
+    margin-left: 1rem; 
+    flex-grow: 1;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    position: relative;
+    text-align: left;
+}
+
+.icon-wrapper {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 12px;
+    position: relative;
+}
+
+.triangle-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0);
+    transition: transform 0.3s ease;
+}
+
+.dropdown {
+    overflow: clip;
+    position: absolute;
+    top: 3.75rem;
+    z-index: 300;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    background: #fff;
+    width: 55%;
+    margin-left: 22.5%;
+}
+
+.dropdown-list {
+    height: 236px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-height: 5.5rem;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.dropdown-option {
+    box-shadow: inset 0 0 0 0.0625rem #a9afbb;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    padding: 1rem;
+    width: 90%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dropdown-option:hover {
+    background: #f1f2f4;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
