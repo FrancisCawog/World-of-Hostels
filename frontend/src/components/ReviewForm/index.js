@@ -18,8 +18,9 @@ import GrayStar from "../../assets/pictures/icons/star-on.svg"
 import arrowRight from "../../assets/pictures/icons/arrow-right.svg"
 import sendSVG from "../../assets/pictures/icons/icons8-send-48.png"
 
-const ReviewForm = ({ onClose, modalReviewId, modalPropertyName }) => {
+const ReviewForm = ({ onClose, sessionUserId, modalReviewId, modalListingId, modalPropertyName }) => {
     const dispatch = useDispatch();
+    const reservationId = modalReviewId;
     const [currentPage, setCurrentPage] = useState(1);
     const [progressWidth, setProgressWidth] = useState(11.1);
     const [formData, setFormData] = useState({
@@ -206,7 +207,7 @@ const ReviewForm = ({ onClose, modalReviewId, modalPropertyName }) => {
                 );
             case 2:
                 return (
-                    <div className='review-square' style={{marginTop: "2.6rem"}}>
+                    <div className={currentPage !== 2 ? 'review-square-slide' : 'review-square'} style={{marginTop: "2.6rem"}}>
                         <div className='review-inner-square'>
                             <div className='review-pic-and-print'>
                                 <img src={securitySVG}/>
@@ -612,8 +613,26 @@ const ReviewForm = ({ onClose, modalReviewId, modalPropertyName }) => {
     };
 
     const handleFormSubmit = () => {
-        dispatch(createReview(formData));
-        onClose();
+        const reviewData = {
+            about_you: formData.page9.areYou.toLowerCase(),
+            age_group: formData.page9.chooseAge,
+            atmosphere: (formData.page5.atmosphere * 2),
+            cleanliness: (formData.page6.cleanliness * 2),
+            facilities: (formData.page7.facilities * 2),
+            feedback: formData.page8.feedback,
+            listing_id: modalListingId,
+            location: (formData.page3.location * 2),
+            reservation_id: reservationId,
+            security: (formData.page2.security * 2),
+            staff: (formData.page4.staff * 2),
+            total_score: roundedAverage,
+            trip_type: formData.page9.tripType.toLowerCase(),
+            user_id: sessionUserId,
+            value_for_money: (formData.page1.value * 2),
+          };
+          onClose();
+          console.log(reviewData)
+        // dispatch(createReview(reviewData));
     };
 
     return (

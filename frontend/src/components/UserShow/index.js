@@ -53,8 +53,9 @@ function UserShow() {
     const [showMapModal, setShowMapModal] = useState(false);
     const [showReviewModal, setShowReviewModal] = useState(false);
     const [showReviewForm, setShowReviewForm] = useState(false);
-    const [modalReviewId, setModalReviewId] = useState("");
+    const [modalReservationId, setModalReservationId] = useState("");
     const [modalPropertyName,setModalPropertyName] = useState("");
+    const [modalListingId, setModalListingId] = useState();
 
     useEffect(() => {
         if (showMapModal) {
@@ -107,14 +108,15 @@ function UserShow() {
 
      function handleReviewClick(reservationId, property_name) {
         handleReservation(reservationId)
-        setModalReviewId(reservationId)
+        setModalReservationId(reservationId)
         setModalPropertyName(property_name)
         setShowReviewModal(true);
      } 
 
-     function handleReviewForm(reservationId, property_name) {
-        setModalPropertyName(property_name);
-        setModalReviewId(reservationId);
+     function handleReviewForm(reservationId, property_name, listing_id) { 
+         setModalReservationId(reservationId);
+         setModalPropertyName(property_name);
+        setModalListingId(listing_id)
         setShowReviewForm(true);
      }
 
@@ -337,8 +339,8 @@ function UserShow() {
     return (
         <>
         {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} onClose={closeMapModal} />}
-        {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReviewId= {modalReviewId} modalPropertyName= {modalPropertyName}/>}
-        {showReviewForm && <ReviewForm onClose={closeReviewForm} modalReviewId= {modalReviewId} modalPropertyName= {modalPropertyName}/>}
+        {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReservationId= {modalReservationId} modalPropertyName= {modalPropertyName}/>}
+        {showReviewForm && <ReviewForm onClose={closeReviewForm} sessionUserId= {sessionUser.id} modalReservationId= {modalReservationId} modalListingId= {modalListingId} modalPropertyName= {modalPropertyName}/>}
 
         <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
           <Navigation />
@@ -524,7 +526,7 @@ function UserShow() {
                                             </>
                                             ) : (
                                             <>
-                                                <p style={{fontSize: "14px"}} onClick={() => handleReviewForm(reservation.id, correspondingListing.property_name)}>Leave a review</p>
+                                                <p style={{fontSize: "14px"}} onClick={() => handleReviewForm(reservation.id, correspondingListing.property_name, correspondingListing.id)}>Leave a review</p>
                                                 <img src={ArrowRight}/>
                                             </>
                                             )}
@@ -629,7 +631,7 @@ function UserShow() {
                         </>
                         ) : (
                             !listingReview(ReservationId) ? (
-                                <button className="review-button" onClick={() => handleReviewForm(ReservationId, foundListing.property_name)}> 
+                                <button className="review-button" onClick={() => handleReviewForm(ReservationId, foundListing.property_name. foundListing?.id)}> 
                                     <img src={transpartstar}/>
                                     <span>Leave a review</span>
                                 </button>
