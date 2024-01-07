@@ -18,9 +18,8 @@ import GrayStar from "../../assets/pictures/icons/star-on.svg"
 import arrowRight from "../../assets/pictures/icons/arrow-right.svg"
 import sendSVG from "../../assets/pictures/icons/icons8-send-48.png"
 
-const ReviewForm = ({ onClose, sessionUserId, modalReviewId, modalListingId, modalPropertyName }) => {
+const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId, modalPropertyName }) => {
     const dispatch = useDispatch();
-    const reservationId = modalReviewId;
     const [currentPage, setCurrentPage] = useState(1);
     const [progressWidth, setProgressWidth] = useState(11.1);
     const [formData, setFormData] = useState({
@@ -586,7 +585,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReviewId, modalListingId, mod
                             <img src={StarSVG}/>
                             <p id='rounded-average'>{roundedAverage}</p>
                         </div>
-                        <button className='review-button-skip' onClick={() => handleAboutYou(selectedFirstOption, selectedSecondOption, selectedThirdOption)}>
+                        <button className='review-button-skip' onClick={() => handleAboutYou(selectedFirstOption, selectedSecondOption, selectedThirdOption)} disabled={ selectedFirstOption === '' || selectedSecondOption === '' || selectedThirdOption === ''}>
                                 <p className='next-or-skip'>Send</p>
                                 <img src={sendSVG} style={{width: "18px", height: "18px", marginLeft: "5px"}}/>
                         </button>
@@ -622,7 +621,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReviewId, modalListingId, mod
             feedback: formData.page8.feedback,
             listing_id: modalListingId,
             location: (formData.page3.location * 2),
-            reservation_id: reservationId,
+            reservation_id: modalReservationId,
             security: (formData.page2.security * 2),
             staff: (formData.page4.staff * 2),
             total_score: roundedAverage,
@@ -631,8 +630,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReviewId, modalListingId, mod
             value_for_money: (formData.page1.value * 2),
           };
           onClose();
-          console.log(reviewData)
-        // dispatch(createReview(reviewData));
+        dispatch(createReview(reviewData));
     };
 
     return (

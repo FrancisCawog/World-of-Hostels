@@ -8,7 +8,6 @@ import checkOutPic from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 // import { LoadScript } from '@react-google-maps/api';
 
-
 const ListingsModal = ({ tabName, onClose }) => {
   const cart = useSelector((state) => state.cart);
   const checkIn = cart.checkIn

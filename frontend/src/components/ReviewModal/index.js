@@ -5,9 +5,9 @@ import HotelSVG from "../../assets/pictures/icons/95d12e1.svg"
 import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
 import GrayStar from "../../assets/pictures/icons/star-on.svg"
 
-const ReviewModal = ({onClose, modalReviewId, modalPropertyName}) => {
+const ReviewModal = ({onClose, modalReservationId, modalPropertyName}) => {
     const reviews = useSelector((state) => state.reviews);
-    const listingReview = Object.values(reviews).filter(review => review.id === modalReviewId);
+    const listingReview = Object.values(reviews).filter(review => review.reservation_id === modalReservationId);
     const review = listingReview[0]
     const atmosphere = (review.atmosphere / 2)
     const cleanliness = (review.cleanliness / 2)

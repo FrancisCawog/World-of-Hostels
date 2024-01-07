@@ -107,17 +107,18 @@ function UserShow() {
      } 
 
      function handleReviewClick(reservationId, property_name) {
+        console.log(reservationId)
         handleReservation(reservationId)
         setModalReservationId(reservationId)
         setModalPropertyName(property_name)
         setShowReviewModal(true);
      } 
 
-     function handleReviewForm(reservationId, property_name, listing_id) { 
+     function handleReviewForm(reservationId, property_name, listing_id) {
          setModalReservationId(reservationId);
          setModalPropertyName(property_name);
-        setModalListingId(listing_id)
-        setShowReviewForm(true);
+         setModalListingId(listing_id)
+         setShowReviewForm(true);
      }
 
 
@@ -328,7 +329,7 @@ function UserShow() {
       }
 
     const listingReview = (reservationId) => {
-        const review = Object.values(reviews).filter(review => review.reservation_id === reservationId);
+        const review = Object.values(reviews).filter(review => review?.reservation_id === reservationId);
         if (review.length === 1) {
             return true
         } else {
@@ -631,7 +632,7 @@ function UserShow() {
                         </>
                         ) : (
                             !listingReview(ReservationId) ? (
-                                <button className="review-button" onClick={() => handleReviewForm(ReservationId, foundListing.property_name. foundListing?.id)}> 
+                                <button className="review-button" onClick={() => handleReviewForm(ReservationId, foundListing.property_name, foundListing.id)}> 
                                     <img src={transpartstar}/>
                                     <span>Leave a review</span>
                                 </button>

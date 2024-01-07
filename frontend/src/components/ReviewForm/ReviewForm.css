@@ -397,3 +397,13 @@
 .rotate {
     transform: rotate(180deg);
 }
+
+.review-button-skip[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+
+  .review-button-skip[disabled]:hover {
+    cursor: not-allowed;
+  }
