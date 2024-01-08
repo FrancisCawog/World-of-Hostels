@@ -39,9 +39,10 @@ function ListingsShowPage() {
   const checkOut = cart.checkOut
   const start_date = new Date(checkIn).toISOString();
   const end_date = new Date(checkOut).toISOString();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const cartInfo = Object.fromEntries(queryParams.entries());
+  sessionStorage.setItem('redirectUrl', window.location.pathname);
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const cartInfo = Object.fromEntries(queryParams.entries());
   
 
   // const availableRooms = rooms.filter(room => room.available_beds > 0);
@@ -143,11 +144,11 @@ function ListingsShowPage() {
     const average = totalScoreSum / listingReviews.length;
     if (average >= 9){
       return "Superb"
-    } else if (average >= 8.0 && average < 9.0) {
+    } else if (average >= 8.0) {
       return "Fabulous"
-    } else if (average >= 7.0 && average < 6.0) {
+    } else if (average >= 7.0) {
       return "Very Good"
-    } else if (average >= 6.0 && average < 7.0) {
+    } else if (average >= 6.0) {
       return "Good"
     } else {
       return ""

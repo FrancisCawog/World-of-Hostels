@@ -65,14 +65,16 @@ function SearchBar() {
 
   return (
     <div className="search-bar">
-      <img src={locationPic} style={{ width: "50px" }} />
+      {/* <img src={locationPic} style={{ width: "50px" }} /> */}
       <input
         type="text"
         name="location"
         id="location"
-        placeholder="Where do you want to go?"
+        // placeholder="Where do you want to go?"
+        placeholder="Bangkok, Thailand"
         value={location}
         onChange={handleLocationChange}
+        disabled={true}
       />
       <input
         type="date"
@@ -98,7 +100,7 @@ function SearchBar() {
         value={guests}
         onChange={handleGuestsChange}
       />
-      <button className="let-go-button" type="button" onClick={handleSearch}>
+      <button className="let-go-button" type="button" onClick={handleSearch} style={{height: "50px"}}>
         Let's Go!
       </button>
     </div>

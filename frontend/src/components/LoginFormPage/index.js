@@ -36,12 +36,14 @@ const handleSubmit = async (e) => {
 };
 
 const redirectUrl = sessionStorage.getItem('redirectUrl');
-if (sessionUser)
-  if (redirectUrl) {
-      history.push(redirectUrl);
+
+if (sessionUser) {
+  if (redirectUrl && redirectUrl !== '/') {
+    history.push(redirectUrl);
   } else {
-      history.push('/');
-  };
+    history.push('/');
+  }
+}
 
 const handleDemoLogin = async () => {
   const demoUser = {

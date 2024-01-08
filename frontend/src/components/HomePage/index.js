@@ -11,6 +11,7 @@ import Footer from "../Footer";
 import SearchBar from "../SearchBar";
 
 export default function HomePage() {
+  sessionStorage.setItem('redirectUrl', window.location.pathname);
 
   return (
     <>

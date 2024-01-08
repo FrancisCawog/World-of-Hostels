@@ -20,6 +20,7 @@ function ListingsIndexPage() {
   const [isHovered2, setIsHovered2] = useState(false);
   const history = useHistory();
   const cart = useSelector((state) => state.cart);
+  sessionStorage.setItem('redirectUrl', window.location.pathname);
 
   useEffect(() => {
     dispatch(fetchListings()).catch((error) => {
@@ -60,11 +61,11 @@ function ListingsIndexPage() {
     const average = totalScoreSum / listingReviews.length;
     if (average >= 9){
       return "Superb"
-    } else if (average >= 8.0 && average < 9.0) {
+    } else if (average >= 8.0) {
       return "Fabulous"
-    } else if (average >= 7.0 && average < 6.0) {
+    } else if (average >= 7.0) {
       return "Very Good"
-    } else if (average >= 6.0 && average < 7.0) {
+    } else if (average >= 6.0 ) {
       return "Good"
     } else {
       return ""

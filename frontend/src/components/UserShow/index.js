@@ -19,19 +19,21 @@ import CancelSVG from "../../assets/pictures/icons/728248.webp"
 import RightSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
 import ReservationMapModal from "../ReservationMapModal";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import ReviewModal from "../ReviewModal";
 import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 
 function UserShow() {
+    const location = useLocation();
+    const { tabName } = location.state || {};
     const reviews = useSelector((state) => state.reviews);
     const history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const reservations = useSelector(state => state.reservations);
     const listings = useSelector(state => state.listings);
-    const [activeTab, setActiveTab] = useState('Home');
+    const [activeTab, setActiveTab] = useState(tabName);
     const [countryCount, setcountryCount] = useState(0);
     const [propertyCount, setpropertyCount] = useState(0);
     const [age, setAge] = useState(0);
@@ -141,6 +143,10 @@ function UserShow() {
     const handleTabClick = (tabName) => {
         setActiveTab(tabName); 
     };
+
+    useEffect(() => {
+        setActiveTab(tabName);
+      }, [tabName]);
 
     useEffect(() => {
         dispatch(fetchListings()).catch((error) => {

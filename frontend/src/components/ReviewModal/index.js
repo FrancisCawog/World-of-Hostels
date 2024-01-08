@@ -41,11 +41,11 @@ const ReviewModal = ({onClose, modalReservationId, modalPropertyName}) => {
     const reviewWord = (average) => {
         if (average >= 9){
             return "Superb"
-        } else if (average >= 8.0 && average < 9.0) {
+        } else if (average >= 8.0) {
             return "Fabulous"
-        } else if (average >= 7.0 && average < 6.0) {
+        } else if (average >= 7.0) {
             return "Very Good"
-        } else if (average >= 6.0 && average < 7.0) {
+        } else if (average >= 6.0) {
             return "Good"
         } else {
             return ""
