@@ -109,7 +109,6 @@ function UserShow() {
      } 
 
      function handleReviewClick(reservationId, property_name) {
-        console.log(reservationId)
         handleReservation(reservationId)
         setModalReservationId(reservationId)
         setModalPropertyName(property_name)
