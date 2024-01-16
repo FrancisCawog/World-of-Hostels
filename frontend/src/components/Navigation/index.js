@@ -48,6 +48,8 @@ function Navigation() {
   const handleRedirect = (link) => {
     if (link === "github"){
     window.location.href = 'https://github.com/FrancisCawog';
+    }else if (link === "portfolio"){
+    window.location.href = 'https://franciscawog.com/';
     } else if (link === "linkedin") {
       window.location.href = 'https://www.linkedin.com/in/francis-cawog-958178187/';
     }
@@ -165,7 +167,7 @@ function Navigation() {
                       </button>
                     </li>
                     <li className='list-item'>
-                      <button className='item-button'>
+                      <button className='item-button' onClick={() => handleRedirect("portfolio")}>
                         <div className='item-button-icon'>
                           <img src={portfolio} alt="User" />
                         </div>
@@ -298,7 +300,7 @@ function Navigation() {
                       </button>
                     </li>
                     <li className='list-item'>
-                      <button className='item-button'>
+                      <button className='item-button' onClick={() => handleRedirect("portfolio")}>
                         <div className='item-button-icon'>
                           <img src={portfolio} alt="User" />
                         </div>
@@ -431,7 +433,7 @@ function Navigation() {
                       </button>
                     </li>
                     <li className='list-item'>
-                      <button className='item-button'>
+                      <button className='item-button' onClick={() => handleRedirect("portfolio")}>
                         <div className='item-button-icon'>
                           <img src={portfolio} alt="User" />
                         </div>
