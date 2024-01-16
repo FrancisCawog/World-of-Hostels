@@ -49,9 +49,9 @@ function Navigation() {
     if (link === "github"){
     window.location.href = 'https://github.com/FrancisCawog';
     }else if (link === "portfolio"){
-    window.location.href = 'https://franciscawog.com/';
+    window.location.href = 'https://franciscawog.com';
     } else if (link === "linkedin") {
-      window.location.href = 'https://www.linkedin.com/in/francis-cawog-958178187/';
+      window.location.href = 'https://www.linkedin.com/in/francis-cawog-958178187';
     }
   };
 
