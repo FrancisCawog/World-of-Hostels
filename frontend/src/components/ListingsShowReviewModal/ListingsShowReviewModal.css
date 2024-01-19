@@ -1,0 +1,83 @@
+.modal-overlay-review {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(99,108,125,.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed; 
+    z-index: 1000;
+  }
+
+  .review-p {
+    font-family: Poppins-bold;
+    font-size: 30px;
+    margin-top: 0px;
+  }
+  
+  .modal-review {
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    height: 60%;
+    width: 30%;
+    overflow: auto;
+    position: relative;
+  } 
+
+  .rating-cats-tab-review {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.rating-cats-modal {
+  font-family: Poppins;
+}
+
+.review-box-modal {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10%;
+}
+
+.rating-bar-and-score-review {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.cat-p {
+  font-family: Poppins-bold;
+  margin-left: 30%;
+}
+
+.gray-bar-modal {
+    background-color: #f1f2f4;
+    border-radius: 0.75rem;
+    flex-grow: 1;
+    height: 0.5rem;
+    width: 15%;
+    position: absolute;
+    margin-top: 20px;
+}
+
+.yellow-bar-modal {
+    background-color: #f6a90e;
+    border-radius: 0.75rem;
+    height: 0.5rem;
+    position: absolute;
+    margin-top: 20px;
+}
+
+.review-modal-popup {
+  width: 55%;
+  overflow-y: auto; 
+  white-space: nowrap;
+}

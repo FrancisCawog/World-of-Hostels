@@ -1,7 +1,9 @@
 json.listing do
   json.extract! @listing, :id, :property_name, :property_type, :address, :city, :country, :check_in, :check_out, :description, :facilities, :house_rules, :latitude, :longitude, :has_wifi?, :has_breakfast?
-  # json.photoUrl @listing.photo.attached? ? @listing.photo.url : nil
+  json.photoUrls @listing.photos.attached? ? @listing.photos.map { |photo| photo.url } : []
 end
+
+# json.photoUrl @listing.photo.attached? ? @listing.photo.url : nil
 
 json.rooms do
    @listing.rooms.each do |room|

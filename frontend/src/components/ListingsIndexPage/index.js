@@ -10,6 +10,7 @@ import WhiteWifiSVG from "../../assets/pictures/icons/wifi-white.svg"
 import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
 import WhiteCoffeeSVG from "../../assets/pictures/icons/white-coffee.svg"
 import { useHistory } from 'react-router-dom';
+import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 
 function ListingsIndexPage() {
   const dispatch = useDispatch();
@@ -72,6 +73,20 @@ function ListingsIndexPage() {
     }
   }
 
+  // Add state for tracking current image index
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Function to update the current image index when clicking left or right
+  const updateImageIndex = (listingId, direction) => {
+    const imageCount = listings[listingId]?.photoUrls.length || 0;
+
+    if (direction === 'prev') {
+      setCurrentImageIndex((prevIndex) => (prevIndex - 1 + imageCount) % imageCount);
+    } else if (direction === 'next') {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageCount);
+    }
+  };
+
   return (
     <>
     <div>
@@ -92,9 +107,18 @@ function ListingsIndexPage() {
 
     <div>
     {Object.values(listings).map((listing) => (
-    <a key={listing.id} href={`listings/${listing.id}`} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id)}} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black" }}>
-      <div className="index-picture"></div>
-
+    <div key={listing.id} href={`listings/${listing.id}`} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id)}} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black"}}>
+      <div className="index-picture">
+        <div className="index-picture-picture">
+          <img src={listing.photoUrls[currentImageIndex]} alt={`Listing ${listing.id}`} />
+        </div>
+        <span className="index-picture-left" onClick={() => updateImageIndex(listing.id, 'prev')}>
+          <img src={ArrowRight} style={{width: "16px", height: "16px", marginLeft: "15%", transform: 'rotate(180deg)'}}/>
+        </span>
+        <span className="index-picture-right" onClick={() => updateImageIndex(listing.id, 'next')}>
+        <img src={ArrowRight} style={{width: "16px", height: "16px", marginLeft: "35%"}}/>
+        </span>
+      </div>
       <div className="single-listing">
         <h3>{listing.property_name}</h3>
 
@@ -185,12 +209,9 @@ function ListingsIndexPage() {
             })()}
             </div>
         </div>
-        </a>
+        </div>
         ))}
     </div>
-
-
-
     <br/>
     <br/>
     <br/>

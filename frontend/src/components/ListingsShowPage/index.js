@@ -14,6 +14,7 @@ import person from "../../assets/pictures/icons/user-128.svg"
 import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
 import minus from "../../assets/pictures/icons/minus.svg"
 import ListingsModal from "../ListingsModal";
+import ListingsShowReviewModal from "../ListingsShowReviewModal";
 import Navigation from "../Navigation";
 import Footer from "../Footer"
 import CheckoutForm from "../Checkout"
@@ -26,11 +27,13 @@ function ListingsShowPage() {
   const dispatch = useDispatch();
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
+  const photos = listing?.photoUrls;
   const reviews = useSelector((state) => state.reviews);
   const users = useSelector((state) => state.users);
   const reservations = useSelector((state) => state.reservations);
   const rooms = useSelector((state) => Object.values(state.rooms));
   const [showAboutModal, setShowAboutModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
   const [tabName, settabName] = useState();
   const cart = useSelector((state) => state.cart);
   const cartItems = useSelector((state) => state.cart.cart);
@@ -40,9 +43,7 @@ function ListingsShowPage() {
   const start_date = new Date(checkIn).toISOString();
   const end_date = new Date(checkOut).toISOString();
   sessionStorage.setItem('redirectUrl', window.location.pathname);
-  // const location = useLocation();
-  // const queryParams = new URLSearchParams(location.search);
-  // const cartInfo = Object.fromEntries(queryParams.entries());
+
   
 
   // const availableRooms = rooms.filter(room => room.available_beds > 0);
@@ -114,6 +115,21 @@ function ListingsShowPage() {
 
   const closeModal = () => {
     setShowAboutModal(false);
+  };
+
+  useEffect(() => {
+    if (showReviewModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto'; 
+    };
+  }, [showReviewModal]);
+
+  const closeReviewModal = () => {
+    setShowReviewModal(false);
   };
 
   const averageTotalScore = (listingId) => {
@@ -220,8 +236,13 @@ function ListingsShowPage() {
   return (
     <>
     {showAboutModal && <ListingsModal tabName={tabName} onClose={closeModal} />}
+    {showReviewModal && <ListingsShowReviewModal tabName={tabName} onClose={closeReviewModal} reviews={reviews}/>}
       <Navigation/>
-      <div className="top-picture"></div>
+      <div className="top-picture">
+      {photos?.map((photo, index) => (
+        <img key={index} src={photo} alt={`Photo ${index + 1}`} />
+      ))}
+    </div>
       <h1 className="title">{listing?.property_name}</h1>
       <p className="listings-p">
         {listing?.property_type &&
@@ -681,7 +702,7 @@ function ListingsShowPage() {
                 }
                 {numberOfReviews(listing?.id) >= 4 &&
                 <div className="view-reviews">
-                  <p className="read-more">View all reviews</p>
+                  <p className="read-more" onClick={() => setShowReviewModal(true)} >View all reviews</p>
                   <img src={MyArrowSVG} style={{ width: '14px' }}/>
                 </div>
                 }

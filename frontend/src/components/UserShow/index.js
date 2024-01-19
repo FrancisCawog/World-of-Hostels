@@ -473,10 +473,10 @@ function UserShow() {
                                         <div className="future-picture">
 
                                         </div >
-                                        <p>{correspondingListing.property_name}</p>
+                                        <p>{correspondingListing?.property_name}</p>
                                         <div className="icon-and-text">
                                             <img src={LocationSVG} alt="Location Icon" className="icon" />
-                                            <p>{correspondingListing.city}</p>
+                                            <p>{correspondingListing?.city}</p>
                                             </div>
                                         <div className="icon-and-text">
                                             <img src={CalendarSVG} alt="Calendar Icon" className="icon" />
@@ -504,10 +504,10 @@ function UserShow() {
                                     <div className="outer-past-div">
                                         <div className="past-picture"></div>
                                         <div className="past-trip-info">
-                                            <p>{correspondingListing.property_name}</p>
+                                            <p>{correspondingListing?.property_name}</p>
                                             <div className="past-icon-and-text">
                                                 <img src={LocationSVG} alt="Location Icon" className="past-icon" />
-                                                <p>{correspondingListing.city}</p>
+                                                <p>{correspondingListing?.city}</p>
                                             </div>
                                             <div className="past-icon-and-text">
                                                 <img src={CalendarSVG} alt="Calendar Icon" className="past-icon" />
