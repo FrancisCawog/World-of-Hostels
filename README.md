@@ -26,3 +26,28 @@ https://world-of-hostels.onrender.com
 ![Sign up page for new users](./frontend/src/assets/read-me-pictures/Screenshot%202023-11-26%20at%2011.28.33%20PM.png)
 
 ![Property details on the listings show page](./frontend/src/assets/read-me-pictures/Screenshot%202023-11-26%20at%2011.29.42%20PM.png)
+
+
+### Future Implementions/ Open Issues
+- Add images to user profile/ listings/ rooms via AWS
+- Add functionality to view all reviews on listings show
+- Google maps API not loading correctly on render
+- Expand the splash page
+- Fix CSS on splash page
+- Add technology information to footer
+- Style the search bar
+- Style date and guests in the listings show
+- Add search bar to Nav
+- Prevent searches in the past, start and end date on the same day, and reset search bar.
+- Prevent rooms from exceeding amount of beds available
+- Don't display listings with no available space
+- Add more seeds data
+- Add functionality to location search
+- Add facilities to listings show
+- Fix dead links in users show
+- Add errors to sign-up/ login/ users edit
+- Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
+- Add 404 page to links that dont exist
+- Format rooms on listings show better
+- Fix styling in leave review - About you
+- Add scroll up feature in users show
