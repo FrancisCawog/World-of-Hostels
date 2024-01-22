@@ -30,8 +30,7 @@ https://world-of-hostels.onrender.com
 
 ### Future Implementions/ Open Issues
 - Add images to user profile/ listings/ rooms via AWS
-- Add functionality to view all reviews on listings show
-- Google maps API not loading correctly on render
+- Add confirmation page to booking
 - Expand the splash page
 - Fix CSS on splash page
 - Add technology information to footer
@@ -48,6 +47,5 @@ https://world-of-hostels.onrender.com
 - Add errors to sign-up/ login/ users edit
 - Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
 - Add 404 page to links that dont exist
-- Format rooms on listings show better
 - Fix styling in leave review - About you
 - Add scroll up feature in users show
