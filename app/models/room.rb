@@ -19,7 +19,7 @@ class Room < ApplicationRecord
   
     belongs_to :listing
     has_many :reservations, dependent: :destroy
-    has_many_attached :photo
+    has_many_attached :photos, dependent: :destroy
 
     def available_beds(start_date, end_date)
       taken_beds = self.reservations.where('(start_date >= ? AND start_date <= ?) OR (end_date >= ? AND end_date <= ?) OR (start_date <= ? AND end_date >= ?)', start_date, end_date, start_date, end_date, start_date, end_date).sum(:num_guests)

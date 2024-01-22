@@ -22,7 +22,7 @@ class User < ApplicationRecord
     validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-    has_one_attached :photo
+    has_one_attached :photos, dependent: :destroy
     has_many :reservations, dependent: :destroy
     has_many :reviews, dependent: :destroy
 

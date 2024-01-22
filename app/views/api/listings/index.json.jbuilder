@@ -12,6 +12,7 @@ json.rooms do
    listing.rooms.each do |room|
      json.set! room.id do
        json.extract! room, :listing_id, :id, :room_type, :room_title, :description, :num_beds, :price
+       json.photoUrls room.photos.attached? ? room.photos.map { |photo| photo.url } : []
        json.available_beds do
          room.available_beds(@start_date, @end_date)
         end

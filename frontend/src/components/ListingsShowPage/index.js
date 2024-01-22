@@ -303,7 +303,9 @@ function ListingsShowPage() {
                     .map((privateRoom, index) => (
                       <div key={index}>
                         <div className="private-room-div">
-                          <div className="private-picture-box"></div>
+                          <div className="private-picture-box">
+                            <img src={privateRoom.photoUrls[0]} />
+                          </div>
                           <div className="room-description-box">
                             <p className="room-title">{privateRoom.room_title}</p>
                             <p className="room-description">{privateRoom.description}</p>
@@ -384,7 +386,9 @@ function ListingsShowPage() {
                     .map((sharedRoom, index) => (
                       <div key={index}>
                         <div className="dorm-bed-div">
-                          <div className="shared-picture-box"></div>
+                          <div className="shared-picture-box">
+                            <img src={sharedRoom.photoUrls[0]} />
+                          </div>
                           <div className="room-description-box">
                             <p className="room-title">{sharedRoom.room_title}</p>
                             <p className="room-description">{sharedRoom.description}</p>
