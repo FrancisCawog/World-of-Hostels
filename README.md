@@ -51,3 +51,4 @@ https://world-of-hostels.onrender.com
 - Add scroll up feature in users show
 - Booking i showing twice on first render after booking
 - -Disable cancel booking if non refundable
+- Google Map icon bug
