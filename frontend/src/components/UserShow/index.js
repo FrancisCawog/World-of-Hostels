@@ -58,6 +58,11 @@ function UserShow() {
     const [modalReservationId, setModalReservationId] = useState("");
     const [modalPropertyName,setModalPropertyName] = useState("");
     const [modalListingId, setModalListingId] = useState();
+    const [isRefundable, setIsRefundable] = useState(true);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [activeTab, showReservation]);
 
     useEffect(() => {
         if (showMapModal) {
@@ -342,6 +347,15 @@ function UserShow() {
         }
     }
 
+    useEffect(() => {
+        if (!foundReservation?.refundable) {
+          setIsRefundable(false);
+        } else {
+            setIsRefundable(true);
+        }
+      }, [foundReservation]);
+    
+
     return (
         <>
         {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} onClose={closeMapModal} />}
@@ -570,12 +584,11 @@ function UserShow() {
                 <div className="icon-and-text">
                     <img src={LocationSVG} alt="Location Icon" className="icon" />
                     <p>{foundListing.address}, {foundListing.city}, {foundListing.country}</p>
-                    </div>
+                </div>
                 <div className="icon-and-text" style={{marginTop: "5px"}}>
                     <img src={CalendarSVG} alt="Calendar Icon" className="icon" />
                     <p>{formatDate(foundReservation.start_date)} - {formatDate(foundReservation.end_date)}</p>
                 </div>
-
                 <div className="trips-maps-button" onClick={() => handleMapClick()}>
                     <img src={mapIcon} alt="My Trips Icon" />
                     <p>Map</p>
@@ -630,13 +643,18 @@ function UserShow() {
                                 </div>
                                 <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
                             </div>
-                        <div className="reservation-info-button" onClick={() => handleDeleteReservation(ReservationId)}>
-                            <div className="reservation-info-button-inner">
-                                        <img src={CancelSVG} alt="Calendar Icon" className="trip-icon"/>
+                            <div style={{display: "flex", alignItems: "center"}}>
+                                <div className="reservation-info-button" onClick={() => isRefundable && handleDeleteReservation(ReservationId)} disabled={!isRefundable} style={{opacity: isRefundable ? "initial" : ".5", pointerEvents: isRefundable ? 'auto' : 'none'}} >
+                                    <div className="reservation-info-button-inner">
+                                        <img src={CancelSVG} alt="Calendar Icon" className="trip-icon" />
                                         <p>Cancel Booking</p>
+                                    </div>
+                                    <img src={RightSVG} alt="Calendar Icon" className="icon" style={{ marginRight: "10px", marginTop: "0px" }} />
                                 </div>
-                                <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
-                        </div>
+                                { !isRefundable && 
+                                <p style={{fontFamily: "Inter", fontWeight: "700", marginTop: "14px", fontSize: "12px"}}>This booking is non-refundable</p>
+                                }
+                            </div>
                         </>
                         ) : (
                             !listingReview(ReservationId) ? (

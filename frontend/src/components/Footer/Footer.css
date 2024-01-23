@@ -1,6 +1,45 @@
 .footer {
-    position: relative;
-    height: 520px;
+    /* position: relative; */
+    height: 600px;
     background-color: rgba(0, 0, 0, 0.925);
     clip-path: polygon(0% 15%, 100% 0%, 100% 100%, 0% 100%);
   }
+
+  .footer-p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-ps {
+    color: white;
+    font-family: Poppins-bold;
+    font-size: 24px;
+    padding-top: 100px;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .skill-div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid white;
+    width: 15%;
+    padding: 20px;
+    }
+
+  .skill-icon img {
+    width: 40%;
+  }
+
+  .skill-name h5 {
+    font-size: 20px;
+    margin-bottom: 0px;
+    color: white;
+  } 

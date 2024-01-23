@@ -7,6 +7,7 @@ import ListingsShowPage from "./components/ListingsShowPage";
 import ListingsIndexPage from "./components/ListingsIndexPage";
 import UserShow from "./components/UserShow";
 import ConfirmationPage from "./components/ConfirmationPage"
+import NotFoundPage from "./components/NotFoundPage"
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
           <Route path="/ConfirmationPage" exact>
             <ConfirmationPage />
           </Route>
+          <Route>
+            <NotFoundPage />
+        </Route>
         </Switch>
     </>
   );

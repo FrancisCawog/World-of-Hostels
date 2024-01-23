@@ -46,14 +46,26 @@ function Navigation() {
   };
 
   const handleRedirect = (link) => {
-    if (link === "github"){
-    window.location.href = 'https://github.com/FrancisCawog';
-    }else if (link === "portfolio"){
-    window.location.href = 'https://franciscawog.com';
-    } else if (link === "linkedin") {
-      window.location.href = 'https://www.linkedin.com/in/francis-cawog-958178187';
+    let targetUrl = '';
+    switch (link) {
+      case 'github':
+        targetUrl = 'https://github.com/FrancisCawog';
+        break;
+      case 'portfolio':
+        targetUrl = 'https://franciscawog.com';
+        break;
+      case 'linkedin':
+        targetUrl = 'https://www.linkedin.com/in/francis-cawog-958178187';
+        break;
+      default:
+        break;
+    }
+  
+    if (targetUrl !== '') {
+      window.open(targetUrl, '_blank');
     }
   };
+  
 
   let contentToRender = null;
 
@@ -189,10 +201,12 @@ function Navigation() {
     contentToRender = (
       <div className="container-conf">
       <header className='conf-header'>
+      <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="left-content">
           <img src={logo} style={{ width: '68px', borderRadius: "15px" }} alt="Logo" />
           <p className="WOF-conf">World of Hostels</p>
         </div>
+      </Link>
         
         <div className="circles">
           {!sessionUser ? (
