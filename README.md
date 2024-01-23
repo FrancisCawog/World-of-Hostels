@@ -47,5 +47,4 @@ https://world-of-hostels.onrender.com
 - Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
 - Fix styling in leave review - About you
 - Booking is showing twice on first render after booking
-- Disable cancel booking if non refundable
 - Google Map icon bug
