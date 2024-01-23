@@ -32,7 +32,6 @@ https://world-of-hostels.onrender.com
 - Add images to user profile/ listings/ rooms via AWS
 - Expand the splash page
 - Fix CSS on splash page
-- Add technology information to footer
 - Style the search bar
 - Style date and guests in the listings show
 - Add search bar to Nav
