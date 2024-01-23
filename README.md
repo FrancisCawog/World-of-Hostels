@@ -45,9 +45,7 @@ https://world-of-hostels.onrender.com
 - Fix dead links in users show
 - Add errors to sign-up/ login/ users edit
 - Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
-- Add 404 page to links that dont exist
 - Fix styling in leave review - About you
-- Add scroll up feature in users show
 - Booking is showing twice on first render after booking
 - Disable cancel booking if non refundable
 - Google Map icon bug
