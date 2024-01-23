@@ -10,9 +10,33 @@
   height: 100%;
 }
 
+.container-conf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* width: 70%; */
+  /* margin-left: 15%; */
+  /* margin-right: 15%; */
+  /* margin-top: 8px; */
+  background: #31363f;
+  height: 100%;
+}
+
 .left-content {
   display: flex;
   align-items: center;
+}
+
+.WOF-conf {
+  color: white;
+  font-family: Poppins-bold;
+  font-size: 30px;
+  font-weight:900
+}
+
+.conf-header{
+  width: 60%;
 }
 
 .WOF {

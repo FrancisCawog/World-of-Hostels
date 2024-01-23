@@ -185,6 +185,134 @@ function Navigation() {
       </header>
     </div>
     );
+  } else if (location.pathname === '/ConfirmationPage') {
+    contentToRender = (
+      <div className="container-conf">
+      <header className='conf-header'>
+        <div className="left-content">
+          <img src={logo} style={{ width: '68px', borderRadius: "15px" }} alt="Logo" />
+          <p className="WOF-conf">World of Hostels</p>
+        </div>
+        
+        <div className="circles">
+          {!sessionUser ? (
+            <Link to="/login">
+              <div className="circle">
+                <img src={userIcon} alt="User" />
+              </div>
+            </Link>
+          ) : (
+            <div>
+              <div className="circle" onClick={toggleDropdown}>
+                <img src={userIcon} alt="User" />
+              </div>
+
+              {isDropdownVisible && (
+                <div className="popover">
+                  <div className='popover-menu-body'>
+                    <div className='avatar-and-name'>
+                      <div className="circle" onClick={(e) => e.stopPropagation()}>
+                        <img src={userIcon} alt="User" />
+                      </div>
+                      <p>{sessionUser.first_name} {sessionUser.last_name}</p>
+                    </div>
+                    <div className='select-list'>
+                      <ul className='select-list-menu'>
+                        <li className='list-item'>
+                          <button className='item-button' onClick={() => handleAccountClick("Home")}>
+                            <div className='item-button-icon'>
+                              <img src={houseIcon} alt="User" />
+                            </div>
+                            <div className='item-button-text'>
+                              <p>Account</p>
+                            </div>
+                          </button>
+                        </li>
+                        <li className='list-item'>
+                          <button className='item-button' onClick={() => handleAccountClick("Edit Details")}>
+                            <div className='item-button-icon'>
+                              <img src={userIcon} alt="User" />
+                            </div>
+                            <div className='item-button-text'>
+                              <p>Edit Details</p>
+                            </div>
+                          </button>
+                        </li>
+                        <li className='list-item'>
+                          <button className='item-button' onClick={() => handleAccountClick("My Trips")}>
+                            <div className='item-button-icon'>
+                              <img src={mapIcon} alt="User" />
+                            </div>
+                            <div className='item-button-text'>
+                              <p>My Trips</p>
+                            </div>
+                          </button>
+                        </li>
+                        <li className='list-item'>
+                          <button className='item-button' onClick={handleLogout}>
+                            <div className='item-button-icon'>
+                              <img src={logoutIcon} alt="User" />
+                            </div>
+                            <div className='item-button-text'>
+                              <p>Logout</p>
+                            </div>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+          <div className="circle" onClick={toggleCredentialDropdown}>
+            <img src={navIcon} style={{ width: "12px", marginLeft: "30%" }} alt="Nav" />
+          </div>
+
+          {isCredentialDropdownVisible && (
+            <div className="popover" onClick={(e) => e.stopPropagation()}>
+              <div className='popover-menu-body'>
+                <div className='select-list'>
+                  <ul className='select-list-menu'>
+                    <li className='list-item'>
+                      <button className='item-button' onClick={() => handleRedirect("linkedin")}>
+                        <div className='item-button-icon'>
+                          <img src={linkedin} alt="User" />
+                        </div>
+                        <div className='item-button-text'>
+                          <p>Linkedin</p>
+                        </div>
+                      </button>
+                    </li>
+                    <li className='list-item'>
+                      <button className='item-button' onClick={() => handleRedirect("github")}>
+                        <div className='item-button-icon'>
+                          <img src={github} alt="User" />
+                        </div>
+                        <div className='item-button-text'>
+                          <p>Github</p>
+                        </div>
+                      </button>
+                    </li>
+                    <li className='list-item'>
+                      <button className='item-button' onClick={() => handleRedirect("portfolio")}>
+                        <div className='item-button-icon'>
+                          <img src={portfolio} alt="User" />
+                        </div>
+                        <div className='item-button-text'>
+                          <p>Portfolio</p>
+                        </div>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </header>
+    </div>
+    )
   } else if (location.pathname.startsWith('/listings')) {
     contentToRender = (
       <div className="listings-header">
@@ -451,7 +579,7 @@ function Navigation() {
       </header>
     </div>
     );
-  }
+  } 
   return (
     <div>
       {contentToRender}

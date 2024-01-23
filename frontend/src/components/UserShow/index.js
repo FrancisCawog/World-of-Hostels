@@ -290,12 +290,12 @@ function UserShow() {
       currentDate.setHours(0, 0, 0, 0);
 
       const futureReservations = Object.values(reservations).filter(reservation => {
-        const startDate = new Date(reservation.start_date);
+        const startDate = new Date(reservation?.start_date);
         return startDate > currentDate;
       });
 
       const pastReservations = Object.values(reservations).filter(reservation => {
-        const startDate = new Date(reservation.start_date);
+        const startDate = new Date(reservation?.start_date);
         return startDate < currentDate;
       });
 
@@ -471,7 +471,7 @@ function UserShow() {
                                 return (
                                     <div key={reservation.id} className="future-booking" onClick={() => handleReservation(reservation.id)}>
                                         <div className="future-picture">
-
+                                            <img src={correspondingListing?.photoUrls[0]} x/>
                                         </div >
                                         <p>{correspondingListing?.property_name}</p>
                                         <div className="icon-and-text">
@@ -502,7 +502,9 @@ function UserShow() {
                             return (
                                 <div key={reservation.id} className="past-booking" onClick={() => handleReservation(reservation.id)}>
                                     <div className="outer-past-div">
-                                        <div className="past-picture"></div>
+                                        <div className="past-picture">
+                                            <img src={correspondingListing?.photoUrls[0]} />
+                                        </div>
                                         <div className="past-trip-info">
                                             <p>{correspondingListing?.property_name}</p>
                                             <div className="past-icon-and-text">
@@ -561,6 +563,7 @@ function UserShow() {
                 </div>
 
                 <div className="reservation-picture">
+                    <img src={foundListing?.photoUrls[0]} />
                 </div>
 
                 <p className="found-listing-name">{foundListing.property_name}</p>

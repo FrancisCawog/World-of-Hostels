@@ -729,7 +729,7 @@ function ListingsShowPage() {
             </div>
           </div>
         </div>
-        <CheckoutForm listingId={listingId}/>
+        <CheckoutForm listingId={listingId} listingName={listing?.property_name} photoUrl={listing?.photoUrls[0]}/>
     </div>
     <Footer/>
     </>

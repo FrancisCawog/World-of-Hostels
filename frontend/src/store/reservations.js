@@ -16,21 +16,26 @@ const removeReservation = (reservationId) => ({
 });
 
 export const createReservation = (reservation) => async (dispatch) => {
-    try {
-        const response = await csrfFetch("/api/reservations", {
+  try {
+      const response = await csrfFetch("/api/reservations", {
           method: 'POST',
           body: JSON.stringify(reservation)
-        });
-        if (response.ok) {
+      });
+
+      if (response.ok) {
           const data = await response.json();
-          dispatch(setReservation(data));
-        } else {
+          const createdReservation = data.reservation;
+          dispatch(setReservation(createdReservation));
+
+          return createdReservation;
+      } else {
           throw new Error('Response not OK');
-        }
-      } catch (error) {
-        console.error("Error occurred:", error);
       }
-}
+  } catch (error) {
+      console.error("Error occurred:", error);
+      throw error;
+  }
+};
 
 export const deleteReservation = (ReservationId) => async (dispatch) => {
   const response = await csrfFetch(`/api/reservations/${ReservationId}`, {

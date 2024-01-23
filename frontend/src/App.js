@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage"
 import ListingsShowPage from "./components/ListingsShowPage";
 import ListingsIndexPage from "./components/ListingsIndexPage";
 import UserShow from "./components/UserShow";
+import ConfirmationPage from "./components/ConfirmationPage"
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/users/:userId" exact>
             <UserShow />
+          </Route>
+          <Route path="/ConfirmationPage" exact>
+            <ConfirmationPage />
           </Route>
         </Switch>
     </>

@@ -1,0 +1,139 @@
+.confirmation-back {
+    background-color: #f1f2f4;
+    width: 100%;
+}
+
+.confirmation-back2 {
+    background-color: white;
+    width: 60%;
+    margin-left: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.confirmation-back3 {
+    width: 70%;
+}
+
+.confirmation-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-message img {
+    width: 28px;
+    height: 28px;
+}
+
+.confirmation-message p {
+    font-size: 1.75rem;
+    line-height: 1.21;
+    letter-spacing: -.2px;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.hostel-info-conf {
+    display: flex;
+    margin-left: 13.5%;
+    margin-right: 13.5%;
+    align-items: center;
+}
+
+.conf-picture {
+    border-radius: 0.25rem;
+    height: 5.625rem;
+    width: 295px;
+    overflow: hidden;
+}
+
+.conf-picture img {
+    border-radius: 0.25rem;
+    height: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    z-index: 2;
+    width: 100%;
+}
+
+.conf-details-info {
+    margin-left: 2.5%;
+}
+
+.conf-details-info p {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.conf-details {
+    display: flex;
+    align-items: center;
+}
+
+.conf-details img {
+    width: 20px;
+    height: 20px;
+}
+
+.your-details {
+    font-weight: 700;
+    margin: 2rem 0;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin-left: 13.5%;
+}
+
+.booking-details-conf {
+    margin-left: 13.5%;
+    margin-right: 13.5%;
+}
+
+.booking-details-conf-ele {
+    align-items: center;
+    border-bottom: 1px solid #dddfe4;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    line-height: 1.5rem;
+    font-weight: 400;
+}
+
+.action-button {
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    display: flex;
+    justify-content:end;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.conf-button {
+    display: block;
+    width: 25%;
+    background: #fff;
+    box-shadow: inset 0 0 0 0.0625rem #a9afbc;
+    color: #31363f;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.conf-button:hover {
+    box-shadow: inset 0 0 0 0.0625rem #f25621;
+    color: #f25621; 
+}
+
+.booking-details-conf-left {
+    font-weight: 700;
+}
+.conf-footer {
+    background-color: #f1f2f4;
+    width: 100%;
+    height: 100px;
+}

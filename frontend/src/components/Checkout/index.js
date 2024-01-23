@@ -6,7 +6,7 @@ import cardinfo from "../../assets/pictures/Screenshot 2023-11-20 at 5.03.09 PM.
 import { updateGuests, setCheckIn, setCheckOut, clearCart } from "../../store/cart";
 import { createReservation } from "../../store/reservations";
 
-function CheckoutForm( { listingId}) {
+function CheckoutForm( { listingId, listingName, photoUrl}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
@@ -41,38 +41,62 @@ function CheckoutForm( { listingId}) {
         }
       };
 
-      const checkoutUser = async () => {
-        if (!sessionUser) {
-            const currentUrl = window.location.pathname;
-            sessionStorage.setItem('redirectUrl', currentUrl);
-            history.push('/login');
-        } else {
-            const reservationsToCreate = [];
-    
-            Object.entries(cart).forEach(([roomId, roomGuests]) => {
-                const room = rooms.find(room => room.id === Number(roomId));
-    
-                if (room) {
-                    const reservation = {
-                        listing_id: listing.id,
-                        room_id: room.id,
-                        num_guests: roomGuests,
-                        start_date: checkInDates,
-                        end_date: checkOutDates,
-                        refundable: refundable
-                    };
-    
-                    reservationsToCreate.push(reservation);
-                }
-            });
-    
-            for (const reservation of reservationsToCreate) {
-                await dispatch(createReservation(reservation));
+    const checkoutUser = async () => {
+    if (!sessionUser) {
+        const currentUrl = window.location.pathname;
+        sessionStorage.setItem('redirectUrl', currentUrl);
+        history.push('/login');
+    } else {
+        const reservationsToCreate = [];
+        let numGuest = 0;
+        let checkInDate = ""
+        let checkOutDate = ""
+        let firstReservationId = 0;
+
+        Object.entries(cart).forEach(([roomId, roomGuests]) => {
+            const room = rooms.find(room => room.id === Number(roomId));
+
+            if (room) {
+                const reservation = {
+                    listing_id: listing.id,
+                    room_id: room.id,
+                    num_guests: roomGuests,
+                    start_date: checkInDates,
+                    end_date: checkOutDates,
+                    refundable: refundable
+                };
+
+                checkInDate = checkInDates;
+                checkOutDate = checkOutDates;
+                numGuest += roomGuests;
+                reservationsToCreate.push(reservation);
             }
-    
-            dispatch(clearCart());
+        });
+
+        for (let i = 0; i < reservationsToCreate.length; i++) {
+            const reservation = reservationsToCreate[i];
+            const createdReservation = await dispatch(createReservation(reservation));
+
+            if (i === 0) {
+                firstReservationId = createdReservation.id;
+            }
         }
-    };    
+
+        history.push({
+            pathname: '/ConfirmationPage',
+            state: {
+                listingName: listingName,
+                guests: numGuest,
+                reservationNumber: firstReservationId,
+                checkIn: checkInDate,
+                checkOut: checkOutDate,
+                price: totalPrice,
+                photoUrl: photoUrl
+            },
+        });
+
+        dispatch(clearCart());
+    }};    
 
     useEffect(() => {
         let totalPriceCalculation = 0;
