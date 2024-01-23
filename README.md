@@ -30,7 +30,6 @@ https://world-of-hostels.onrender.com
 
 ### Future Implementions/ Open Issues
 - Add images to user profile/ listings/ rooms via AWS
-- Add confirmation page to booking
 - Expand the splash page
 - Fix CSS on splash page
 - Add technology information to footer
@@ -49,6 +48,6 @@ https://world-of-hostels.onrender.com
 - Add 404 page to links that dont exist
 - Fix styling in leave review - About you
 - Add scroll up feature in users show
-- Booking i showing twice on first render after booking
-- -Disable cancel booking if non refundable
+- Booking is showing twice on first render after booking
+- Disable cancel booking if non refundable
 - Google Map icon bug
