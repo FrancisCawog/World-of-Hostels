@@ -2,11 +2,12 @@ import locationPic from "../../assets/pictures/icons/Screenshot 2023-11-13 at 4.
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function SearchBar() {
   const dispatch = useDispatch();
-
+  const cart = useSelector((state) => state.cart);
+  
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -34,23 +35,31 @@ function SearchBar() {
 
   const history = useHistory();
 
+  // useEffect(() => {
+  //   const storedCheckInDate = localStorage.getItem('checkInDate');
+  //   const storedCheckOutDate = localStorage.getItem('checkOutDate');
+  //   const storedGuests = localStorage.getItem('guests');
+  
+    // if (storedCheckInDate) {
+    //   setCheckInDate(storedCheckInDate);
+    // }
+  
+    // if (storedCheckOutDate) {
+    //   setCheckOutDate(storedCheckOutDate);
+    // }
+  
+    // if (storedGuests) {
+    //   setGuests(storedGuests);
+    // }
+  // }, []);
+
   useEffect(() => {
-    const storedCheckInDate = localStorage.getItem('checkInDate');
-    const storedCheckOutDate = localStorage.getItem('checkOutDate');
-    const storedGuests = localStorage.getItem('guests');
-  
-    if (storedCheckInDate) {
-      setCheckInDate(storedCheckInDate);
+    if (cart.checkIn !== "") {
+      setCheckInDate(cart.checkIn);
+      setCheckOutDate(cart.checkOut);
+      setGuests(cart.guests)
     }
-  
-    if (storedCheckOutDate) {
-      setCheckOutDate(storedCheckOutDate);
-    }
-  
-    if (storedGuests) {
-      setGuests(storedGuests);
-    }
-  }, []);
+  }, [cart]);
 
   const handleSearch = () => {
     dispatch(setCheckIn(checkInDate));

@@ -1,6 +1,8 @@
 class Api::ListingsController < ApplicationController
     def index
         @listings = Listing.all
+        @start_date = (params[:start_date])
+        @end_date = (params[:end_date])
         render :index
     end
 
@@ -8,7 +10,7 @@ class Api::ListingsController < ApplicationController
         @listing = Listing.find_by(id: params[:id])
         
         @start_date = (params[:start_date]) || Date.today
-        @end_date = (params[:end_date]&.to_date || Date.tomorrow).prev_day
+        @end_date = (params[:end_date] || Date.tomorrow)
         
         if @listing
             render :show

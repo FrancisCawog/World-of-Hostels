@@ -13,8 +13,8 @@ const setListing = (payload) => ({
     payload
 });
 
-export const fetchListings = () => async (dispatch) => {
-    const response = await csrfFetch("/api/listings");
+export const fetchListings = (start_date, end_date) => async (dispatch) => {
+    const response = await csrfFetch(`/api/listings/?start_date=${start_date}&end_date=${end_date}`);
     if (response.ok) {
         const data = await response.json();
         dispatch(setListings(data));

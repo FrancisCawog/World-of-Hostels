@@ -13,18 +13,18 @@ import { useHistory } from 'react-router-dom';
 import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 
 function ListingsIndexPage() {
-  const dispatch = useDispatch();
-  const listings = useSelector((state) => state.listings);
   const reviews = useSelector((state) => state.reviews);
   const rooms = useSelector((state) => Object.values(state.rooms));
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered2, setIsHovered2] = useState(false);
   const history = useHistory();
   const cart = useSelector((state) => state.cart);
+  const listings = useSelector((state) => state.listings);
+  const dispatch = useDispatch();
   sessionStorage.setItem('redirectUrl', window.location.pathname);
 
   useEffect(() => {
-    dispatch(fetchListings()).catch((error) => {
+    dispatch(fetchListings(cart.checkIn, cart.checkOut)).catch((error) => {
       console.error("Error fetching listing:", error);
     });
   }, [dispatch]);
@@ -87,6 +87,7 @@ function ListingsIndexPage() {
     }
   };
 
+
   return (
     <>
     <div>
@@ -118,6 +119,7 @@ function ListingsIndexPage() {
         <span className="index-picture-right" onClick={() => updateImageIndex(listing.id, 'next')}>
         <img src={ArrowRight} style={{width: "16px", height: "16px", marginLeft: "35%"}}/>
         </span>
+
       </div>
       <div className="single-listing">
         <h3>{listing.property_name}</h3>
@@ -175,11 +177,11 @@ function ListingsIndexPage() {
             <div className="private-and-dorm" style={{ position: 'absolute', bottom: '5px', right: '5px', padding: '5px', borderRadius: '5px', fontFamily: "Poppins", display: "flex", alignItems: "center" }}>
             {(() => {
                 const prices = Object.values(rooms).filter(room => room.listing_id === listing.id).reduce((acc, room) => {
-                if (room.room_type === 'shared' && (!acc.sharedPrice || room.price < acc.sharedPrice)) {
+                  if (room.room_type === 'shared' && (!acc.sharedPrice || room.price < acc.sharedPrice) && room.available_beds > 0) {
                     acc.sharedPrice = room.price;
-                } else if (room.room_type === 'private' && (!acc.privatePrice || room.price < acc.privatePrice)) {
+                  } else if (room.room_type === 'private' && (!acc.privatePrice || room.price < acc.privatePrice) && room.available_beds === room.num_beds) {
                     acc.privatePrice = room.price;
-                }
+                  }
                 return acc;
                 }, { sharedPrice: null, privatePrice: null });
 

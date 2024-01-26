@@ -12,6 +12,7 @@ import checkOutPic from "../../assets/pictures/icons/Screenshot 2023-11-17 at 1.
 import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
 import person from "../../assets/pictures/icons/user-128.svg"
 import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
+import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg"
 import minus from "../../assets/pictures/icons/minus.svg"
 import ListingsModal from "../ListingsModal";
 import ListingsShowReviewModal from "../ListingsShowReviewModal";
@@ -43,10 +44,6 @@ function ListingsShowPage() {
   const start_date = new Date(checkIn).toISOString();
   const end_date = new Date(checkOut).toISOString();
   sessionStorage.setItem('redirectUrl', window.location.pathname);
-
-  
-
-  // const availableRooms = rooms.filter(room => room.available_beds > 0);
 
   useEffect(() => {
     dispatch(fetchUsers()).catch((error) => {
@@ -192,7 +189,7 @@ function ListingsShowPage() {
     const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
     const numberedElement = listingReviews[num]
     const reservationId = numberedElement.reservation_id;
-    const reservation = Object.values(reservations).find(reservation => reservation.id === reservationId);
+    const reservation = Object.values(reservations).find(reservation => reservation?.id === reservationId);
     const date = new Date(reservation?.start_date);
     const options = { year: 'numeric', month: 'short' };
     return date.toLocaleDateString('en-US', options);
@@ -231,6 +228,14 @@ function ListingsShowPage() {
     const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
     const numberedElement = listingReviews[num]
     return numberedElement.feedback
+  }
+
+  const checkAvailability = (id) => {
+    const [specificRoom] = Object.values(rooms).filter(room => room.id === id);
+    if (cartItems[id] >= specificRoom.available_beds) {
+      return false
+    }
+      return true
   }
   
   return (
@@ -295,11 +300,11 @@ function ListingsShowPage() {
         <div id="choose-room" className="choose-room">Choose your room</div>
           {rooms && (
             <>
-              {rooms.some(room => room.room_type === "private") && (
+              {rooms.some(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds) && (
                 <>
                   <p className="room-type">Private Rooms</p>
                   {rooms
-                    .filter(room => room.room_type === "private")
+                    .filter(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds)
                     .map((privateRoom, index) => (
                       <div key={index}>
                         <div className="private-room-div">
@@ -333,8 +338,8 @@ function ListingsShowPage() {
                                   <div style={{marginRight: ".5rem"}}>
                                     <p style={{ fontFamily: "Poppins-bold"}}>{cartItems[privateRoom.id]}</p>
                                   </div>
-                                  <div className={`add-div ${refundable ? '' : 'disabled'}`} onClick={() => refundable && handleAddToCart(privateRoom.id, true)}>
-                                    <img src={add} className="add-image" alt="add icon" />
+                                  <div className={`add-div ${refundable ? '' : 'disabled'}`}style={{ pointerEvents: 'none', border: '2px solid lightgray' }} onClick={() => refundable && handleAddToCart(privateRoom.id, true)}>
+                                    <img src={grayadd} className="add-image" alt="add icon" />
                                   </div>
                                 </div>                                
                                 ) : (
@@ -360,8 +365,8 @@ function ListingsShowPage() {
                                   <div style={{marginRight: ".5rem"}}>
                                     <p style={{ fontFamily: "Poppins-bold"}}>{cartItems[privateRoom.id]}</p>
                                   </div>
-                                  <div className={`add-div ${!refundable ? '' : 'disabled'}`} onClick={() => !refundable && handleAddToCart(privateRoom.id, false)}>
-                                    <img src={add} className="add-image" alt="add icon" />
+                                  <div className={`add-div ${!refundable ? '' : 'disabled'}`} style={{pointerEvents: 'none', border: '2px solid lightgray' }} onClick={() => !refundable && handleAddToCart(privateRoom.id, false)}>
+                                    <img src={grayadd} className="add-image" alt="add icon" />
                                   </div>
                                 </div>                                
                                 ) : (
@@ -378,11 +383,11 @@ function ListingsShowPage() {
                     ))}
                   </>
               )}
-              {rooms.some(room => room.room_type === "shared") && (
+              {rooms.some(room => room.room_type === "shared" && room.available_beds > 0) && (
                 <>
                   <p className="room-type">Dorm Beds</p>
                   {rooms
-                    .filter(room => room.room_type === "shared")
+                    .filter(room => room.room_type === "shared" && room.available_beds > 0)
                     .map((sharedRoom, index) => (
                       <div key={index}>
                         <div className="dorm-bed-div">
@@ -416,8 +421,11 @@ function ListingsShowPage() {
                                   <div style={{marginRight: ".5rem"}}>
                                     <p style={{ fontFamily: "Poppins-bold"}}>{cartItems[sharedRoom.id]}</p>
                                   </div>
-                                  <div className={`add-div ${refundable ? '' : 'disabled'}`} onClick={() => refundable && handleAddToCart(sharedRoom.id, true)}>
-                                    <img src={add} className="add-image" alt="add icon" />
+                                  <div className={`add-div ${refundable ? '' : 'disabled'}`}style={checkAvailability(sharedRoom.id) ? {} : { pointerEvents: 'none', border: '2px solid lightgray' }} onClick={() => refundable && checkAvailability(sharedRoom.id) && handleAddToCart(sharedRoom.id, true)}>
+                                  {checkAvailability(sharedRoom.id) ? (
+                                      <img src={add} className="add-image" alt="add icon" />
+                                     ) : ( <img src={grayadd} className="add-image" alt="add icon" />
+                                    )}
                                   </div>
                                 </div>                                
                                 ) : (
@@ -443,8 +451,11 @@ function ListingsShowPage() {
                                   <div style={{marginRight: ".5rem"}}>
                                     <p style={{ fontFamily: "Poppins-bold"}}>{cartItems[sharedRoom.id]}</p>
                                   </div>
-                                  <div className={`add-div ${!refundable ? '' : 'disabled'}`} onClick={() => !refundable && handleAddToCart(sharedRoom.id, false)}>
-                                    <img src={add} className="add-image" alt="add icon" />
+                                  <div className={`add-div ${!refundable ? '' : 'disabled'}`} style={checkAvailability(sharedRoom.id) ? {} : { pointerEvents: 'none', border: '2px solid lightgray' }} onClick={() => !refundable && checkAvailability(sharedRoom.id) && handleAddToCart(sharedRoom.id, false)}>
+                                  {checkAvailability(sharedRoom.id) ? (
+                                      <img src={add} className="add-image" alt="add icon" />
+                                     ) : ( <img src={grayadd} className="add-image" alt="add icon" />
+                                    )}
                                   </div>
                                 </div>                                
                                 ) : (

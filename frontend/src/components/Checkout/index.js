@@ -33,7 +33,6 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
     const timeDifference = checkOutDates.getTime() - checkInDates.getTime();
     const numNights = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
-
     const handleScroll = () => {
         const chooseRoomDiv = document.getElementById('choose-room');
         if (chooseRoomDiv) {

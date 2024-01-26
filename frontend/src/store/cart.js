@@ -35,7 +35,10 @@ export const setCheckOut = (date) => ({
     payload: date
 });
 
-const cartReducer = (state = { cart: {}, guests: 0, checkIn: null, checkOut: null, refundable: true }, action) => {
+const cartReducer = (
+    state = { cart: {}, guests: 1, checkIn: '', checkOut: '', refundable: true },
+    action
+  ) => {
     const newState = { ...state };
 
     switch (action.type) {
