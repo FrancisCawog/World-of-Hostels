@@ -36,8 +36,6 @@ https://world-of-hostels.onrender.com
 - Style date and guests in the listings show
 - Add search bar to Nav
 - Prevent searches in the past, start and end date on the same day, and reset search bar.
-- Prevent rooms from exceeding amount of beds available
-- Don't display listings with no available space
 - Add more seeds data
 - Add functionality to location search
 - Add facilities to listings show
