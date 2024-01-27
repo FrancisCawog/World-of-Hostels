@@ -252,3 +252,361 @@ img {
   bottom: -15px;
   left: 10%;
 }  
+
+.this-is {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.this-is-text {
+  margin-left: 21.5%;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+}
+
+.this-is-car {
+  width: 25%;
+}
+
+.this-is-car img {
+  height: 100%;
+  width: 100%;
+}
+
+.this-text p {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -.00625rem;
+  line-height: 1.625rem;
+  margin-bottom: 0.5rem;
+  font-family: Poppins-bold;
+}
+
+.this-text h2 {
+  padding-right: 10%;
+  font-size: 55px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+  line-height: 4rem;
+  font-family: Poppins-bold;
+}
+
+.this-text button {
+  margin-left: 0;
+  margin-right: 0;
+  /* margin-top: 3rem; */
+  background: linear-gradient(275.42deg,#f6a90e 17%,#f8bf0a 79.31%);
+  position: relative;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.1px;
+  line-height: 1.5rem;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+.this-text button::before {
+  background: #f9bf0b;
+    border-radius: 3px;
+    content: "";
+    height: 16px;
+    position: absolute;
+    top: calc(100% - 13px);
+    transform: skewY(-34deg) rotate(90deg);
+    width: 20px;
+    z-index: -1;
+}
+
+.arrow-down-this {
+  margin-left: 0.5rem;
+  margin-right: -5px;
+  transform: rotate(-90deg);
+  width: 16px;
+  height: 16px;
+}
+
+.see-who-going {
+  margin-top: 5rem;
+  height: 48rem;
+  background-color: #7f32cd;
+  clip-path: polygon(0 calc(100% - 3rem),0 3rem,100% 0,100% 100%);
+  padding-bottom: 5rem;
+  position: relative;
+}
+
+.animation img {
+  animation: card-rotate 2s cubic-bezier(.6,-.28,.69,1.58) forwards;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px rgba(0,0,0,.3);
+  left: calc(50% - 139px);
+  position: absolute;
+  top: 15rem;
+  transform: rotate(-3deg);
+  z-index: 200;
+  width: 280px;
+  height: auto;
+}
+
+@keyframes card-rotate {
+  0% {
+    transform: rotate(15deg);
+}
+100% {
+  transform: rotate(-3deg);
+}
+}
+
+.user-1 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 76px;
+  animation-name: swig-animation-usa-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.6,-.28,.69,1.58);
+} 
+
+@keyframes swig-animation-usa-5fe91112 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(285px, 80px);
+  }
+}
+
+.user-2 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 68px;
+  animation-name: swig-animation-poland-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.6,-.28,.69,1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-poland-5fe91112 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-70px, 50px);
+  }
+}
+
+.user-3 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 112px;
+  animation-name: swig-animation-ireland-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.6,-.28,.69,1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-ireland-5fe91112 {
+  0% {
+    transform: translate(140px,30px);
+  }
+  100% {
+    transform: translate(540px,130px);
+  }
+}
+
+.user-4 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 166px;
+  animation-name: swig-animation-brazil-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.69, 1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-brazil-5fe91112 {
+  0% {
+    transform: translate(-100px);
+  }
+  100% {
+    transform: translate(-400px, -80px);
+  }
+}
+
+.user-5 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 124px;
+  animation-name: swig-animation-germany-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.69, 1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-germany-5fe91112 {
+  0% {
+    transform: translate(-100px,160px);
+  }
+  100% {
+    transform: translate(-330px,240px);
+  }
+}
+
+.user-6 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 76px;
+  animation-name: swig-animation-portugal-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.69, 1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-portugal-5fe91112 {
+  0% {
+    transform: translate(-140px,-80px);
+  }
+  100% {
+    transform: translate(-130px,-110px);
+  }
+}
+
+.user-7 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 84px;
+  animation-name: swig-animation-italy-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.69, 1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-italy-5fe91112 {
+  0% {
+    transform: translate(110px,-110px);
+  }
+  100% {
+    transform: translate(260px,-50px);
+  }
+}
+
+.user-8 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 160px;
+  animation-name: swig-animation-china-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.69, 1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-china-5fe91112 {
+  0% {
+    transform: translate(-100px,100px);
+  }
+  100% {
+    transform: translate(-600px,100px);
+  }
+}
+
+.user-9 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 84px;
+  animation-name: swig-animation-france-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.69, 1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-france-5fe91112 {
+  0% {
+    transform: translate(-40px,60px);
+  }
+  100% {
+    transform: translate(-140px,150px);
+  }
+}
+
+.user-10 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 132px;
+  animation-name: swig-animation-korea-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.69, 1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-korea-5fe91112{
+  0% {
+    transform: translate(120px);
+  }
+  100% {
+    transform: translate(630px,-90px);
+  }
+}
+
+.user-11 img {
+  border: 0.1875rem solid #fff;
+  border-radius: 50%;
+  width: 100px;
+  animation-name: swig-animation-spain-5fe91112;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.69, 1.58);
+  z-index: 100;
+}
+
+@keyframes swig-animation-spain-5fe91112 {
+  0% {
+    transform: translate(120px,90px);
+  }
+  100% {
+    transform: translate(360px,190px);
+  }
+}
+
+.see-who-going {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.see-who-going-text {
+  text-align: center;
+}
+
+.see-who-going-text h2 {
+  align-self: center;
+  font-family: Poppins-bold;
+  font-size: 64px;
+  color: white;
+  padding-top: 530px;
+}
+
+.see-who-going-text p {
+  font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 1.125rem;
+    font-weight: 800;
+    letter-spacing: -.00625rem;
+    /* line-height: 1.5rem; */
+    /* margin-bottom: 2rem; */
+    margin-top: -1.5rem;
+    color: white;
+}
