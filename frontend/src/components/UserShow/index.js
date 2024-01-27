@@ -59,6 +59,9 @@ function UserShow() {
     const [modalPropertyName,setModalPropertyName] = useState("");
     const [modalListingId, setModalListingId] = useState();
     const [isRefundable, setIsRefundable] = useState(true);
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -153,7 +156,7 @@ function UserShow() {
       }, [tabName]);
 
     useEffect(() => {
-        dispatch(fetchListings()).catch((error) => {
+        dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
           console.error("Error fetching listing:", error);
         });
       }, [dispatch]);
@@ -485,7 +488,7 @@ function UserShow() {
                                 return (
                                     <div key={reservation.id} className="future-booking" onClick={() => handleReservation(reservation.id)}>
                                         <div className="future-picture">
-                                            <img src={correspondingListing?.photoUrls[0]} x/>
+                                            <img src={correspondingListing?.photoUrls[0]}/>
                                         </div >
                                         <p>{correspondingListing?.property_name}</p>
                                         <div className="icon-and-text">
