@@ -41,9 +41,26 @@ function ListingsShowPage() {
   const [refundable, setRefundable] = useState();
   const checkIn = cart.checkIn
   const checkOut = cart.checkOut
-  const start_date = new Date(checkIn).toISOString();
-  const end_date = new Date(checkOut).toISOString();
   sessionStorage.setItem('redirectUrl', window.location.pathname);
+
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  let start_date;
+  let end_date;
+
+  if (checkIn) {
+    start_date = new Date(checkIn).toISOString();
+    end_date = new Date(checkOut).toISOString();
+  } else {
+    start_date = today.toISOString().split("T")[0];
+    end_date = tomorrow.toISOString().split("T")[0];
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchUsers()).catch((error) => {

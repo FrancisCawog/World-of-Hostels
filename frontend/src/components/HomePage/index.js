@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useInView } from 'react-intersection-observer';
 import './Homepage.css';
 import groupPhoto from "../../assets/pictures/hero.chats.webp"
@@ -24,8 +24,17 @@ import user8 from "../../assets/profile-pics/user8.jpeg"
 import user9 from "../../assets/profile-pics/user9.jpeg"
 import user10 from "../../assets/profile-pics/user10.jpeg"
 import user11 from "../../assets/profile-pics/user11.jpeg"
+import { useDispatch, useSelector } from "react-redux";
+import { fetchListings } from "../../store/listings";
+import { Link } from 'react-router-dom';
+
 
 export default function HomePage() {
+  const dispatch = useDispatch();
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const listings = useSelector((state) => state.listings);
   sessionStorage.setItem('redirectUrl', window.location.pathname);
 
   const handleClick = (e) => {
@@ -39,6 +48,12 @@ export default function HomePage() {
     triggerOnce: true,
     threshold: 0.5,
   });
+
+  useEffect(() => {
+    dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
+      console.error("Error fetching listing:", error);
+    });
+  }, [dispatch]);
 
   return (
     <>
@@ -172,6 +187,62 @@ export default function HomePage() {
             going.
           </h2>
           <p>Connect with other travellers staying in the same hostel or city as you.</p>
+      </div>
+    </div>
+
+    <div className="world-best">
+      <div className="world-cards">
+        <div style={{display: "flex"}}>
+        <Link to={`/listings/${listings[1]?.id}`} className="world-cards1">
+            <div className="world-photo">
+              <img  src={listings[1]?.photoUrls[0]}/>
+            </div>
+            <p className="world-car-p1">{listings[1]?.property_name}</p>
+            <p className="world-car-p2">{listings[1]?.city}, {listings[1]?.country}</p>
+        </Link>
+        <Link to={`/listings/${listings[2]?.id}`} className="world-cards2">
+            <div className="world-photo">
+              <img  src={listings[2]?.photoUrls[0]}/>
+            </div>
+            <p className="world-car-p1">{listings[2]?.property_name}</p>
+            <p className="world-car-p2">{listings[2]?.city}, {listings[2]?.country}</p>
+        </Link>
+        </div>
+
+        <div style={{display: "flex"}}>
+          <div className="world-text" style={{width: "30%"}}>
+            <h3>
+              The world's best hostels, with over
+              <span style={{color: "#30cf72", marginLeft: "10px"}}>13 million reviews</span>
+              .
+            </h3>
+            <p>With over 16,500 hostels in 180 countries, there’s always room for a new adventure!</p>
+          </div>
+          <Link to={`/listings/${listings[3]?.id}`} className="world-cards3">
+            <div className="world-photo">
+              <img  src={listings[3]?.photoUrls[0]}/>
+            </div>
+            <p className="world-car-p1">{listings[3]?.property_name}</p>
+            <p className="world-car-p2">{listings[3]?.city}, {listings[3]?.country}</p>
+        </Link>
+        </div>
+
+        <div style={{display: "flex"}}>
+        <Link to={`/listings/${listings[4]?.id}`} className="world-cards4">
+            <div className="world-photo">
+              <img  src={listings[4]?.photoUrls[0]}/>
+            </div>
+            <p className="world-car-p1">{listings[4]?.property_name}</p>
+            <p className="world-car-p2">{listings[4]?.city}, {listings[4]?.country}</p>
+        </Link>
+        <Link to={`/listings/${listings[5]?.id}`} className="world-cards5">
+            <div className="world-photo">
+              <img  src={listings[5]?.photoUrls[0]}/>
+            </div>
+            <p className="world-car-p1">{listings[5]?.property_name}</p>
+            <p className="world-car-p2">{listings[5]?.city}, {listings[5]?.country}</p>
+        </Link>
+        </div>
       </div>
     </div>
 
