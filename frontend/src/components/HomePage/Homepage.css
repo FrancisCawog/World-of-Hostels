@@ -32,7 +32,7 @@ img {
 .background h1 {
   position: absolute;
   font-size: 60px;
-  top: 16%;
+  top: 10rem;
   left: 18.4%;
   color: white;
   text-align: center;
@@ -40,9 +40,9 @@ img {
 }
 
 .background p {
-  position: absolute;;
+  position: absolute;
   font-size: 26px;
-  top: 25%;
+  top: 15.5rem;
   left: 18.4%;
   color: white;
   text-align: center;
@@ -52,8 +52,8 @@ img {
 .group-photo {
   position: absolute;
   width: 23%;
-  height: auto;
-  top: 14%;
+  height: 18rem;
+  top: 8rem;
   right: 17.5%;
 }
 
@@ -61,51 +61,111 @@ img {
   position: absolute;
   width: 9%;
   height: auto;
-  top: 32.5%;
+  top: 19.75rem;
   left: 29%;
 }
 
-.search-bar {
+.search-bar-container {
   position: relative;
-  display: flex;
-  border: 1px solid white;
-  background-color: white;
-  align-items: center;
-  padding: 5px;
-  top: 90%;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  width: 95%;
+  top: 23rem;
+  width: 100%;
+  padding: 0px 0.75rem;
+}
+
+.inline-wrapper {
   box-shadow: 0 0 70px rgb(158, 6, 158);
-  border-radius: 25px;
-  height: 64px;
+  border-radius: 16px;
+  max-width: 90%;
+  margin: auto;
 }
 
-.search-bar input {
-  border: none;
+.inline-form {
+  border-radius: 16px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  width: 100%;
+  gap: 0.25rem;
+  padding: 0.25rem;
+}
+
+.destination-container {
+  width: 100%;
+}
+
+.input-inner {
+    position: relative;
+}
+
+.input-prefix {
+    position: absolute;
+    top: 4px;
+    z-index: 1;
+    padding: 1rem;
+}
+
+.input-wrapper input {
+  padding-left: 3rem;
+  padding-bottom: 0.5rem;
+    padding-top: 1.5rem;
+    text-overflow: ellipsis;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 1.5rem;
+    border-style: initial;
+    border-radius: 1rem;
+    margin: 0px;
+}
+
+.input-wrapper input:hover {
+  box-shadow: rgb(169, 175, 187) 0px 0px 0px 0.125rem inset;
+}
+
+.input-wrapper input:focus {
   outline: none;
-  margin-top: 7.5px;
+  box-shadow: rgb(18, 20, 23) 0px 0px 0px 0.125rem inset;
 }
 
-.search-bar input:not(:last-child) {
-  margin-left: 15px;
+.input-label {
+  color: rgb(99, 108, 125);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    left: 0px;
+    letter-spacing: 0px;
+    line-height: 1.5rem;
+    overflow-x: hidden;
+    pointer-events: none;
+    position: absolute;
+    text-overflow: ellipsis;
+    top: 0px;
+    width: 100%;
+    z-index: 1;
+    padding: 1rem;
+    transition: all 0.2s ease 0s;
+    white-space: nowrap;
+    margin-left: 32.5px;
 }
 
-.search-bar input:hover {
-  border: 2px solid #d3d3d3df;
-  border-radius: 15px;
+.input-wrapper input:focus + .input-label,
+.input-wrapper input:placeholder-shown + .input-label,
+.input-wrapper.non-empty input + .input-label,
+.input-label2,
+.input-label3,
+.input-label4 {
+  font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: .75rem;
+    font-weight: 400;
+    letter-spacing: .0125rem;
+    line-height: 1rem;
+    transform: translateX(0) translateY(-0.5rem);
+    margin-top: -5px;
 }
-
-.search-bar button {
-  background-color: #F25621;
-  height: 100%; 
-}
-.search-bar button:hover {
-  box-shadow: 0 0 10px #F25621;
-}
-
-.search-bar button::after {
-  content: none;
+.divider {
+  border-right: 0.0625rem solid #a9afbb;
+  height: 3rem;
+  width: 0.0625rem;
 }
 
 .cancellation img {
@@ -224,11 +284,11 @@ img {
 }
 
 .let-go-button {
-  width: 100%;
+  width: 25%;
   height: 40px;
   background-color: #F25621;
   color: white;
-  padding: 10px 15px;
+  padding: 10px 0px 10px 30px;
   border: none;
   cursor: pointer;
   border-radius: 15px;
@@ -236,22 +296,12 @@ img {
   font-size: 18px;
   font-weight: bold;
   position: relative;
+  /* margin-right: 0px; */
 }
 
 .let-go-button:hover {
-  background-color: #c44c24;
+  box-shadow: 0 8px 24px rgba(242,85,33,.35);
 }
-
-.let-go-button::after {
-  content: '';
-  display: block;
-  width: 80%;
-  height: 1px;
-  background-color: #ddd;
-  position: absolute;
-  bottom: -15px;
-  left: 10%;
-}  
 
 .this-is {
   display: flex;

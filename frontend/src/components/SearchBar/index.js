@@ -1,8 +1,10 @@
-import locationPic from "../../assets/pictures/icons/Screenshot 2023-11-13 at 4.48.41 PM.png";
+import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.svg";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
 import { useDispatch, useSelector } from "react-redux";
+import users from "../../assets/pictures/icons/17115.png"
+import arrow from "../../assets/pictures/icons/icons8-arrow-30.png"
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -72,46 +74,127 @@ function SearchBar() {
     history.push("/listings");
   };
 
+
   return (
-    <div className="search-bar">
-      {/* <img src={locationPic} style={{ width: "50px" }} /> */}
-      <input
-        type="text"
-        name="location"
-        id="location"
-        // placeholder="Where do you want to go?"
-        placeholder="Bangkok, Thailand"
-        value={location}
-        onChange={handleLocationChange}
-        disabled={true}
-      />
-      <input
-        type="date"
-        name="checkInDate"
-        id="checkInDate"
-        placeholder="Check in"
-        value={checkInDate}
-        onChange={handleCheckInDateChange}
-      />
-      <input
-        type="date"
-        name="checkOutDate"
-        id="checkOutDate"
-        placeholder="Check out"
-        value={checkOutDate}
-        onChange={handleCheckOutDateChange}
-      />
-      <input
-        type="number"
-        name="guests"
-        id="guests"
-        placeholder="Guests"
-        value={guests}
-        onChange={handleGuestsChange}
-      />
-      <button className="let-go-button" type="button" onClick={handleSearch} style={{height: "50px"}}>
-        Let's Go!
-      </button>
+    <div className="search-bar-container">
+      <div className="searchbar-wrapper">
+        <div className="inline-wrapper">
+          <div className="inline-form">
+
+            <div className="destination-container">
+              <div className="input-strip">
+                <div className="input-inner">
+                  <div className="input-prefix">
+                    <img  style={{marginTop: "-5px", width:"20px", height:"20px"}} src={locationPic}/>
+                  </div>
+                  <div className={`input-wrapper ${location !== "" ? 'non-empty' : ''}`}>
+                     <input
+                      type="text"
+                      name="location"
+                      id="location"
+                      placeholder="Bangkok, Thailand"
+                      value={location}
+                      onChange={handleLocationChange}
+                      disabled={true}
+                    />
+                    <label className="input-label">
+                      Where do you want to go?
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+              
+            </div>
+
+            <div className="divider"></div>
+
+            <div className="dates">
+              <div className="checkin-checkout">
+                <div className="checkin-input">
+                  <div className="input-with-label">
+                    <div className="input-prefix">
+                      <img/>
+                    </div>
+                    <div className="input-wrapper">
+                      <input
+                      style={{paddingLeft: "1rem"}}
+                        type="date"
+                        name="checkInDate"
+                        id="checkInDate"
+                        value={checkInDate}
+                        onChange={handleCheckInDateChange}
+                      />
+                      <label className="input-label2">
+                        Check In
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <div className="divider"></div>
+
+            <div className="dates">
+              <div className="checkin-checkout">
+                <div className="checkin-input">
+                  <div className="input-with-label">
+                    <div className="input-prefix">
+                      <img/>
+                    </div>
+                    <div className="input-wrapper">
+                      <input
+                        style={{paddingLeft: "1rem"}}
+                        type="date"
+                        name="checkOutDate"
+                        id="checkOutDate"
+                        value={checkOutDate}
+                        onChange={handleCheckOutDateChange}
+                      />
+                      <label className="input-label3">
+                        Check Out
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="divider"></div>
+
+            <div className="guests">
+              <div className="guests-strip">
+                <div className="guests-input">
+                  <div className="input-with-label">
+                    <div className="input-prefix">
+                      <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
+                    </div>
+                    <div className="input-wrapper">
+                      <input
+                        type="number"
+                        name="guests"
+                        id="guests"
+                        placeholder="Guests"
+                        value={guests}
+                        onChange={handleGuestsChange}
+                      />
+                      <label className="input-label4">
+                        Guests
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          <button className="let-go-button" onClick={handleSearch} style={{height: "50px", display: "flex", alignItems: "center"}}>
+            Let's Go!
+            <img src={arrow} style={{width: "24px", height: "24px", marginLeft: "10px"}}/>
+          </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
