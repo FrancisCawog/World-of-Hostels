@@ -10,6 +10,7 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
     const listing = useSelector((state) => state.listings[listingId]);
     const users = useSelector((state) => state.users);
     const reservations = useSelector((state) => state.reservations);
+    const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
 
     const extractDate = (listingId, num) => {
       const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
@@ -49,6 +50,14 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
     
       return `${gender}, ${ageGroup}, ${nationality}`;
     };
+
+    const extractPicture = (listingId, num) => {
+      const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
+      const numberedElement = listingReviews[num];
+      const userId = numberedElement.user_id;
+      const user = Object.values(users).find(user => user.id === userId);
+      return user.photoUrl
+    }
     
     const extractFeedback = (listingId, num) => {
       const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
@@ -118,7 +127,9 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
       </div>
 
       <div className="pic-name-and-info">
-        <div className="review-profile-pic"></div>
+        <div className="review-profile-pic">
+          <img src={extractPicture(listing?.id, index) || defaultPic} style={{borderRadius: "50%", width: "2.25rem", height: "2.25rem"}}/>
+        </div>
         <div className="review-name-info">
           <p>{extractName(listing?.id, index)}</p>
           <p>{extractDemographic(listing?.id, index)}</p>

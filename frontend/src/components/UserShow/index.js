@@ -62,6 +62,7 @@ function UserShow() {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
+    const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -404,7 +405,7 @@ function UserShow() {
             {activeTab === 'Home' && (
                 <div className="user-about">
                     <div className="picture-circle">
-                        
+                        <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "5rem", height: "5rem"}}/>
                     </div>
                     <div className="name-and-age">
                         <p>{sessionUser.first_name}</p>
@@ -425,7 +426,9 @@ function UserShow() {
                 <>
                 <div className="edit-about">
                     <p>Edit Details</p>
-                    <div className="edit-picture-circle"></div>
+                    <div className="edit-picture-circle">
+                        <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "2.5rem", height: "2.5rem"}}/>
+                    </div>
                     <div className="four-inputs-div">
                         <div className="input-with-label">
                             <label htmlFor="fullName">Full Name</label>

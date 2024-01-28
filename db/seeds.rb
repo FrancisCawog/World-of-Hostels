@@ -33,11 +33,11 @@ require "open-uri"
         email: "demo_user@gmail.com",
         password: "Password123!",
         nationality: "USA",
-        date_of_birth: "2010-10-10",
-        age: 13
+        date_of_birth: "2000-10-10",
+        age: 23
     )
 
-    # u1.photo.attach(io: URI.open(""), filename: "profile_pic.png")
+    u1.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user1.jpeg"), filename: "/user1.jpeg")
 
     u2 = User.create!(
         first_name: "Paul",
@@ -49,6 +49,8 @@ require "open-uri"
         age: 26
     )
 
+    u2.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user10.jpeg"), filename: "/user10.jpeg")
+
     u3 = User.create!(
         first_name: "Francis",
         last_name: "Cawog",
@@ -58,6 +60,8 @@ require "open-uri"
         date_of_birth: "1997-05-11",
         age: 26
     )
+
+    u3.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/FRA09244.jpg"), filename: "/FRA09244.jpg")
     
     u4 = User.create!(
         first_name: "John",
@@ -68,6 +72,8 @@ require "open-uri"
         date_of_birth: "1990-08-25",
         age: 31
     )
+
+    u4.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user7.jpeg"), filename: "/user7.jpeg")
     
     u5 = User.create!(
         first_name: "Alice",
@@ -78,6 +84,8 @@ require "open-uri"
         date_of_birth: "1985-12-18",
         age: 36
     )
+
+    u5.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user3.jpeg"), filename: "/user3.jpeg")
     
     u6 = User.create!(
         first_name: "Eleanor",
@@ -88,16 +96,20 @@ require "open-uri"
         date_of_birth: "1992-03-22",
         age: 29
     )
+
+    u6.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user4.jpeg"), filename: "/user4.jpeg")
     
     u7 = User.create!(
         first_name: "Michael",
         last_name: "Clark",
         email: "michael.clark@gmail.com",
         password: "ClarkPass456!",
-        nationality: "JAP",
+        nationality: "GER",
         date_of_birth: "1988-07-15",
         age: 33
     )
+
+    u7.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user9.jpeg"), filename: "/user9.jpeg")
     
     u8 = User.create!(
         first_name: "Sophia",
@@ -108,9 +120,11 @@ require "open-uri"
         date_of_birth: "1995-02-28",
         age: 27
     )
+
+    u8.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user5.jpeg"), filename: "/user5.jpeg")
     
     u9 = User.create!(
-        first_name: "David",
+        first_name: "Alyssa",
         last_name: "Anderson",
         email: "david.anderson@gmail.com",
         password: "Anderson123!",
@@ -118,6 +132,8 @@ require "open-uri"
         date_of_birth: "1983-09-10",
         age: 38
     )
+
+    u9.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user6.jpeg"), filename: "/user6.jpeg")
     
     u10 = User.create!(
         first_name: "Emily",
@@ -128,7 +144,8 @@ require "open-uri"
         date_of_birth: "1998-11-05",
         age: 23
     )
-    
+
+    u10.photo.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"), filename: "/user8.jpeg")
 
     l1 = Listing.create!(
         property_name: "Mad Monkey Hostel",

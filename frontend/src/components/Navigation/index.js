@@ -21,6 +21,7 @@ function Navigation() {
   const sessionUser = useSelector((state) => state.session.user);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isCredentialDropdownVisible, seCredentialtIsDropdownVisible] = useState(false);
+  const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
 
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
@@ -82,13 +83,13 @@ function Navigation() {
           {!sessionUser ? (
             <Link to="/login">
               <div className="circle">
-                <img src={userIcon} alt="User" />
+                <img src={userIcon} alt="User" style={{width: "21px", height: "21px"}}/>
               </div>
             </Link>
           ) : (
             <div>
               <div className="circle" onClick={toggleDropdown}>
-                <img src={userIcon} alt="User" />
+                <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "28px", height: "28px"}}/>
               </div>
 
               {isDropdownVisible && (
@@ -96,7 +97,7 @@ function Navigation() {
                   <div className='popover-menu-body'>
                     <div className='avatar-and-name'>
                       <div className="circle" onClick={(e) => e.stopPropagation()}>
-                        <img src={userIcon} alt="User" />
+                      <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "28px", height: "28px"}}/>
                       </div>
                       <p>{sessionUser.first_name} {sessionUser.last_name}</p>
                     </div>
@@ -212,13 +213,13 @@ function Navigation() {
           {!sessionUser ? (
             <Link to="/login">
               <div className="circle">
-                <img src={userIcon} alt="User" />
+                <img src={userIcon} alt="User" style={{width: "21px", height: "21px"}}/>
               </div>
             </Link>
           ) : (
             <div>
               <div className="circle" onClick={toggleDropdown}>
-                <img src={userIcon} alt="User" />
+                <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "28px", height: "28px"}}/>
               </div>
 
               {isDropdownVisible && (
@@ -226,7 +227,7 @@ function Navigation() {
                   <div className='popover-menu-body'>
                     <div className='avatar-and-name'>
                       <div className="circle" onClick={(e) => e.stopPropagation()}>
-                        <img src={userIcon} alt="User" />
+                        <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "28px", height: "28px"}}/>
                       </div>
                       <p>{sessionUser.first_name} {sessionUser.last_name}</p>
                     </div>
@@ -345,13 +346,13 @@ function Navigation() {
           {!sessionUser ? (
             <Link to="/login">
               <div className="circle">
-                <img src={userIcon} alt="User" />
+              style={{width: "21px", height: "21px"}}
               </div>
             </Link>
           ) : (
             <div>
               <div className="circle" onClick={toggleDropdown}>
-                <img src={userIcon} alt="User" />
+              <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "28px", height: "28px"}}/>
               </div>
 
               {isDropdownVisible && (
@@ -359,7 +360,7 @@ function Navigation() {
                   <div className='popover-menu-body'>
                     <div className='avatar-and-name'>
                       <div className="circle" onClick={(e) => e.stopPropagation()}>
-                        <img src={userIcon} alt="User" />
+                      <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "28px", height: "28px"}}/>
                       </div>
                       <p>{sessionUser.first_name} {sessionUser.last_name}</p>
                     </div>
@@ -484,7 +485,7 @@ function Navigation() {
           ) : (
             <div>
               <div className="circle" onClick={toggleDropdown}>
-                <img src={userIcon} alt="User" />
+                <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "28px", height: "28px"}}/>
               </div>
 
               {isDropdownVisible && (
@@ -492,7 +493,7 @@ function Navigation() {
                   <div className='popover-menu-body'>
                     <div className='avatar-and-name'>
                       <div className="circle" onClick={(e) => e.stopPropagation()}>
-                        <img src={userIcon} alt="User" />
+                        <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "28px", height: "28px"}}/>
                       </div>
                       <p>{sessionUser.first_name} {sessionUser.last_name}</p>
                     </div>

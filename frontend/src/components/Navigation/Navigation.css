@@ -51,11 +51,8 @@
 }
 
 .circle img {
-  max-width: 75%;
-  max-height: 75%;
   display: block; 
   margin: auto;
-  margin-left: 12.5%;
 }
 
 .circle {
