@@ -29,7 +29,6 @@ https://world-of-hostels.onrender.com
 
 
 ### Future Implementions/ Open Issues
-- Add images to users
 - Fix photo cycling in listings index and show
 - Style the search bar in listings show
 - Style date and guests in the listings show
@@ -44,3 +43,4 @@ https://world-of-hostels.onrender.com
 - Fix styling in leave review - About you
 - Booking is showing twice on first render after booking
 - Google Map icon bug
+- Add styling to calendar and guests
