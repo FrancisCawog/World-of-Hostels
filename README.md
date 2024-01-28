@@ -29,7 +29,8 @@ https://world-of-hostels.onrender.com
 
 
 ### Future Implementions/ Open Issues
-- Add images to user profile/ listings/ rooms via AWS
+- Add images to users
+- Fix photo cycling in listings index and show
 - Style the search bar in listings show
 - Style date and guests in the listings show
 - Add search bar to Nav
