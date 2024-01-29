@@ -28,6 +28,10 @@
   align-items: center;
 }
 
+.left-content-img {
+  width: 50px;
+}
+
 .WOF-conf {
   color: white;
   font-family: Poppins-bold;
@@ -218,4 +222,20 @@
   letter-spacing: 0;
   line-height: 1.5rem;
   text-align: left;
+}
+
+.circle-21 {
+  width: 21px;
+   height: 21px;
+}
+
+.circle-28 {
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+}
+
+.circle-12 {
+  width: 12px; 
+  margin-left: 30%;
 }

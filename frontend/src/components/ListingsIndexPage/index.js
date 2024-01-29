@@ -114,10 +114,10 @@ function ListingsIndexPage() {
           <img src={listing.photoUrls[currentImageIndex]} alt={`Listing ${listing.id}`} />
         </div>
         <span className="index-picture-left" onClick={() => updateImageIndex(listing.id, 'prev')}>
-          <img src={ArrowRight} style={{width: "16px", height: "16px", marginLeft: "15%", transform: 'rotate(180deg)'}}/>
+          <img src={ArrowRight}/>
         </span>
         <span className="index-picture-right" onClick={() => updateImageIndex(listing.id, 'next')}>
-        <img src={ArrowRight} style={{width: "16px", height: "16px", marginLeft: "35%"}}/>
+        <img src={ArrowRight}/>
         </span>
 
       </div>

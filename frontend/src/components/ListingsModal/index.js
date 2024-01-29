@@ -6,7 +6,7 @@ import './ListingsModal.css';
 import checkInPic from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.50.07 PM.png';
 import checkOutPic from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
-// import { LoadScript } from '@react-google-maps/api';
+import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png";
 
 const ListingsModal = ({ tabName, onClose }) => {
   const cart = useSelector((state) => state.cart);
@@ -35,10 +35,19 @@ const ListingsModal = ({ tabName, onClose }) => {
     width: '100%',
   };
 
+  const [infoWindowPosition, setInfoWindowPosition] = useState(null);
   const [infoWindowVisible, setInfoWindowVisible] = useState(false);
-  
+
   const handleMarkerClick = () => {
     setInfoWindowVisible(!infoWindowVisible);
+    setInfoWindowPosition({ lat: listing.latitude, lng: listing.longitude });
+  };
+
+  const markerImageSize = new window.google.maps.Size(40, 40);
+
+  const customMarkerIcon = {
+    url: `data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="${markerImageSize.width}" height="${markerImageSize.height + 12}" viewBox="0 0 ${markerImageSize.width} ${markerImageSize.height + 12}"><rect width="${markerImageSize.width}" height="${markerImageSize.height}" fill="none"/><text x="50%" y="90%" font-size="24" font-family="Arial, sans-serif" dominant-baseline="middle" text-anchor="middle" fill="%23e45b2e">▼</text><image href="${logo}" width="${markerImageSize.width}" height="${markerImageSize.height}" /></svg>`,
+    scaledSize: markerImageSize,
   };
 
     return (
@@ -50,34 +59,35 @@ const ListingsModal = ({ tabName, onClose }) => {
             {tabName === 'Map' ? (
                 <>
                 <h2 className='modal-header'>Location</h2>
-                {/* <LoadScript
-                  googleMapsApiKey={process.env.REACT_APP_MAPS_API_KEY}> */}
                 <GoogleMap
-                mapContainerStyle={mapStyles}
-                zoom={18}
-                center={{
-                  lat: listing?.latitude,
-                  lng: listing?.longitude,
-                }}
-              >
-                <Marker position={{
-                  lat: listing?.latitude,
-                  lng: listing?.longitude,
-                }}
-                  onClick={handleMarkerClick}
-                />
-                {infoWindowVisible && (
-                  <InfoWindow
+                  mapContainerStyle={mapStyles}
+                  zoom={18}
+                  center={{
+                    lat: listing.latitude,
+                    lng: listing.longitude,
+                  }}
+                >
+                  <Marker
                     position={{
-                      lat: listing?.latitude,
-                      lng: listing?.longitude,
+                      lat: listing.latitude,
+                      lng: listing.longitude,
                     }}
-                    onCloseClick={() => setInfoWindowVisible(false)}
-                  >
-                  </InfoWindow>
-                )}
-              </GoogleMap>
-              {/* </LoadScript> */}
+                    onClick={handleMarkerClick}
+                    icon={customMarkerIcon}
+                  />
+                  {infoWindowVisible && infoWindowPosition && (
+                    <InfoWindow
+                      position={infoWindowPosition}
+                      onCloseClick={() => setInfoWindowVisible(false)}
+                    >
+                      <div>
+                        <h3 style={{ fontFamily: "Inter", fontSize: "20px" }}>{listing.property_name}</h3>
+                        <p style={{ fontFamily: "Inter", fontWeight: "400", padding: "0px" }}>{listing.address}</p>
+                        <p style={{ fontFamily: "Inter", fontWeight: "400", marginTop: "-10px" }}>{`${listing.city}, ${listing.country}`}</p>
+                      </div>
+                    </InfoWindow>
+                  )}
+                </GoogleMap>
               </>
                 ) : (
             <>
