@@ -41,5 +41,4 @@ https://world-of-hostels.onrender.com
 - Add errors to sign-up/ login/ users edit
 - Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
 - Fix styling in leave review - About you
-- Booking is showing twice on first render after booking
 - Add styling to calendar and guests
