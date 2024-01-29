@@ -686,7 +686,7 @@ function ListingsShowPage() {
 
                   <div className="pic-name-and-info">
                     <div className="review-profile-pic">
-                      <img src={extractPicture(listing?.id, (numberOfReviews(listing?.id) - 1)) || defaultPic} className="pic-25"/>
+                      <img src={extractPicture(listing?.id, (numberOfReviews(listing?.id) - 1)) || defaultPic} style={{width: "2.25rem", height: "2.25rem", borderRadius: "50%"}}/>
                     </div>
                     <div className="review-name-info">
                       <p>{extractName(listing?.id, (numberOfReviews(listing?.id) - 1))}</p>
@@ -711,7 +711,7 @@ function ListingsShowPage() {
 
                 <div className="pic-name-and-info">
                   <div className="review-profile-pic">
-                    <img src={extractPicture(listing?.id, (numberOfReviews(listing?.id) - 2)) || defaultPic} className="pic-25"/>
+                    <img src={extractPicture(listing?.id, (numberOfReviews(listing?.id) - 2)) || defaultPic} style={{width: "2.25rem", height: "2.25rem", borderRadius: "50%"}}/>
                   </div>
                   <div className="review-name-info">
                     <p>{extractName(listing?.id, (numberOfReviews(listing?.id) - 2))}</p>
@@ -736,7 +736,7 @@ function ListingsShowPage() {
 
                 <div className="pic-name-and-info">
                   <div className="review-profile-pic">
-                    <img src={extractPicture(listing?.id, (numberOfReviews(listing?.id) - 3)) || defaultPic} className="pic-25"/>
+                    <img src={extractPicture(listing?.id, (numberOfReviews(listing?.id) - 3)) || defaultPic} style={{width: "2.25rem", height: "2.25rem", borderRadius: "50%"}}/>
                   </div>
                   <div className="review-name-info">
                     <p>{extractName(listing?.id, (numberOfReviews(listing?.id) - 3))}</p>

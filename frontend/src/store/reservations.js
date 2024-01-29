@@ -5,9 +5,9 @@ import { RECEIVE_USER } from "./session";
 const SET_RESERVATION = "listings/setReservation";
 const REMOVE_RESERVATION = 'listings/removeReservation';
 
-const setReservation = (listings) => ({
-    type: SET_RESERVATION,
-    payload: listings
+const setReservation = (reservation) => ({
+  type: SET_RESERVATION,
+  payload: { reservation }
 });
 
 const removeReservation = (reservationId) => ({
@@ -17,40 +17,46 @@ const removeReservation = (reservationId) => ({
 
 export const createReservation = (reservation) => async (dispatch) => {
   try {
-      const response = await csrfFetch("/api/reservations", {
-          method: 'POST',
-          body: JSON.stringify(reservation)
-      });
+    const response = await csrfFetch("/api/reservations", {
+      method: 'POST',
+      body: JSON.stringify(reservation)
+    });
 
-      if (response.ok) {
-          const data = await response.json();
-          const createdReservation = data.reservation;
-          dispatch(setReservation(createdReservation));
+    if (response.ok) {
+      const data = await response.json();
+      const createdReservation = data.reservation;
+      dispatch(setReservation(createdReservation));
 
-          return createdReservation;
-      } else {
-          throw new Error('Response not OK');
-      }
+      return createdReservation;
+    } else {
+      throw new Error('Response not OK');
+    }
   } catch (error) {
-      console.error("Error occurred:", error);
-      throw error;
+    console.error("Error occurred:", error);
+    throw error;
   }
 };
 
 export const deleteReservation = (ReservationId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/reservations/${ReservationId}`, {
-    method: "DELETE",
-  });
+  try {
+    const response = await csrfFetch(`/api/reservations/${ReservationId}`, {
+      method: "DELETE",
+    });
 
-  if (response.ok) {
-    dispatch(removeReservation(ReservationId));
-  } else {
-    throw response;
+    if (response.ok) {
+      dispatch(removeReservation(ReservationId));
+    } else {
+      const responseData = await response.json();
+      console.error('Error deleting reservation:', responseData.error);
+      throw new Error('Response not OK');
+    }
+
+    return response;
+  } catch (error) {
+    console.error("Error occurred:", error);
+    throw error;
   }
-
-  return response;
 };
-
 
 const reservationReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -58,8 +64,11 @@ const reservationReducer = (state = {}, action) => {
 
     switch (action.type) {
         case SET_RESERVATION:
-            newState[action.payload.reservation] = action.payload.reservation;
-            return newState;
+            const newReservation = action.payload?.reservation;
+            if (newReservation) {
+                return { ...state, [newReservation.id]: newReservation };
+            }
+            return state;    
         case RECEIVE_USER:
             return {...newState, ...action.reservations}
         case SET_LISTING:

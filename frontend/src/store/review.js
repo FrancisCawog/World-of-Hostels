@@ -34,7 +34,7 @@ const reviewReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_REVIEW:
             const newReview = action.payload.review;
-            newState[newReview.id] = newReview; // Assuming each review has a unique ID
+            newState[newReview.id] = newReview; 
             return newState;
         case SET_LISTING:
             return {...newState, ...action.payload.reviews}

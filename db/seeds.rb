@@ -546,7 +546,7 @@ Things to note about our hostel:
     ro2 = Room.create!(
         listing_id: 2,
         room_type: "shared",
-        room_title: "Private 2 Bed Dorm",
+        room_title: "8 Bed Dorm",
         description: "Bed located in a shared room with 2 beds distributed in 4 bunk beds 0.90X2.00, equipped with curtains, night light, private locker and private bathroom. Bed linen is provided.",
         num_beds: 8,
         price: 100.00

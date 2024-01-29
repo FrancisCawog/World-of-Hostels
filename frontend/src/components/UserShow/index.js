@@ -298,15 +298,19 @@ function UserShow() {
       const currentDate = new Date();
       currentDate.setHours(0, 0, 0, 0);
 
-      const futureReservations = Object.values(reservations).filter(reservation => {
+      const futureReservations = Object.values(reservations)
+      .filter(reservation => reservation?.user_id === sessionUser.id)
+      .filter(reservation => {
         const startDate = new Date(reservation?.start_date);
         return startDate > currentDate;
       });
-
-      const pastReservations = Object.values(reservations).filter(reservation => {
+    
+    const pastReservations = Object.values(reservations)
+      .filter(reservation => reservation?.user_id === sessionUser.id)
+      .filter(reservation => {
         const startDate = new Date(reservation?.start_date);
         return startDate < currentDate;
-      });
+      });    
 
       const isReservationInPast = pastReservations.some(reservation => reservation.id === ReservationId);
 
