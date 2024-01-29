@@ -56,7 +56,9 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
       const numberedElement = listingReviews[num];
       const userId = numberedElement.user_id;
       const user = Object.values(users).find(user => user.id === userId);
-      return user.photoUrl
+      if (user) {
+        return user.photoUrl
+      }
     }
     
     const extractFeedback = (listingId, num) => {
