@@ -409,7 +409,7 @@ function UserShow() {
             {activeTab === 'Home' && (
                 <div className="user-about">
                     <div className="picture-circle">
-                        <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "5rem", height: "5rem"}}/>
+                        <img src={sessionUser?.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "5rem", height: "5rem"}}/>
                     </div>
                     <div className="name-and-age">
                         <p>{sessionUser.first_name}</p>
@@ -431,7 +431,7 @@ function UserShow() {
                 <div className="edit-about">
                     <p>Edit Details</p>
                     <div className="edit-picture-circle">
-                        <img src={sessionUser.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "2.5rem", height: "2.5rem"}}/>
+                        <img src={sessionUser?.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "2.5rem", height: "2.5rem"}}/>
                     </div>
                     <div className="four-inputs-div">
                         <div className="input-with-label">

@@ -37,27 +37,16 @@ function ListingsShowPage() {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [tabName, settabName] = useState();
   const cart = useSelector((state) => state.cart);
+  const start_date = cart.checkIn;
+  const end_date = cart.checkOut;
   const cartItems = useSelector((state) => state.cart.cart);
   const [refundable, setRefundable] = useState();
-  const checkIn = cart.checkIn
-  const checkOut = cart.checkOut
   const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
   sessionStorage.setItem('redirectUrl', window.location.pathname);
-
+  
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-
-  let start_date;
-  let end_date;
-
-  if (checkIn) {
-    start_date = new Date(checkIn).toISOString();
-    end_date = new Date(checkOut).toISOString();
-  } else {
-    start_date = today.toISOString().split("T")[0];
-    end_date = tomorrow.toISOString().split("T")[0];
-  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -70,11 +59,15 @@ function ListingsShowPage() {
   }, [dispatch]);
 
   useEffect(() => {
-    if(start_date !== undefined && end_date !== undefined){
-    dispatch(fetchListing(listingId, start_date, end_date))
-      .catch((error) => {
-        console.error("Error fetching listing:", error);
-      })};
+    if (cart.checkIn){
+    dispatch(fetchListing(listingId, cart.checkIn, cart.checkOut)).catch((error) => {
+    console.error("Error fetching listing:", error);
+    });
+  } else {
+    dispatch(fetchListing(listingId, today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
+      console.error("Error fetching listing:", error)
+    });
+  }
   }, [listingId, dispatch, start_date, end_date]);
 
   const handleAddToCart = useCallback((index, value) => {

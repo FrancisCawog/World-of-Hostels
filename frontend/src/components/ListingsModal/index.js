@@ -18,13 +18,20 @@ const ListingsModal = ({ tabName, onClose }) => {
   const { listingId } = useParams();
   const listing = useSelector((state) => state.listings[listingId]);
   const [activeTab, setActiveTab] = useState(tabName);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   useEffect(() => {
-    if (start_date !== undefined && end_date !== undefined) {
+    if (checkIn !== null) {
     dispatch(fetchListing(listingId, start_date, end_date)).catch((error) => {
       console.error('Error fetching listing:', error);
-    })};
-  }, [listingId, dispatch]);
+    })
+    } else {
+      dispatch(fetchListing(listingId, today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
+        console.error('Error fetching listing:', error);
+      })}
+    }, [listingId, dispatch]);
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -162,7 +169,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                 </div>
                 <div className="smaller-horizontal-line" style={{marginLeft: "1px", marginRight: "1px", marginBottom: "-15px"}}> </div>
                 <h2 style={{fontFamily: "Poppins-bold", fontSize: "20px", marginTop: "15px", marginBottom: "-25px"}}>Things to Note</h2>
-                <p> {listing.house_rules}</p> 
+                <p> {listing?.house_rules}</p> 
                 </div> 
                 </>
                 

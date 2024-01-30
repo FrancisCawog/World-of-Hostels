@@ -170,32 +170,77 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                             Choose a room
                         </button>
                     </div>
-                    <div className="choose-middle">
-                    <input
-                        type="date"
-                        name="checkInDate"
-                        id="checkInDate"
-                        placeholder={checkInDate}
-                        value={checkInDate}
-                        onChange={handleCheckInDateChange}
-                    />
-                    <input
-                        type="date"
-                        name="checkOutDate"
-                        id="checkOutDate"
-                        placeholder={checkOutDate}
-                        value={checkOutDate}
-                        onChange={handleCheckOutDateChange}
-                    />
-                    <input
-                        type="number"
-                        name="guests"
-                        id="guests"
-                        placeholder={numGuests}
-                        value={guests}
-                        onChange={handleGuestsChange}
-                    />
+                <div style={{display: "flex", border: "1px solid black"}}>
+                <div className="dates">
+                    <div className="checkin-checkout">
+                        <div className="checkin-input">
+                        <div className="input-with-label">
+                            <div className="input-prefix">
+                            <img/>
+                            </div>
+                            <div className="input-wrapper">
+                            <input
+                            style={{paddingLeft: "1rem"}}
+                                type="date"
+                                name="checkInDate"
+                                id="checkInDate"
+                                value={checkInDate}
+                                onChange={handleCheckInDateChange}
+                            />
+                            <label className="input-label2">
+                                Check In
+                            </label>
+                            </div>
+                        </div>
+                        </div>
                     </div>
+                </div>
+                <div className="dates">
+                    <div className="checkin-checkout">
+                        <div className="checkin-input">
+                        <div className="input-with-label">
+                            <div className="input-prefix">
+                            <img/>
+                            </div>
+                            <div className="input-wrapper">
+                            <input
+                                style={{paddingLeft: "1rem"}}
+                                type="date"
+                                name="checkOutDate"
+                                id="checkOutDate"
+                                value={checkOutDate}
+                                onChange={handleCheckOutDateChange}
+                            />
+                            <label className="input-label3">
+                                Check Out
+                            </label>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="guests">
+                    <div className="guests-strip">
+                        <div className="guests-input">
+                        <div className="input-with-label">
+                            <div className="input-wrapper">
+                            <input
+                                type="number"
+                                name="guests"
+                                id="guests"
+                                placeholder="Guests"
+                                value={guests}
+                                onChange={handleGuestsChange}
+                            />
+                            <label className="input-label4">
+                                Guests
+                            </label>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
                     <img src={cardinfo} alt="Card Information"></img>
                 </div>
             </div>

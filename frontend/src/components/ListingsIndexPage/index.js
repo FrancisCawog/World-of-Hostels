@@ -22,11 +22,20 @@ function ListingsIndexPage() {
   const listings = useSelector((state) => state.listings);
   const dispatch = useDispatch();
   sessionStorage.setItem('redirectUrl', window.location.pathname);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   useEffect(() => {
+    if (cart.checkIn){
     dispatch(fetchListings(cart.checkIn, cart.checkOut)).catch((error) => {
-      console.error("Error fetching listing:", error);
+    console.error("Error fetching listing:", error);
     });
+  } else {
+    dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
+      console.error("Error fetching listing:", error)
+    });
+  }
   }, [dispatch]);
 
   const handleRedirect = (listingId) => {
