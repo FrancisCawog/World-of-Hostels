@@ -162,6 +162,7 @@ img {
     transform: translateX(0) translateY(-0.5rem);
     margin-top: -5px;
 }
+
 .divider {
   border-right: 0.0625rem solid #a9afbb;
   height: 3rem;

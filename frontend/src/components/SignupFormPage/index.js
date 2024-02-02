@@ -42,61 +42,72 @@ function SignupFormPage() {
     <div className="sign-container">
         <div className="signupContainer">
           <div className="signupBox">
-            <Link to="/" exact="true">
-              <img src={MyArrowSVG} alt="Back" style={{ width: '10px' }}/> Back
-            </Link>
-            <br/>
+            <Link to="/" exact="true" style={{ textDecoration: 'underline', color: 'black', display: 'flex', alignItems: 'center', fontFamily: "Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif", fontWeight: "bolder" }}>
+                <img src={MyArrowSVG} alt="Back" style={{ width: '14px', marginTop: "2px" }}/> Back
+              </Link>
             <br/>
             <img src={logo} style={{ width: '50px' }}/>
               <h1>Sign up to add more adventure!</h1> 
-              <p> See who else is staying in your hostel and let others know you are staying too. Get to know the names and ages of your fellow travellers and message to say hello before you go. Meet other travellers by joining or organising events to explore together.</p>
-              <p> Sign up to agree to the use of your information. To learn more, visit our social terms of service and privacy policy pages. </p>
+              <p className="log-in-p" style={{fontSize: "12px"}}> Sign up to agree to the use of your information. To learn more, visit our social terms of service and privacy policy pages. </p>
               <form onSubmit={handleSubmit}>
             <ul>
               {errors.map((error) => <li key={error}>{error}</li>)}
                 </ul>
 
-                <label>
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                  />
-                </label>
+                <div className={`input-wrapper-login ${firstName !== "" ? 'non-empty' : ''}`}>
+                     <input
+                      type="text"
+                      name="firstName"
+                      id="location"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                    />
+                    <label className="input-label5">
+                      First Name
+                    </label>
+                </div>
+                <div className={`input-wrapper-login ${lastName !== "" ? 'non-empty' : ''}`}>
+                     <input
+                      type="text"
+                      name="lastName"
+                      id="location"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                    />
+                    <label className="input-label5">
+                      Last Name
+                    </label>
+                </div>
+                <div className={`input-wrapper-login ${email !== "" ? 'non-empty' : ''}`}>
+                     <input
+                      type="text"
+                      name="email"
+                      id="location"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <label className="input-label5">
+                      Email
+                    </label>
+                </div>
+                <div className={`input-wrapper-login ${password !== "" ? 'non-empty' : ''}`}>
+                     <input
+                      type="text"
+                      name="password"
+                      id="location"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <label className="input-label5">
+                      Password
+                    </label>
+                </div>
 
-                <label>
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                  />
-                </label>
-
-                <label>
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </label>
-
-                <label>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </label>
-
-                <button className="sign-up-button" type="submit" >Sign Up</button>
+                <button id="loginButton" type="submit" style={{pointerEvents: (email !== '' && password !== '' && firstName !== '' && lastName !== '') ? 'auto' : 'none', opacity: (email === '' || password === '' && firstName !== '' && lastName !== '') ? 0.5 : 1}}>Sign Up</button>
               </form>
 
               <br/>
@@ -104,12 +115,11 @@ function SignupFormPage() {
               <Link id="bottom" className="link" to="/login">
                 <img src={UserSVG} alt="Back" style={{ width: '14px' }}/> Login
               </Link>
-              <p>If you do not want to participate in social features continue as a guest and do not sign in above. You can always turn off social features in your settings.</p>
             </div>
           </div>
 
-            <div className="car-container">
-            <img src={car} ></img>
+          <div className="car-container">
+            <img src={car} style={{marginLeft: "10%", width: "85%"}}/>
           </div>
         </div>
       </>

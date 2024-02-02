@@ -17,9 +17,9 @@
   }
 
   .loginBox {
-    margin-left: 30%;
-    width: 40%;
-    margin-top: 15%;
+    margin-left: 32.5%;
+    width: 34%;
+    margin-top: 5rem
   }
 
 h1 {
@@ -27,11 +27,22 @@ h1 {
     font-size: 24px;
     font-family: Poppins-bold;
     margin-top: 25px;
+    line-height: 32px;
 }
 
 p {
     color: black;
     font-size: 14px;
+}
+
+.log-in-p {
+  font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    background-color: #ffff;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 form {
@@ -47,18 +58,18 @@ ul {
 label {
     display: block;
     margin-bottom: 10px;
-    font-family: Inter;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 input {
     width: 100%;
-    height: 50px;
+    height: 55px;
     padding: 10px;
     margin-bottom: 10px;
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 15px;
-    font-family: Inter;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 14px;
 }
 
@@ -71,7 +82,7 @@ input {
     border: none;
     cursor: pointer;
     border-radius: 15px;
-    font-family: Inter;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 18px;
     font-weight: bold;
     position: relative;
@@ -84,7 +95,7 @@ input {
 .link {
     display: block;
     margin-top: 14px;
-    font-family: Inter;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
     text-decoration: none;
     color: black;
     text-decoration: underline;
@@ -94,6 +105,7 @@ input {
 
 #bottom {
     text-align: center;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 img {
@@ -110,4 +122,58 @@ img {
     position: absolute;
     bottom: -15px;
     left: 10%;
+}
+
+.input-wrapper-login input {
+  padding-left: 1.5rem;
+  padding-bottom: 0.5rem;
+    padding-top: 1.5rem;
+    text-overflow: ellipsis;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 20px;
+}
+
+.input-wrapper-login input:focus {
+  outline: none;
+  border: 1px solid lightgray;
+}
+
+.input-wrapper-login input:focus + .input-label5,
+.input-wrapper-login input:placeholder-shown + .input-label5,
+.input-wrapper-login.non-empty input + .input-label5 {
+  font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: .75rem;
+    font-weight: 400;
+    letter-spacing: .0125rem;
+    line-height: 1rem;
+    transform: translateX(0) translateY(-0.5rem);
+    /* margin-top: -5px; */
+    margin-top: -3.6rem;
+}
+
+.input-label5 {
+  color: rgb(99, 108, 125);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    /* left: 0px; */
+    letter-spacing: 0px;
+    line-height: 1.5rem;
+    overflow-x: hidden;
+    pointer-events: none;
+    position: absolute;
+    text-overflow: ellipsis;
+    /* top: 0px; */
+    /* width: 100%; */
+    z-index: 1;
+    /* padding: 1rem; */
+    transition: all 0.2s ease 0s;
+    white-space: nowrap;
+    margin-left: 1rem;
+    margin-top: -3.5rem;
 }

@@ -70,54 +70,61 @@ const handleDemoLogin = async () => {
     <>
       <div className="log-container">
         <div className="loginContainer">
-          <div className="loginBox">
-          <Link to="/" exact="true">
-            <img src={MyArrowSVG} alt="Back" style={{ width: '10px' }}/> Back
-          </Link>
-          <br/>
-          <br/>
-          <img src={logo} style={{ width: '50px' }}/>
-          <h1>Welcome traveller!</h1>
-          <p>Log in to unlock extras and start connecting with travelers heading to your hostel</p>
-          <form onSubmit={handleSubmit}>
-            <ul>
-              {errors.map(error => <li key={error}>{error}</li>)}
-            </ul>
-            <label>
-              <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
-            <button id="loginButton" type="submit" >Login</button>
-          </form>
+            <div className="loginBox">
+              <Link to="/" exact="true" style={{ textDecoration: 'underline', color: 'black', display: 'flex', alignItems: 'center', fontFamily: "Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif", fontWeight: "bolder" }}>
+                <img src={MyArrowSVG} alt="Back" style={{ width: '14px', marginTop: "2px" }}/> Back
+              </Link>
+              <br/>
+              <img src={logo} style={{ width: '50px' }}/>
+              <h1>Welcome traveller!</h1>
+              <p className="log-in-p">Log in to unlock extras and start connecting with travelers heading to your hostel</p>
+              <form onSubmit={handleSubmit}>
+                <ul>
+                  {errors.map(error => <li key={error}>{error}</li>)}
+                </ul>
+                <div className={`input-wrapper-login ${email !== "" ? 'non-empty' : ''}`}>
+                     <input
+                      type="text"
+                      name="password"
+                      id="location"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <label className="input-label5">
+                      Email
+                    </label>
+                </div>
+                <div className={`input-wrapper-login ${password !== "" ? 'non-empty' : ''}`}>
+                     <input
+                      type="text"
+                      name="password"
+                      id="location"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <label className="input-label5">
+                      Password
+                    </label>
+                </div>
+                <button id="loginButton" type="submit" style={{pointerEvents: (email !== '' && password !== '') ? 'auto' : 'none', opacity: (email === '' || password === '') ? 0.5 : 1}}>Login</button>
+              </form>
 
-          <br/>
-          <p id="bottom">Don't have an account?</p>
-          <span id="bottom" className="link" onClick={handleDemoLogin}>
-            Demo User
-          </span>
-          <Link id="bottom" className="link" to="/signup">
-          <img src={PencilSVG} alt="Back" style={{ width: '14px' }}/> Sign Up
-          </Link>
+              <br/>
+              <p id="bottom">Don't have an account?</p>
+              <span id="bottom" className="link" onClick={handleDemoLogin}>
+                Demo User
+              </span>
+              <Link id="bottom" className="link" to="/signup">
+              <img src={PencilSVG} alt="Back" style={{ width: '14px' }}/>Sign Up
+              </Link>
+          </div>
         </div>
-      </div>
 
-      <div className="car-container">
-          <img src={car} ></img>
-      </div>
+        <div className="car-container">
+            <img src={car} style={{marginLeft: "10%", width: "85%"}}/>
+        </div>
     </div>
     </>
   );
