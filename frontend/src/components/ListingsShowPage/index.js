@@ -269,7 +269,7 @@ function ListingsShowPage() {
         <img key={index} src={photo} alt={`Photo ${index + 1}`} />
       ))}
     </div>
-      <h1 className="title">{listing?.property_name}</h1>
+      <h1 className="title" style={{marginBottom: "20px"}}>{listing?.property_name}</h1>
       <p className="listings-p">
         {listing?.property_type &&
           listing?.property_type.charAt(0).toUpperCase() + listing?.property_type.slice(1)}

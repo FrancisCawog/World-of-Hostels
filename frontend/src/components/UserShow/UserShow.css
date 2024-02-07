@@ -153,6 +153,7 @@
     margin-left: 3.5%;
     margin-top: -4.5rem;
     width: 45%;
+    margin-bottom: -40px;
   }
 
   .edit-picture-circle {
@@ -252,6 +253,7 @@
     outline: none;
     padding: 0.75rem 1.5rem;
     width: 16.25%;
+    margin-top: -20px;
 }
 
 .confirmation-box {

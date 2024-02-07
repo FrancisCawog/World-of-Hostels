@@ -5,6 +5,13 @@ import "./CheckoutForm.css";
 import cardinfo from "../../assets/pictures/Screenshot 2023-11-20 at 5.03.09 PM.png"
 import { updateGuests, setCheckIn, setCheckOut, clearCart } from "../../store/cart";
 import { createReservation } from "../../store/reservations";
+import users from "../../assets/pictures/icons/17115.png"
+import { useRef } from 'react'
+import { DateRange } from 'react-date-range'
+import format from 'date-fns/format'
+import { addDays } from 'date-fns'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
 
 function CheckoutForm( { listingId, listingName, photoUrl}) {
     const dispatch = useDispatch();
@@ -156,6 +163,45 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
         dispatch(setCheckOut(checkOutDate));
       }, [guests, checkInDate, checkOutDate]);
 
+
+      // date state
+        const [range, setRange] = useState([
+            {
+            startDate: new Date(),
+            endDate: addDays(new Date(), 7),
+            key: 'selection'
+            }
+        ])
+
+        // open close
+        const [open, setOpen] = useState(false)
+
+        // get the target element to toggle 
+        const refOne = useRef(null)
+
+        useEffect(() => {
+            // event listeners
+            document.addEventListener("keydown", hideOnEscape, true)
+            document.addEventListener("click", hideOnClickOutside, true)
+        }, [])
+
+        // hide dropdown on ESC press
+        const hideOnEscape = (e) => {
+            // console.log(e.key)
+            if( e.key === "Escape" ) {
+            setOpen(false)
+            }
+        }
+
+        // Hide on outside click
+        const hideOnClickOutside = (e) => {
+            // console.log(refOne.current)
+            // console.log(e.target)
+            if( refOne.current && !refOne.current.contains(e.target) ) {
+            setOpen(false)
+            }
+        }
+
     return (
         <>
         {shouldRenderCheckoutChoose ? (
@@ -170,7 +216,9 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                             Choose a room
                         </button>
                     </div>
-                <div style={{display: "flex", border: "1px solid black"}}>
+
+                <div className="inline-form" style={{border: "1px solid black"}}>
+
                 <div className="dates">
                     <div className="checkin-checkout">
                         <div className="checkin-input">
@@ -178,15 +226,28 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                             <div className="input-prefix">
                             <img/>
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper" style={{width: "10rem"}}>
                             <input
-                            style={{paddingLeft: "1rem"}}
-                                type="date"
-                                name="checkInDate"
-                                id="checkInDate"
-                                value={checkInDate}
-                                onChange={handleCheckInDateChange}
+                                value={`${format(range[0].startDate, "dd MMM")} to ${format(range[0].endDate, "dd MMM")}`}
+                                readOnly
+                                className="inputBox"
+                                onClick={ () => setOpen(open => !open) }
+                                style={{paddingLeft: "1rem", marginBottom: "12px"}}
                             />
+
+                            <div ref={refOne}>
+                                {open && 
+                                <DateRange
+                                    onChange={item => setRange([item.selection])}
+                                    editableDateInputs={true}
+                                    moveRangeOnFirstSelection={false}
+                                    ranges={range}
+                                    months={1}
+                                    direction="horizontal"
+                                    className="calendarElement"
+                                />
+                                }
+                            </div>
                             <label className="input-label2">
                                 Check In
                             </label>
@@ -195,34 +256,16 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                         </div>
                     </div>
                 </div>
-                <div className="dates">
-                    <div className="checkin-checkout">
-                        <div className="checkin-input">
-                        <div className="input-with-label">
-                            <div className="input-prefix">
-                            <img/>
-                            </div>
-                            <div className="input-wrapper">
-                            <input
-                                style={{paddingLeft: "1rem"}}
-                                type="date"
-                                name="checkOutDate"
-                                id="checkOutDate"
-                                value={checkOutDate}
-                                onChange={handleCheckOutDateChange}
-                            />
-                            <label className="input-label3">
-                                Check Out
-                            </label>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+
+                <div className="divider"></div>
+
                 <div className="guests">
                     <div className="guests-strip">
                         <div className="guests-input">
                         <div className="input-with-label">
+                            <div className="input-prefix">
+                            <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
+                            </div>
                             <div className="input-wrapper">
                             <input
                                 type="number"
@@ -231,6 +274,7 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                                 placeholder="Guests"
                                 value={guests}
                                 onChange={handleGuestsChange}
+                                style={{marginBottom: "8px"}}
                             />
                             <label className="input-label4">
                                 Guests
@@ -241,54 +285,97 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                     </div>
                 </div>
                 </div>
-                    <img src={cardinfo} alt="Card Information"></img>
+                
+                <img src={cardinfo} alt="Card Information"></img>
                 </div>
             </div>
         ) : (
             <div className="checkout-check">
                 <div className="checkout-info">
-                <div className="choose-top">
-                    <div className="choose-middle">
-                    <input
-                        type="date"
-                        name="checkInDate"
-                        id="checkInDate"
-                        placeholder={checkInDate}
-                        value={checkInDate}
-                        onChange={handleCheckInDateChange}
-                    />
-                    <input
-                        type="date"
-                        name="checkOutDate"
-                        id="checkOutDate"
-                        placeholder={checkOutDate}
-                        value={checkOutDate}
-                        onChange={handleCheckOutDateChange}
-                    />
-                    <input
-                        type="number"
-                        name="guests"
-                        id="guests"
-                        placeholder={numGuests}
-                        value={guests}
-                        onChange={handleGuestsChange}
-                    />
+                <div className="inline-form" style={{border: "1px solid black"}}>
+                    <div className="dates">
+                        <div className="checkin-checkout">
+                            <div className="checkin-input">
+                            <div className="input-with-label">
+                                <div className="input-prefix">
+                                <img/>
+                                </div>
+                                <div className="input-wrapper" style={{width: "10rem"}}>
+                                <input
+                                    value={`${format(range[0].startDate, "dd MMM")} to ${format(range[0].endDate, "dd MMM")}`}
+                                    readOnly
+                                    className="inputBox"
+                                    onClick={ () => setOpen(open => !open) }
+                                    style={{paddingLeft: "1rem", marginBottom: "12px"}}
+                                />
+
+                                <div ref={refOne}>
+                                    {open && 
+                                    <DateRange
+                                        onChange={item => setRange([item.selection])}
+                                        editableDateInputs={true}
+                                        moveRangeOnFirstSelection={false}
+                                        ranges={range}
+                                        months={1}
+                                        direction="horizontal"
+                                        className="calendarElement"
+                                    />
+                                    }
+                                </div>
+                                <label className="input-label2">
+                                    Check In
+                                </label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="divider"></div>
+
+                    <div className="guests">
+                        <div className="guests-strip">
+                            <div className="guests-input">
+                            <div className="input-with-label">
+                                <div className="input-prefix">
+                                <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
+                                </div>
+                                <div className="input-wrapper">
+                                <input
+                                    type="number"
+                                    name="guests"
+                                    id="guests"
+                                    placeholder="Guests"
+                                    value={guests}
+                                    onChange={handleGuestsChange}
+                                    style={{marginBottom: "8px"}}
+                                />
+                                <label className="input-label4">
+                                    Guests
+                                </label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div style={{fontFamily: "Poppins-bold"}}>
-                    <div style={{display: "flex", }}>
-                        <p>Total</p>
-                        <p>US${totalPrice.toFixed(2)}</p>
+                
+                <div style={{marginTop: "1rem"}}>
+                    <div style={{fontFamily: "Poppins-bold"}}>
+                        <div style={{display: "flex", }}>
+                            <p>Total</p>
+                            <p>US${totalPrice.toFixed(2)}</p>
+                        </div>
+                        <div style={{display: "flex", }}>
+                            <p style={{color: "green"}}> Payable Now</p>
+                            <p>US${(totalPrice * .15).toFixed(2)}</p>
+                        </div>
                     </div>
-                    <div style={{display: "flex", }}>
-                        <p style={{color: "green"}}> Payable Now</p>
-                        <p>US${(totalPrice * .15).toFixed(2)}</p>
-                    </div>
+                    <button onClick={checkoutUser} className="check-out-button">
+                        Checkout
+                    </button>
+                    <img src={cardinfo} alt="Card Information"></img>
                 </div>
-                <button onClick={checkoutUser} className="check-out-button">
-                    Checkout
-                </button>
-                <img src={cardinfo} alt="Card Information"></img>
             </div>
             </div>
             )}

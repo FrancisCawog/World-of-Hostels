@@ -37,24 +37,6 @@ function SearchBar() {
 
   const history = useHistory();
 
-  // useEffect(() => {
-  //   const storedCheckInDate = localStorage.getItem('checkInDate');
-  //   const storedCheckOutDate = localStorage.getItem('checkOutDate');
-  //   const storedGuests = localStorage.getItem('guests');
-  
-    // if (storedCheckInDate) {
-    //   setCheckInDate(storedCheckInDate);
-    // }
-  
-    // if (storedCheckOutDate) {
-    //   setCheckOutDate(storedCheckOutDate);
-    // }
-  
-    // if (storedGuests) {
-    //   setGuests(storedGuests);
-    // }
-  // }, []);
-
   useEffect(() => {
     if (cart.checkIn !== "") {
       setCheckInDate(cart.checkIn);
@@ -102,9 +84,7 @@ function SearchBar() {
                     </label>
                   </div>
                 </div>
-
-              </div>
-              
+              </div>       
             </div>
 
             <div className="divider"></div>
