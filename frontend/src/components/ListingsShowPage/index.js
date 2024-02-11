@@ -22,6 +22,7 @@ import CheckoutForm from "../Checkout"
 import { setCart } from "../../store/cart";
 import { removeCart } from "../../store/cart";
 import { useLocation } from 'react-router-dom';
+import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
 import { fetchUsers } from "../../store/users";
 
 function ListingsShowPage() {
@@ -43,10 +44,6 @@ function ListingsShowPage() {
   const [refundable, setRefundable] = useState();
   const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
   sessionStorage.setItem('redirectUrl', window.location.pathname);
-  
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -58,17 +55,34 @@ function ListingsShowPage() {
     });
   }, [dispatch]);
 
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const checkInDate = (start_date || today.toISOString().split("T")[0]);
+  const checkOutDate = (end_date || tomorrow.toISOString().split("T")[0]);
+  const guests = cart.guests || "1"
+
   useEffect(() => {
-    if (cart.checkIn){
-    dispatch(fetchListing(listingId, cart.checkIn, cart.checkOut)).catch((error) => {
-    console.error("Error fetching listing:", error);
+    dispatch(setCheckIn(checkInDate));
+    dispatch(setCheckOut(checkOutDate));
+    dispatch(updateGuests(guests));
+    
+    localStorage.setItem('checkInDate', checkInDate);
+    localStorage.setItem('checkOutDate', checkOutDate);
+    localStorage.setItem('guests', guests);
+  }, []);
+
+  useEffect(() => {
+    if (start_date){
+    dispatch(fetchListing(listingId, start_date, end_date)).catch((error) => {
+      console.error("Error fetching listing:", error);
     });
   } else {
     dispatch(fetchListing(listingId, today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
       console.error("Error fetching listing:", error)
     });
   }
-  }, [listingId, dispatch, start_date, end_date]);
+  }, [cart]);
 
   const handleAddToCart = useCallback((index, value) => {
     dispatch(setCart(index, value));
@@ -767,7 +781,11 @@ function ListingsShowPage() {
             </div>
           </div>
         </div>
-        <CheckoutForm listingId={listingId} listingName={listing?.property_name} photoUrl={listing?.photoUrls[0]}/>
+
+        {start_date &&
+        <CheckoutForm checkIn={start_date} checkOut={end_date} numGuests={guests} listingId={listingId} listingName={listing?.property_name} photoUrl={listing?.photoUrls[0]}/>
+        }
+        
     </div>
     <Footer/>
     </>

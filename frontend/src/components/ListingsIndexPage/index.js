@@ -11,6 +11,7 @@ import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
 import WhiteCoffeeSVG from "../../assets/pictures/icons/white-coffee.svg"
 import { useHistory } from 'react-router-dom';
 import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
+import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
 
 function ListingsIndexPage() {
   const reviews = useSelector((state) => state.reviews);
@@ -25,6 +26,19 @@ function ListingsIndexPage() {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const checkInDate = (cart.checkIn || today.toISOString().split("T")[0]);
+  const checkOutDate = (cart.checkOut || tomorrow.toISOString().split("T")[0]);
+  const guests = cart.guests || "1"
+
+  useEffect(() => {
+    dispatch(setCheckIn(checkInDate));
+    dispatch(setCheckOut(checkOutDate));
+    dispatch(updateGuests(guests));
+    
+    localStorage.setItem('checkInDate', checkInDate);
+    localStorage.setItem('checkOutDate', checkOutDate);
+    localStorage.setItem('guests', guests);
+  }, []);
 
   useEffect(() => {
     if (cart.checkIn){

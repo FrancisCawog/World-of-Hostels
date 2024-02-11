@@ -15,8 +15,8 @@
     width: 300px;
 }
 
-.checkout-check button, 
-.checkout-choose button {
+.check-button,
+.check-out-button {
     width: 150px;
     height: 45px;
     background-color: #F25621;
@@ -31,8 +31,8 @@
     margin-bottom: 10px;
 }
 
-.checkout-check button:hover, 
-.checkout-choose button:hover {
+.check-button:hover,
+.check-out-button:hover {
     box-shadow: 0 0 10px 3px rgba(242, 86, 33, 0.7);
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./CheckoutForm.css";
@@ -6,37 +6,32 @@ import cardinfo from "../../assets/pictures/Screenshot 2023-11-20 at 5.03.09 PM.
 import { updateGuests, setCheckIn, setCheckOut, clearCart } from "../../store/cart";
 import { createReservation } from "../../store/reservations";
 import users from "../../assets/pictures/icons/17115.png"
-import { useRef } from 'react'
 import { DateRange } from 'react-date-range'
 import format from 'date-fns/format'
-import { addDays } from 'date-fns'
+import * as fecha from "fecha";
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 
-function CheckoutForm( { listingId, listingName, photoUrl}) {
+function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, photoUrl}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const cartItems = useSelector((state) => Object.values(state.cart.cart));
+    const cart = useSelector((state) => state.cart.cart);
     const rooms = useSelector((state) => Object.values(state.rooms));
     const availableRooms = rooms.filter(room => room.available_beds > 0);
     const cheapestPrice = Math.min(...availableRooms.map(room => room.price));
     const shouldRenderCheckoutChoose = cartItems.length === 0 || cartItems.every(item => item === 0);
     const [totalPrice, setTotalPrice] = useState(0);
-    const cart = useSelector((state) => state.cart.cart);
     const cartEffect = useSelector((state) => state.cart);
     const refundable = useSelector((state) => state.cart.refundable)
-    const checkIn = cartEffect.checkIn
-    const checkOut = cartEffect.checkOut
-    const numGuests = cartEffect.guests
     const [guests, setGuests] = useState(numGuests);
     const [checkInDate, setCheckInDate] = useState(checkIn);
     const [checkOutDate, setCheckOutDate] = useState(checkOut);
     const listing = useSelector((state) => state.listings[listingId])
-
-    const checkInDates = new Date(checkInDate);
-    const checkOutDates = new Date(checkOutDate);
-
+    
+    const checkInDates = fecha.parse(checkInDate, "YYYY-MM-DD");
+    const checkOutDates = fecha.parse(checkOutDate, "YYYY-MM-DD");
     const timeDifference = checkOutDates.getTime() - checkInDates.getTime();
     const numNights = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
@@ -94,8 +89,8 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                 listingName: listingName,
                 guests: numGuest,
                 reservationNumber: firstReservationId,
-                checkIn: checkInDate,
-                checkOut: checkOutDate,
+                checkIn: checkInDates,
+                checkOut: checkOutDates,
                 price: totalPrice,
                 photoUrl: photoUrl
             },
@@ -167,11 +162,20 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
       // date state
         const [range, setRange] = useState([
             {
-            startDate: new Date(),
-            endDate: addDays(new Date(), 7),
+            startDate: checkInDates,
+            endDate: checkOutDates,
             key: 'selection'
             }
         ])
+
+        const handleDateRangeChange = (item) => {
+            const startDate = item.selection.startDate.toISOString().split("T")[0];
+            const endDate = item.selection.endDate.toISOString().split("T")[0];
+          
+            setRange([item.selection]);
+            setCheckInDate(startDate);
+            setCheckOutDate(endDate);
+          };
 
         // open close
         const [open, setOpen] = useState(false)
@@ -187,7 +191,6 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
 
         // hide dropdown on ESC press
         const hideOnEscape = (e) => {
-            // console.log(e.key)
             if( e.key === "Escape" ) {
             setOpen(false)
             }
@@ -195,8 +198,6 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
 
         // Hide on outside click
         const hideOnClickOutside = (e) => {
-            // console.log(refOne.current)
-            // console.log(e.target)
             if( refOne.current && !refOne.current.contains(e.target) ) {
             setOpen(false)
             }
@@ -212,7 +213,7 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                             <p>Rooms from</p>
                             <p style={{marginTop: "-12px", fontFamily: "Poppins-bold", fontSize: "18px", marginLeft: "7px"}}>US ${(cheapestPrice * 0.95).toFixed(2)}</p>
                         </div>
-                        <button onClick={handleScroll}>
+                        <button className="check-button" onClick={handleScroll}>
                             Choose a room
                         </button>
                     </div>
@@ -238,7 +239,7 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                             <div ref={refOne}>
                                 {open && 
                                 <DateRange
-                                    onChange={item => setRange([item.selection])}
+                                    onChange={handleDateRangeChange}
                                     editableDateInputs={true}
                                     moveRangeOnFirstSelection={false}
                                     ranges={range}
@@ -249,7 +250,7 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                                 }
                             </div>
                             <label className="input-label2">
-                                Check In
+                                Check In - Check Out
                             </label>
                             </div>
                         </div>
@@ -312,7 +313,7 @@ function CheckoutForm( { listingId, listingName, photoUrl}) {
                                 <div ref={refOne}>
                                     {open && 
                                     <DateRange
-                                        onChange={item => setRange([item.selection])}
+                                        onChange={handleDateRangeChange}
                                         editableDateInputs={true}
                                         moveRangeOnFirstSelection={false}
                                         ranges={range}
