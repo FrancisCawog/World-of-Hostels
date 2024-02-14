@@ -95,21 +95,27 @@ function ListingsIndexPage() {
       return ""
     }
   }
+  const [imageIndexes, setImageIndexes] = useState({});
 
-  // Add state for tracking current image index
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  useEffect(() => {
+    const initialImageIndexes = Object.fromEntries(
+      Object.values(listings).map((listing) => [listing.id, 0])
+    );
+    setImageIndexes(initialImageIndexes);
+  }, [listings]);
+  
+const updateImageIndex = (listingId, direction) => {
+  const imageCount = listings[listingId]?.photoUrls.length || 0;
 
-  // Function to update the current image index when clicking left or right
-  const updateImageIndex = (listingId, direction) => {
-    const imageCount = listings[listingId]?.photoUrls.length || 0;
-
-    if (direction === 'prev') {
-      setCurrentImageIndex((prevIndex) => (prevIndex - 1 + imageCount) % imageCount);
-    } else if (direction === 'next') {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageCount);
-    }
-  };
-
+  setImageIndexes((prevIndexes) => {
+    const currentIndex = prevIndexes[listingId] || 0;
+    const newIndex =
+      direction === 'prev'
+        ? (currentIndex - 1 + imageCount) % Math.max(1, imageCount)
+        : (currentIndex + 1) % Math.max(1, imageCount);
+    return { ...prevIndexes, [listingId]: newIndex };
+  });
+};
 
   return (
     <>
@@ -130,20 +136,21 @@ function ListingsIndexPage() {
     </div>
 
     <div>
-    {Object.values(listings).map((listing) => (
-    <div key={listing.id} href={`listings/${listing.id}`} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id)}} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black"}}>
-      <div className="index-picture">
-        <div className="index-picture-picture">
-          <img src={listing.photoUrls[currentImageIndex]} alt={`Listing ${listing.id}`} />
+    {Object.values(listings).map((listing) => {
+      const currentImageIndex = imageIndexes[listing.id] || 0;
+      return (
+        <div key={listing.id} href={`listings/${listing.id}`} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black"}} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id)}}>
+          <div className="index-picture">
+            <div className="index-picture-picture">
+              <img src={listing.photoUrls[currentImageIndex]} alt={`Listing ${listing.id}`} />
+            </div>
+            <span className="index-picture-left" onClick={(e) => { e.stopPropagation(); updateImageIndex(listing.id, 'prev'); }}>
+              <img src={ArrowRight}/>
+            </span>
+            <span className="index-picture-right" onClick={(e) => { e.stopPropagation(); updateImageIndex(listing.id, 'next'); }}>
+              <img src={ArrowRight}/>
+            </span>
         </div>
-        <span className="index-picture-left" onClick={() => updateImageIndex(listing.id, 'prev')}>
-          <img src={ArrowRight}/>
-        </span>
-        <span className="index-picture-right" onClick={() => updateImageIndex(listing.id, 'next')}>
-        <img src={ArrowRight}/>
-        </span>
-
-      </div>
       <div className="single-listing">
         <h3>{listing.property_name}</h3>
 
@@ -235,7 +242,7 @@ function ListingsIndexPage() {
             </div>
         </div>
         </div>
-        ))}
+        )})}
     </div>
     <br/>
     <br/>

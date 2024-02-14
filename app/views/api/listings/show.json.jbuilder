@@ -3,12 +3,10 @@ json.listing do
   json.photoUrls @listing.photos.attached? ? @listing.photos.map { |photo| photo.url } : []
 end
 
-# json.photoUrl @listing.photo.attached? ? @listing.photo.url : nil
-
 json.rooms do
    @listing.rooms.each do |room|
     json.set! room.id do
-      json.extract! room, :id, :room_type, :room_title, :description, :num_beds, :price
+      json.extract! room, :id, :room_type, :room_title, :description, :num_beds, :price, :listing_id
       json.photoUrls room.photos.attached? ? room.photos.map { |photo| photo.url } : []
       json.available_beds room.available_beds(@start_date, @end_date)
       end

@@ -25,8 +25,11 @@ img {
 .background {
   width: 100%;
   height: 400px;
-  background: url("../../assets/pictures/icons/Screenshot 2023-11-13 at 1.49.53 PM.png") center/120%;
-  border-radius: 25px;
+  align-items: flex-start;
+  background-image: url(https://a.hwstatic.com/image/upload/v1675960377/pwa/bg.desktop.svg);
+  border-radius: 1.5rem;
+  justify-content: center;
+  margin: 0 2.5rem 2.5rem;
 }
 
 .background h1 {
@@ -37,6 +40,7 @@ img {
   color: white;
   text-align: center;
   font-weight: 700;
+  margin-top: 60px;
 }
 
 .background p {
@@ -53,7 +57,7 @@ img {
   position: absolute;
   width: 23%;
   height: 18rem;
-  top: 8rem;
+  top: 9rem;
   right: 17.5%;
 }
 

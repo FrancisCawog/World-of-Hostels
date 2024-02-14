@@ -21,6 +21,7 @@ import Footer from "../Footer"
 import CheckoutForm from "../Checkout"
 import { setCart } from "../../store/cart";
 import { removeCart } from "../../store/cart";
+import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import { useLocation } from 'react-router-dom';
 import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
 import { fetchUsers } from "../../store/users";
@@ -272,6 +273,32 @@ function ListingsShowPage() {
     }
       return true
   }
+
+  const [imageIndexes, setImageIndexes] = useState({});
+
+  useEffect(() => {
+    const initialImageIndexes = Object.fromEntries(
+      rooms.map((room) => [room.listing_id, 0])
+    );
+    setImageIndexes(initialImageIndexes);
+  }, []);
+  
+  const updateImageIndex = (roomId, direction) => {
+    const imageCount = rooms.find(room => room.id === roomId)?.photoUrls.length || 0;
+  
+    setImageIndexes((prevIndexes) => {
+      const currentIndex = prevIndexes[roomId] || 0;
+      const newIndex =
+        direction === 'prev'
+          ? (currentIndex - 1 + imageCount) % Math.max(1, imageCount)
+          : (currentIndex + 1) % Math.max(1, imageCount);
+
+      const updatedIndexes = { ...prevIndexes, [roomId]: newIndex };
+      return updatedIndexes;
+    });
+  };
+  
+  
   
   return (
     <>
@@ -340,11 +367,25 @@ function ListingsShowPage() {
                   <p className="room-type">Private Rooms</p>
                   {rooms
                     .filter(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds)
-                    .map((privateRoom, index) => (
+                    .map((privateRoom, index) => {
+                      const currentImageIndex = imageIndexes[privateRoom.id] || 0; 
+                    return (
                       <div key={index}>
                         <div className="private-room-div">
                           <div className="private-picture-box">
-                            <img src={privateRoom.photoUrls[0]} />
+                          <div className="index-picture-picture2">
+                            <img src={privateRoom.photoUrls[currentImageIndex]} alt={`Room ${privateRoom.id}`} />
+                          </div>
+                          {privateRoom.photoUrls.length > 1 && (
+                            <>
+                             <span className="index-picture-left2" onClick={(e) => { e.stopPropagation(); updateImageIndex(privateRoom.id, 'prev'); }}>
+                                <img src={ArrowRight} alt="Left Arrow" />
+                              </span>
+                              <span className="index-picture-right2" onClick={(e) => { e.stopPropagation(); updateImageIndex(privateRoom.id, 'next'); }}>
+                                <img src={ArrowRight} alt="Right Arrow" />
+                              </span>
+                            </>
+                          )}
                           </div>
                           <div className="room-description-box">
                             <p className="room-title">{privateRoom.room_title}</p>
@@ -415,19 +456,33 @@ function ListingsShowPage() {
                           </div>
                         </div>
                       </div>
-                    ))}
+                    )})}
                   </>
               )}
               {rooms.some(room => room.room_type === "shared" && room.available_beds > 0) && (
                 <>
                   <p className="room-type">Dorm Beds</p>
                   {rooms
-                    .filter(room => room.room_type === "shared" && room.available_beds > 0)
-                    .map((sharedRoom, index) => (
+                  .filter(room => room.room_type === "shared" && room.available_beds > 0 && room.available_beds === room.num_beds)
+                  .map((sharedRoom, index) => {
+                    const currentImageIndex = imageIndexes[sharedRoom.id] || 0; 
+                    return (
                       <div key={index}>
                         <div className="dorm-bed-div">
                           <div className="shared-picture-box">
-                            <img src={sharedRoom.photoUrls[0]} />
+                          <div className="index-picture-picture2">
+                            <img src={sharedRoom.photoUrls[currentImageIndex]} alt={`Room ${sharedRoom.id}`} />
+                          </div>
+                          {sharedRoom.photoUrls.length > 1 && (
+                            <>
+                            <span className="index-picture-left2" onClick={(e) => { e.stopPropagation(); updateImageIndex(sharedRoom.id, 'prev'); }}>
+                              <img src={ArrowRight} alt="Left Arrow" />
+                            </span>
+                            <span className="index-picture-right2" onClick={(e) => { e.stopPropagation(); updateImageIndex(sharedRoom.id, 'next'); }}>
+                              <img src={ArrowRight} alt="Right Arrow" />
+                            </span>
+                            </>
+                          )}
                           </div>
                           <div className="room-description-box">
                             <p className="room-title">{sharedRoom.room_title}</p>
@@ -504,9 +559,9 @@ function ListingsShowPage() {
                           </div>
                         </div>
                       </div>
-                    ))}
-                </>
-              )}
+                    )})}
+                  </>
+                )}
             </>
           )}
         </div>

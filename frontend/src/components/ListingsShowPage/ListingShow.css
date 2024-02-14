@@ -127,14 +127,13 @@
 .private-picture-box img,
 .shared-picture-box img {
     z-index: 2;
-    width: 100%;
+    width: 150px;
     height: 100%;
     border-radius: 15px;
 }
   
 .private-room-div,
 .dorm-bed-div {
-    /* height: 200px; */
     border: 2px solid lightgray;
     border-radius: 25px;
     margin-bottom: 15px;
@@ -147,7 +146,6 @@
     width: 54%;
     margin-top: 10px;
     margin-left: 10px;
-    /* height: 165px; */
     padding-bottom: 2%;
 }
 
@@ -205,7 +203,6 @@
     display: flex;
     flex-direction: column;
     margin-left: 1%;
-    height: 165px;
     margin-top: 10px;
     width: 32.5%;
 }
@@ -606,4 +603,62 @@ li {
     font-size: 0.875rem;
     letter-spacing: 0.00625rem;
     line-height: 1.25rem;
+}
+
+.index-picture-left2 {
+    margin-left: .2%;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    height: 28px;
+    justify-content: center;
+    position: absolute;
+    width: 28px;
+    z-index: 30;
+    cursor: pointer;
+}
+
+.index-picture-left2 img {
+    width: 14px; 
+    height: 14px; 
+    margin-left: 15%;
+    transform: rotate(180deg);
+}
+
+.index-picture-right2 {
+    margin-left: 7.25rem;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    height: 28px;
+    justify-content: center;
+    position: absolute;
+    width: 28px;
+    z-index: 30;
+    cursor: pointer;
+}
+
+.index-picture-right2 img {
+    width: 14px;
+    height: 14px;
+    margin-left: 35%;
+}
+
+.index-picture-picture2 {
+    height: 100%;
+    position: relative;
+    width: 165px;
+    margin: 0;
+}
+
+.index-picture-picture2 img {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
 }
