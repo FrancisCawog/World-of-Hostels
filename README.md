@@ -45,3 +45,4 @@ https://world-of-hostels.onrender.com
 - User photos arent all fitting in reviews
 - Reviews arent always being added correctly
 - Not enough guests
+- Fix users review picture listing 2
