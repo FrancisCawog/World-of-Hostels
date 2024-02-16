@@ -29,7 +29,6 @@ https://world-of-hostels.onrender.com
 
 
 ### Future Implementions/ Open Issues
-- Fix photo cycling in listings index and show
 - Style the search bar in listings show
 - Style date and guests in the listings show
 - Add search bar to Nav
@@ -41,4 +40,5 @@ https://world-of-hostels.onrender.com
 - Add errors to sign-up/ login/ users edit
 - Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
 - Fix styling in leave review - About you
-- Add styling to calendar and guests
+- User photos arent all fitting in reviews
+- Reviews arent always being added correctly
