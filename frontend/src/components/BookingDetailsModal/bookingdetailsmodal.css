@@ -1,0 +1,223 @@
+.modal-overlay3 {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    z-index: 400;
+    background: rgba(99, 108, 125, 0.6);
+  }
+  
+  .modal3 {
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    height: 50rem;
+    width: 30%;
+    overflow: auto;
+    position: relative;
+  }
+
+  .booking-details-h1{
+    padding-right: 4rem;
+    box-shadow: rgb(221, 223, 228) 0px -0.0625rem 0px 0px inset;
+    flex-grow: 1;
+    font-family: Poppins-bold;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.0125rem;
+    line-height: 2.125rem;
+    min-height: 3rem;
+    margin-top: 0rem;
+  }
+
+  .details-modal {
+    overflow: auto;
+    padding: 0px 1.5rem;
+  }
+
+  .details-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+  }
+
+  .seperator-details {
+    height: 0.5rem;
+    width: 100%;
+    background: rgb(241, 242, 244);
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+  }
+
+  .details-inner {
+    padding: 2rem;
+  }
+
+  .details-reference-data {
+    position: relative;
+  }
+
+  .details-reference {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    position: relative;
+    border-width: 1px 1px 1px;
+    border-style: solid solid none;
+    border-color: rgb(221, 223, 228) rgb(221, 223, 228) rgb(221, 223, 228);
+    border-image: initial;
+    border-bottom: none;
+    padding: 1rem;
+  }
+  
+  .details-reference p:first-of-type {
+    color: rgb(99, 108, 125);
+    font-weight: 400;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.00625rem;
+    line-height: 1.25rem;
+    padding: 0px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .details-reference p:last-of-type {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0px;
+    line-height: 1.5rem;
+    font-weight: 400;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .details-left {
+    bottom: 0px;
+    height: 0.875rem;
+    position: absolute;
+    top: 0px;
+    width: 0.5rem;
+    background: rgb(255, 255, 255);
+    margin: auto 0px;
+    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 2rem;
+    border-width: 1px 1px 1px;
+    border-style: solid solid solid none;
+    border-color: rgb(221, 223, 228) rgb(221, 223, 228) rgb(221, 223, 228);
+    border-image: initial;
+    border-left: none;
+  }
+
+  .details-right {
+    border-bottom-left-radius: 2rem;
+    border-top-left-radius: 2rem;
+    right: 0px;
+    border-width: 1px 1px 1px;
+    border-style: solid none solid solid;
+    border-color: rgb(221, 223, 228) rgb(221, 223, 228) rgb(221, 223, 228);
+    border-image: initial;
+    border-right: none;
+    bottom: 0px;
+    height: 0.875rem;
+    position: absolute;
+    top: 0px;
+    width: 0.5rem;
+    background: rgb(255, 255, 255);
+    margin: auto 0px;
+  }
+
+  .details-date {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    z-index: -1;
+    border-width: 1px 1px 1px;
+    border-style: none solid solid;
+    border-color: rgb(221, 223, 228) rgb(221, 223, 228) rgb(221, 223, 228);
+    border-image: initial;
+    border-top: none;
+    padding: 1rem;
+  }
+
+  .details-guests {
+    align-items: center;
+    display: flex;
+    padding-right: 2.5rem;
+  }
+
+  .stay-period p:first-of-type {
+    color: rgb(99, 108, 125);
+    font-weight: 400;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.00625rem;
+    line-height: 1.25rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .stay-period p:last-of-type {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0px;
+    line-height: 1.5rem;
+    font-weight: 400;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .details-icon-cont {
+    height: 1.3125rem;
+    margin-right: 0.5rem;
+    width: 1.3125rem;
+  }
+
+  .details-icon-cont img {
+    margin-top: 2px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .details-guests-num p:first-of-type {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.00625rem;
+    line-height: 1.25rem;
+    color: rgb(99, 108, 125);
+    font-weight: 400;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .details-guests-num p:last-of-type {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0px;
+    line-height: 1.5rem;
+    font-weight: 400;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .dotted-line {
+    position: relative;
+    border-style: dashed;
+    border-color: rgb(225, 223, 223);
+    border-width: .5px .5px; 
+    width: 90%;
+    margin-left: 5%;
+  }
+  

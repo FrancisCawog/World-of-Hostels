@@ -463,7 +463,7 @@ function ListingsShowPage() {
                 <>
                   <p className="room-type">Dorm Beds</p>
                   {rooms
-                  .filter(room => room.room_type === "shared" && room.available_beds > 0 && room.available_beds === room.num_beds)
+                  .filter(room => room.room_type === "shared" && room.available_beds > 0)
                   .map((sharedRoom, index) => {
                     const currentImageIndex = imageIndexes[sharedRoom.id] || 0; 
                     return (

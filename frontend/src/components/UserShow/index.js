@@ -23,6 +23,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import ReviewModal from "../ReviewModal";
 import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
+import BookingDetailsModal from "../BookingDetailsModal"
 
 function UserShow() {
     const location = useLocation();
@@ -58,6 +59,7 @@ function UserShow() {
     const [modalReservationId, setModalReservationId] = useState("");
     const [modalPropertyName,setModalPropertyName] = useState("");
     const [modalListingId, setModalListingId] = useState();
+    const [showDetails, setShowDetails] = useState(false);
     const [isRefundable, setIsRefundable] = useState(true);
     const today = new Date();
     const tomorrow = new Date(today);
@@ -69,7 +71,7 @@ function UserShow() {
       }, [activeTab, showReservation]);
 
     useEffect(() => {
-        if (showMapModal) {
+        if (showMapModal || showDetails) {
           document.body.style.overflow = 'hidden';
         } else {
           document.body.style.overflow = 'auto';
@@ -77,7 +79,7 @@ function UserShow() {
         return () => {
           document.body.style.overflow = 'auto'; 
         };
-      }, [showMapModal]);
+      }, [showMapModal, showDetails]);
     
       const closeMapModal = () => {
         setShowMapModal(false);
@@ -116,6 +118,10 @@ function UserShow() {
      function handleMapClick() {
         setShowMapModal(true);
      } 
+
+     const closeModal = () => {
+        setShowDetails(false);
+      };
 
      function handleReviewClick(reservationId, property_name) {
         handleReservation(reservationId)
@@ -362,13 +368,13 @@ function UserShow() {
             setIsRefundable(true);
         }
       }, [foundReservation]);
-    
 
     return (
         <>
         {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} name= {foundListing.property_name} address={foundListing.address} city={foundListing.city} country={foundListing.country} onClose={closeMapModal} />}
         {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReservationId= {modalReservationId} modalPropertyName= {modalPropertyName}/>}
         {showReviewForm && <ReviewForm onClose={closeReviewForm} sessionUserId= {sessionUser.id} modalReservationId= {modalReservationId} modalListingId= {modalListingId} modalPropertyName= {modalPropertyName}/>}
+        {showDetails && <BookingDetailsModal onClose={closeModal} />}
 
         <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
           <Navigation />
@@ -630,7 +636,7 @@ function UserShow() {
                 <div className="reservation-info">
                     <div className="reservation-info-buttons">
                         <div className="reservation-info-button">
-                            <div className="reservation-info-button-inner">
+                            <div className="reservation-info-button-inner" onClick={() => setShowDetails(true)}>
                                 <img src={CalendarSVG} alt="Calendar Icon" className="trip-icon" />
                                 <p>Booking Details</p>
                             </div>
