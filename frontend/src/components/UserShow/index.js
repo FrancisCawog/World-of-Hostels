@@ -635,15 +635,15 @@ function UserShow() {
             <>
                 <div className="reservation-info">
                     <div className="reservation-info-buttons">
-                        <div className="reservation-info-button">
-                            <div className="reservation-info-button-inner" onClick={() => setShowDetails(true)}>
+                        <div className="reservation-info-button" onClick={() => setShowDetails(true)}>
+                            <div className="reservation-info-button-inner">
                                 <img src={CalendarSVG} alt="Calendar Icon" className="trip-icon" />
                                 <p>Booking Details</p>
                             </div>
                             <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
                         </div>
-                        <div className="reservation-info-button">
-                            <div className="reservation-info-button-inner" onClick={() => {history.push(`/listings/${foundListing.id}`)}}>
+                        <div className="reservation-info-button" onClick={() => {history.push(`/listings/${foundListing.id}`)}}>
+                            <div className="reservation-info-button-inner">
                                 <img src={BuildingSVG} alt="Calendar Icon" className="trip-icon" />
                                 <p>View Booking</p>
                             </div>
@@ -659,8 +659,8 @@ function UserShow() {
                                 </div>
                                 <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
                             </div>
-                            <div style={{display: "flex", alignItems: "center"}}>
-                                <div className="reservation-info-button" onClick={() => isRefundable && handleDeleteReservation(ReservationId)} disabled={!isRefundable} style={{opacity: isRefundable ? "initial" : ".5", pointerEvents: isRefundable ? 'auto' : 'none'}} >
+                            <div onClick={() => isRefundable && handleDeleteReservation(ReservationId)} disabled={!isRefundable} style={{display: "flex", alignItems: "center", opacity: isRefundable ? "initial" : ".5", pointerEvents: isRefundable ? 'auto' : 'none'}}>
+                                <div className="reservation-info-button" >
                                     <div className="reservation-info-button-inner">
                                         <img src={CancelSVG} alt="Calendar Icon" className="trip-icon" />
                                         <p>Cancel Booking</p>

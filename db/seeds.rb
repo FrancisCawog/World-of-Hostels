@@ -625,7 +625,8 @@ Things to note about our hostel:
         num_guests: 2,
         start_date: "2023-11-21",
         end_date: "2023-11-24",
-        refundable: true
+        refundable: true,
+        created_at: "2024-02-17T22:08:51.251Z"
     )
 
     RE2 = Reservation.create!(
@@ -635,7 +636,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-21",
         end_date: "2023-11-23",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:52.251Z"
     )
 
     RE3 = Reservation.create!(
@@ -645,7 +647,8 @@ Things to note about our hostel:
         num_guests: 2,
         start_date: "2023-11-22",
         end_date: "2023-11-26",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:53.251Z"
     )
 
     RE4 = Reservation.create!(
@@ -655,7 +658,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:54.251Z"
     )
 
     Reservation.create!(
@@ -665,7 +669,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:55.251Z"
     )
 
     Reservation.create!(
@@ -675,7 +680,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:56.251Z"
     )
 
     Reservation.create!(
@@ -685,7 +691,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:57.251Z"
     )
 
     Reservation.create!(
@@ -695,7 +702,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:58.251Z"
     )
 
     Reservation.create!(
@@ -705,7 +713,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:59.251Z"
     )
 
     Reservation.create!(
@@ -715,7 +724,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:41.251Z"
     )
 
     Reservation.create!(
@@ -725,7 +735,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:31.251Z"
     )
 
     Reservation.create!(
@@ -735,7 +746,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:21.251Z"
     )
 
     Reservation.create!(
@@ -745,7 +757,8 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:11.251Z"
     )
 
     Reservation.create!(
@@ -755,7 +768,19 @@ Things to note about our hostel:
         num_guests: 1,
         start_date: "2023-11-28",
         end_date: "2023-12-20",
-        refundable: false
+        refundable: false,
+        created_at: "2024-02-17T22:08:01.251Z"
+    )
+
+    Reservation.create!(
+        listing_id: 3,
+        user_id: 1,
+        room_id: 1,
+        num_guests: 3,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2024-02-17T22:08:23.251Z"
     )
 
     rev1 = Review.create!(
@@ -834,7 +859,7 @@ Things to note about our hostel:
 Review.create!(
     user_id: 7,
     listing_id: 3,
-    reservation_id: 8,
+    reservation_id: 5,
     security: 8,
     cleanliness: 7,
     location: 9,
@@ -853,7 +878,7 @@ Review.create!(
   Review.create!(
     user_id: 9,
     listing_id: 2,
-    reservation_id: 8,
+    reservation_id: 6,
     security: 7,
     cleanliness: 9,
     location: 8,
@@ -872,7 +897,7 @@ Review.create!(
   Review.create!(
     user_id: 5,
     listing_id: 4,
-    reservation_id: 8,
+    reservation_id: 7,
     security: 9,
     cleanliness: 8,
     location: 9,
@@ -910,7 +935,7 @@ Review.create!(
   Review.create!(
     user_id: 3,
     listing_id: 5,
-    reservation_id: 8,
+    reservation_id: 9,
     security: 7,
     cleanliness: 9,
     location: 8,
@@ -929,7 +954,7 @@ Review.create!(
   Review.create!(
     user_id: 8,
     listing_id: 3,
-    reservation_id: 8,
+    reservation_id: 10,
     security: 8,
     cleanliness: 7,
     location: 9,
@@ -948,7 +973,7 @@ Review.create!(
   Review.create!(
     user_id: 2,
     listing_id: 1,
-    reservation_id: 8,
+    reservation_id: 11,
     security: 9,
     cleanliness: 8,
     location: 10,
@@ -967,7 +992,7 @@ Review.create!(
   Review.create!(
     user_id: 6,
     listing_id: 4,
-    reservation_id: 8,
+    reservation_id: 12,
     security: 9,
     cleanliness: 8,
     location: 9,
@@ -986,7 +1011,7 @@ Review.create!(
   Review.create!(
     user_id: 4,
     listing_id: 2,
-    reservation_id: 8,
+    reservation_id: 13,
     security: 7,
     cleanliness: 9,
     location: 8,
@@ -1005,7 +1030,7 @@ Review.create!(
   Review.create!(
     user_id: 10,
     listing_id: 5,
-    reservation_id: 8,
+    reservation_id: 14,
     security: 7,
     cleanliness: 9,
     location: 8,

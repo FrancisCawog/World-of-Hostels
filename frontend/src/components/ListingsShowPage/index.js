@@ -22,7 +22,7 @@ import CheckoutForm from "../Checkout"
 import { setCart } from "../../store/cart";
 import { removeCart } from "../../store/cart";
 import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
 import { fetchUsers } from "../../store/users";
 

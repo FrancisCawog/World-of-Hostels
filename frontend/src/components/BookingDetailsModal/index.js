@@ -22,7 +22,7 @@ const BookingDetailsModal = ({ onClose, bookingReference, startDate, endDate, re
         setShowCancellation(prevState => !prevState);
     };
 
-  const timeTolerance = 2000;
+  const timeTolerance = 1500;
 
   const filteredReservations = Object.values(reservations).filter(reservation => {
     const reservationCreatedAt = new Date(reservation.created_at).getTime();
