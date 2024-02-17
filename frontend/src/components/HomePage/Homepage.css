@@ -289,6 +289,7 @@ img {
 }
 
 .let-go-button {
+  margin-top: 2px;
   width: 25%;
   height: 40px;
   background-color: #F25621;

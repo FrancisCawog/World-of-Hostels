@@ -374,7 +374,7 @@ function UserShow() {
         {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} name= {foundListing.property_name} address={foundListing.address} city={foundListing.city} country={foundListing.country} onClose={closeMapModal} />}
         {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReservationId= {modalReservationId} modalPropertyName= {modalPropertyName}/>}
         {showReviewForm && <ReviewForm onClose={closeReviewForm} sessionUserId= {sessionUser.id} modalReservationId= {modalReservationId} modalListingId= {modalListingId} modalPropertyName= {modalPropertyName}/>}
-        {showDetails && <BookingDetailsModal onClose={closeModal} />}
+        {showDetails && <BookingDetailsModal onClose={closeModal} bookingReference= {ReservationId} startDate= {foundReservation.start_date} endDate= {foundReservation.end_date} reservationDate= {foundReservation.created_at} listing={foundListing}/>}
 
         <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
           <Navigation />
@@ -620,7 +620,7 @@ function UserShow() {
         {activeTab === 'Home' && (
             <div className="travel-stats">
                 <div >
-                    <p>My Travel Stats</p>
+                    <p>My Travel Stats</p>x
                     <p>I've explored <strong>{countryCount} {countryWord}</strong></p>
                     <p>and stayed in <strong>{propertyCount} {propertyWord}</strong></p>
                 </div>
