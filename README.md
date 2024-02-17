@@ -29,18 +29,18 @@ https://world-of-hostels.onrender.com
 
 
 ### Future Implementions/ Open Issues
-- Style the search bar in listings show
-- Style date and guests in the listings show
-- Add search bar to Nav
-- Prevent searches in the past, start and end date on the same day, and reset search bar.
+- In the listings show, fix the calendar style.
+- In splash page, fix calndar style.
+- Fix guests button in both listings show and splash page.
+- Add search feature to nav bar in listings show and index.
+- Prevent searches in the past and prevent start and end date on the same day.
 - Add more seeds data
-- Add functionality to location search
+- Add more locations to search location feature.
 - Add facilities to listings show
 - Combine reservations in users show and booking cancellation
-- Change private room guest number
-- Fix dead links in users show
+- In store, change the amount of people satying at a pivate room.
+- Add edit reservation feature.
 - Add errors to sign-up/ login/ users edit
 - Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
 - Fix styling in leave review - About you
-- Not enough guests
-- Guests for private rooms = remainder guests
+- Prevent checkout if not all guests are accounted for.
