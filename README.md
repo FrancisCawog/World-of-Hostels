@@ -36,14 +36,11 @@ https://world-of-hostels.onrender.com
 - Add more seeds data
 - Add functionality to location search
 - Add facilities to listings show
-- Combine reservations in users show, booking details, and booking cancellation
+- Combine reservations in users show and booking cancellation
 - Change private room guest number
 - Fix dead links in users show
 - Add errors to sign-up/ login/ users edit
 - Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
 - Fix styling in leave review - About you
-- User photos arent all fitting in reviews
-- Reviews arent always being added correctly
 - Not enough guests
 - Guests for private rooms = remainder guests
-- Fix users review picture listing 2
