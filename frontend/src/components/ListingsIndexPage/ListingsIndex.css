@@ -3,6 +3,10 @@
     box-shadow: inset 0 100px 32px -100px rgba(0,0,0,.1);
   }
 
+  .horizontal-line2 {
+    border-top: .5px solid #ccc;
+  }
+
 .listings-location h2 {
     font-family: Poppins-bold;
     font-size: 30px;

@@ -111,11 +111,17 @@ const updateImageIndex = (listingId, direction) => {
     const currentIndex = prevIndexes[listingId] || 0;
     const newIndex =
       direction === 'prev'
-        ? (currentIndex - 1 + imageCount) % Math.max(1, imageCount)
-        : (currentIndex + 1) % Math.max(1, imageCount);
-    return { ...prevIndexes, [listingId]: newIndex };
-  });
-};
+      ? (currentIndex - 1 + imageCount) % Math.max(1, imageCount)
+      : (currentIndex + 1) % Math.max(1, imageCount);
+      return { ...prevIndexes, [listingId]: newIndex };
+    });
+  };
+
+  const [hoveredListings, setHoveredListings] = useState({});
+
+  const handleListingHover = (listingId, isHovered) => {
+    setHoveredListings((prevHovered) => ({ ...prevHovered, [listingId]: isHovered }));
+  };
 
   return (
     <>
@@ -132,24 +138,29 @@ const updateImageIndex = (listingId, direction) => {
           <h2>Bangkok, Thailand</h2>
           <p>Showing {Object.values(listings).length} properties</p>
         </div>
-        <div className="horizontal-line" style={{ marginBottom: "20px" }}></div>
+        <div className="horizontal-line2" style={{ marginBottom: "20px" }}></div>
     </div>
 
     <div>
     {Object.values(listings).map((listing) => {
       const currentImageIndex = imageIndexes[listing.id] || 0;
+      const isCurrentlyHovered = hoveredListings[listing.id] || false;
       return (
-        <div key={listing.id} href={`listings/${listing.id}`} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black"}} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id)}}>
+        <div key={listing.id} href={`listings/${listing.id}`} className="show-listing" style={{ position: 'relative', marginBottom: '20px', textDecoration: 'none', color: "black"}} onClick={(e) => {e.preventDefault(); handleRedirect(listing.id)}} onMouseEnter={() => handleListingHover(listing.id, true)} onMouseLeave={() => handleListingHover(listing.id, false)}>
           <div className="index-picture">
             <div className="index-picture-picture">
               <img src={listing.photoUrls[currentImageIndex]} alt={`Listing ${listing.id}`} />
             </div>
+            {isCurrentlyHovered && (
+              <div className="index-picture-nav">
             <span className="index-picture-left" onClick={(e) => { e.stopPropagation(); updateImageIndex(listing.id, 'prev'); }}>
               <img src={ArrowRight}/>
             </span>
             <span className="index-picture-right" onClick={(e) => { e.stopPropagation(); updateImageIndex(listing.id, 'next'); }}>
               <img src={ArrowRight}/>
             </span>
+            </div>
+            )}
         </div>
       <div className="single-listing">
         <h3>{listing.property_name}</h3>

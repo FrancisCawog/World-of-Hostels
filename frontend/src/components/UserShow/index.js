@@ -318,6 +318,12 @@ function UserShow() {
         return startDate < currentDate;
       });    
 
+      const groupReservationsByTime = (reservations) => reservations.reduce((groups, reservation) => {
+        const existingGroup = groups.find(group => Math.abs(new Date(reservation.created_at) - new Date(group[group.length - 1].created_at)) <= 1500);
+        existingGroup ? existingGroup.push(reservation) : groups.push([reservation]);
+        return groups;
+      }, []).map(group => group[0]);
+
       const isReservationInPast = pastReservations.some(reservation => reservation.id === ReservationId);
 
       const handleReservation = (id) => {
@@ -339,12 +345,28 @@ function UserShow() {
         )}
     }
 
-    const handleDeleteReservation = (ReservationId) => {
+    const handleDeleteReservation = (ReservationId, reservations) => {
         handleTabClick('My Trips');
         setShowReservation(false);
-        dispatch(deleteReservation(ReservationId));
+      
+        const reservationsArray = Object.values(reservations);
+        const targetReservation = reservationsArray.find(reservation => reservation.id === ReservationId);
+        const targetCreatedAt = targetReservation ? targetReservation.created_at : null;
+      
+        const reservationsToDelete = reservationsArray.filter(reservation => {
+          if (targetCreatedAt) {
+            const timeDifference = Math.abs(new Date(targetCreatedAt) - new Date(reservation.created_at));
+            return timeDifference <= 1500;
+          }
+          return false;
+        });
+      
+        reservationsToDelete.forEach(reservation => {
+          dispatch(deleteReservation(reservation.id));
+        });
+      
         setShowDeleteConfirmation(true);
-    };    
+      };
 
     const extractRating = (reservationId) => {
         const listingReviews = Object.values(reviews).filter(review => review.reservation_id === reservationId);
@@ -491,7 +513,7 @@ function UserShow() {
                             </div>
                             ) : (
                             <>
-                                {futureReservations.map((reservation) => {
+                                {groupReservationsByTime(futureReservations).map((reservation) => {
                                 const startDate = formatDate(reservation.start_date);
                                 const endDate = formatDate(reservation.end_date);
                                 const correspondingListing = Object.values(listings).find(
@@ -522,7 +544,7 @@ function UserShow() {
                         <>
                         <br/>
                         <p>Past Trips</p>
-                        {pastReservations.map((reservation) => {
+                        {groupReservationsByTime(pastReservations).map((reservation) => {
                             const startDate = formatDate(reservation.start_date);
                             const endDate = formatDate(reservation.end_date);
                             const correspondingListing = Object.values(listings).find(
@@ -659,7 +681,7 @@ function UserShow() {
                                 </div>
                                 <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
                             </div>
-                            <div onClick={() => isRefundable && handleDeleteReservation(ReservationId)} disabled={!isRefundable} style={{display: "flex", alignItems: "center", opacity: isRefundable ? "initial" : ".5", pointerEvents: isRefundable ? 'auto' : 'none'}}>
+                            <div onClick={() => isRefundable && handleDeleteReservation(ReservationId, reservations)} disabled={!isRefundable} style={{display: "flex", alignItems: "center", opacity: isRefundable ? "initial" : ".5", pointerEvents: isRefundable ? 'auto' : 'none'}}>
                                 <div className="reservation-info-button" >
                                     <div className="reservation-info-button-inner">
                                         <img src={CancelSVG} alt="Calendar Icon" className="trip-icon" />
