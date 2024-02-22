@@ -62,7 +62,7 @@ function ListingsShowPage() {
   tomorrow.setDate(tomorrow.getDate() + 1);
   const checkInDate = (start_date || today.toISOString().split("T")[0]);
   const checkOutDate = (end_date || tomorrow.toISOString().split("T")[0]);
-  const guests = cart.guests || "1"
+  const guests = parseInt(cart.guests, 10) || "1"
 
   useEffect(() => {
     dispatch(setCheckIn(checkInDate));

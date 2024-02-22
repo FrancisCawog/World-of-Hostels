@@ -37,9 +37,7 @@ https://world-of-hostels.onrender.com
 - Add more seeds data
 - Add more locations to search location feature.
 - Add facilities to listings show
-- In store, change the amount of people satying at a pivate room.
 - Add edit reservation feature.
 - Add errors to sign-up/ login/ users edit
 - Prevent users from adding a country that doesnt exist/ changing birthdate to an incorrect date
 - Fix styling in leave review - About you
-- Prevent checkout if not all guests are accounted for.

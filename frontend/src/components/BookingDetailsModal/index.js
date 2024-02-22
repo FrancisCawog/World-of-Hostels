@@ -33,11 +33,16 @@ const BookingDetailsModal = ({ onClose, bookingReference, startDate, endDate, re
   });
 
   const totalGuests = filteredReservations.reduce((sum, reservation) => sum + reservation.num_guests, 0);
-  const totalPrice = filteredReservations.reduce((sum, reservation) => sum + reservation.total_price, 0);
+  const totalPrice = filteredReservations.reduce((sum, reservation) => sum + (reservation.total_price), 0);
 
   const getRoomTitle = (roomId) => {
     const room = rooms[roomId];
     return room ? room.room_title : 'N/A';
+  };
+
+  const getRoomType = (roomId) => {
+    const room = rooms[roomId];
+    return room.room_type
   };
 
   const startDateObject = new Date(startDate);
@@ -87,11 +92,15 @@ const BookingDetailsModal = ({ onClose, bookingReference, startDate, endDate, re
 
                                 {filteredReservations.map(reservation => (
                                     <div key={reservation.id} className='single-room'>
-                                    <p>{getRoomTitle(reservation.room_id)}</p>
-                                    <div className='details-price-room'>
-                                        <p>US${(reservation.total_price / reservation.num_guests).toFixed(2)} x {reservation.num_guests}</p>
-                                        <p>US${reservation.total_price.toFixed(2)}</p>
-                                    </div>
+                                        <p>{getRoomTitle(reservation.room_id)}</p>
+                                        <div className='details-price-room'>
+                                            {getRoomType(reservation.room_id) === "private" ? (
+                                                <p>US${(reservation.total_price / parseInt(reservation.num_nights, 10)).toFixed(2)} x 1 room x {(parseInt(reservation.num_nights, 10))} {parseInt(reservation.num_nights, 10) === 1 ? 'night' : 'nights'}</p>
+                                            ) : (
+                                                <p>US${(reservation.total_price / reservation.num_guests / parseInt(reservation.num_nights, 10)).toFixed(2)} x {reservation.num_guests} beds x {(parseInt(reservation.num_nights, 10))} {parseInt(reservation.num_nights, 10) === 1 ? 'night' : 'nights'}</p>
+                                            )}
+                                            <p>US${(reservation.total_price.toFixed(2))}</p>
+                                        </div>
                                     </div>
                                 ))}
 

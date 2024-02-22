@@ -29,11 +29,22 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
     const [checkInDate, setCheckInDate] = useState(checkIn);
     const [checkOutDate, setCheckOutDate] = useState(checkOut);
     const listing = useSelector((state) => state.listings[listingId])
-    
     const checkInDates = fecha.parse(checkInDate, "YYYY-MM-DD");
     const checkOutDates = fecha.parse(checkOutDate, "YYYY-MM-DD");
     const timeDifference = checkOutDates.getTime() - checkInDates.getTime();
     const numNights = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    const [showNotEnough, setShowNotEnough] = useState(false);
+
+    const totalGuests = Object.entries(cart).reduce((acc, [roomId, val]) => {
+        const room = rooms.find(room => room.id === Number(roomId));
+      
+        if (room) {
+          const bedsToAdd = room.room_type === 'private' ? room.num_beds : val;
+          return acc + bedsToAdd;
+        }
+      
+        return acc;
+      }, 0);
 
     const handleScroll = () => {
         const chooseRoomDiv = document.getElementById('choose-room');
@@ -48,56 +59,85 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
         sessionStorage.setItem('redirectUrl', currentUrl);
         history.push('/login');
     } else {
-        const reservationsToCreate = [];
-        let numGuest = 0;
-        let checkInDate = ""
-        let checkOutDate = ""
-        let firstReservationId = 0;
+        if (totalGuests < guests){
+            setShowNotEnough(true);
+        } else {
+            const reservationsToCreate = [];
+            let numGuest = 0;
+            let checkInDate = ""
+            let checkOutDate = ""
+            let firstReservationId = 0;
+            
+            Object.entries(cart).forEach(([roomId, roomGuests]) => {
+                const room = rooms.find(room => room.id === Number(roomId));
+                
+                if (room && room.room_type === "private") {
+                    const numberGuests = room.num_beds - (totalGuests - guests) >= 1 ? room.num_beds - (totalGuests - guests) : 1;
 
-        Object.entries(cart).forEach(([roomId, roomGuests]) => {
-            const room = rooms.find(room => room.id === Number(roomId));
-
-            if (room) {
-                const reservation = {
-                    listing_id: listing.id,
-                    room_id: room.id,
-                    num_guests: roomGuests,
-                    start_date: checkInDates,
-                    end_date: checkOutDates,
-                    refundable: refundable
-                };
-
-                checkInDate = checkInDates;
-                checkOutDate = checkOutDates;
-                numGuest += roomGuests;
-                reservationsToCreate.push(reservation);
+                    const reservation = {
+                        listing_id: listing.id,
+                        room_id: room.id,
+                        num_guests: numberGuests,
+                        start_date: checkInDates,
+                        end_date: checkOutDates,
+                        refundable: refundable
+                    };
+                    checkInDate = checkInDates;
+                    checkOutDate = checkOutDates;
+                    numGuest += roomGuests;
+                    reservationsToCreate.push(reservation);
+                } else {
+                    const reservation = {
+                        listing_id: listing.id,
+                        room_id: room.id,
+                        num_guests: roomGuests,
+                        start_date: checkInDates,
+                        end_date: checkOutDates,
+                        refundable: refundable
+                    };
+                    
+                    checkInDate = checkInDates;
+                    checkOutDate = checkOutDates;
+                    numGuest += roomGuests;
+                    reservationsToCreate.push(reservation);
+                }
+            });
+            
+            for (let i = 0; i < reservationsToCreate.length; i++) {
+                const reservation = reservationsToCreate[i];
+                console.log(reservation)
+                const createdReservation = await dispatch(createReservation(reservation));
+                
+                if (i === 0) {
+                    firstReservationId = createdReservation.id;
+                }
             }
-        });
-
-        for (let i = 0; i < reservationsToCreate.length; i++) {
-            const reservation = reservationsToCreate[i];
-            const createdReservation = await dispatch(createReservation(reservation));
-
-            if (i === 0) {
-                firstReservationId = createdReservation.id;
-            }
+            
+            history.push({
+                pathname: '/ConfirmationPage',
+                state: {
+                    listingName: listingName,
+                    guests: numGuest,
+                    reservationNumber: firstReservationId,
+                    checkIn: checkInDates,
+                    checkOut: checkOutDates,
+                    price: totalPrice,
+                    photoUrl: photoUrl
+                },
+            });
+            
+            dispatch(clearCart());
         }
-
-        history.push({
-            pathname: '/ConfirmationPage',
-            state: {
-                listingName: listingName,
-                guests: numGuest,
-                reservationNumber: firstReservationId,
-                checkIn: checkInDates,
-                checkOut: checkOutDates,
-                price: totalPrice,
-                photoUrl: photoUrl
-            },
-        });
-
-        dispatch(clearCart());
     }};    
+
+    useEffect(() => {
+        if (showNotEnough) {
+          const timer = setTimeout(() => {
+            setShowNotEnough(false);
+          }, 3000);
+          return () => clearTimeout(timer);
+        }
+      }, [showNotEnough]);
 
     useEffect(() => {
         let totalPriceCalculation = 0;
@@ -140,13 +180,13 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
         }
       }, []);
     
-      const handleCheckInDateChange = (e) => {
-        setCheckInDate(e.target.value);
-      };
+    //   const handleCheckInDateChange = (e) => {
+    //     setCheckInDate(e.target.value);
+    //   };
     
-      const handleCheckOutDateChange = (e) => {
-        setCheckOutDate(e.target.value);
-      };
+    //   const handleCheckOutDateChange = (e) => {
+    //     setCheckOutDate(e.target.value);
+    //   };
     
       const handleGuestsChange = (e) => {
         setGuests(e.target.value);
@@ -205,6 +245,10 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
 
     return (
         <>
+        {showNotEnough && (
+            <div className="confirmation-box">Not enough beds selected for all the guests</div>
+        )}
+
         {shouldRenderCheckoutChoose ? (
             <div className="checkout-choose">
                 <div className="checkout-info">
@@ -364,11 +408,11 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
                 <div style={{marginTop: "1rem"}}>
                     <div style={{fontFamily: "Poppins-bold"}}>
                         <div style={{display: "flex", }}>
-                            <p>Total</p>
+                            <p style={{marginRight: "5px"}}>Total</p>
                             <p>US${totalPrice.toFixed(2)}</p>
                         </div>
                         <div style={{display: "flex", }}>
-                            <p style={{color: "green"}}> Payable Now</p>
+                            <p style={{color: "green", marginRight: "5px"}}> Payable Now</p>
                             <p>US${(totalPrice * .15).toFixed(2)}</p>
                         </div>
                     </div>

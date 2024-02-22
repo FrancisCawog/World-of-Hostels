@@ -28,6 +28,10 @@ class Reservation < ApplicationRecord
     end
 
     def total_price
-        return( num_nights * room.price)
+        if room.room_type == "private"
+            return ( num_nights * room.price)
+        else 
+            return ( num_nights * room.price * num_guests)
+        end
     end
 end
