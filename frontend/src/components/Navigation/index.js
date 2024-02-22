@@ -13,6 +13,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import navIcon from "../../assets/pictures/icons/Screenshot 2023-11-19 at 9.22.41 PM.png";
 import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
+import { clearCart } from "../../store/cart";
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function Navigation() {
   const handleLogout = () => {
     dispatch(sessionActions.logout());
     history.push('/');
+    dispatch(clearCart());
   };
 
   const goBack = () => {

@@ -42,7 +42,8 @@ function ListingsShowPage() {
   const start_date = cart.checkIn;
   const end_date = cart.checkOut;
   const cartItems = useSelector((state) => state.cart.cart);
-  const [refundable, setRefundable] = useState();
+  const isRefundable = useSelector((state) => state?.cart.refundable)
+  const [refundable, setRefundable] = useState(isRefundable || false);
   const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
   sessionStorage.setItem('redirectUrl', window.location.pathname);
 

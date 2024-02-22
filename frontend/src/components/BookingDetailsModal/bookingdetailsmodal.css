@@ -49,10 +49,7 @@
     height: 0.5rem;
     width: 100%;
     background: rgb(241, 242, 244);
-    border-width: initial;
-    border-style: none;
-    border-color: initial;
-    border-image: initial;
+    border: none;
     margin-top: -10px;
   }
 
