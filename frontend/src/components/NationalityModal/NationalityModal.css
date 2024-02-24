@@ -1,0 +1,22 @@
+.modal-overlay4 {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    z-index: 400;
+    background: rgba(99, 108, 125, 0.6);
+  }
+  
+  .modal4 {
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    height: 29rem;
+    width: 46%;
+    overflow: auto;
+    position: relative;
+  }

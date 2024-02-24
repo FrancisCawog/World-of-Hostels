@@ -21,6 +21,7 @@ import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.
 import ReservationMapModal from "../ReservationMapModal";
 import { useHistory, useLocation } from 'react-router-dom';
 import ReviewModal from "../ReviewModal";
+import NationalityModal from "../NationalityModal";
 import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 import BookingDetailsModal from "../BookingDetailsModal"
@@ -55,6 +56,7 @@ function UserShow() {
     const [ReservationId, setReservationId] = useState();
     const [showMapModal, setShowMapModal] = useState(false);
     const [showReviewModal, setShowReviewModal] = useState(false);
+    const [showNationality, setShowNationality] = useState(false);
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [modalReservationId, setModalReservationId] = useState("");
     const [modalPropertyName,setModalPropertyName] = useState("");
@@ -385,11 +387,35 @@ function UserShow() {
 
     useEffect(() => {
         if (!foundReservation?.refundable) {
-          setIsRefundable(false);
+            setIsRefundable(false);
         } else {
             setIsRefundable(true);
         }
-      }, [foundReservation]);
+    }, [foundReservation]);
+    
+    useEffect(() => {
+        if (showNationality) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+        return () => {
+          document.body.style.overflow = 'auto'; 
+        };
+      }, [showNationality]);
+    
+      const closeNationality = () => {
+        setShowNationality(false);
+      };
+      
+      const handleNationalityInput = () => {
+        setShowNationality(true);
+      };
+    
+      const handleModalInputChange = (newValue) => {
+        setUserNationality(newValue);
+        setShowNationality(false); // Close the modal after selecting a value
+      };
 
     return (
         <>
@@ -397,6 +423,7 @@ function UserShow() {
         {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReservationId= {modalReservationId} modalPropertyName= {modalPropertyName}/>}
         {showReviewForm && <ReviewForm onClose={closeReviewForm} sessionUserId= {sessionUser.id} modalReservationId= {modalReservationId} modalListingId= {modalListingId} modalPropertyName= {modalPropertyName}/>}
         {showDetails && <BookingDetailsModal onClose={closeModal} bookingReference= {ReservationId} startDate= {foundReservation.start_date} endDate= {foundReservation.end_date} reservationDate= {foundReservation.created_at} listing={foundListing}/>}
+        {showNationality && <NationalityModal onClose={closeNationality}/>}
 
         <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
           <Navigation />
@@ -483,7 +510,9 @@ function UserShow() {
                             <input
                                 id="nationality"
                                 value={userNationality}
-                                onChange={(e) => setUserNationality(e.target.value)}
+                                onClick={handleNationalityInput}
+                                // onChange={(e) => setUserNationality(e.target.value)}
+                                readOnly
                             />
                         </div>
                         <div className="input-with-label">
