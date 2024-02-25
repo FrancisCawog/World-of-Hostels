@@ -11,6 +11,7 @@ https://world-of-hostels.onrender.com
 - React/Redux
 - PostgreSQL
 - Amazon Web Storage (AWS)
+- Restful API
 - HTML
 - CSS
 
