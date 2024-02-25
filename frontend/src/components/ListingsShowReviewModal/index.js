@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './ListingsShowReviewModal.css';
 import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
-
+const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 const ListingsShowReviewModal = ({ onClose, reviews }) => {
     const { listingId } = useParams();
@@ -44,11 +44,12 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
       const userId = numberedElement.user_id;
       const user = Object.values(users).find(user => user.id === userId);
       const nationality = user?.nationality;
+      const matchingCountry = restCountriesData.find(country => country.name.common === nationality);
       const ageGroup = numberedElement.age_group;
       let gender = numberedElement.about_you;
       gender = gender.charAt(0).toUpperCase() + gender.slice(1);
     
-      return `${gender}, ${ageGroup}, ${nationality}`;
+      return `${gender}, ${ageGroup}, ${matchingCountry ? matchingCountry.cca3 : nationality}`;
     };
 
     const extractPicture = (listingId, num) => {

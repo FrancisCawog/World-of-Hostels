@@ -25,6 +25,7 @@ import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 // import { useLocation } from 'react-router-dom';
 import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
 import { fetchUsers } from "../../store/users";
+const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 function ListingsShowPage() {
   const dispatch = useDispatch();
@@ -244,11 +245,12 @@ function ListingsShowPage() {
     const userId = numberedElement.user_id;
     const user = Object.values(users).find(user => user.id === userId);
     const nationality = user?.nationality;
+    const matchingCountry = restCountriesData.find(country => country.name.common === nationality);
     const ageGroup = numberedElement.age_group;
     let gender = numberedElement.about_you;
     gender = gender.charAt(0).toUpperCase() + gender.slice(1);
   
-    return `${gender}, ${ageGroup}, ${nationality}`;
+    return `${gender}, ${ageGroup}, ${matchingCountry ? matchingCountry.cca3 : nationality}`;
   };
   
   const extractPicture = (listingId, num) => {

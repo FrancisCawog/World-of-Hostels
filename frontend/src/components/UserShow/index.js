@@ -25,6 +25,7 @@ import NationalityModal from "../NationalityModal";
 import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 import BookingDetailsModal from "../BookingDetailsModal"
+const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 function UserShow() {
     const location = useLocation();
@@ -414,8 +415,13 @@ function UserShow() {
     
       const handleModalInputChange = (newValue) => {
         setUserNationality(newValue);
-        setShowNationality(false); // Close the modal after selecting a value
+        setShowNationality(false);
       };
+
+      const findCountryCCA3 = (commonName) => {
+        const matchingCountry = restCountriesData.find(country => country.name.common === commonName);
+        return matchingCountry ? matchingCountry.cca3 : commonName;
+    };
 
     return (
         <>
@@ -423,7 +429,7 @@ function UserShow() {
         {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReservationId= {modalReservationId} modalPropertyName= {modalPropertyName}/>}
         {showReviewForm && <ReviewForm onClose={closeReviewForm} sessionUserId= {sessionUser.id} modalReservationId= {modalReservationId} modalListingId= {modalListingId} modalPropertyName= {modalPropertyName}/>}
         {showDetails && <BookingDetailsModal onClose={closeModal} bookingReference= {ReservationId} startDate= {foundReservation.start_date} endDate= {foundReservation.end_date} reservationDate= {foundReservation.created_at} listing={foundListing}/>}
-        {showNationality && <NationalityModal onClose={closeNationality}/>}
+        {showNationality && <NationalityModal onClose={closeNationality} onInputChange={handleModalInputChange}/>}
 
         <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
           <Navigation />
@@ -469,13 +475,13 @@ function UserShow() {
                     <div className="name-and-age">
                         <p>{sessionUser.first_name}</p>
                         {sessionUser.date_of_birth !== null && sessionUser.nationality !== "" && (
-                            <p style={{ fontSize: "26px" }}>{age} years old, {sessionUser.nationality}</p>
+                            <p style={{ fontSize: "26px" }}>{age} years old, {findCountryCCA3(sessionUser.nationality)}</p>
                         )}
                         {sessionUser.date_of_birth !== null && sessionUser.nationality === "" && (
                             <p style={{ fontSize: "26px" }}>{age} years old</p>
                         )}
                         {sessionUser.date_of_birth === null && sessionUser.nationality !== "" && (
-                            <p style={{ fontSize: "26px" }}>{sessionUser.nationality}</p>
+                            <p style={{ fontSize: "26px" }}>{findCountryCCA3(sessionUser.nationality)}</p>
                         )}
                     </div>
                 </div>
@@ -671,7 +677,7 @@ function UserShow() {
         {activeTab === 'Home' && (
             <div className="travel-stats">
                 <div >
-                    <p>My Travel Stats</p>x
+                    <p>My Travel Stats</p>
                     <p>I've explored <strong>{countryCount} {countryWord}</strong></p>
                     <p>and stayed in <strong>{propertyCount} {propertyWord}</strong></p>
                 </div>
