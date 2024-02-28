@@ -230,12 +230,12 @@ export default function HomePage() {
             </h3>
             <p>With over 16,500 hostels in 180 countries, there’s always room for a new adventure!</p>
           </div>
-          <Link to={`/listings/${listings[3]?.id}`} className="world-cards3">
+          <Link to={`/listings/${listings[6]?.id}`} className="world-cards3">
             <div className="world-photo">
-              <img  src={listings[3]?.photoUrls[0]}/>
+              <img  src={listings[6]?.photoUrls[0]}/>
             </div>
-            <p className="world-car-p1">{listings[3]?.property_name}</p>
-            <p className="world-car-p2">{listings[3]?.city}, {listings[3]?.country}</p>
+            <p className="world-car-p1">{listings[6]?.property_name}</p>
+            <p className="world-car-p2">{listings[6]?.city}, {listings[6]?.country}</p>
         </Link>
         </div>
 

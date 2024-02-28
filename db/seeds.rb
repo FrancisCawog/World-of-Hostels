@@ -32,7 +32,7 @@ require "open-uri"
         last_name: "User",
         email: "demo_user@gmail.com",
         password: "Password123!",
-        nationality: "USA",
+        nationality: "United States",
         date_of_birth: "2000-10-10",
         age: 23
     )
@@ -44,7 +44,7 @@ require "open-uri"
         last_name: "Ramirez",
         email: "paulramirex@gmail.com",
         password: "Password123!",
-        nationality: "PHI",
+        nationality: "Philippines",
         date_of_birth: "1997-05-11",
         age: 26
     )
@@ -56,7 +56,7 @@ require "open-uri"
         last_name: "Cawog",
         email: "franciscawog@gmail.com",
         password: "NewPassword123!",
-        nationality: "USA",
+        nationality: "United States",
         date_of_birth: "1997-05-11",
         age: 26
     )
@@ -68,7 +68,7 @@ require "open-uri"
         last_name: "Smith",
         email: "johnsmith@gmail.com",
         password: "SecurePwd456!",
-        nationality: "Can",
+        nationality: "Canada",
         date_of_birth: "1990-08-25",
         age: 31
     )
@@ -80,7 +80,7 @@ require "open-uri"
         last_name: "Johnson",
         email: "alice.johnson@gmail.com",
         password: "Pass123!",
-        nationality: "USA",
+        nationality: "France",
         date_of_birth: "1985-12-18",
         age: 36
     )
@@ -92,7 +92,7 @@ require "open-uri"
         last_name: "Brown",
         email: "eleanor.brown@gmail.com",
         password: "BrownPwd789!",
-        nationality: "UK",
+        nationality: "United Kingdom",
         date_of_birth: "1992-03-22",
         age: 29
     )
@@ -104,7 +104,7 @@ require "open-uri"
         last_name: "Clark",
         email: "michael.clark@gmail.com",
         password: "ClarkPass456!",
-        nationality: "GER",
+        nationality: "Germany",
         date_of_birth: "1988-07-15",
         age: 33
     )
@@ -116,7 +116,7 @@ require "open-uri"
         last_name: "Miller",
         email: "sophiamiller@gmail.com",
         password: "SophiaPwd123!",
-        nationality: "IND",
+        nationality: "India",
         date_of_birth: "1995-02-28",
         age: 27
     )
@@ -128,7 +128,7 @@ require "open-uri"
         last_name: "Anderson",
         email: "david.anderson@gmail.com",
         password: "Anderson123!",
-        nationality: "FRA",
+        nationality: "Switzerland",
         date_of_birth: "1983-09-10",
         age: 38
     )
@@ -140,7 +140,7 @@ require "open-uri"
         last_name: "Taylor",
         email: "emily.taylor@gmail.com",
         password: "TaylorPwd789!",
-        nationality: "ITA",
+        nationality: "Italy",
         date_of_birth: "1998-11-05",
         age: 23
     )
@@ -531,6 +531,86 @@ Things to note about our hostel:
     l5.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Back+Home/50.webp"), filename: "/50.webp")
     l5.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Back+Home/vznbplgkkqqwcotwdrpd.webp"), filename: "/vznbplgkkqqwcotwdrpd.webp")
 
+    l6 = Listing.create!(
+        property_name: "Palmers Lodge - Swiss Cottage",
+        property_type: "hotel",
+        address: "40 College Crescent, Swiss Cottage",
+        city: "London",
+        country: "England",
+        check_in: "14:00 - 23:00",
+        check_out: "10:00",
+        description: "Whether you're a backpacker, flash-packer or a budget traveller, Palmers Lodge has everything you need for one of the most unique experiences in London! Combining the grand charm of our historic building constucted in 1882, our friendly team and accessible location, Palmers Lodge has it all. 
+
+Swiss Cottage boasts not only a fantastic London city location and building but our services are unbeatable! We have a 24 hour reception so you can be assured we are always there when you need us, you can meet other like-minded travellers downstairs at Swiss Bar - taking advantage of our selections of drinks and snacks.
+
+An added bonus is that beds are pre-made and come with linen all for free, so the late arriving lodger can jump straight into bed, or the bar! We also offer free Wi-Fi throughout the hostel so you can stay in touch with the rest of the world and explore what's on in London! 
+
+It is easy to forget when you stay at Swiss Cottage that there is a vibrant city just outside waiting for you! We are close to the underground (tube to the locals) so you can be in any of London's hotspots within minutes! If it's shopping you're looking for, the tube will take you directly from Swiss Cottage Station to the centre of Oxford Street (15 mins) or you can shop till you drop at Europe's largest shopping centre Westfield. You could also have a drink or two in Leicester Square (15 mins) take a spin on the London Eye (20 mins) or spot Kate and William at Buckingham Palace (10 mins) all this and more with the tube from Swiss Cottage Station or Finchley Road only 200 metres away! 
+
+Award winning Hostel, winning or being a finalist for “Best Customer Service” and 'Best UK Youth Accommodation' (2012, 2013, 2015) by the British Education Travel Association, among our several other awards. 
+
+Just some of our facilities and services:
+▪ 24 hour reception and staff
+▪ Check in time 2 pm
+▪ Check out time 10 am
+▪ Key-card door access
+▪ Free safes and luggage lockers in every room
+▪ En-suite rooms available
+▪ Coach and car parking available (£10.00)
+▪ Full CCTV coverage for added security
+▪ Free linen and beds which are pre-made
+▪ Bar and late night lounge areas
+▪ Reading, conservatory and quiet rooms
+▪ Lift
+▪ Large selection of rooms including double, twin and dormitory rooms
+▪ Ground floor reception and rooms
+▪ Luggage storage for hire
+▪ Photocopy facilities
+▪ Free Wi-Fi
+▪ Washing and drying facilities available
+▪ Souvenirs and toiletries sales at reception
+
+Note that this property has a maximum stay of 14 nights. No guests can stay longer than 14 total nights within any 6-month period.
+
+All under 18's must be accompanied by an adult and have a written approval from parents with a copy of their passport or I.D. If staying in a single sex dorm room the adult and child must be the same gender. Please note under 16's are not allowed to stay in dorm rooms. You must book a private room.
+
+Bookings for 15 or more people qualify as group reservations and are subject to different Terms and Conditions. Please contact the property/hostel directly for more information.
+
+Please note that reservations for the night of the 31st December will be subject to a no-cancellation policy.
+
+This property has a 24 HR cancellation policy. Bookings will need to be cancelled via email by 2 pm of the previous day the guest is supposed to arrive. 
+Failure to cancel within this time will result in a cancellation charge equal to the first night of your stay. 
+
+Reservations for any Guests that fail to arrive for check in between 2pm on their Date of Arrival, up until 5am the next day will be subject to complete cancellation of their reservation and also subject to a one-night cancellation charge unless the property have otherwise been informed of a late/delayed arrival and have also approved an amended check-in time and date. 
+
+Guests are reminded that once they have paid on the day of check-in, no refunds will be issued.
+
+Bookings for 15 or more people qualify as group reservations and are subject to different Terms and Conditions. Please contact the property/hostel directly for more information.
+
+Palmers Lodge reserve the right to preauthorise Guests cards for prior to arrival. During times of extremely high demand, all reservations are required to have been made with a valid, chargeable card. Any reservations without a valid, chargeable card may be cancelled by Palmers Lodge at any given time.",
+        facilities: "[Security, Lockers,Key Card Access,Common Room,Elevator, Bicycle,Parking,BBQ,Adaptors]",
+        house_rules: "
+Valid Photo ID will be required at check-in.  
+Earliest check-in: 14:00, Latest check-out: 10:00 Late check out may incur a £10 charge at hostels discretion.   
+If you are planning to arrive after midnight, please contact us and let us know.  
+For Non-Refundable Bookings: We will attempt to charge your card within 24 hours of a reservation being made. Should payment be unsuccessful we then will issue you with an email prompting you to update your card details and you will have 24 hours to make this update. If you do not update your details on time or should any updated details unsuccessfully charge then we will be forced to cancel your reservation.  
+CREDIT AND DEBIT CARD PAYMENTS: Maestro cards are not accepted. Please note the total price of the reservation may be pre-authorised any time after booking. Should pre-authorisation fail we will then issue you with an email prompting you to update your card details and you will have 24 hours to make this update. If you do not update your details on time then we will be forced to cancel your reservation.
+CANCELLATION: A 24-hour notice (from check-in time) is required in order not to be charged for the night. Any no-shows will be charged in full for the first night. At the day of check in, upon payment there will be no refunds given. Please note that reservations for the night of the 31st December will be subject to a NO-CANCELLATION policy.   
+Reservations for any Guests that fail to arrive for check in between 2pm on their Date of Arrival, up until 5am the next day will be subject to complete cancellation of their reservation and also subject to a one-night cancellation charge unless the property have otherwise been informed of a late/delayed arrival and have also approved an amended check-in time and date.   
+Guests are reminded that once they have paid on the day of check-in, no refunds will be issued.  Minors and Families Bookings cannot be accepted from any person under the age of 18 unless they are accompanied by an adult (over 18) who is staying in the same dorm/room. If staying in a single-sex dorm room the adult and child must be the same gender. Couples under 18 years old are not able to share a private room. Children Under the age of 13 must be in a private room, they cannot be placed in a shared dormitory and must be accompanied by an adult. Written authorization signed by their parents and copies of parents' ID's are needed, for all under 18 years old. In compliance with Licensing Law, all under 18s will be asked to leave Bar after 8 pm. Families travelling with children will need to book private rooms. Children under 2 stay for free in existing bedding (Private rooms). Children aged 2 or over must book their own bed. Please note that we cannot provide extra beds.   
+Bookings for 15 or more people qualify as group reservations and are subject to different Terms and Conditions. Please contact the property/hostel directly for more information.  No pets and no service animals are allowed at this property.  Please note that this property has a MAXIMUM STAY of 14 nights.",
+        latitude: 51.544770,
+        longitude: -0.175040,
+        has_wifi?: true,
+        has_breakfast?: false
+        )
+
+    l6.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/laia0ldvmfb6za42ffmf.webp"), filename: "/laia0ldvmfb6za42ffmf.webp")
+    l6.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/zlosnmit4yuyeilklbxm.webp"), filename: "/zlosnmit4yuyeilklbxm.webp")
+    l6.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/111.jpg"), filename: "/111.jpg")
+    l6.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/114.jpg"), filename: "/114.jpg")
+    l6.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/kpzj57woqgu9bivicmwv.jpeg"), filename: "/kpzj57woqgu9bivicmwv.jpeg")
+
     ro1 = Room.create!(
         listing_id: 1,
         room_type: "shared",
@@ -618,6 +698,42 @@ Things to note about our hostel:
 
     ro7.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Mad+Monkey/xcmxkgpdy8queij28q0a.webp"), filename: "xcmxkgpdy8queij28q0a.webp")
 
+    ro8 = Room.create!(
+        listing_id: 6,
+        room_type: "private",
+        room_title: "Standard Double Bed Private Shared Bathroom",
+        description: "Private Double Room with Shared Bathroom",
+        num_beds: 2,
+        price: 142.50
+        )
+
+    ro8.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/fw5wtixnbhzvw78jbudm.webp"), filename: "fw5wtixnbhzvw78jbudm.webp")
+    ro8.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/jgsw7cbjwtep9xhjj5vg.webp"), filename: "jgsw7cbjwtep9xhjj5vg.webp")
+
+    ro9 = Room.create!(
+            listing_id: 6,
+            room_type: "shared",
+            room_title: "Standard 6 Bed Mixed Dorm",
+            description: "Sleeps 6",
+            num_beds: 6,
+            price: 52.59
+            )
+
+    ro9.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/kbw7cadc3z5bob61s6eq.webp"), filename: "kbw7cadc3z5bob61s6eq.webp")
+    ro9.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/nnbcui1wc0gvsri3mvr2.webp"), filename: "nnbcui1wc0gvsri3mvr2.webp")
+    
+    ro10 = Room.create!(
+        listing_id: 6,
+        room_type: "shared",
+        room_title: "Standard 18 Bed Mixed Dorm",
+        description: "Sleeps 18",
+        num_beds: 18,
+        price: 45.50
+        )
+        
+    ro10.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/lgfxpn5x2ongrxbl9ds9.webp"), filename: "lgfxpn5x2ongrxbl9ds9.webp")
+    ro10.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/xqaxuwtolvgsqgzgne7u.webp"), filename: "xqaxuwtolvgsqgzgne7u.webp")
+                
     RE1 = Reservation.create!(
         listing_id: 1,
         user_id: 1,
@@ -781,6 +897,72 @@ Things to note about our hostel:
         end_date: "2024-02-12",
         refundable: true,
         created_at: "2024-02-17T22:08:23.251Z"
+    )
+
+    Reservation.create!(
+        listing_id: 6,
+        user_id: 3,
+        room_id: 8,
+        num_guests: 2,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2024-01-17T22:07:23.251Z"
+    )
+
+    Reservation.create!(
+        listing_id: 6,
+        user_id: 9,
+        room_id: 9,
+        num_guests: 5,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2024-01-17T22:08:23.251Z"
+    )
+
+    Reservation.create!(
+        listing_id: 6,
+        user_id: 8,
+        room_id: 10,
+        num_guests: 6,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2024-02-14T22:08:23.251Z"
+    )
+
+    Reservation.create!(
+        listing_id: 6,
+        user_id: 7,
+        room_id: 8,
+        num_guests: 1,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2024-02-11T22:08:23.251Z"
+    )
+
+    Reservation.create!(
+        listing_id: 6,
+        user_id: 6,
+        room_id: 9,
+        num_guests: 4,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2024-02-27T22:08:23.251Z"
+    )
+
+    Reservation.create!(
+        listing_id: 6,
+        user_id: 5,
+        room_id: 10,
+        num_guests: 8,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2024-02-17T22:08:52.251Z"
     )
 
     rev1 = Review.create!(
@@ -1043,6 +1225,114 @@ Review.create!(
     age_group: "20-25",
     trip_type: "business trip",
     feedback: "Enjoyed my stay. Nice atmosphere"
+  )
+
+  Review.create!(
+    user_id: 3,
+    listing_id: 6,
+    reservation_id: 15,
+    security: 8,
+    cleanliness: 8,
+    location: 8,
+    facilities: 8,
+    staff: 8,
+    value_for_money: 8, 
+    atmosphere: 8,
+    total_score: 8.0,
+    about_you: "male",
+    age_group: "20-25",
+    trip_type: "business trip",
+    feedback: "super charming place, adds a lot to the trip. staff was kind, bed was good, all clean. only unfortunate incident was my dad's wallet got stolen at night in the room, but he did leave it outside his locker, so not the hostel's fault :')"
+  )
+
+  Review.create!(
+    user_id: 9,
+    listing_id: 6,
+    reservation_id: 16,
+    security: 8,
+    cleanliness: 10,
+    location: 10,
+    facilities: 10,
+    staff: 8,
+    value_for_money: 10, 
+    atmosphere: 8,
+    total_score: 9.1,
+    about_you: "female",
+    age_group: "18-24",
+    trip_type: "weekend away",
+    feedback: "pretty good although a bit far out from the city"
+  )
+
+  Review.create!(
+    user_id: 8,
+    listing_id: 6,
+    reservation_id: 17,
+    security: 7,
+    cleanliness: 9,
+    location: 8,
+    facilities: 7,
+    staff: 9,
+    value_for_money: 8, 
+    atmosphere: 8,
+    total_score: 8.0,
+    about_you: "female",
+    age_group: "41+",
+    trip_type: "vacation",
+    feedback: "Palmers Swiss Cottage is a beautiful property. The staff are sincerly happy and helpful. It is just a good atmosphere. It's a bit out of central London, but worth the tube rides."
+  )
+
+  Review.create!(
+    user_id: 7,
+    listing_id: 6,
+    reservation_id: 18,
+    security: 10,
+    cleanliness: 10,
+    location: 10,
+    facilities: 10,
+    staff: 10,
+    value_for_money: 10, 
+    atmosphere: 10,
+    total_score: 10.0,
+    about_you: "couple",
+    age_group: "20-25",
+    trip_type: "weekend aaway",
+    feedback: "Great place and had good breakfast."
+  )
+
+  Review.create!(
+    user_id: 6,
+    listing_id: 6,
+    reservation_id: 19,
+    security: 10,
+    cleanliness: 10,
+    location: 10,
+    facilities: 10,
+    staff: 10,
+    value_for_money: 10, 
+    atmosphere: 10,
+    total_score: 10.0,
+    about_you: "female",
+    age_group: "41+",
+    trip_type: "business trip",
+    feedback: "Keep up the good work ! Top hostel!"
+  )
+
+  Review.create!(
+    user_id: 5,
+    listing_id: 6,
+    reservation_id: 20,
+    security: 8,
+    cleanliness: 8,
+    location: 8,
+    facilities: 8,
+    staff: 8,
+    value_for_money: 8, 
+    atmosphere: 8,
+    total_score: 8.0,
+    about_you: "all female group",
+    age_group: "20-25",
+    trip_type: "vacation",
+    feedback: "The staff here are super friendly and open to answer any questions. It is kinda far from the city center and the area didn't feel the safest but nothing to bad. The kitchen is really small i wouldn't plan to make any full meals here because no more than 2 people fit in the space. But other than that the bed rooms, coffee lounge, and bar area were nice and spacious."
   )
     
     puts "Done!"

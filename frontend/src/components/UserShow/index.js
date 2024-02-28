@@ -174,7 +174,7 @@ function UserShow() {
     
     useEffect(() => {
         const uniqueListingIds = Object.values(reservations).reduce((acc, reservation) => {
-            if (reservation && reservation.listing_id) {
+            if (reservation && reservation.listing_id && reservation.user_id === sessionUser.id) {
                 acc.add(reservation.listing_id);
             }
             return acc;
@@ -186,7 +186,7 @@ function UserShow() {
 
     useEffect(() => {
         const uniqueListingIds = Object.values(reservations).reduce((acc, reservation) => {
-            if (reservation && reservation.listing_id) {
+            if (reservation && reservation.listing_id && reservation.user_id === sessionUser.id) {
                 acc.add(reservation.listing_id);
             }
             return acc;
@@ -203,7 +203,7 @@ function UserShow() {
         const numberOfCountries = uniqueCountries.size;
 
         setcountryCount(numberOfCountries);
-    }, [reservations, listings]);
+    }, [reservations, listings, sessionUser]);
 
     useEffect(() => {
         if (sessionUser.date_of_birth !== null) {

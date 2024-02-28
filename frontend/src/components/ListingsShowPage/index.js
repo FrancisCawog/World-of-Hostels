@@ -815,8 +815,8 @@ function ListingsShowPage() {
               </div>
                 }
                 {numberOfReviews(listing?.id) >= 4 &&
-                <div className="view-reviews">
-                  <p className="read-more" onClick={() => setShowReviewModal(true)} >View all reviews</p>
+                <div className="view-reviews" onClick={() => setShowReviewModal(true)}>
+                  <p className="read-more" >View all reviews</p>
                   <img src={MyArrowSVG} style={{ width: '14px' }}/>
                 </div>
                 }
