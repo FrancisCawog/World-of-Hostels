@@ -11,7 +11,7 @@ import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
 import WhiteCoffeeSVG from "../../assets/pictures/icons/white-coffee.svg"
 import { useHistory } from 'react-router-dom';
 import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
-import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
+import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
 
 function ListingsIndexPage() {
   const reviews = useSelector((state) => state.reviews);
@@ -26,20 +26,24 @@ function ListingsIndexPage() {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  const checkInDate = (cart.checkIn || today.toISOString().split("T")[0]);
-  const checkOutDate = (cart.checkOut || tomorrow.toISOString().split("T")[0]);
-  const guests = cart.guests || "1"
+  const checkInDate = cart.checkIn || localStorage.getItem('checkInDate') || today.toISOString().split("T")[0];
+  const checkOutDate = cart.checkOut || localStorage.getItem('checkOutDate') || tomorrow.toISOString().split("T")[0];
+  const guests = cart.guests || localStorage.getItem('guests') || "1";
+  const location = cart.location || localStorage.getItem('location') || "";
 
   useEffect(() => {
-    dispatch(setCheckIn(checkInDate));
-    dispatch(setCheckOut(checkOutDate));
-    dispatch(updateGuests(guests));
-    
+    localStorage.setItem('location', location);
     localStorage.setItem('checkInDate', checkInDate);
     localStorage.setItem('checkOutDate', checkOutDate);
     localStorage.setItem('guests', guests);
-  }, []);
 
+    dispatch(setLocation(location));
+    dispatch(setCheckIn(checkInDate));
+    dispatch(setCheckOut(checkOutDate));
+    dispatch(updateGuests(guests));
+  }, [location, checkInDate, checkOutDate, guests]);
+  
+  
   useEffect(() => {
     if (cart.checkIn){
     dispatch(fetchListings(cart.checkIn, cart.checkOut)).catch((error) => {
@@ -135,7 +139,7 @@ const updateImageIndex = (listingId, direction) => {
           <Navigation />
         </div>
         <div className="listings-location">
-          <h2>Bangkok, Thailand</h2>
+          <h2>{location}</h2>
           <p>Showing {Object.values(listings).length} properties</p>
         </div>
         <div className="horizontal-line2" style={{ marginBottom: "20px" }}></div>

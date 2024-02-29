@@ -1,7 +1,7 @@
 import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.svg";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
+import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
 import { useDispatch, useSelector } from "react-redux";
 import users from "../../assets/pictures/icons/17115.png"
 import arrow from "../../assets/pictures/icons/icons8-arrow-30.png"
@@ -14,13 +14,13 @@ function SearchBar() {
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  const [location, setLocation] = useState("");
+  const [location, setLocations] = useState("");
   const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
   const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().split("T")[0]);
   const [guests, setGuests] = useState("1");
 
   const handleLocationChange = (e) => {
-    setLocation(e.target.value);
+    setLocations(e.target.value);
   };
 
   const handleCheckInDateChange = (e) => {
@@ -39,6 +39,7 @@ function SearchBar() {
 
   useEffect(() => {
     if (cart.checkIn !== "") {
+      setLocations(cart.location)
       setCheckInDate(cart.checkIn);
       setCheckOutDate(cart.checkOut);
       setGuests(cart.guests)
@@ -46,16 +47,31 @@ function SearchBar() {
   }, [cart]);
 
   const handleSearch = () => {
+    if (location === "") {
+      document.getElementById("location").focus();
+      return;
+    }
+  
+    const cartData = {
+      checkIn: checkInDate,
+      checkOut: checkOutDate,
+      guests: guests,
+      location: location,
+      refundable: true,
+    };
+  
+    localStorage.setItem('cart', JSON.stringify(cartData));
+  
+    dispatch(setLocation(location));
     dispatch(setCheckIn(checkInDate));
     dispatch(setCheckOut(checkOutDate));
     dispatch(updateGuests(guests));
-    
+  
     localStorage.setItem('checkInDate', checkInDate);
     localStorage.setItem('checkOutDate', checkOutDate);
     localStorage.setItem('guests', guests);
     history.push("/listings");
   };
-
 
   return (
     <div className="search-bar-container">
@@ -74,10 +90,10 @@ function SearchBar() {
                       type="text"
                       name="location"
                       id="location"
-                      placeholder="Bangkok, Thailand"
+                      // placeholder="Bangkok, Thailand"
                       value={location}
                       onChange={handleLocationChange}
-                      disabled={true}
+                      // disabled={true}
                     />
                     <label className="input-label">
                       Where do you want to go?

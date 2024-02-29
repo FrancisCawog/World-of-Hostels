@@ -4,6 +4,7 @@ const CLEAR_CART = "rooms/clearRooms";
 const UPDATE_GUESTS = "rooms/updateGuests";
 const SET_CHECK_IN = "rooms/setCheckIn";
 const SET_CHECK_OUT = "rooms/setCheckOut";
+const SET_LOCATION = "rooms/setLocation";
 
 export const setCart = (roomId, refundable) => ({
     type: SET_CART,
@@ -35,8 +36,13 @@ export const setCheckOut = (date) => ({
     payload: date
 });
 
+export const setLocation = (location) => ({
+    type: SET_LOCATION,
+    payload: location
+});
+
 const cartReducer = (
-    state = { cart: {}, guests: 1, checkIn: '', checkOut: '', refundable: true },
+    state = { cart: {}, guests: "", checkIn: '', checkOut: '', refundable: true, location: ""},
     action
   ) => {
     const newState = { ...state };
@@ -55,7 +61,7 @@ const cartReducer = (
             return { ...newState };
 
         case CLEAR_CART:
-            return { cart: {}, guests: 1, checkIn: null, checkOut: null };
+            return { cart: {}, guests: 1, checkIn: null, checkOut: null, location: null };
 
         case UPDATE_GUESTS:
             return { ...newState, guests: action.payload };
@@ -65,6 +71,9 @@ const cartReducer = (
 
         case SET_CHECK_OUT:
             return { ...newState, checkOut: action.payload };
+
+        case SET_LOCATION:
+            return { ...newState, location: action.payload };
 
         default:
             return state;

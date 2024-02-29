@@ -23,7 +23,7 @@ import { setCart } from "../../store/cart";
 import { removeCart } from "../../store/cart";
 import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 // import { useLocation } from 'react-router-dom';
-import { setCheckIn, setCheckOut, updateGuests } from "../../store/cart";
+import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
 import { fetchUsers } from "../../store/users";
 const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
@@ -61,19 +61,23 @@ function ListingsShowPage() {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  const checkInDate = (start_date || today.toISOString().split("T")[0]);
-  const checkOutDate = (end_date || tomorrow.toISOString().split("T")[0]);
-  const guests = parseInt(cart.guests, 10) || "1"
+  const checkInDate = cart.checkIn || localStorage.getItem('checkInDate') || today.toISOString().split("T")[0];
+  const checkOutDate = cart.checkOut || localStorage.getItem('checkOutDate') || tomorrow.toISOString().split("T")[0];
+  const guests = cart.guests || localStorage.getItem('guests') || "1";
+  const location = cart.location || localStorage.getItem('location') || "";
 
+  // UseEffect to persist cart data to localStorage
   useEffect(() => {
-    dispatch(setCheckIn(checkInDate));
-    dispatch(setCheckOut(checkOutDate));
-    dispatch(updateGuests(guests));
-    
+    localStorage.setItem('location', location);
     localStorage.setItem('checkInDate', checkInDate);
     localStorage.setItem('checkOutDate', checkOutDate);
     localStorage.setItem('guests', guests);
-  }, []);
+
+    dispatch(setLocation(location));
+    dispatch(setCheckIn(checkInDate));
+    dispatch(setCheckOut(checkOutDate));
+    dispatch(updateGuests(guests));
+  }, [location, checkInDate, checkOutDate, guests]);
 
   useEffect(() => {
     if (start_date){
