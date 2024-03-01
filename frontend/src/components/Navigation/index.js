@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import navIcon from "../../assets/pictures/icons/Screenshot 2023-11-19 at 9.22.41 PM.png";
 import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
 import { clearCart } from "../../store/cart";
+import SearchBar2 from '../SearchBar2';
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -343,7 +344,9 @@ function Navigation() {
                 </div>
             </Link>
           </div>
-          
+          <div>
+            <SearchBar2/>
+          </div>
           <div className="circles">
           {!sessionUser ? (
             <Link to="/login">
