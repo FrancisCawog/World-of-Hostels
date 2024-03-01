@@ -907,7 +907,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         start_date: "2024-01-28",
         end_date: "2024-02-12",
         refundable: true,
-        created_at: "2024-01-17T22:07:23.251Z"
+        created_at: "2024-02-17T22:01:23.251Z"
     )
 
     Reservation.create!(

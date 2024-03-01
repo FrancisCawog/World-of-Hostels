@@ -90,7 +90,7 @@ function SearchBar() {
   const handleInputBlur = () => {
     const timeoutId = setTimeout(() => {
       setInputFocused(false);
-    }, 100);
+    }, 200);
 
     setBlurTimeout(timeoutId);
   };
