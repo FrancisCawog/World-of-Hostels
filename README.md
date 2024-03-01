@@ -36,7 +36,6 @@ https://world-of-hostels.onrender.com
 - Add search feature to nav bar in listings show and index.
 - Prevent searches in the past and prevent start and end date on the same day.
 - Add more seeds data
-- Add more locations to search location feature.
 - Add facilities to listings show
 - Add edit reservation feature.
 - Add errors to sign-up/ login/ users edit

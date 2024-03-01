@@ -9,6 +9,8 @@ import arrow from "../../assets/pictures/icons/icons8-arrow-30.png"
 function SearchBar() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const listings = useSelector((state) => state.listings)
+  const history = useHistory();
   
   const today = new Date();
   const tomorrow = new Date(today);
@@ -18,6 +20,9 @@ function SearchBar() {
   const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
   const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().split("T")[0]);
   const [guests, setGuests] = useState("1");
+
+  const [uniqueCities, setUniqueCities] = useState([]);
+  const [isInputFocused, setInputFocused] = useState(false);
 
   const handleLocationChange = (e) => {
     setLocations(e.target.value);
@@ -35,8 +40,6 @@ function SearchBar() {
     setGuests(e.target.value);
   };
 
-  const history = useHistory();
-
   useEffect(() => {
     if (cart.checkIn !== "") {
       setLocations(cart.location)
@@ -47,8 +50,9 @@ function SearchBar() {
   }, [cart]);
 
   const handleSearch = () => {
-    if (location === "") {
+    if (!uniqueCities.includes(location)) {
       document.getElementById("location").focus();
+      setInputFocused(true);
       return;
     }
   
@@ -73,6 +77,30 @@ function SearchBar() {
     history.push("/listings");
   };
 
+  useEffect(() => {
+      const listingsArray = Object.values(listings);
+      setUniqueCities([...new Set(listingsArray.map((listing) => `${listing.city}, ${listing.country}`))]);
+  }, [listings]);
+
+  const handleInputFocus = () => {
+    setInputFocused(true);
+  };
+
+  const [blurTimeout, setBlurTimeout] = useState(null);
+  const handleInputBlur = () => {
+    const timeoutId = setTimeout(() => {
+      setInputFocused(false);
+    }, 100);
+
+    setBlurTimeout(timeoutId);
+  };
+
+  const handleDestinationButtonClick = (city) => {
+    clearTimeout(blurTimeout);
+    setInputFocused(false);
+    setLocations(city);
+  };
+
   return (
     <div className="search-bar-container">
       <div className="searchbar-wrapper">
@@ -86,21 +114,38 @@ function SearchBar() {
                     <img  style={{marginTop: "-5px", width:"20px", height:"20px"}} src={locationPic}/>
                   </div>
                   <div className={`input-wrapper ${location !== "" ? 'non-empty' : ''}`}>
-                     <input
+                  <input
                       type="text"
                       name="location"
                       id="location"
-                      // placeholder="Bangkok, Thailand"
                       value={location}
                       onChange={handleLocationChange}
-                      // disabled={true}
+                      autoComplete="off"
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
                     />
+                    
                     <label className="input-label">
                       Where do you want to go?
                     </label>
                   </div>
                 </div>
-              </div>       
+              </div> 
+
+              {isInputFocused && (
+                <div className="destination-selection">
+                  <div className="destination-selection-ul">
+                    {uniqueCities.map((city, index) => (
+                      <div key={index} className="destination-selection-li">
+                        <button className="destination-selection-button" onClick={() => handleDestinationButtonClick(city)}>
+                          {city}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+     
             </div>
 
             <div className="divider"></div>

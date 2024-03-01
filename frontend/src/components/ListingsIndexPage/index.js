@@ -30,6 +30,8 @@ function ListingsIndexPage() {
   const checkOutDate = cart.checkOut || localStorage.getItem('checkOutDate') || tomorrow.toISOString().split("T")[0];
   const guests = cart.guests || localStorage.getItem('guests') || "1";
   const location = cart.location || localStorage.getItem('location') || "";
+  const searchCity = location.split(',');
+  const filteredListings = Object.values(listings).filter((listing) => listing.city === searchCity[0])
 
   useEffect(() => {
     localStorage.setItem('location', location);
@@ -140,13 +142,13 @@ const updateImageIndex = (listingId, direction) => {
         </div>
         <div className="listings-location">
           <h2>{location}</h2>
-          <p>Showing {Object.values(listings).length} properties</p>
+          <p>Showing {Object.values(filteredListings).length} properties</p>
         </div>
         <div className="horizontal-line2" style={{ marginBottom: "20px" }}></div>
     </div>
 
     <div>
-    {Object.values(listings).map((listing) => {
+    {Object.values(filteredListings).map((listing) => {
       const currentImageIndex = imageIndexes[listing.id] || 0;
       const isCurrentlyHovered = hoveredListings[listing.id] || false;
       return (
