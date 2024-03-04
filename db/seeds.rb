@@ -458,7 +458,7 @@ The bedsheet can be changed every three nights of stay.
   
     l5 = Listing.create!(
         property_name: "Back Home Backpackers",
-        property_type: "hotel",
+        property_type: "hostel",
         address: "72/1 Samsen Rd.(soi 2), Banglampoo, Pranakorn",
         city: "Bangkok",
         country: "Thailand",
@@ -533,7 +533,7 @@ Things to note about our hostel:
 
     l6 = Listing.create!(
         property_name: "Palmers Lodge - Swiss Cottage",
-        property_type: "hotel",
+        property_type: "hostel",
         address: "40 College Crescent, Swiss Cottage",
         city: "London",
         country: "England",
@@ -610,6 +610,111 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
     l6.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/111.jpg"), filename: "/111.jpg")
     l6.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/114.jpg"), filename: "/114.jpg")
     l6.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/kpzj57woqgu9bivicmwv.jpeg"), filename: "/kpzj57woqgu9bivicmwv.jpeg")
+
+    l7 = Listing.create!(
+        property_name: "Wombat's City Hostel London",
+        property_type: "hostel",
+        address: "7 Dock Street",
+        city: "London",
+        country: "England",
+        check_in: "14:00 - 23:00",
+        check_out: "10:00",
+        description: 
+"A safe haven in the middle of the metropolis: We took a traditional brick building with roots dating back to the 1800s and set a new standard for hostel life in the UK.
+What was once sailors' accommodation is now a hostel that caters for all the needs of the modern traveller. With great attention to detail, we have created a hostel in London that celebrates the heritage of our historic building.
+The old oak that once formed part of sturdy ships and churches is now immortalised in our furnishings throughout the house. The beers you drink here will be served on a bar made from 500 year old wood!
+
+Our Wombat's City Hostel is located in the London Borough of Tower Hamlets, right next to the famous Tower Bridge and Tower of London, charming markets, authentic pubs and many other places of historical interest.
+A short walk will take you to trendy Shoreditch with its vibrant street art, the lively nightlife of Hoxton Square and Old Street and finally Brick Lane, which has become one of the most popular spots.
+All other London attractions are easily accessible by public transport: Aldgate East and Tower Bridge underground and DLR stations are just a stone's throw away.
+
+After a long and exciting day in London, our hostel awaits you with a cosy courtyard, a spacious lobby with our own Wombat's Cafe (exclusive Wombat's Roast included) and womBAR. Here you can relax and enjoy our always unexpected offers.
+All rooms are equipped with en-suite bathroom and private lockers.
+
+Includes:
+- Bed linen.
+- WiFi.
+- Our own Wombat's city maps.
+- Wombat's Café.
+- The womBAR for endless parties.
+- A guest kitchen open to all who want to satisfy their own culinary needs.
+- 24/7 reception.
+- Secure luggage storage.
+- Rental items (umbrellas, hairdryers, adaptors: everything a traveller could need).
+- Coin-operated laundry facilities (washing and drying), so you can revitalise your clothes!
+
+Our famous Tasty Brekkie buffet guarantees you enough energy for your exciting day in London. You can buy breakfast for an economical price at reception.
+
+(Minimum age 18 years).
+
+NON-REFUNDABLE RESERVATIONS:
+* Full payment is required at the time of booking and is non-refundable.
+* If you leave early, cancel or do not honour this booking, you will not be refunded.
+* Any extension of this stay requires a new booking for the additional dates, subject to availability and current rates.
+
+In the event of invalid credit card details, you will be contacted by our team. You will have 48 hours to provide valid credit card details, otherwise we reserve the right to cancel the booking.",
+        facilities: "[Security, Lockers,Key Card Access,Common Room,Elevator, Bicycle,Parking,BBQ,Adaptors]",
+        house_rules: "
+CANCELLATION CONDITIONS
+
+FULLY FLEXIBLE RESERVATIONS:
+*Bookings can be changed (depending on availability) and cancelled up to 48 HOURS prior to arrival.
+*In case of a No-Show or delayed cancellation request, the amount of the FIRST night will be charged.
+
+*If you need to change the dates of your reservation, please let us know via e-mail: booklondon@wombats.eu
+*We need to know the name and the reference number of your reservation in order to help you.
+
+In case of a cancellation, we recommend to cancel directly through your Hostelworld profile, however, you are also welcome to contact us directly.
+
+NON-REFUNDABLE RESERVATIONS:
+* Full payment is required at the time of booking and is non-refundable.
+* If you depart earlier, cancel or fail to honour this reservation, you will not be refunded.
+* Any extensions of this stay require a new reservation for the additional dates - subject to availability and current rates
+
+In case of invalid credit card details, our team will contact you. You'll have 48 hours to provide valid credit card details, otherwise we reserve the right to cancel the reservation.
+
+GENERAL INFORMATION:
+
+Check-in starts at 2 p.m.
+Check-out is until 10 a.m.
+
+In case of an earlier arrival or later departure, you are welcome to use our luggage room meanwhile.
+
+You need a valid photo ID in order to check-in! No ID = No check-in!
+
+24/7 front desk
+
+Payment upon arrival by cash, or cards (Visa, MasterCard, Maestro)
+Please note the property may pre-authorise your card before arrival.
+
+All dormitories include:
+
+Power sockets
+Linen & bedding
+Personal locker (operated via key card)
+
+Please note:
+- the minimum age restriction is 18!
+- the maximum lenght of stay is 7 nights.
+- Hooligans out there: please find an alternative accommodation to our hostel
+
+Thanks for reading this.
+We wish you a nice trip and look forward to welcoming you!
+
+Your womCrew",
+        latitude: 51.510430,
+        longitude: -0.068170,
+        has_wifi?: true,
+        has_breakfast?: true
+        )
+
+    l7.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/pjevcbvykdzliw2grhlb.webp"), filename: "/pjevcbvykdzliw2grhlb.webp")
+    l7.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/xfv0nl7n5ifatggyc9nf.webp"), filename: "/xfv0nl7n5ifatggyc9nf.webp")
+    l7.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/k5trz7w3shkt1ayd9n1x.webp"), filename: "/k5trz7w3shkt1ayd9n1x.webp")
+    l7.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/d6apkcbwm5g28u1ssf7r.webp"), filename: "/d6apkcbwm5g28u1ssf7r.webp")
+    l7.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/tprycopzreej8gkiwz8h.webp"), filename: "/tprycopzreej8gkiwz8h.webp")
+    l7.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/i9cheksq3lgn1nsipuxi.webp"), filename: "/i9cheksq3lgn1nsipuxi.webp")
+    l7.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/uaajkhyf9cccziyvxxpi.webp"), filename: "/uaajkhyf9cccziyvxxpi.webp")
 
     ro1 = Room.create!(
         listing_id: 1,
@@ -733,6 +838,32 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         
     ro10.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/lgfxpn5x2ongrxbl9ds9.webp"), filename: "lgfxpn5x2ongrxbl9ds9.webp")
     ro10.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Palmers/xqaxuwtolvgsqgzgne7u.webp"), filename: "xqaxuwtolvgsqgzgne7u.webp")
+
+    ro11 = Room.create!(
+        listing_id: 7,
+        room_type: "private",
+        room_title: "Double Bed Private Ensuite",
+        description: "Private Double Room with * a comfy double bed * private shower and toilet facilities ensuite (towels included) * wardrobe * free WIFI",
+        num_beds: 2,
+        price: 190.00
+        )
+        
+    ro11.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/p0ocbpaebqv8wp1gfgkl.webp"), filename: "/p0ocbpaebqv8wp1gfgkl.webp")
+    ro11.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/aj5lm1emwsaftxgdxyp7.webp"), filename: "/aj5lm1emwsaftxgdxyp7.webp")
+    ro11.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/yea7sbtnglzrzbko7okb.webp"), filename: "/yea7sbtnglzrzbko7okb.webp")
+
+    ro12 = Room.create!(
+        listing_id: 7,
+        room_type: "shared",
+        room_title: "8 Bed Mixed Dorm Ensuite",
+        description: "Shared 8-bed dorm MIXED with * 4 ccomfy bunk beds–equipped with mobile phone holder/USB socket, small safe with sockets/adapters, small fan * private shower and toilet facilities ensuite * security lockers * free WIFI * Minimum age 18",
+        num_beds: 8,
+        price: 35.25
+        )
+        
+    ro12.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/yd5gifrkjscicrxs67rl.webp"), filename: "/yd5gifrkjscicrxs67rl.webp")
+    ro12.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/fsbil5rkb5ofu447dik6.webp"), filename: "/fsbil5rkb5ofu447dik6.webp")
+    ro12.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Wombat/wgywqgipnk7jgasvmyyt.webp"), filename: "/wgywqgipnk7jgasvmyyt.webp")
                 
     RE1 = Reservation.create!(
         listing_id: 1,
@@ -778,7 +909,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:54.251Z"
     )
 
-    Reservation.create!(
+    RE5 =  Reservation.create!(
         listing_id: 3,
         user_id: 7,
         room_id: 3,
@@ -789,7 +920,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:55.251Z"
     )
 
-    Reservation.create!(
+    RE6 = Reservation.create!(
         listing_id: 2,
         user_id: 9,
         room_id: 2,
@@ -800,7 +931,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:56.251Z"
     )
 
-    Reservation.create!(
+    RE7 = Reservation.create!(
         listing_id: 4,
         user_id: 5,
         room_id: 4,
@@ -811,7 +942,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:57.251Z"
     )
 
-    Reservation.create!(
+    RE8 = Reservation.create!(
         listing_id: 1,
         user_id: 1,
         room_id: 7,
@@ -822,7 +953,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:58.251Z"
     )
 
-    Reservation.create!(
+    RE9 = Reservation.create!(
         listing_id: 3,
         user_id: 5,
         room_id: 3,
@@ -833,7 +964,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:59.251Z"
     )
 
-    Reservation.create!(
+    RE10 = Reservation.create!(
         listing_id: 3,
         user_id: 8,
         room_id: 3,
@@ -844,7 +975,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:41.251Z"
     )
 
-    Reservation.create!(
+    RE11 = Reservation.create!(
         listing_id: 1,
         user_id: 2,
         room_id: 6,
@@ -855,7 +986,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:31.251Z"
     )
 
-    Reservation.create!(
+    RE12 = Reservation.create!(
         listing_id: 4,
         user_id: 6,
         room_id: 4,
@@ -866,7 +997,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:21.251Z"
     )
 
-    Reservation.create!(
+    RE13 = Reservation.create!(
         listing_id: 2,
         user_id: 4,
         room_id: 2,
@@ -877,7 +1008,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:11.251Z"
     )
 
-    Reservation.create!(
+    RE14 = Reservation.create!(
         listing_id: 5,
         user_id: 10,
         room_id: 5,
@@ -888,7 +1019,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:01.251Z"
     )
 
-    Reservation.create!(
+    RE15 = Reservation.create!(
         listing_id: 3,
         user_id: 1,
         room_id: 1,
@@ -899,7 +1030,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:08:23.251Z"
     )
 
-    Reservation.create!(
+    RE16 = Reservation.create!(
         listing_id: 6,
         user_id: 3,
         room_id: 8,
@@ -910,7 +1041,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-17T22:01:23.251Z"
     )
 
-    Reservation.create!(
+    RE17 = Reservation.create!(
         listing_id: 6,
         user_id: 9,
         room_id: 9,
@@ -921,7 +1052,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-01-17T22:08:23.251Z"
     )
 
-    Reservation.create!(
+    RE18 = Reservation.create!(
         listing_id: 6,
         user_id: 8,
         room_id: 10,
@@ -932,7 +1063,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-14T22:08:23.251Z"
     )
 
-    Reservation.create!(
+    RE19 = Reservation.create!(
         listing_id: 6,
         user_id: 7,
         room_id: 8,
@@ -943,7 +1074,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-11T22:08:23.251Z"
     )
 
-    Reservation.create!(
+    RE20 = Reservation.create!(
         listing_id: 6,
         user_id: 6,
         room_id: 9,
@@ -954,7 +1085,7 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         created_at: "2024-02-27T22:08:23.251Z"
     )
 
-    Reservation.create!(
+    RE21 = Reservation.create!(
         listing_id: 6,
         user_id: 5,
         room_id: 10,
@@ -963,6 +1094,50 @@ Bookings for 15 or more people qualify as group reservations and are subject to 
         end_date: "2024-02-12",
         refundable: true,
         created_at: "2024-02-17T22:08:52.251Z"
+    )
+
+    RE22 = Reservation.create!(
+        listing_id: 7,
+        user_id: 4,
+        room_id: 11,
+        num_guests: 2,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2023-02-11T22:08:23.251Z"
+    )
+
+    RE23 = Reservation.create!(
+        listing_id: 7,
+        user_id: 5,
+        room_id: 12,
+        num_guests: 1,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2022-02-27T22:08:23.251Z"
+    )
+
+    RE24 = Reservation.create!(
+        listing_id: 7,
+        user_id: 6,
+        room_id: 12,
+        num_guests: 8,
+        start_date: "2024-01-28",
+        end_date: "2024-02-12",
+        refundable: true,
+        created_at: "2023-12-17T22:08:52.251Z"
+    )
+
+    RE25 = Reservation.create!(
+        listing_id: 7,
+        user_id: 1,
+        room_id: 12,
+        num_guests: 4,
+        start_date: "2024-01-24",
+        end_date: "2024-02-02",
+        refundable: true,
+        created_at: "2024-12-11T22:12:42.251Z"
     )
 
     rev1 = Review.create!(
@@ -1230,7 +1405,7 @@ Review.create!(
   Review.create!(
     user_id: 3,
     listing_id: 6,
-    reservation_id: 15,
+    reservation_id: 16,
     security: 8,
     cleanliness: 8,
     location: 8,
@@ -1248,7 +1423,7 @@ Review.create!(
   Review.create!(
     user_id: 9,
     listing_id: 6,
-    reservation_id: 16,
+    reservation_id: 17,
     security: 8,
     cleanliness: 10,
     location: 10,
@@ -1266,7 +1441,7 @@ Review.create!(
   Review.create!(
     user_id: 8,
     listing_id: 6,
-    reservation_id: 17,
+    reservation_id: 18,
     security: 7,
     cleanliness: 9,
     location: 8,
@@ -1284,7 +1459,7 @@ Review.create!(
   Review.create!(
     user_id: 7,
     listing_id: 6,
-    reservation_id: 18,
+    reservation_id: 19,
     security: 10,
     cleanliness: 10,
     location: 10,
@@ -1302,7 +1477,7 @@ Review.create!(
   Review.create!(
     user_id: 6,
     listing_id: 6,
-    reservation_id: 19,
+    reservation_id: 20,
     security: 10,
     cleanliness: 10,
     location: 10,
@@ -1320,7 +1495,7 @@ Review.create!(
   Review.create!(
     user_id: 5,
     listing_id: 6,
-    reservation_id: 20,
+    reservation_id: 21,
     security: 8,
     cleanliness: 8,
     location: 8,
@@ -1333,6 +1508,60 @@ Review.create!(
     age_group: "20-25",
     trip_type: "vacation",
     feedback: "The staff here are super friendly and open to answer any questions. It is kinda far from the city center and the area didn't feel the safest but nothing to bad. The kitchen is really small i wouldn't plan to make any full meals here because no more than 2 people fit in the space. But other than that the bed rooms, coffee lounge, and bar area were nice and spacious."
+  )
+
+  Review.create!(
+    user_id: 4,
+    listing_id: 7,
+    reservation_id: 22,
+    security: 10,
+    cleanliness: 10,
+    location: 10,
+    facilities: 10,
+    staff: 10,
+    value_for_money: 10, 
+    atmosphere: 10,
+    total_score: 10.0,
+    about_you: "couple",
+    age_group: "25-30",
+    trip_type: "weekend aaway",
+    feedback: "Really helpful and friendly staff. Café & bar seemed social."
+  )
+
+  Review.create!(
+    user_id: 5,
+    listing_id: 7,
+    reservation_id: 23,
+    security: 8,
+    cleanliness: 10,
+    location: 8,
+    facilities: 10,
+    staff: 8,
+    value_for_money: 10, 
+    atmosphere: 8,
+    total_score: 8.9,
+    about_you: "all female group",
+    age_group: "20-25",
+    trip_type: "vacation",
+    feedback: "Great little place. Bit of a travel to get around. Yet the tube is close by and still one hell of a good spot."
+  )
+
+  Review.create!(
+    user_id: 6,
+    listing_id: 7,
+    reservation_id: 24,
+    security: 10,
+    cleanliness: 10,
+    location: 8,
+    facilities: 8,
+    staff: 6,
+    value_for_money: 8, 
+    atmosphere: 10,
+    total_score: 8.6,
+    about_you: "female",
+    age_group: "41+",
+    trip_type: "business trip",
+    feedback: "Everything was so good! The hostel felt almost like a hotel, l'm little surprised of that. So clean and many facilities! Security lockers were also super!"
   )
     
     puts "Done!"
