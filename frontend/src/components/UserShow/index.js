@@ -25,6 +25,7 @@ import NationalityModal from "../NationalityModal";
 import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 import BookingDetailsModal from "../BookingDetailsModal"
+import SearchBar2 from "../SearchBar2";
 const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 function UserShow() {
@@ -535,10 +536,12 @@ function UserShow() {
                 <>
                     <div className="my-trips">
                         <p>My Trips</p>
-                            <br/>
                         <p>Coming Soon</p>
 
                         {futureReservations.length === 0 ? (
+                            <>
+                            <div style={{width: "125%"}}>
+
                             <div className="bus-div">
                                 <img src="https://www.hostelworld.com/_nuxt/img/05d49c7.svg"/>
                                 <div className="other-ready">
@@ -546,6 +549,11 @@ function UserShow() {
                                 <p id="ready">Ready to start looking?</p>
                                 </div>
                             </div>
+                        
+                            <SearchBar2/>
+                            </div>
+                            
+                            </>
                             ) : (
                             <>
                                 {groupReservationsByTime(futureReservations).map((reservation) => {
