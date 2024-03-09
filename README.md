@@ -32,7 +32,7 @@ https://world-of-hostels.onrender.com
 ### Future Implementions/ Open Issues
 - In the listings show and nav, fix the calendar style.
 - In splash page, fix calendar style.
-- Fix guests button in both listings show,splash page, and nav.
+- Fix guests button in both listings show and nav. 
 - Fix dates that show in nav bar.
 - Prevent searches in the past and prevent start and end date on the same day.
 - Add more seeds data
