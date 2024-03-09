@@ -5,6 +5,10 @@ import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/
 import { useDispatch, useSelector } from "react-redux";
 import users from "../../assets/pictures/icons/17115.png"
 import arrow from "../../assets/pictures/icons/icons8-arrow-30.png"
+import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
+import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg"
+import minus from "../../assets/pictures/icons/minus.svg"
+import grayminus from "../../assets/pictures/icons/—Pngtree—vector minus icon_4239642.png"
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -19,10 +23,11 @@ function SearchBar() {
   const [location, setLocations] = useState("");
   const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
   const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().split("T")[0]);
-  const [guests, setGuests] = useState("1");
+  const [guests, setGuests] = useState(1);
 
   const [uniqueCities, setUniqueCities] = useState([]);
   const [isInputFocused, setInputFocused] = useState(false);
+  const [isInputGuestFocused, setInputGuestFocused] = useState(false);
 
   const handleLocationChange = (e) => {
     setLocations(e.target.value);
@@ -36,9 +41,13 @@ function SearchBar() {
     setCheckOutDate(e.target.value);
   };
 
-  const handleGuestsChange = (e) => {
-    setGuests(e.target.value);
-  };
+  const handleGuestsChange = (action) => {
+    if (action === 'add') {
+      setGuests(prevGuests => (prevGuests < 10) ? prevGuests + 1 : prevGuests);
+    } else if (action === 'subtract') {
+      setGuests(prevGuests => (prevGuests > 1) ? prevGuests - 1 : prevGuests);
+    }
+  };  
 
   useEffect(() => {
     if (cart.checkIn !== "") {
@@ -86,6 +95,10 @@ function SearchBar() {
     setInputFocused(true);
   };
 
+  const handleGuestInputFocus = () => {
+    setInputGuestFocused(true);
+  };
+
   const [blurTimeout, setBlurTimeout] = useState(null);
   const handleInputBlur = () => {
     const timeoutId = setTimeout(() => {
@@ -115,16 +128,15 @@ function SearchBar() {
                   </div>
                   <div className={`input-wrapper ${location !== "" ? 'non-empty' : ''}`}>
                   <input
-                      type="text"
-                      name="location"
-                      id="location"
-                      value={location}
-                      onChange={handleLocationChange}
-                      autoComplete="off"
-                      onFocus={handleInputFocus}
-                      onBlur={handleInputBlur}
-                    />
-                    
+                    type="text"
+                    name="location"
+                    id="location"
+                    value={location}
+                    onChange={handleLocationChange}
+                    autoComplete="off"
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
+                  />       
                     <label className="input-label">
                       Where do you want to go?
                     </label>
@@ -213,12 +225,13 @@ function SearchBar() {
                     </div>
                     <div className="input-wrapper">
                       <input
-                        type="number"
+                        type="text"
                         name="guests"
                         id="guests"
-                        placeholder="Guests"
-                        value={guests}
                         onChange={handleGuestsChange}
+                        value={guests}
+                        autoComplete="off"
+                        onFocus={handleGuestInputFocus}
                       />
                       <label className="input-label4">
                         Guests
@@ -228,6 +241,51 @@ function SearchBar() {
                 </div>
               </div>
             </div>
+
+            {isInputGuestFocused && (
+                <div className="guests-selection">
+                  <div className="guests-inner-selection">
+                    <div className="guests-label-selection"> 
+                      <div>
+                        <img src={users} style={{width: "20px", height: "20px", marginTop: "5px"}}/>
+                      </div>
+                      <span>
+                        Guests
+                      </span>
+                    </div>
+
+                    <div className="guests-counter"> 
+                      {guests > 1 ? (
+                      <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
+                        <img src={minus} alt="Minus" />
+                      </button> 
+                      ):( 
+                        <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                          <img src={grayminus} alt="Minus" />
+                        </button>
+                      )}
+
+                      <input className="guests-counter-number"
+                        type="text"
+                        name="guests"
+                        id="guests"
+                        value={guests}
+                        autoComplete="off"
+                        onChange={handleGuestsChange}
+                      />
+                      {guests !== 10 ? (
+                      <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
+                        <img src={add} alt="add" />
+                      </button> 
+                      ):( 
+                        <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                          <img src={grayadd} alt="add" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
           
           <button className="let-go-button" onClick={handleSearch} style={{height: "50px", display: "flex", alignItems: "center"}}>
             Let's Go!
