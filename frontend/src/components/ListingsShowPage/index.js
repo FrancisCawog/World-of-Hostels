@@ -13,7 +13,7 @@ import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.
 import person from "../../assets/pictures/icons/user-128.svg"
 import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
 import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg"
-import minus from "../../assets/pictures/icons/minus.svg"
+import minus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com regular.svg"
 import ListingsModal from "../ListingsModal";
 import ListingsShowReviewModal from "../ListingsShowReviewModal";
 import Navigation from "../Navigation";

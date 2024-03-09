@@ -1,5 +1,5 @@
 import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,14 +7,15 @@ import users from "../../assets/pictures/icons/17115.png"
 import arrow from "../../assets/pictures/icons/icons8-arrow-30.png"
 import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
 import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg"
-import minus from "../../assets/pictures/icons/minus.svg"
-import grayminus from "../../assets/pictures/icons/—Pngtree—vector minus icon_4239642.png"
+import minus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com regular.svg"
+import grayminus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
 
 function SearchBar() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const listings = useSelector((state) => state.listings)
   const history = useHistory();
+  const guestsSelectionRef = useRef(null);
   
   const today = new Date();
   const tomorrow = new Date(today);
@@ -54,7 +55,7 @@ function SearchBar() {
       setLocations(cart.location)
       setCheckInDate(cart.checkIn);
       setCheckOutDate(cart.checkOut);
-      setGuests(cart.guests)
+      setGuests(parseInt(cart.guests, 10) || 1)
     }
   }, [cart]);
 
@@ -113,6 +114,24 @@ function SearchBar() {
     setInputFocused(false);
     setLocations(city);
   };
+
+  const handleGuestsSelectionClick = (e) => {
+    e.stopPropagation();
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (guestsSelectionRef.current && !guestsSelectionRef.current.contains(event.target)) {
+        setInputGuestFocused(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="search-bar-container">
@@ -232,6 +251,9 @@ function SearchBar() {
                         value={guests}
                         autoComplete="off"
                         onFocus={handleGuestInputFocus}
+                        readOnly
+                        ref={guestsSelectionRef} 
+                        onClick={handleGuestsSelectionClick}
                       />
                       <label className="input-label4">
                         Guests
@@ -243,7 +265,7 @@ function SearchBar() {
             </div>
 
             {isInputGuestFocused && (
-                <div className="guests-selection">
+                <div className="guests-selection" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick}>
                   <div className="guests-inner-selection">
                     <div className="guests-label-selection"> 
                       <div>
@@ -272,6 +294,7 @@ function SearchBar() {
                         value={guests}
                         autoComplete="off"
                         onChange={handleGuestsChange}
+                        readOnly
                       />
                       {guests !== 10 ? (
                       <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
