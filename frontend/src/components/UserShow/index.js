@@ -542,15 +542,16 @@ function UserShow() {
                             <>
                             <div style={{width: "125%"}}>
 
-                            <div className="bus-div">
-                                <img src="https://www.hostelworld.com/_nuxt/img/05d49c7.svg"/>
-                                <div className="other-ready">
-                                <p id="other">Others are busy booking.</p>
-                                <p id="ready">Ready to start looking?</p>
+                                <div className="bus-div">
+                                    <img src="https://www.hostelworld.com/_nuxt/img/05d49c7.svg"/>
+                                    <div className="other-ready">
+                                    <p id="other">Others are busy booking.</p>
+                                    <p id="ready">Ready to start looking?</p>
+                                    </div>
                                 </div>
+                            <div style={{width: "45rem"}}>
+                                <SearchBar2/>
                             </div>
-                        
-                            <SearchBar2/>
                             </div>
                             
                             </>

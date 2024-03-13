@@ -6,13 +6,16 @@
     flex-direction: row;
     gap: 0.25rem;
     padding: 0.25rem;
+}
+
+.inline-form-small.listings{
     min-width: 50rem;
     max-width: 60rem;
 }
 
 .destination-container-input {
     position: relative;
-    /* box-sizing: inherit; */
+    box-sizing: inherit;
 }
 
 .search-input-prefix {
@@ -47,10 +50,17 @@
     grid-template-rows: 1fr auto;
     margin-top: 5rem;
     position: absolute;
-    left: 66%;
     width: 13rem;
     z-index: 600;
     border-radius: 1rem;
     padding-left: .5rem;
     padding-right: .5rem;
+}
+
+.guests-selection2.listings {
+    left: 66%;
+}
+
+.guests-selection2.users {
+    margin-left: 28%;
 }

@@ -2,6 +2,8 @@ import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.sv
 import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import xImage from "../../assets/pictures/icons/close-x.svg"
 import users from "../../assets/pictures/icons/17115.png"
@@ -28,11 +30,14 @@ function SearchBar2() {
     const [location, setLocations] = useState("");
     const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
     const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().split("T")[0]);
-    const [guests, setGuests] = useState("1");
+    const [guests, setGuests] = useState(1);
   
     const [uniqueCities, setUniqueCities] = useState([]);
     const [isInputFocused, setInputFocused] = useState(false);
     const [isInputGuestFocused, setInputGuestFocused] = useState(false);
+
+    const locationPath = useLocation()
+    const isListingsPage = locationPath.pathname === "/listings";
   
     const handleLocationChange = (e) => {
       setLocations(e.target.value);
@@ -157,7 +162,7 @@ const handleDateRangeChange = (item) => {
         <div className="search-form-container">
             <div className="search-form-wrapper">
                 <div className="search-form-inline">
-                    <div className="inline-form-small" >
+                    <div className={`inline-form-small ${isListingsPage ? 'listings' : ''}`}>
                         <div className="destination-container">
                             <div className="destination-container-input">
                                 <div className="input-inner-prefix">
@@ -281,7 +286,7 @@ const handleDateRangeChange = (item) => {
                         </div>
 
                             {isInputGuestFocused && (
-                                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} >
+                                <div className={`guests-selection2 ${isListingsPage ? 'listings' : 'users'}`} ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} >
                                 <div className="guests-inner-selection">
                                 <div className="guests-label-selection"> 
                                 <div>
