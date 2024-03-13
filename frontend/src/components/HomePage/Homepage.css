@@ -117,7 +117,7 @@ img {
     font-weight: 400;
     letter-spacing: 0px;
     line-height: 1.5rem;
-    border-style: initial;
+    border-style: none;
     border-radius: 1rem;
     margin: 0px;
 }

@@ -9,12 +9,17 @@ import glass from "../../assets/pictures/icons/icons8-search (1).svg"
 import "./SearchBar2.css"
 import { DateRange } from 'react-date-range'
 import format from 'date-fns/format'
+import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
+import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg"
+import minus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com regular.svg"
+import grayminus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
 
 function SearchBar2() {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
     const listings = useSelector((state) => state.listings)
     const history = useHistory();
+    const guestsSelectionRef = useRef(null);
     
     const today = new Date();
     const tomorrow = new Date(today);
@@ -27,14 +32,19 @@ function SearchBar2() {
   
     const [uniqueCities, setUniqueCities] = useState([]);
     const [isInputFocused, setInputFocused] = useState(false);
+    const [isInputGuestFocused, setInputGuestFocused] = useState(false);
   
     const handleLocationChange = (e) => {
       setLocations(e.target.value);
     };
   
-    const handleGuestsChange = (e) => {
-      setGuests(e.target.value);
-    };
+    const handleGuestsChange = (action) => {
+        if (action === 'add') {
+          setGuests(prevGuests => (prevGuests < 10) ? prevGuests + 1 : prevGuests);
+        } else if (action === 'subtract') {
+          setGuests(prevGuests => (prevGuests > 1) ? prevGuests - 1 : prevGuests);
+        }
+      };  
   
     useEffect(() => {
       if (cart.checkIn !== "") {
@@ -81,6 +91,10 @@ function SearchBar2() {
     const handleInputFocus = () => {
       setInputFocused(true);
     };
+
+    const handleGuestInputFocus = () => {
+        setInputGuestFocused(true);
+      };
   
     const [blurTimeout, setBlurTimeout] = useState(null);
     const handleInputBlur = () => {
@@ -119,6 +133,25 @@ const handleDateRangeChange = (item) => {
 
   // get the target element to toggle 
   const refOne = useRef(null)
+  
+
+  const handleGuestsSelectionClick = (e) => {
+    e.stopPropagation();
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (guestsSelectionRef.current && !guestsSelectionRef.current.contains(event.target)) {
+        setInputGuestFocused(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
     return (
         <div className="search-form-container">
@@ -133,7 +166,7 @@ const handleDateRangeChange = (item) => {
                                             <img style={{marginTop: "-5px", width:"20px", height:"20px"}} src={locationPic}/>
                                         </div>
                                     </div>
-                                    <div className={`input-wrapper ${location !== "" ? 'non-empty' : ''}`}>
+                                    <div className={`input-wrapper ${location !== "" ? 'non-empty' : ''}`} >
                                         <input
                                             type="text"
                                             name="location"
@@ -227,29 +260,79 @@ const handleDateRangeChange = (item) => {
                                 <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
                                 </div>
                                 <div className="input-wrapper">
-                                <input
-                                    type="number"
-                                    name="guests"
-                                    id="guests"
-                                    placeholder="Guests"
-                                    value={guests}
-                                    onChange={handleGuestsChange}
-                                />
-                                <label className="input-label4">
-                                    Guests
-                                </label>
+                                    <input
+                                        type="text"
+                                        name="guests"
+                                        id="guests"
+                                        onChange={handleGuestsChange}
+                                        value={guests}
+                                        autoComplete="off"
+                                        onFocus={handleGuestInputFocus}
+                                        readOnly
+                                        ref={guestsSelectionRef} 
+                                        onClick={handleGuestsSelectionClick}
+                                    />
+                                    <label className="input-label4">
+                                        Guests
+                                    </label>
                                 </div>
                             </div>
                             </div>
                         </div>
+
+                            {isInputGuestFocused && (
+                                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} >
+                                <div className="guests-inner-selection">
+                                <div className="guests-label-selection"> 
+                                <div>
+                                <img src={users} style={{width: "20px", height: "20px", marginTop: "5px"}}/>
+                                </div>
+                                <span>
+                                Guests
+                                </span>
+                                </div>
+                                
+                                <div className="guests-counter" style={{marginLeft: "5px"}}> 
+                                {guests > 1 ? (
+                                    <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
+                                    <img src={minus} alt="Minus" />
+                                    </button> 
+                                    ):( 
+                                        <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                        <img src={grayminus} alt="Minus" />
+                                        </button>
+                                        )}
+                                        
+                                        <input className="guests-counter-number"
+                                        type="text"
+                                        name="guests"
+                                        id="guests"
+                                        value={guests}
+                                        autoComplete="off"
+                                        onChange={handleGuestsChange}
+                                        readOnly
+                                        />
+                                        {guests !== 10 ? (
+                                            <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
+                                            <img src={add} alt="add" />
+                                            </button> 
+                                            ):( 
+                                                <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                                <img src={grayadd} alt="add" />
+                                                </button>
+                                                )}
+                                                </div>
+                                                </div>
+                                                </div>
+                                            )}
                     
                         <button className="let-go-button" onClick={handleSearch} style={{height: "50px", display: "flex", alignItems: "center", padding: "0px", width: "50px"}}>
                             <img src={glass} style={{width: "24px", height: "24px", marginLeft: "10px"}}/>
                         </button>
                     </div>
+                    </div>
                 </div>
             </div>
-        </div>
     )
 }
 
