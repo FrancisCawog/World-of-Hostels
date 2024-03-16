@@ -1048,10 +1048,8 @@ img {
   line-height: 1.25rem;
   text-align: center;
   width: 2.1875rem;
-  border-width: initial;
   border-style: none;
-  border-color: initial;
-  border-image: initial;
+  border: none;
   margin: 0px 0.25rem;
   outline: none;
 }
