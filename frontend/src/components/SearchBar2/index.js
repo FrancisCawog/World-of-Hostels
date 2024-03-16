@@ -37,7 +37,7 @@ function SearchBar2() {
     const [isInputGuestFocused, setInputGuestFocused] = useState(false);
 
     const locationPath = useLocation()
-    const isListingsPage = locationPath.pathname === "/listings";
+    const isListingsPage = locationPath.pathname.startsWith("/listings");
   
     const handleLocationChange = (e) => {
       setLocations(e.target.value);
@@ -56,7 +56,7 @@ function SearchBar2() {
         setLocations(cart.location)
         setCheckInDate(cart.checkIn);
         setCheckOutDate(cart.checkOut);
-        setGuests(cart.guests)
+        setGuests(parseInt(cart.guests, 10) || 1)
       }
     }, [cart]);
   

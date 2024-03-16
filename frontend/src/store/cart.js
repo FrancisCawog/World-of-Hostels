@@ -42,7 +42,7 @@ export const setLocation = (location) => ({
 });
 
 const cartReducer = (
-    state = { cart: {}, guests: "", checkIn: '', checkOut: '', refundable: true, location: ""},
+    state = { cart: {}, guests: 0, checkIn: '', checkOut: '', refundable: true, location: ""},
     action
   ) => {
     const newState = { ...state };
