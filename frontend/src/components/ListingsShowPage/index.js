@@ -845,7 +845,7 @@ function ListingsShowPage() {
         </div>
 
         {start_date &&
-        <CheckoutForm checkIn={start_date} checkOut={end_date} numGuests={guests} listingId={listingId} listingName={listing?.property_name} photoUrl={listing?.photoUrls[0]}/>
+        <CheckoutForm checkIn={start_date} checkOut={end_date} listingId={listingId} listingName={listing?.property_name} photoUrl={listing?.photoUrls[0]}/>
         }
         
     </div>

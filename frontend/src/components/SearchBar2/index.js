@@ -78,15 +78,24 @@ function SearchBar2() {
       localStorage.setItem('cart', JSON.stringify(cartData));
     
       dispatch(setLocation(location));
-      dispatch(setCheckIn(checkInDate));
-      dispatch(setCheckOut(checkOutDate));
-      dispatch(updateGuests(guests));
     
       localStorage.setItem('checkInDate', checkInDate);
       localStorage.setItem('checkOutDate', checkOutDate);
       localStorage.setItem('guests', guests);
       history.push("/listings");
     };
+
+    useEffect(() => {
+      dispatch(updateGuests(guests));
+    }, [guests])
+
+    useEffect(() => {
+      dispatch(setCheckIn(checkInDate));
+    }, [checkInDate])
+
+    useEffect(() => {
+      dispatch(setCheckOut(checkOutDate));
+    }, [checkOutDate])
   
     useEffect(() => {
         const listingsArray = Object.values(listings);

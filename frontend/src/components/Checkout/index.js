@@ -11,10 +11,15 @@ import format from 'date-fns/format'
 import * as fecha from "fecha";
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
+import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
+import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg"
+import minus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com regular.svg"
+import grayminus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
 
-function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, photoUrl}) {
+function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
     const dispatch = useDispatch();
     const history = useHistory();
+    const guestsSelectionRef = useRef(null);
     const sessionUser = useSelector((state) => state.session.user);
     const cartItems = useSelector((state) => Object.values(state.cart.cart));
     const cart = useSelector((state) => state.cart.cart);
@@ -25,7 +30,7 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
     const [totalPrice, setTotalPrice] = useState(0);
     const cartEffect = useSelector((state) => state.cart);
     const refundable = useSelector((state) => state.cart.refundable)
-    const [guests, setGuests] = useState(numGuests);
+    const [guests, setGuests] = useState(1);
     const [checkInDate, setCheckInDate] = useState(checkIn);
     const [checkOutDate, setCheckOutDate] = useState(checkOut);
     const listing = useSelector((state) => state.listings[listingId])
@@ -34,6 +39,7 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
     const timeDifference = checkOutDates.getTime() - checkInDates.getTime();
     const numNights = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
     const [showNotEnough, setShowNotEnough] = useState(false);
+    const [isInputGuestFocused, setInputGuestFocused] = useState(false);
 
     const totalGuests = Object.entries(cart).reduce((acc, [roomId, val]) => {
         const room = rooms.find(room => room.id === Number(roomId));
@@ -162,43 +168,6 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
         setTotalPrice(totalPriceCalculation);
     },[cartEffect, checkInDate, checkOutDate]);
 
-    useEffect(() => {
-        const storedCheckInDate = localStorage.getItem('checkInDate');
-        const storedCheckOutDate = localStorage.getItem('checkOutDate');
-        const storedGuests = localStorage.getItem('guests');
-      
-        if (storedCheckInDate) {
-          setCheckInDate(storedCheckInDate);
-        }
-      
-        if (storedCheckOutDate) {
-          setCheckOutDate(storedCheckOutDate);
-        }
-      
-        if (storedGuests) {
-          setGuests(storedGuests);
-        }
-      }, []);
-    
-    //   const handleCheckInDateChange = (e) => {
-    //     setCheckInDate(e.target.value);
-    //   };
-    
-    //   const handleCheckOutDateChange = (e) => {
-    //     setCheckOutDate(e.target.value);
-    //   };
-    
-      const handleGuestsChange = (e) => {
-        setGuests(e.target.value);
-      };
-
-      useEffect(() => {
-        dispatch(updateGuests(guests));
-        dispatch(setCheckIn(checkInDate));
-        dispatch(setCheckOut(checkOutDate));
-      }, [guests, checkInDate, checkOutDate]);
-
-
       // date state
         const [range, setRange] = useState([
             {
@@ -242,6 +211,54 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
             setOpen(false)
             }
         }
+
+    const handleGuestsChange = (action) => {
+        if (action === 'add') {
+            setGuests(prevGuests => (prevGuests < 10) ? prevGuests + 1 : prevGuests);
+        } else if (action === 'subtract') {
+            setGuests(prevGuests => (prevGuests > 1) ? prevGuests - 1 : prevGuests);
+        }
+    };  
+
+    const handleGuestInputFocus = () => {
+        setInputGuestFocused(true);
+    };
+
+    const handleGuestsSelectionClick = (e) => {
+        e.stopPropagation();
+      };
+    
+      useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (guestsSelectionRef.current && !guestsSelectionRef.current.contains(event.target)) {
+            setInputGuestFocused(false);
+          }
+        };
+    
+        document.addEventListener("click", handleClickOutside);
+    
+        return () => {
+          document.removeEventListener("click", handleClickOutside);
+        };
+      }, []);
+
+      useEffect(() => {
+        dispatch(updateGuests(guests));
+      }, [guests])
+
+      useEffect(() => {
+        dispatch(setCheckIn(checkInDate));
+      }, [checkInDate])
+
+      useEffect(() => {
+        dispatch(setCheckOut(checkOutDate));
+      }, [checkOutDate])
+
+      useEffect(() => {
+        //   setCheckInDate(cart.checkIn);
+        //   setCheckOutDate(cart.checkOut);
+          setGuests(parseInt(cartEffect.guests, 10) || 1)
+      }, [cartEffect]);
 
     return (
         <>
@@ -304,37 +321,84 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
 
                 <div className="divider"></div>
 
-                <div className="guests">
-                    <div className="guests-strip">
-                        <div className="guests-input">
-                        <div className="input-with-label">
-                            <div className="input-prefix">
-                            <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
-                            </div>
-                            <div className="input-wrapper">
+                <div className="guests-strip">
+                    <div className="guests-input">
+                    <div className="input-with-label">
+                        <div className="input-prefix">
+                        <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
+                        </div>
+                        <div className="input-wrapper">
                             <input
-                                type="number"
+                                type="text"
                                 name="guests"
                                 id="guests"
-                                placeholder="Guests"
-                                value={guests}
                                 onChange={handleGuestsChange}
-                                style={{marginBottom: "8px"}}
+                                value={guests}
+                                autoComplete="off"
+                                onFocus={handleGuestInputFocus}
+                                readOnly
+                                ref={guestsSelectionRef} 
+                                onClick={handleGuestsSelectionClick}
                             />
                             <label className="input-label4">
                                 Guests
                             </label>
-                            </div>
-                        </div>
                         </div>
                     </div>
+                    </div>
                 </div>
+
+            {isInputGuestFocused && (
+                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} >
+                <div className="guests-inner-selection">
+                <div className="guests-label-selection"> 
+                <div>
+                <img src={users} style={{width: "20px", height: "20px", marginTop: "5px"}}/>
+                </div>
+                <span>
+                Guests
+                </span>
                 </div>
                 
-                <img src={cardinfo} alt="Card Information"></img>
+                <div className="guests-counter" style={{marginLeft: "5px"}}> 
+                {guests > 1 ? (
+                    <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
+                    <img src={minus} alt="Minus" />
+                    </button> 
+                    ):( 
+                        <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                        <img src={grayminus} alt="Minus" />
+                        </button>
+                        )}
+                        
+                        <input className="guests-counter-number"
+                        type="text"
+                        name="guests"
+                        id="guests"
+                        value={guests}
+                        autoComplete="off"
+                        onChange={handleGuestsChange}
+                        readOnly
+                        />
+                        {guests !== 10 ? (
+                            <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
+                            <img src={add} alt="add" />
+                            </button> 
+                            ):( 
+                                <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                <img src={grayadd} alt="add" />
+                                </button>
+                                )}
+                                </div>
+                                </div>
+                                </div>
+                            )}
+                    </div>
+                
+                    <img src={cardinfo} alt="Card Information"></img>
+                    </div>
                 </div>
-            </div>
-        ) : (
+            ) : (
             <div className="checkout-check">
                 <div className="checkout-info">
                 <div className="inline-form" style={{border: "1px solid black"}}>
@@ -378,31 +442,78 @@ function CheckoutForm( { checkIn, checkOut, numGuests, listingId, listingName, p
 
                     <div className="divider"></div>
 
-                    <div className="guests">
-                        <div className="guests-strip">
+                    <div className="guests-strip">
                             <div className="guests-input">
                             <div className="input-with-label">
                                 <div className="input-prefix">
                                 <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
                                 </div>
                                 <div className="input-wrapper">
-                                <input
-                                    type="number"
-                                    name="guests"
-                                    id="guests"
-                                    placeholder="Guests"
-                                    value={guests}
-                                    onChange={handleGuestsChange}
-                                    style={{marginBottom: "8px"}}
-                                />
-                                <label className="input-label4">
-                                    Guests
-                                </label>
+                                    <input
+                                        type="text"
+                                        name="guests"
+                                        id="guests"
+                                        onChange={handleGuestsChange}
+                                        value={guests}
+                                        autoComplete="off"
+                                        onFocus={handleGuestInputFocus}
+                                        readOnly
+                                        ref={guestsSelectionRef} 
+                                        onClick={handleGuestsSelectionClick}
+                                    />
+                                    <label className="input-label4">
+                                        Guests
+                                    </label>
                                 </div>
                             </div>
                             </div>
                         </div>
-                    </div>
+
+                            {isInputGuestFocused && (
+                                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} >
+                                <div className="guests-inner-selection">
+                                <div className="guests-label-selection"> 
+                                <div>
+                                <img src={users} style={{width: "20px", height: "20px", marginTop: "5px"}}/>
+                                </div>
+                                <span>
+                                Guests
+                                </span>
+                                </div>
+                                
+                                <div className="guests-counter" style={{marginLeft: "5px"}}> 
+                                {guests > 1 ? (
+                                    <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
+                                    <img src={minus} alt="Minus" />
+                                    </button> 
+                                    ):( 
+                                        <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                        <img src={grayminus} alt="Minus" />
+                                        </button>
+                                        )}
+                                        
+                                        <input className="guests-counter-number"
+                                        type="text"
+                                        name="guests"
+                                        id="guests"
+                                        value={guests}
+                                        autoComplete="off"
+                                        onChange={handleGuestsChange}
+                                        readOnly
+                                        />
+                                        {guests !== 10 ? (
+                                            <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
+                                            <img src={add} alt="add" />
+                                            </button> 
+                                            ):( 
+                                                <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                                <img src={grayadd} alt="add" />
+                                                </button>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                 </div>
                 
                 <div style={{marginTop: "1rem"}}>
