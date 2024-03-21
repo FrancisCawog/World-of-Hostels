@@ -279,129 +279,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                         </button>
                     </div>
 
-                <div className="inline-form" style={{border: "1px solid black"}}>
-
-                <div className="dates">
-                    <div className="checkin-checkout">
-                        <div className="checkin-input">
-                        <div className="input-with-label">
-                            <div className="input-prefix">
-                            <img/>
-                            </div>
-                            <div className="input-wrapper" style={{width: "10rem"}}>
-                            <input
-                                value={`${format(range[0].startDate, "dd MMM")} to ${format(range[0].endDate, "dd MMM")}`}
-                                readOnly
-                                className="inputBox"
-                                onClick={ () => setOpen(open => !open) }
-                                style={{paddingLeft: "1rem", marginBottom: "12px"}}
-                            />
-
-                            <div ref={refOne}>
-                                {open && 
-                                <DateRange
-                                    onChange={handleDateRangeChange}
-                                    editableDateInputs={true}
-                                    moveRangeOnFirstSelection={false}
-                                    ranges={range}
-                                    months={1}
-                                    direction="horizontal"
-                                    className="calendarElement"
-                                />
-                                }
-                            </div>
-                            <label className="input-label2">
-                                Check In - Check Out
-                            </label>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="divider"></div>
-
-                <div className="guests-strip">
-                    <div className="guests-input">
-                    <div className="input-with-label">
-                        <div className="input-prefix">
-                        <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
-                        </div>
-                        <div className="input-wrapper">
-                            <input
-                                type="text"
-                                name="guests"
-                                id="guests"
-                                onChange={handleGuestsChange}
-                                value={guests}
-                                autoComplete="off"
-                                onFocus={handleGuestInputFocus}
-                                readOnly
-                                ref={guestsSelectionRef} 
-                                onClick={handleGuestsSelectionClick}
-                            />
-                            <label className="input-label4">
-                                Guests
-                            </label>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-            {isInputGuestFocused && (
-                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} >
-                <div className="guests-inner-selection">
-                <div className="guests-label-selection"> 
-                <div>
-                <img src={users} style={{width: "20px", height: "20px", marginTop: "5px"}}/>
-                </div>
-                <span>
-                Guests
-                </span>
-                </div>
-                
-                <div className="guests-counter" style={{marginLeft: "5px"}}> 
-                {guests > 1 ? (
-                    <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
-                    <img src={minus} alt="Minus" />
-                    </button> 
-                    ):( 
-                        <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                        <img src={grayminus} alt="Minus" />
-                        </button>
-                        )}
-                        
-                        <input className="guests-counter-number"
-                        type="text"
-                        name="guests"
-                        id="guests"
-                        value={guests}
-                        autoComplete="off"
-                        onChange={handleGuestsChange}
-                        readOnly
-                        />
-                        {guests !== 10 ? (
-                            <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
-                            <img src={add} alt="add" />
-                            </button> 
-                            ):( 
-                                <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                <img src={grayadd} alt="add" />
-                                </button>
-                                )}
-                                </div>
-                                </div>
-                                </div>
-                            )}
-                    </div>
-                
-                    <img src={cardinfo} alt="Card Information"></img>
-                    </div>
-                </div>
-            ) : (
-            <div className="checkout-check">
-                <div className="checkout-info">
-                <div className="inline-form" style={{border: "1px solid black"}}>
+                    <div className="inline-form" style={{border: "1px solid black"}}>
                     <div className="dates">
                         <div className="checkin-checkout">
                             <div className="checkin-input">
@@ -432,10 +310,128 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                     }
                                 </div>
                                 <label className="input-label2">
-                                    Check In
+                                    Check In - Check Out
                                 </label>
                                 </div>
                             </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="divider"></div>
+
+                    <div className="guests-strip">
+                        <div className="guests-input">
+                            <div className="input-with-label">
+                                <div className="input-prefix">
+                                <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
+                                </div>
+                                <div className="input-wrapper">
+                                    <input
+                                        type="text"
+                                        name="guests"
+                                        id="guests"
+                                        onChange={handleGuestsChange}
+                                        value={guests}
+                                        autoComplete="off"
+                                        onFocus={handleGuestInputFocus}
+                                        readOnly
+                                        ref={guestsSelectionRef} 
+                                        onClick={handleGuestsSelectionClick}
+                                    />
+                                    <label className="input-label4">
+                                        Guests
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {isInputGuestFocused && (
+                        <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} style={{marginLeft: "2%"}}>
+                        <div className="guests-inner-selection">
+                        <div className="guests-label-selection"> 
+                        <div>
+                        <img src={users} style={{width: "20px", height: "20px", marginTop: "5px"}}/>
+                        </div>
+                        <span>
+                        Guests
+                        </span>
+                        </div>
+                        
+                            <div className="guests-counter" style={{marginLeft: "5px"}}> 
+                            {guests > 1 ? (
+                                <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
+                                    <img src={minus} alt="Minus" style={{width: "90%"}}/>
+                                </button> 
+                                ):( 
+                                    <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                    <img src={grayminus} alt="Minus" style={{width: "90%"}}/>
+                                    </button>
+                                )}
+                                
+                                <input className="guests-counter-number"
+                                    type="text"
+                                    name="guests"
+                                    id="guests"
+                                    value={guests}
+                                    autoComplete="off"
+                                    onChange={handleGuestsChange}
+                                    readOnly
+                                />
+                                {guests !== 10 ? (
+                                    <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
+                                        <img src={add} alt="add" style={{width: "90%"}}/>
+                                    </button> 
+                                ):( 
+                                    <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                        <img src={grayadd} alt="add" style={{width: "90%"}}/>
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                                    </div>
+                                )}
+                        </div>
+                    
+                        <img src={cardinfo} alt="Card Information"></img>
+                </div>
+            </div>
+            ) : (
+            <div className="checkout-check">
+                <div className="checkout-info">
+                <div className="inline-form" style={{border: "1px solid black"}}>
+                    <div className="dates">
+                        <div className="checkin-checkout">
+                            <div className="checkin-input">
+                                <div className="input-with-label">
+                                    <div className="input-wrapper" style={{width: "10rem"}}>
+                                    <input
+                                        value={`${format(range[0].startDate, "dd MMM")} to ${format(range[0].endDate, "dd MMM")}`}
+                                        readOnly
+                                        className="inputBox"
+                                        onClick={ () => setOpen(open => !open) }
+                                        style={{paddingLeft: "1rem", marginBottom: "12px"}}
+                                    />
+
+                                    <div ref={refOne}>
+                                        {open && 
+                                        <DateRange
+                                            onChange={handleDateRangeChange}
+                                            editableDateInputs={true}
+                                            moveRangeOnFirstSelection={false}
+                                            ranges={range}
+                                            months={1}
+                                            direction="horizontal"
+                                            className="calendarElement"
+                                        />
+                                        }
+                                    </div>
+                                    <label className="input-label2">
+                                        Check In
+                                    </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -470,7 +466,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                         </div>
 
                             {isInputGuestFocused && (
-                                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} >
+                                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} style={{marginLeft: "2%"}}>
                                 <div className="guests-inner-selection">
                                 <div className="guests-label-selection"> 
                                 <div>
@@ -484,11 +480,11 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                 <div className="guests-counter" style={{marginLeft: "5px"}}> 
                                 {guests > 1 ? (
                                     <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
-                                    <img src={minus} alt="Minus" />
+                                    <img src={minus} alt="Minus" style={{width: "90%"}}/>
                                     </button> 
                                     ):( 
                                         <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                        <img src={grayminus} alt="Minus" />
+                                        <img src={grayminus} alt="Minus" style={{width: "90%"}}/>
                                         </button>
                                         )}
                                         
@@ -503,11 +499,11 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                         />
                                         {guests !== 10 ? (
                                             <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
-                                            <img src={add} alt="add" />
+                                            <img src={add} alt="add" style={{width: "90%"}}/>
                                             </button> 
                                             ):( 
                                                 <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                                <img src={grayadd} alt="add" />
+                                                <img src={grayadd} alt="add" style={{width: "90%"}}/>
                                                 </button>
                                                 )}
                                             </div>
