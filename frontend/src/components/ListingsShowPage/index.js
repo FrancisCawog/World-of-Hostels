@@ -285,24 +285,28 @@ function ListingsShowPage() {
 
   useEffect(() => {
     const initialImageIndexes = Object.fromEntries(
-      rooms.map((room) => [room.listing_id, 0])
+      Object.values(rooms).map((listing) => [listing.id, 0])
     );
     setImageIndexes(initialImageIndexes);
-  }, []);
+  }, [rooms]);
   
-  const updateImageIndex = (roomId, direction) => {
-    const imageCount = rooms.find(room => room.id === roomId)?.photoUrls.length || 0;
-  
-    setImageIndexes((prevIndexes) => {
-      const currentIndex = prevIndexes[roomId] || 0;
-      const newIndex =
-        direction === 'prev'
-          ? (currentIndex - 1 + imageCount) % Math.max(1, imageCount)
-          : (currentIndex + 1) % Math.max(1, imageCount);
+const updateImageIndex = (roomId, direction) => {
+  const imageCount = rooms[roomId]?.photoUrls.length || 0;
 
-      const updatedIndexes = { ...prevIndexes, [roomId]: newIndex };
-      return updatedIndexes;
+  setImageIndexes((prevIndexes) => {
+    const currentIndex = prevIndexes[roomId] || 0;
+    const newIndex =
+      direction === 'prev'
+      ? (currentIndex - 1 + imageCount) % Math.max(1, imageCount)
+      : (currentIndex + 1) % Math.max(1, imageCount);
+      return { ...prevIndexes, [roomId]: newIndex };
     });
+  };
+
+  const [hoveredListings, setHoveredListings] = useState({});
+
+  const handleListingHover = (roomId, isHovered) => {
+    setHoveredListings((prevHovered) => ({ ...prevHovered, [roomId]: isHovered }));
   };
   
   
@@ -376,21 +380,26 @@ function ListingsShowPage() {
                     .filter(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds)
                     .map((privateRoom, index) => {
                       const currentImageIndex = imageIndexes[privateRoom.id] || 0; 
+                      const isCurrentlyHovered = hoveredListings[listing.id] || false;
                     return (
                       <div key={index}>
                         <div className="private-room-div">
                           <div className="private-picture-box">
                           <div className="index-picture-picture2">
-                            <img src={privateRoom.photoUrls[currentImageIndex]} alt={`Room ${privateRoom.id}`} />
+                            <img src={privateRoom.photoUrls[currentImageIndex]} alt={`Room ${privateRoom.id}`} onMouseEnter={() => handleListingHover(privateRoom.id, true)} onMouseLeave={() => handleListingHover(privateRoom.id, false)}/>
                           </div>
                           {privateRoom.photoUrls.length > 1 && (
                             <>
+                            {isCurrentlyHovered && (
+                              <>
                              <span className="index-picture-left2" onClick={(e) => { e.stopPropagation(); updateImageIndex(privateRoom.id, 'prev'); }}>
                                 <img src={ArrowRight} alt="Left Arrow" />
                               </span>
                               <span className="index-picture-right2" onClick={(e) => { e.stopPropagation(); updateImageIndex(privateRoom.id, 'next'); }}>
                                 <img src={ArrowRight} alt="Right Arrow" />
                               </span>
+                              </>
+                              )}
                             </>
                           )}
                           </div>
@@ -473,21 +482,26 @@ function ListingsShowPage() {
                   .filter(room => room.room_type === "shared" && room.available_beds > 0)
                   .map((sharedRoom, index) => {
                     const currentImageIndex = imageIndexes[sharedRoom.id] || 0; 
+                    const isCurrentlyHovered = hoveredListings[listing.id] || false;
                     return (
-                      <div key={index}>
+                      <div key={index} onMouseEnter={() => handleListingHover(sharedRoom.id, true)} onMouseLeave={() => handleListingHover(sharedRoom.id, false)}>
                         <div className="dorm-bed-div">
                           <div className="shared-picture-box">
                           <div className="index-picture-picture2">
-                            <img src={sharedRoom.photoUrls[currentImageIndex]} alt={`Room ${sharedRoom.id}`} />
+                            <img src={sharedRoom.photoUrls[currentImageIndex]} alt={`Room ${sharedRoom.id}`}/>
                           </div>
                           {sharedRoom.photoUrls.length > 1 && (
                             <>
+                            {isCurrentlyHovered && (
+                              <>
                             <span className="index-picture-left2" onClick={(e) => { e.stopPropagation(); updateImageIndex(sharedRoom.id, 'prev'); }}>
                               <img src={ArrowRight} alt="Left Arrow" />
                             </span>
                             <span className="index-picture-right2" onClick={(e) => { e.stopPropagation(); updateImageIndex(sharedRoom.id, 'next'); }}>
                               <img src={ArrowRight} alt="Right Arrow" />
                             </span>
+                              </>
+                            )}
                             </>
                           )}
                           </div>
