@@ -30,19 +30,19 @@ const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields
 function ListingsShowPage() {
   const dispatch = useDispatch();
   const { listingId } = useParams();
-  const listing = useSelector((state) => state.listings[listingId]);
+  const listing = useSelector((state) => state?.listings[listingId]);
   const photos = listing?.photoUrls;
-  const reviews = useSelector((state) => state.reviews);
-  const users = useSelector((state) => state.users);
-  const reservations = useSelector((state) => state.reservations);
+  const reviews = useSelector((state) => state?.reviews);
+  const users = useSelector((state) => state?.users);
+  const reservations = useSelector((state) => state?.reservations);
   const rooms = useSelector((state) => Object.values(state.rooms));
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [tabName, settabName] = useState();
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state?.cart);
   const start_date = cart.checkIn;
   const end_date = cart.checkOut;
-  const cartItems = useSelector((state) => state.cart.cart);
+  const cartItems = useSelector((state) => state?.cart.cart);
   const isRefundable = useSelector((state) => state?.cart.refundable)
   const [refundable, setRefundable] = useState(isRefundable || false);
   const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
@@ -285,21 +285,23 @@ function ListingsShowPage() {
 
   useEffect(() => {
     const initialImageIndexes = Object.fromEntries(
-      Object.values(rooms).map((listing) => [listing.id, 0])
+      rooms.map((room) => [room.listing_id, 0])
     );
     setImageIndexes(initialImageIndexes);
-  }, [rooms]);
-  
-const updateImageIndex = (roomId, direction) => {
-  const imageCount = rooms[roomId]?.photoUrls.length || 0;
+  }, []);
 
-  setImageIndexes((prevIndexes) => {
-    const currentIndex = prevIndexes[roomId] || 0;
-    const newIndex =
-      direction === 'prev'
-      ? (currentIndex - 1 + imageCount) % Math.max(1, imageCount)
-      : (currentIndex + 1) % Math.max(1, imageCount);
-      return { ...prevIndexes, [roomId]: newIndex };
+  const updateImageIndex = (roomId, direction) => {
+    const imageCount = rooms.find(room => room.id === roomId)?.photoUrls.length || 0;
+
+    setImageIndexes((prevIndexes) => {
+      const currentIndex = prevIndexes[roomId] || 0;
+      const newIndex =
+        direction === 'prev'
+          ? (currentIndex - 1 + imageCount) % Math.max(1, imageCount)
+          : (currentIndex + 1) % Math.max(1, imageCount);
+
+      const updatedIndexes = { ...prevIndexes, [roomId]: newIndex };
+      return updatedIndexes;
     });
   };
 
@@ -308,8 +310,6 @@ const updateImageIndex = (roomId, direction) => {
   const handleListingHover = (roomId, isHovered) => {
     setHoveredListings((prevHovered) => ({ ...prevHovered, [roomId]: isHovered }));
   };
-  
-  
   
   return (
     <>
@@ -380,7 +380,7 @@ const updateImageIndex = (roomId, direction) => {
                     .filter(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds)
                     .map((privateRoom, index) => {
                       const currentImageIndex = imageIndexes[privateRoom.id] || 0; 
-                      const isCurrentlyHovered = hoveredListings[listing.id] || false;
+                      const isCurrentlyHovered = hoveredListings[privateRoom.id] || false;
                     return (
                       <div key={index}>
                         <div className="private-room-div">
@@ -482,7 +482,7 @@ const updateImageIndex = (roomId, direction) => {
                   .filter(room => room.room_type === "shared" && room.available_beds > 0)
                   .map((sharedRoom, index) => {
                     const currentImageIndex = imageIndexes[sharedRoom.id] || 0; 
-                    const isCurrentlyHovered = hoveredListings[listing.id] || false;
+                    const isCurrentlyHovered = hoveredListings[sharedRoom.id] || false;
                     return (
                       <div key={index} onMouseEnter={() => handleListingHover(sharedRoom.id, true)} onMouseLeave={() => handleListingHover(sharedRoom.id, false)}>
                         <div className="dorm-bed-div">

@@ -20,20 +20,20 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const guestsSelectionRef = useRef(null);
-    const sessionUser = useSelector((state) => state.session.user);
-    const cartItems = useSelector((state) => Object.values(state.cart.cart));
-    const cart = useSelector((state) => state.cart.cart);
-    const rooms = useSelector((state) => Object.values(state.rooms));
+    const sessionUser = useSelector((state) => state?.session.user);
+    const cartItems = useSelector((state) => Object.values(state?.cart.cart));
+    const cart = useSelector((state) => state?.cart.cart);
+    const rooms = useSelector((state) => Object.values(state?.rooms));
     const availableRooms = rooms.filter(room => room.available_beds > 0);
     const cheapestPrice = Math.min(...availableRooms.map(room => room.price));
     const shouldRenderCheckoutChoose = cartItems.length === 0 || cartItems.every(item => item === 0);
     const [totalPrice, setTotalPrice] = useState(0);
-    const cartEffect = useSelector((state) => state.cart);
-    const refundable = useSelector((state) => state.cart.refundable)
+    const cartEffect = useSelector((state) => state?.cart);
+    const refundable = useSelector((state) => state?.cart.refundable)
     const [guests, setGuests] = useState(1);
     const [checkInDate, setCheckInDate] = useState(checkIn);
     const [checkOutDate, setCheckOutDate] = useState(checkOut);
-    const listing = useSelector((state) => state.listings[listingId])
+    const listing = useSelector((state) => state?.listings[listingId])
     const checkInDates = fecha.parse(checkInDate, "YYYY-MM-DD");
     const checkOutDates = fecha.parse(checkOutDate, "YYYY-MM-DD");
     const timeDifference = checkOutDates.getTime() - checkInDates.getTime();
