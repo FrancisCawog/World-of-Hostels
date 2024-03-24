@@ -3,6 +3,7 @@ import {useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './ListingsShowReviewModal.css';
 import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
+import communication from "../../assets/pictures/icons/communication.svg"
 const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 const ListingsShowReviewModal = ({ onClose, reviews }) => {
@@ -151,19 +152,25 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
               <div className="modal-content-review">
                 <p className='review-p'>Reviews</p>
                 <span className="close" onClick={onClose}>&times;</span>
+              <div className='review-message-modal'>
+                 <img src={communication}/>
+                 <div>
+                  <p className='review-100'>100% genuine reviews from real hostel travellers like you!</p>
+                 </div>
+              </div>
               <div style={{display: "flex", height: "30rem"}}>
                 <div className="review-box-modal" >
                     <div className="review-rating-box-modal" > 
                       <div className="listing-review-star-and-rating" >
                           <img style={{width: "24px", height: "24px"}} src={StarSVG}/>
                           <p>
-                          <span className="total-score" style={{marginRight: "10px", fontFamily: "Poppins-bold"}}>
+                          <span className="total-score" style={{marginRight: "10px", fontFamily: "Poppins-bold", fontSize: "1.75rem"}}>
                               {averageTotalScore(listing?.id).toFixed(1)}
                           </span>
-                          <span style={{ fontSize: '16px' }}>
+                          <span className='reviews-modal-numbers'>
                               {reviewWordRating(listing?.id)}
                           </span>
-                          <span style={{ fontSize: '16px'}}>
+                          <span className='reviews-modal-numbers'>
                               ({numberOfReviews(listing?.id)} Reviews)
                           </span>
                           </p>
