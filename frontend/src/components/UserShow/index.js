@@ -44,7 +44,7 @@ function UserShow() {
     let formattedDate = null;
     if (sessionUser.date_of_birth) {
         const [year, month, day] = sessionUser.date_of_birth.split('-');
-        formattedDate = `${month}/${day}/${year}`;
+        formattedDate = `${day}/${month}/${year}`;
     }
     const [fullName, setFullName] = useState(
         sessionUser.first_name + " " + sessionUser.last_name
@@ -284,18 +284,36 @@ function UserShow() {
 
       useEffect(() => {
         const [firstName, lastName] = fullName.split(' ');
-      
-        if (
-          formattedDate !== dateOfBirth ||
-          sessionUser.nationality !== userNationality ||
-          sessionUser.first_name !== firstName ||
-          sessionUser.last_name !== lastName
-        ) {
-          setButtonDisabled(false);
-        } else {
+        
+          if (
+            dateOfBirth?.length === 0 && 
+            formattedDate === null && 
+            sessionUser.nationality === userNationality &&
+            sessionUser.first_name === firstName &&
+            sessionUser.last_name === lastName
+          ){
+            setButtonDisabled(true);
+          } else if (dateOfBirth?.length !== 10 && dateOfBirth?.length !== 0){
+            setButtonDisabled(true);
+          } else if(
+          formattedDate === dateOfBirth &&
+          sessionUser.nationality === userNationality &&
+          sessionUser.first_name === firstName &&
+          sessionUser.last_name === lastName
+         ) {
           setButtonDisabled(true);
+        } else {
+          setButtonDisabled(false);
         }
       }, [dateOfBirth, userNationality, fullName, sessionUser]);
+
+    //   function isValidAge(dateOfBirth) {
+    //     const dob = new Date(dateOfBirth);
+    //     const today = new Date();
+    //     const age = today.getFullYear() - dob.getFullYear();
+    //     const monthDiff = today.getMonth() - dob.getMonth();
+    //     return age > 17 && age <= 100 && (age !== 18 || monthDiff >= 0);
+    // }
       
       function formatDate(dateString) {
         const options = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -424,6 +442,28 @@ function UserShow() {
         return matchingCountry ? matchingCountry.cca3 : commonName;
     };
 
+function formatInputDate(inputDate) {
+    const cleanedInput = inputDate.replace(/\D/g, '');
+    if (cleanedInput.length === 8) {
+        const year = cleanedInput.slice(-4);
+        const month = cleanedInput.slice(0, 2);
+        const day = cleanedInput.slice(2, 4);
+        return `${month}/${day}/${year}`;
+    }
+    return inputDate;
+}
+
+// function formatDate(displayedDate) {
+//     const parts = displayedDate.split('/');
+//     if (parts.length === 3) {
+//         const [month, day, year] = parts;
+//         const formattedMonth = month.padStart(2, '0');
+//         const formattedDay = day.padStart(2, '0');
+//         return `${formattedMonth}/${formattedDay}/${year}`;
+//     }
+//     return displayedDate;
+// }
+
     return (
         <>
         {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} name= {foundListing.property_name} address={foundListing.address} city={foundListing.city} country={foundListing.country} onClose={closeMapModal} />}
@@ -509,7 +549,8 @@ function UserShow() {
                             <input
                                 id="dateofBirth"
                                 value={dateOfBirth}
-                                onChange={(e) => setDateOfBirth(e.target.value)}
+                                // value={formatDate(dateOfBirth)}
+                                onChange={(e) => setDateOfBirth(formatInputDate(e.target.value))}
                             />
                             </div>
                         <div className="input-with-label">
