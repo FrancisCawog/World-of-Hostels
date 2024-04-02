@@ -240,17 +240,17 @@ const handleDateRangeChange = (item) => {
                                         className="inputBox"
                                         onClick={ () => setOpen(open => !open) }
                                         style={{paddingLeft: "1rem", marginBottom: "12px"}}
-                                        disabled
+                                        // disabled
                                     />
 
-                                    <div ref={refOne}>
+                                    <div className="searchBar2-cal" ref={refOne}>
                                         {open && 
                                         <DateRange
                                             onChange={handleDateRangeChange}
                                             editableDateInputs={true}
                                             moveRangeOnFirstSelection={false}
                                             ranges={range}
-                                            months={1}
+                                            months={2}
                                             direction="horizontal"
                                             className="calendarElement"
                                         />
