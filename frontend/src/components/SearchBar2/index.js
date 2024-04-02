@@ -1,153 +1,169 @@
-import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.svg";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import xImage from "../../assets/pictures/icons/close-x.svg"
-import users from "../../assets/pictures/icons/17115.png"
-import glass from "../../assets/pictures/icons/icons8-search (1).svg"
-import "./SearchBar2.css"
-import { DateRange } from 'react-date-range'
-import format from 'date-fns/format'
-import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
-import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg"
-import minus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com regular.svg"
-import grayminus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
+import { DateRange } from 'react-date-range';
+// import format from 'date-fns/format';
+import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.svg";
+import xImage from "../../assets/pictures/icons/close-x.svg";
+import users from "../../assets/pictures/icons/17115.png";
+import glass from "../../assets/pictures/icons/icons8-search (1).svg";
+import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg";
+import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg";
+import minus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com regular.svg";
+import grayminus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg";
+import "./SearchBar2.css";
 
 function SearchBar2() {
-    const dispatch = useDispatch();
-    const cart = useSelector((state) => state.cart);
-    const listings = useSelector((state) => state.listings)
-    const history = useHistory();
-    const guestsSelectionRef = useRef(null);
-    
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const listings = useSelector((state) => state.listings);
+  const history = useHistory();
+  const guestsSelectionRef = useRef(null);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
   
-    const [location, setLocations] = useState("");
-    const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
-    const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().split("T")[0]);
-    const [guests, setGuests] = useState(1);
-  
-    const [uniqueCities, setUniqueCities] = useState([]);
-    const [isInputFocused, setInputFocused] = useState(false);
-    const [isInputGuestFocused, setInputGuestFocused] = useState(false);
+  const [location, setLocations] = useState("");
+  const [checkInDate, setCheckInDate] = useState(today);
+  const [checkOutDate, setCheckOutDate] = useState(tomorrow);
+  const [guests, setGuests] = useState(1);
 
-    const locationPath = useLocation()
-    const isListingsPage = locationPath.pathname.startsWith("/listings");
-  
-    const handleLocationChange = (e) => {
-      setLocations(e.target.value);
-    };
-  
-    const handleGuestsChange = (action) => {
-        if (action === 'add') {
-          setGuests(prevGuests => (prevGuests < 10) ? prevGuests + 1 : prevGuests);
-        } else if (action === 'subtract') {
-          setGuests(prevGuests => (prevGuests > 1) ? prevGuests - 1 : prevGuests);
-        }
-      };  
-  
-    useEffect(() => {
-      if (cart.checkIn !== "") {
-        setLocations(cart.location)
-        setCheckInDate(cart.checkIn);
-        setCheckOutDate(cart.checkOut);
-        setGuests(parseInt(cart.guests, 10) || 1)
-      }
-    }, [cart]);
-  
-    const handleSearch = () => {
-      if (!uniqueCities.includes(location)) {
-        document.getElementById("location").focus();
-        setInputFocused(true);
-        return;
-      }
-    
-      const cartData = {
-        checkIn: checkInDate,
-        checkOut: checkOutDate,
-        guests: guests,
-        location: location,
-        refundable: true,
-      };
-    
-      localStorage.setItem('cart', JSON.stringify(cartData));
-    
-      dispatch(setLocation(location));
-    
-      localStorage.setItem('checkInDate', checkInDate);
-      localStorage.setItem('checkOutDate', checkOutDate);
-      localStorage.setItem('guests', guests);
-      history.push("/listings");
-    };
+  const [uniqueCities, setUniqueCities] = useState([]);
+  const [isInputFocused, setInputFocused] = useState(false);
+  const [isInputGuestFocused, setInputGuestFocused] = useState(false);
+  const locationPath = useLocation();
+  const isListingsPage = locationPath.pathname.startsWith("/listings");
 
-    useEffect(() => {
-      dispatch(updateGuests(guests));
-    }, [guests])
-
-    useEffect(() => {
-      dispatch(setCheckIn(checkInDate));
-    }, [checkInDate])
-
-    useEffect(() => {
-      dispatch(setCheckOut(checkOutDate));
-    }, [checkOutDate])
+  const handleLocationChange = (e) => {
+    setLocations(e.target.value);
+  };
   
-    useEffect(() => {
-        const listingsArray = Object.values(listings);
-        setUniqueCities([...new Set(listingsArray.map((listing) => `${listing.city}, ${listing.country}`))]);
-    }, [listings]);
+  const handleGuestsChange = (action) => {
+    if (action === 'add') {
+      setGuests(prevGuests => (prevGuests < 10) ? prevGuests + 1 : prevGuests);
+    } else if (action === 'subtract') {
+      setGuests(prevGuests => (prevGuests > 1) ? prevGuests - 1 : prevGuests);
+    }
+  };
   
-    const handleInputFocus = () => {
+  useEffect(() => {
+    if (cart.checkIn !== "") {
+      setLocations(cart.location)
+      setCheckInDate(cart.checkIn);
+      setCheckOutDate(cart.checkOut);
+      setGuests(parseInt(cart.guests, 10) || 1)
+    }
+  }, [cart]);
+  
+  const handleSearch = () => {
+    if (!uniqueCities.includes(location)) {
+      document.getElementById("location").focus();
       setInputFocused(true);
+      return;
+    }
+
+    const cartData = {
+      checkIn: checkInDate.toISOString().split("T")[0],
+      checkOut: checkOutDate.toISOString().split("T")[0],
+      guests: guests,
+      location: location,
+      refundable: true,
     };
 
-    const handleGuestInputFocus = () => {
-        setInputGuestFocused(true);
-      };
-  
-    const [blurTimeout, setBlurTimeout] = useState(null);
-    const handleInputBlur = () => {
-      const timeoutId = setTimeout(() => {
-        setInputFocused(false);
-      }, 200);
-  
-      setBlurTimeout(timeoutId);
-    };
-  
-    const handleDestinationButtonClick = (city) => {
-      clearTimeout(blurTimeout);
-      setInputFocused(false);
-      setLocations(city);
-    };
+    localStorage.setItem('cart', JSON.stringify(cartData));
 
-      // date state
-      const [range, setRange] = useState([
-          {
-              startDate: checkInDate,
-              endDate: checkOutDate,
-              key: 'selection'
-            }
-        ])
-        
-const handleDateRangeChange = (item) => {
-    const startDate = item.selection.startDate.toISOString().split("T")[0];
-    const endDate = item.selection.endDate.toISOString().split("T")[0];
-    setCheckInDate(startDate);
-    setCheckOutDate(endDate)
-    setRange([item.selection]);
+    dispatch(setLocation(location));
+
+    localStorage.setItem('checkInDate', cartData.checkIn);
+    localStorage.setItem('checkOutDate', cartData.checkOut);
+    localStorage.setItem('guests', guests);
+    history.push("/listings");
   };
 
-  // open close
-  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    dispatch(updateGuests(guests));
+  }, [guests]);
 
-  // get the target element to toggle 
-  const refOne = useRef(null)
+  useEffect(() => {
+    dispatch(setCheckIn(checkInDate));
+  }, [checkInDate])
+
+  useEffect(() => {
+    dispatch(setCheckOut(checkOutDate));
+  }, [checkOutDate])
+
+  useEffect(() => {
+      const listingsArray = Object.values(listings);
+      setUniqueCities([...new Set(listingsArray.map((listing) => `${listing.city}, ${listing.country}`))]);
+  }, [listings]);
   
+  const handleInputFocus = () => {
+    setInputFocused(true);
+  };
+
+  const handleGuestInputFocus = () => {
+      setInputGuestFocused(true);
+    };
+
+  const [blurTimeout, setBlurTimeout] = useState(null);
+  const handleInputBlur = () => {
+    const timeoutId = setTimeout(() => {
+      setInputFocused(false);
+    }, 200);
+
+    setBlurTimeout(timeoutId);
+  };
+
+  const handleDestinationButtonClick = (city) => {
+    clearTimeout(blurTimeout);
+    setInputFocused(false);
+    setLocations(city);
+  };
+
+  const [range, setRange] = useState([
+      {
+          startDate: checkInDate,
+          endDate: checkOutDate,
+          key: 'selection'
+        }
+    ])
+
+    useEffect(() => {
+      setRange([
+        {
+          startDate: checkInDate,
+          endDate: checkOutDate,
+          key: 'selection'
+        }
+      ]);
+    }, [checkInDate, checkOutDate]);
+
+    // console.log(range)
+        
+    const handleDateRangeChange = (item) => {
+      const startDate = formatDate(item.selection.startDate);
+      const endDate = formatDate(item.selection.endDate);
+      
+      setCheckInDate(startDate);
+      setCheckOutDate(endDate);
+      setRange([item.selection]);
+    };
+    
+    const formatDate = (date) => {
+      if (!(date instanceof Date) || isNaN(date.getTime())) {
+        return ""; // handle invalid date
+      }
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+    
+
+  const [open, setOpen] = useState(false)
+  const refOne = useRef(null)
 
   const handleGuestsSelectionClick = (e) => {
     e.stopPropagation();
@@ -166,6 +182,18 @@ const handleDateRangeChange = (item) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  const formatDates = (dateString) => {
+    const date = new Date(dateString + 'T00:00:00');
+    if (isNaN(date.getTime())) {
+      return "";
+    }
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthIndex = date.getUTCMonth();
+    const month = monthNames[monthIndex];
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    return `${day} ${month}`;
+  };
 
     return (
         <div className="search-form-container">
@@ -235,7 +263,7 @@ const handleDateRangeChange = (item) => {
                                     </div>
                                     <div className="input-wrapper">
                                     <input
-                                        value={`${format(range[0].startDate, "dd MMM")} - ${format(range[0].endDate, "dd MMM")}`}
+                                        value={`${formatDates(checkInDate)} - ${formatDates(checkOutDate)}`}
                                         readOnly
                                         className="inputBox"
                                         onClick={ () => setOpen(open => !open) }
@@ -246,14 +274,14 @@ const handleDateRangeChange = (item) => {
                                     <div className="searchBar2-cal" ref={refOne}>
                                         {open && 
                                         <DateRange
-                                            onChange={handleDateRangeChange}
-                                            editableDateInputs={true}
-                                            moveRangeOnFirstSelection={false}
-                                            ranges={range}
-                                            months={2}
-                                            direction="horizontal"
-                                            className="calendarElement"
-                                        />
+                                        onChange={handleDateRangeChange}
+                                        editableDateInputs={true}
+                                        moveRangeOnFirstSelection={false}
+                                        ranges={range}
+                                        months={2}
+                                        direction="horizontal"
+                                        className="calendarElement"
+                                    />
                                         }
                                     </div>
                                     <label className="input-label2">
