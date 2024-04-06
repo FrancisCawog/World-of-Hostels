@@ -4,7 +4,7 @@ import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { DateRange } from 'react-date-range';
-// import format from 'date-fns/format';
+import format from 'date-fns/format';
 import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.svg";
 import xImage from "../../assets/pictures/icons/close-x.svg";
 import users from "../../assets/pictures/icons/17115.png";
@@ -21,9 +21,9 @@ function SearchBar2() {
   const listings = useSelector((state) => state.listings);
   const history = useHistory();
   const guestsSelectionRef = useRef(null);
-  const today = new Date();
+  const today = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
   const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setDate(tomorrow.getDate() + 1);  
   
   const [location, setLocations] = useState("");
   const [checkInDate, setCheckInDate] = useState(today);
@@ -129,18 +129,6 @@ function SearchBar2() {
           key: 'selection'
         }
     ])
-
-    useEffect(() => {
-      console.log(checkInDate)
-      setRange([
-        {
-          startDate: checkInDate,
-          endDate: checkOutDate,
-          key: 'selection'
-        }
-      ]);
-      console.log(range)
-    }, [cart]);
         
     const handleDateRangeChange = (item) => {
       const startDate = formatDate(item.selection.startDate);

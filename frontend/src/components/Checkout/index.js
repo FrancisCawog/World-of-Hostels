@@ -34,12 +34,17 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
     const [checkInDate, setCheckInDate] = useState(checkIn);
     const [checkOutDate, setCheckOutDate] = useState(checkOut);
     const listing = useSelector((state) => state?.listings[listingId])
-    const checkInDates = fecha.parse(checkInDate, "YYYY-MM-DD");
-    const checkOutDates = fecha.parse(checkOutDate, "YYYY-MM-DD");
+    let checkInDates = fecha.parse(checkInDate, "YYYY-MM-DD");
+    let checkOutDates = fecha.parse(checkOutDate, "YYYY-MM-DD");
     const timeDifference = checkOutDates.getTime() - checkInDates.getTime();
     const numNights = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
     const [showNotEnough, setShowNotEnough] = useState(false);
     const [isInputGuestFocused, setInputGuestFocused] = useState(false);
+
+    useEffect(()=> {
+        checkInDates = fecha.parse(checkInDate, "YYYY-MM-DD");
+        checkOutDates = fecha.parse(checkOutDate, "YYYY-MM-DD");
+    }, [checkInDate,checkOutDate])
 
     const totalGuests = Object.entries(cart).reduce((acc, [roomId, val]) => {
         const room = rooms.find(room => room.id === Number(roomId));
@@ -111,7 +116,6 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
             
             for (let i = 0; i < reservationsToCreate.length; i++) {
                 const reservation = reservationsToCreate[i];
-                console.log(reservation)
                 const createdReservation = await dispatch(createReservation(reservation));
                 
                 if (i === 0) {
@@ -168,7 +172,6 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
         setTotalPrice(totalPriceCalculation);
     },[cartEffect, checkInDate, checkOutDate]);
 
-      // date state
         const [range, setRange] = useState([
             {
             startDate: checkInDates,
@@ -176,6 +179,16 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
             key: 'selection'
             }
         ])
+
+            useEffect(() => {
+      setRange([
+        {
+          startDate: checkInDates,
+          endDate: checkOutDates,
+          key: 'selection'
+        }
+      ]);
+    }, [cartEffect]);
 
         const handleDateRangeChange = (item) => {
             const startDate = item.selection.startDate.toISOString().split("T")[0];
@@ -255,9 +268,9 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
       }, [checkOutDate])
 
       useEffect(() => {
-        //   setCheckInDate(cart.checkIn);
-        //   setCheckOutDate(cart.checkOut);
-          setGuests(parseInt(cartEffect.guests, 10) || 1)
+        setCheckInDate(cartEffect.checkIn);
+        setCheckOutDate(cartEffect.checkOut);
+        setGuests(parseInt(cartEffect.guests, 10) || 1)
       }, [cartEffect]);
 
     return (
