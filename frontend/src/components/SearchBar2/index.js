@@ -131,6 +131,7 @@ function SearchBar2() {
     ])
 
     useEffect(() => {
+      console.log(checkInDate)
       setRange([
         {
           startDate: checkInDate,
@@ -138,9 +139,8 @@ function SearchBar2() {
           key: 'selection'
         }
       ]);
-    }, [checkInDate, checkOutDate]);
-
-    // console.log(range)
+      console.log(range)
+    }, [cart]);
         
     const handleDateRangeChange = (item) => {
       const startDate = formatDate(item.selection.startDate);
@@ -153,7 +153,7 @@ function SearchBar2() {
     
     const formatDate = (date) => {
       if (!(date instanceof Date) || isNaN(date.getTime())) {
-        return ""; // handle invalid date
+        return "";
       }
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -268,20 +268,19 @@ function SearchBar2() {
                                         className="inputBox"
                                         onClick={ () => setOpen(open => !open) }
                                         style={{paddingLeft: "1rem", marginBottom: "12px"}}
-                                        // disabled
                                     />
 
                                     <div className="searchBar2-cal" ref={refOne}>
                                         {open && 
                                         <DateRange
-                                        onChange={handleDateRangeChange}
-                                        editableDateInputs={true}
-                                        moveRangeOnFirstSelection={false}
-                                        ranges={range}
-                                        months={2}
-                                        direction="horizontal"
-                                        className="calendarElement"
-                                    />
+                                            onChange={handleDateRangeChange}
+                                            editableDateInputs={true}
+                                            moveRangeOnFirstSelection={false}
+                                            ranges={range}
+                                            months={2}
+                                            direction="horizontal"
+                                            className="calendarElement"
+                                        />
                                         }
                                     </div>
                                     <label className="input-label2">
