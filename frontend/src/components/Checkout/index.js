@@ -309,7 +309,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                     style={{paddingLeft: "1rem", marginBottom: "12px"}}
                                 />
 
-                                <div ref={refOne}>
+                                <div className="searchBar2-cal" ref={refOne} style={{marginLeft: "20%"}}>
                                     {open && 
                                     <DateRange
                                         onChange={handleDateRangeChange}

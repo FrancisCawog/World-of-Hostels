@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchListing } from "../../store/listings";
+import { fetchListing, fetchListings } from "../../store/listings";
 import "./ListingShow.css";
 import WifiSVG from "../../assets/pictures/icons/wifi.svg"
 import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
@@ -50,6 +50,12 @@ function ListingsShowPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
+      console.error("Error fetching listing:", error);
+    });
   }, []);
 
   useEffect(() => {

@@ -65,8 +65,8 @@ function SearchBar2() {
     }
 
     const cartData = {
-      checkIn: checkInDate.toISOString().split("T")[0],
-      checkOut: checkOutDate.toISOString().split("T")[0],
+      checkIn: checkInDate,
+      checkOut: checkOutDate,
       guests: guests,
       location: location,
       refundable: true,
