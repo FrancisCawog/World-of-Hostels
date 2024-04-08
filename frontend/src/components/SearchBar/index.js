@@ -9,6 +9,8 @@ import add from "../../assets/pictures/icons/plus-bold-svgrepo-com.svg"
 import grayadd from "../../assets/pictures/icons/plus-gray-svgrepo-com copy.svg"
 import minus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com regular.svg"
 import grayminus from "../../assets/pictures/icons/minus-sign-of-a-line-in-horizontal-position-svgrepo-com.svg"
+import { DateRange } from 'react-date-range';
+import CalendarSVG from "../../assets/pictures/icons/calendar-alt-svgrepo-com.svg"
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -133,14 +135,56 @@ function SearchBar() {
     };
   }, []);
 
+  const [open, setOpen] = useState(false)
+  const refOne = useRef(null)
+
+  const formatDates = (dateString) => {
+    const date = new Date(dateString + 'T00:00:00');
+    if (isNaN(date.getTime())) {
+      return "";
+    }
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthIndex = date.getUTCMonth();
+    const month = monthNames[monthIndex];
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    return `${day} ${month}`;
+  };
+
+  const [range, setRange] = useState([
+    {
+        startDate: checkInDate,
+        endDate: checkOutDate,
+        key: 'selection'
+      }
+  ])
+      
+  const handleDateRangeChange = (item) => {
+    const startDate = formatDate(item.selection.startDate);
+    const endDate = formatDate(item.selection.endDate);
+    
+    setCheckInDate(startDate);
+    setCheckOutDate(endDate);
+    setRange([item.selection]);
+  };
+
+  const formatDate = (date) => {
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+      return "";
+    }
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   return (
     <div className="search-bar-container">
       <div className="searchbar-wrapper">
         <div className="inline-wrapper">
           <div className="inline-form">
 
-            <div className="destination-container">
-              <div className="input-strip">
+            <div className="destination-container" style={{width: "80%"}}>
+              <div className="input-strip" >
                 <div className="input-inner">
                   <div className="input-prefix">
                     <img  style={{marginTop: "-5px", width:"20px", height:"20px"}} src={locationPic}/>
@@ -181,22 +225,21 @@ function SearchBar() {
 
             <div className="divider"></div>
 
-            <div className="dates">
-              <div className="checkin-checkout">
+            <div className="dates" style={{width: "25%"}}>
+              <div className="checkin-checkout" >
                 <div className="checkin-input">
                   <div className="input-with-label">
                     <div className="input-prefix">
-                      <img/>
+                      <img src={CalendarSVG} style={{width: "20px", height: "20px", marginBottom: "12.5px"}}/>
                     </div>
-                    <div className="input-wrapper">
-                      <input
-                      style={{paddingLeft: "1rem"}}
-                        type="date"
-                        name="checkInDate"
-                        id="checkInDate"
-                        value={checkInDate}
-                        onChange={handleCheckInDateChange}
-                      />
+                    <div className="input-wrapper" style={{display: "flex", alignItems: "center"}}>
+                    <input
+                        value={`${formatDates(checkInDate)}`}
+                        readOnly
+                        className="inputBox"
+                        onClick={ () => setOpen(open => !open) }
+                        style={{ marginBottom: "12px"}}
+                    />
                       <label className="input-label2">
                         Check In
                       </label>
@@ -208,22 +251,21 @@ function SearchBar() {
         
             <div className="divider"></div>
 
-            <div className="dates">
+            <div className="dates" style={{width: "25%"}}>
               <div className="checkin-checkout">
                 <div className="checkin-input">
                   <div className="input-with-label">
                     <div className="input-prefix">
-                      <img/>
+                      <img src={CalendarSVG} style={{width: "20px", height: "20px", marginBottom: "12.5px"}}/>
                     </div>
-                    <div className="input-wrapper">
-                      <input
-                        style={{paddingLeft: "1rem"}}
-                        type="date"
-                        name="checkOutDate"
-                        id="checkOutDate"
-                        value={checkOutDate}
-                        onChange={handleCheckOutDateChange}
-                      />
+                    <div className="input-wrapper" style={{display: "flex", alignItems: "center"}}>
+                    <input
+                        value={`${formatDates(checkOutDate)}`}
+                        readOnly
+                        className="inputBox"
+                        onClick={ () => setOpen(open => !open) }
+                        style={{marginBottom: "12px"}}
+                    />
                       <label className="input-label3">
                         Check Out
                       </label>
@@ -233,9 +275,23 @@ function SearchBar() {
               </div>
             </div>
 
+            <div className="searchBar2-cal" ref={refOne} style={{marginTop: "75px", marginLeft: "10%"}}>
+              {open && 
+              <DateRange
+                  onChange={handleDateRangeChange}
+                  editableDateInputs={true}
+                  moveRangeOnFirstSelection={false}
+                  ranges={range}
+                  months={2}
+                  direction="horizontal"
+                  className="calendarElement"
+              />
+              }
+          </div>
+
             <div className="divider"></div>
 
-            <div className="guests">
+            <div className="guests" style={{width: "20%"}}>
               <div className="guests-strip">
                 <div className="guests-input">
                   <div className="input-with-label">

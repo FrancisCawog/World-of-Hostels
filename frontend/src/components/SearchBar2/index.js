@@ -4,7 +4,7 @@ import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { DateRange } from 'react-date-range';
-import format from 'date-fns/format';
+// import format from 'date-fns/format';
 import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.svg";
 import xImage from "../../assets/pictures/icons/close-x.svg";
 import users from "../../assets/pictures/icons/17115.png";
