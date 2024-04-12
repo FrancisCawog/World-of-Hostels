@@ -26,6 +26,7 @@ import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 import BookingDetailsModal from "../BookingDetailsModal"
 import SearchBar2 from "../SearchBar2";
+import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
 const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 function UserShow() {
@@ -463,6 +464,40 @@ function formatInputDate(inputDate) {
 //     }
 //     return displayedDate;
 // }
+
+
+const cart = useSelector((state) => state.cart);
+sessionStorage.setItem('redirectUrl', window.location.pathname);
+tomorrow.setDate(tomorrow.getDate() + 1);
+const checkInDate = cart.checkIn || localStorage.getItem('checkInDate') || today.toISOString().split("T")[0];
+const checkOutDate = cart.checkOut || localStorage.getItem('checkOutDate') || tomorrow.toISOString().split("T")[0];
+const guests = cart.guests || localStorage.getItem('guests') || "1";
+const locations = cart.location || localStorage.getItem('location') || "";
+
+useEffect(() => {
+  localStorage.setItem('location', locations);
+  localStorage.setItem('checkInDate', checkInDate);
+  localStorage.setItem('checkOutDate', checkOutDate);
+  localStorage.setItem('guests', guests);
+
+  dispatch(setLocation(locations));
+  dispatch(setCheckIn(checkInDate));
+  dispatch(setCheckOut(checkOutDate));
+  dispatch(updateGuests(guests));
+}, [locations, checkInDate, checkOutDate, guests]);
+
+
+useEffect(() => {
+  if (cart.checkIn){
+  dispatch(fetchListings(cart.checkIn, cart.checkOut)).catch((error) => {
+  console.error("Error fetching listing:", error);
+  });
+} else {
+  dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
+    console.error("Error fetching listing:", error)
+  });
+}
+}, [dispatch]);
 
     return (
         <>

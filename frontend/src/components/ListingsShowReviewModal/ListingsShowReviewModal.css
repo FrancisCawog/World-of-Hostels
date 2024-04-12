@@ -22,9 +22,9 @@
     background-color: white;
     padding: 20px;
     border-radius: 25px;
-    height: 58%;
+    height: 33.5rem;
     width: 42.5%;
-    overflow: auto;
+    overflow: none;
     position: relative;
   } 
 
@@ -82,12 +82,6 @@
     margin-top: 20px;
 }
 
-.review-modal-popup {
-  width: 55%;
-  overflow-y: auto; 
-  white-space: nowrap;
-}
-
 .review-message-modal {
   align-items: center;
   background-color: #fce3b0 !important;
@@ -127,4 +121,23 @@
 .review-rating-box-modal {
   margin-top: -25px;
   margin-bottom: 15px;
+}
+
+.side-div2 {
+  min-height: 255px;
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 2.5%;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 0 9px 1px rgb(225, 225, 225);
+    border-radius: 25px 25px 25px 25px;
+}
+
+.review-modal-popup {
+  width: 55%;
+  overflow: auto; 
+  white-space: nowrap;
+  max-height: 82.5%;
+  /* margin-bottom: 20px; */
 }

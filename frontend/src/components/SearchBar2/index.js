@@ -271,7 +271,7 @@ function SearchBar2() {
                                         />
                                         }
                                     </div>
-                                    <label className="input-label2">
+                                    <label className="input-label2" style={{marginLeft: "0"}}>
                                         Dates
                                     </label>
                                     </div>

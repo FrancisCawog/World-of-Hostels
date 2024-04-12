@@ -121,7 +121,7 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
       const reviewIndices = Array.from({ length: totalReviews }, (_, index) => index);
 
   const reviewElements = reviewIndices.map((index) => (
-    <div key={index} className="side-div" style={{width: "95%", marginLeft: "2.5%", marginTop: "2.5%"}}>
+    <div key={index} className="side-div2" >
       <div className="date-and-rating">
         <p style={{ marginTop: "25px" }}>Stayed in {extractDate(listing?.id, index)}</p>
         <div className="star-and-rating">

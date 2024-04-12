@@ -72,7 +72,6 @@ function ListingsShowPage() {
   const guests = cart.guests || localStorage.getItem('guests') || "1";
   const location = cart.location || localStorage.getItem('location') || "";
 
-  // UseEffect to persist cart data to localStorage
   useEffect(() => {
     localStorage.setItem('location', location);
     localStorage.setItem('checkInDate', checkInDate);
@@ -379,11 +378,11 @@ function ListingsShowPage() {
         <div id="choose-room" className="choose-room">Choose your room</div>
           {rooms && (
             <>
-              {rooms.some(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds) && (
+              {rooms.some(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds && room.listing_id == listingId) && (
                 <>
                   <p className="room-type">Private Rooms</p>
                   {rooms
-                    .filter(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds)
+                    .filter(room => room.room_type === "private" && room.available_beds > 0 && room.available_beds === room.num_beds && room.listing_id == listingId)
                     .map((privateRoom, index) => {
                       const currentImageIndex = imageIndexes[privateRoom.id] || 0; 
                       const isCurrentlyHovered = hoveredListings[privateRoom.id] || false;
@@ -481,11 +480,11 @@ function ListingsShowPage() {
                     )})}
                   </>
               )}
-              {rooms.some(room => room.room_type === "shared" && room.available_beds > 0) && (
+              {rooms.some(room => room.room_type === "shared" && room.available_beds > 0 && room.listing_id == listingId) && (
                 <>
                   <p className="room-type">Dorm Beds</p>
                   {rooms
-                  .filter(room => room.room_type === "shared" && room.available_beds > 0)
+                  .filter(room => room.room_type === "shared" && room.available_beds > 0 && room.listing_id == listingId)
                   .map((sharedRoom, index) => {
                     const currentImageIndex = imageIndexes[sharedRoom.id] || 0; 
                     const isCurrentlyHovered = hoveredListings[sharedRoom.id] || false;

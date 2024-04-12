@@ -78,6 +78,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
             let checkInDate = ""
             let checkOutDate = ""
             let firstReservationId = 0;
+            let stayingGuests = 0;
             
             Object.entries(cart).forEach(([roomId, roomGuests]) => {
                 const room = rooms.find(room => room.id === Number(roomId));
@@ -116,18 +117,18 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
             
             for (let i = 0; i < reservationsToCreate.length; i++) {
                 const reservation = reservationsToCreate[i];
+                stayingGuests += reservation.num_guests;
                 const createdReservation = await dispatch(createReservation(reservation));
                 
                 if (i === 0) {
                     firstReservationId = createdReservation.id;
                 }
             }
-            
             history.push({
                 pathname: '/ConfirmationPage',
                 state: {
                     listingName: listingName,
-                    guests: numGuest,
+                    guests: stayingGuests,
                     reservationNumber: firstReservationId,
                     checkIn: checkInDates,
                     checkOut: checkOutDates,
@@ -322,7 +323,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                     />
                                     }
                                 </div>
-                                <label className="input-label2">
+                                <label className="input-label2" style={{marginLeft: "0"}}>
                                     Check In - Check Out
                                 </label>
                                 </div>
@@ -440,7 +441,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                         />
                                         }
                                     </div>
-                                    <label className="input-label2">
+                                    <label className="input-label2" style={{marginLeft: "0"}}>
                                         Check In
                                     </label>
                                     </div>
