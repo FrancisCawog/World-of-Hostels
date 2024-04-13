@@ -4,7 +4,6 @@ import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { DateRange } from 'react-date-range';
-// import format from 'date-fns/format';
 import locationPic from "../../assets/pictures/icons/location-pin-svgrepo-com.svg";
 import xImage from "../../assets/pictures/icons/close-x.svg";
 import users from "../../assets/pictures/icons/17115.png";
@@ -130,6 +129,8 @@ function SearchBar2() {
         }
     ])
         
+    const [dateSelectionCount, setDateSelectionCount] = useState(0);
+
     const handleDateRangeChange = (item) => {
       const startDate = formatDate(item.selection.startDate);
       const endDate = formatDate(item.selection.endDate);
@@ -137,7 +138,18 @@ function SearchBar2() {
       setCheckInDate(startDate);
       setCheckOutDate(endDate);
       setRange([item.selection]);
+      setDateSelectionCount(dateSelectionCount + 1);
+
+      if (dateSelectionCount === 1 && open) {
+        setOpen(false);
+      }
     };
+    
+    useEffect(() => {
+      if (dateSelectionCount === 2) {
+        setDateSelectionCount(0);
+      }
+    }, [dateSelectionCount]);
     
     const formatDate = (date) => {
       if (!(date instanceof Date) || isNaN(date.getTime())) {
@@ -149,7 +161,6 @@ function SearchBar2() {
       return `${year}-${month}-${day}`;
     };
     
-
   const [open, setOpen] = useState(false)
   const refOne = useRef(null)
 
@@ -159,17 +170,24 @@ function SearchBar2() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (guestsSelectionRef.current && !guestsSelectionRef.current.contains(event.target)) {
+      const isCalendarClicked = refOne.current && refOne.current.contains(event.target);
+      const isGuestsClicked = guestsSelectionRef.current && guestsSelectionRef.current.contains(event.target);
+  
+      if (!isCalendarClicked) {
+        setOpen(false);
+      }
+  
+      if (!isGuestsClicked) {
         setInputGuestFocused(false);
       }
     };
-
+  
     document.addEventListener("click", handleClickOutside);
-
+  
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, []);  
 
   const formatDates = (dateString) => {
     const date = new Date(dateString + 'T00:00:00');
@@ -254,7 +272,11 @@ function SearchBar2() {
                                         value={`${formatDates(checkInDate)} - ${formatDates(checkOutDate)}`}
                                         readOnly
                                         className="inputBox"
-                                        onClick={ () => setOpen(open => !open) }
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setInputGuestFocused(false)
+                                          setOpen(open => !open);
+                                      }}
                                         style={{paddingLeft: "1rem", marginBottom: "12px"}}
                                     />
 
@@ -298,8 +320,11 @@ function SearchBar2() {
                                         autoComplete="off"
                                         onFocus={handleGuestInputFocus}
                                         readOnly
-                                        ref={guestsSelectionRef} 
-                                        onClick={handleGuestsSelectionClick}
+                                        ref={guestsSelectionRef}
+                                        onClick={(e) => {
+                                          handleGuestsSelectionClick(e);
+                                          setOpen(false);
+                                      }}                                      
                                     />
                                     <label className="input-label4">
                                         Guests
