@@ -30,10 +30,7 @@ https://world-of-hostels.onrender.com
 
 
 ### Future Implementions/ Open Issues
-- In the listings show and nav, fix the calendar style.
-- In splash page, fix calendar style.
-- Fix guests button in both listings show and nav. 
-- Fix dates that show in nav bar.
+- Find different calander.
 - Prevent searches in the past and prevent start and end date on the same day.
 - Add more seeds data
 - Add facilities to listings show
@@ -41,3 +38,4 @@ https://world-of-hostels.onrender.com
 - Add errors to sign-up/ login/ users edit
 - Prevent users from changing birthdate to an incorrect date and not having a valid name
 - Fix styling in leave review - About you
+- Fix calander to turn off when not selected
