@@ -36,6 +36,5 @@ https://world-of-hostels.onrender.com
 - Add facilities to listings show
 - Add edit reservation feature.
 - Add errors to sign-up/ login/ users edit
-- Prevent users from changing birthdate to an incorrect date and not having a valid name
 - Fix styling in leave review - About you
 - Fix calander to turn off when not selected
