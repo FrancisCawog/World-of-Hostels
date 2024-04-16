@@ -50,7 +50,7 @@ function UserShow() {
     const [fullName, setFullName] = useState(
         sessionUser.first_name + " " + sessionUser.last_name
       );
-    const [dateOfBirth, setDateOfBirth] = useState(formattedDate);
+    const [dateOfBirth, setDateOfBirth] = useState(flip(formattedDate))
     const [userNationality, setUserNationality] = useState(sessionUser.nationality);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -240,9 +240,8 @@ function UserShow() {
         const dateOfBirth = document.getElementById('dateofBirth').value;
         const nationality = document.getElementById('nationality').value;
       
-        const [year, month, day] = dateOfBirth.split('-');
+        const [month, day, year] = dateOfBirth.split('/');
         const dob = new Date(`${month}/${day}/${year}`);
-      
         const now = new Date();
         let ages = now.getFullYear() - dob.getFullYear();
         const monthDiff = now.getMonth() - dob.getMonth();
@@ -256,7 +255,7 @@ function UserShow() {
             id: sessionUser.id,
             first_name: firstName,
             last_name: lastName,
-            date_of_birth: dateOfBirth,
+            date_of_birth: dob,
             nationality: nationality,
             age: ages,
           })
@@ -291,13 +290,16 @@ function UserShow() {
             formattedDate === null && 
             sessionUser.nationality === userNationality &&
             sessionUser.first_name === firstName &&
-            sessionUser.last_name === lastName
+            sessionUser.last_name === lastName || 
+            fullName.length === 0 || 
+            fullName.split(' ').length > 2 || 
+            !isValidAge(dateOfBirth)
           ){
             setButtonDisabled(true);
           } else if (dateOfBirth?.length !== 10 && dateOfBirth?.length !== 0){
             setButtonDisabled(true);
           } else if(
-          formattedDate === dateOfBirth &&
+          flip(formattedDate) === dateOfBirth &&
           sessionUser.nationality === userNationality &&
           sessionUser.first_name === firstName &&
           sessionUser.last_name === lastName
@@ -308,13 +310,34 @@ function UserShow() {
         }
       }, [dateOfBirth, userNationality, fullName, sessionUser]);
 
-    //   function isValidAge(dateOfBirth) {
-    //     const dob = new Date(dateOfBirth);
-    //     const today = new Date();
-    //     const age = today.getFullYear() - dob.getFullYear();
-    //     const monthDiff = today.getMonth() - dob.getMonth();
-    //     return age > 17 && age <= 100 && (age !== 18 || monthDiff >= 0);
-    // }
+      function isValidAge(dateOfBirth) {
+        if (dateOfBirth) {
+            const [day, month, year] = dateOfBirth.split('/');
+            const dayNum = parseInt(day, 10);
+            const monthNum = parseInt(month, 10);
+            const yearNum = parseInt(year, 10);
+          
+            if (yearNum < 1900 || yearNum > new Date().getFullYear()) {
+              return false;
+            }
+            const dob = new Date(yearNum, monthNum - 1, dayNum);
+            const today = new Date();
+            const age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            return age > 17 && age <= 100 && (age !== 18 || monthDiff >= 0);
+        } else {
+            return false; 
+        }
+    }    
+
+      function flip(formattedDate) {
+        if (formattedDate) {
+            const [day, month, year] = formattedDate.split('/')
+            return `${month}/${day}/${year}`
+        } else {
+            return false
+        }
+      }
       
       function formatDate(dateString) {
         const options = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -454,18 +477,6 @@ function formatInputDate(inputDate) {
     return inputDate;
 }
 
-// function formatDate(displayedDate) {
-//     const parts = displayedDate.split('/');
-//     if (parts.length === 3) {
-//         const [month, day, year] = parts;
-//         const formattedMonth = month.padStart(2, '0');
-//         const formattedDay = day.padStart(2, '0');
-//         return `${formattedMonth}/${formattedDay}/${year}`;
-//     }
-//     return displayedDate;
-// }
-
-
 const cart = useSelector((state) => state.cart);
 sessionStorage.setItem('redirectUrl', window.location.pathname);
 tomorrow.setDate(tomorrow.getDate() + 1);
@@ -584,7 +595,6 @@ useEffect(() => {
                             <input
                                 id="dateofBirth"
                                 value={dateOfBirth}
-                                // value={formatDate(dateOfBirth)}
                                 onChange={(e) => setDateOfBirth(formatInputDate(e.target.value))}
                             />
                             </div>
@@ -594,7 +604,6 @@ useEffect(() => {
                                 id="nationality"
                                 value={userNationality}
                                 onClick={handleNationalityInput}
-                                // onChange={(e) => setUserNationality(e.target.value)}
                                 readOnly
                             />
                         </div>
