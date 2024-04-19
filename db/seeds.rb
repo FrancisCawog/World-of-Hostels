@@ -190,7 +190,12 @@ Our hostel is located right in the heart of the action for backpackers in Bangko
         
         WHY CHOOSE MAD MONKEY?
 Our goal at Mad Monkey is to create meaningful and sustainable travel experiences for our guests — we want to show you an epic time but also immerse you in the local culture and connect you to the communities you're exploring. Our socially responsible hostel has projects around Asia that directly supports the locals — building water wells, creating education funds, providing fair employment for our team, and so on. Your stay with us contributes to these efforts.", 
-        facilities: "[Security Lockers, Swimming Pool, Air Conditioning, Hot Showers, Towels Not Included, Luggage Storage, 24 Hour Reception, Tours/Travel Desk, 24 Hour Security Housekeeping, restaurant, bar, Follows Covid-19 sanitation guidance]",
+        facilities: {
+            "Free" => ["Linen Included", "Free Wifi"],
+            "General" => ["Security Lockers", "Swimming Pool", "Air Conditioning", "Hot Showers"],
+            "Services" => ["Towels for hire", "Luggage Storage", "24 Hour Reception", "Tours/Travel Desk", "24 Hour Security", "Housekeeping"],
+            "Food & Drink" => ["Restaurant", "Bar", "Meals Available"]
+        },
         house_rules: "
 1. Check-in Time: from 14:00 to 23:00. 
 2. Check-out Time: before 12:00 (noon). 
@@ -252,7 +257,13 @@ Do not miss your opportunity to stay at NapPark Hostel, the perfect base from wh
 
 Please note that our dorms are not suitable for children under 12 years of age. Teenagers aged 13-16 years old should be accompanied by a parent.
 ",
-        facilities: "[Free WiFi, Air Conditioning, 24-Hour Reception, Luggage Storage, Tours/Travel Desk, Rooftop Lounge, Common Area, Smoking Area]",
+        facilities: {
+            "Free" => ["Linen Included", "Free Wifi", "Free City Maps", "Towels Included"],
+            "General" => ["Security Lockers", "Key Card Access", "Common Room", "Air Conditioning", "Adapters", "Hot Showers", "Fridge/Freezer", "Utensils", "Dryer", "Cable TV", "Outdoor Terrace", "Reading Light", "Hair Dryers", "Celing Fan", "Iron/Ironing Board", "Safe Deposit Box", "Microwave", "Washing Machine"],
+            "Services" => ["Laundry Facilities", "Aiport Transfer", "Luggage Storage", "24 Hour Reception", "Tours/Travel Desk", "24 Hour Security", "Housekeeping", "Wake-up calls"],
+            "Food & Drink" => ["Mini-Supermarket", "Tea & Coffee Making Facilities"],
+            "Entertainment" => ["Board Games", "Games Room"]
+        },
         house_rules: "
 1. Check-in Time: from 14:00 to 23:00.
 2. Check-out Time: before 12:00 (noon).
@@ -304,7 +315,13 @@ At Jam, youll find:
 - free WiFi with good signal throughout the hostel
 
 Youll also find out that our hostel is more than just an accommodation, but also a community of backpackers that prioritizes adventures, one-of-a-kind travel experiences, independence, and meeting new people with kindness and compassion. Let us be your friends and guides for your journey in Bangkok and we’d like to take you to embrace the chaos and cultures of our beloved city Bangkok!",
-        facilities: "[Free WiFi, Air Conditioning, 24-Hour Reception, Rooftop Garden, Shared Kitchen, Lounge Area, Luggage Storage]",
+        facilities: {
+            "Free" => ["Free Breakfast", "Linen Included", "Towels Included", "Free WiFi", "Free City Tour"],
+            "General" => ["Security Lockers", "Key Card Access", "Common Room", "Elevator", "BBQ", "Air Conditioning", "Adaptors", "Book Exchange", "Hot Showers", "Self-Catering Facilities", "Cooker", "Fridge/Freezer", "Utensils", "Dryer", "Cable TV", "Outdoor Terrace", "Reading Light", "Hair Dryers", "Iron / Ironing Board", "Safe Deposit Box", "Microwave", "Washing Machine"],
+            "Services" => ["Laundry Facilities", "Airport Transfers", "Luggage Storage", "Tours/Travel Desk", "24 Hour Security", "Housekeeping", "Late check-out", "Reception (limited hours)", "Wake-up calls"],
+            "Food & Drink" => ["Restaurant", "Bar", "Meals Available", "Tea & Coffee Making Facilities"],
+            "Entertainment" => ["Board Games"]
+        },
         house_rules: "
 1. Amendment, Cancellation & No Show Pollicies
 -No charge for notification of cancellation requests 72 hours preceding your scheduled arrival date (check-in date).
@@ -333,7 +350,7 @@ If you have any questions, please feel free to send us an email to us.",
         latitude: 14.188650,
         longitude: 100.637020,
         has_wifi?: true,
-        has_breakfast?: false
+        has_breakfast?: true
         )
 
     l3.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Jam+Hostel/48.webp"), filename: "/48.webp")
@@ -408,7 +425,13 @@ The bedsheet can be changed every three nights of stay.
 15). Please download the map or call for directions to Here Hostel.
 
 16.) Our swimming pool will be closed for maintenance from 30 Oct 2023 to 02 Nov 2023.",
-        facilities: "[Free WiFi, Air Conditioning, 24-Hour Reception, Cozy Lounge, Shared Kitchen, Cultural Events]",
+        facilities: {
+            "Free" => ["Linen Included", "Free City Maps", "Free WiFi"],
+            "General" => ["Security Lockers", "Swimming Pool", "Key Card Access", "Common Room", "Bicycle Parking", "Air Conditioning", "Adaptors", "Book Exchange", "Hot Showers", "Self-Catering Facilities", "Fridge/Freezer", "Dryer", "Cable TV", "Outdoor Terrace", "Reading Light", "Parking", "Hair Dryers", "Ceiling fan", "Microwave"],
+            "Services" => ["Towels for hire", "Luggage Storage", "24 Hour Reception", "Tours/Travel Desk", "24 Hour Security", "Housekeeping"],
+            "Food & Drink" => ["Bar", "Cafe"],
+            "Entertainment" => ["Board Games"]
+        },
         house_rules: "
 1). 24-hour reception on duty.
 
@@ -502,7 +525,13 @@ Things to note about our hostel:
 • Guests will have 24-hour access to their beds or rooms
 • Smoking is not allowed in the rooms and balcony
 • We offer additional continental breakfast for 129 Baht at the property",
-        facilities: "[Free High-Speed WiFi, Spa & Wellness Center, Rooftop Pool, 24-Hour Concierge, Gourmet Restaurant, Conference Facilities]",
+        facilities: {
+            "Free" => ["Linen Included", "Free City Maps", "Towels Included", "Free WiFi"],
+            "General" => ["Security Lockers", "Common Room", "Air Conditioning", "Book Exchange", "Hot Showers", "Outdoor Terrace", "Safe Deposit Box"],
+            "Services" => ["Internet access", "Laundry Facilities", "Luggage Storage", "24 Hour Reception", "Tours/Travel Desk", "ATM", "24 Hour Security", "Housekeeping", "Late check-out"],
+            "Food & Drink" => ["Bar", "Meals Available", "Tea & Coffee Making Facilities"],
+            "Entertainment" => ["Board Games", "Wi-Fi"]
+        },
         house_rules: "
 • Payment is by cash only upon arrival
 • We have 24-hour staff to provide assistance, care and advice
@@ -520,7 +549,7 @@ Things to note about our hostel:
         latitude: 13.634180,
         longitude: 100.413979,
         has_wifi?: true,
-        has_breakfast?: true
+        has_breakfast?: false
         )
 
     l5.photos.attach(io: URI.open("https://world-of-hostels-seeds.s3.amazonaws.com/Back+Home/evsunnju9i3qjrcr1goo.webp"), filename: "/evsunnju9i3qjrcr1goo.webp")
@@ -588,7 +617,13 @@ Guests are reminded that once they have paid on the day of check-in, no refunds 
 Bookings for 15 or more people qualify as group reservations and are subject to different Terms and Conditions. Please contact the property/hostel directly for more information.
 
 Palmers Lodge reserve the right to preauthorise Guests cards for prior to arrival. During times of extremely high demand, all reservations are required to have been made with a valid, chargeable card. Any reservations without a valid, chargeable card may be cancelled by Palmers Lodge at any given time.",
-        facilities: "[Security, Lockers,Key Card Access,Common Room,Elevator, Bicycle,Parking,BBQ,Adaptors]",
+        facilities: {
+        "Free" => ["Linen Included", "Free WiFi"],
+        "General" => ["Security Lockers", "Key Card Access", "Common Room", "Elevator", "Bicycle Parking", "BBQ", "Adaptors", "Book Exchange", "Hot Showers", "Self-Catering Facilities", "Cooker", "Fridge/Freezer", "Utensils", "Dryer", "Outdoor Terrace", "Reading Light", "Parking", "Hair Dryers", "Iron / Ironing Board", "Safe Deposit Box", "Washing Machine"],
+        "Services" => ["Laundry Facilities", "Towels for hire", "Luggage Storage", "24 Hour Reception", "Postal Service", "24 Hour Security", "Housekeeping"],
+        "Food & Drink" => ["Restaurant", "Bar", "Meals Available", "Vending Machines", "Cafe", "Tea & Coffee Making Facilities"],
+        "Entertainment" => ["PlayStation", "DVD's", "Board Games", "Games Room", "Pool Table"]
+        },
         house_rules: "
 Valid Photo ID will be required at check-in.  
 Earliest check-in: 14:00, Latest check-out: 10:00 Late check out may incur a £10 charge at hostels discretion.   
@@ -653,7 +688,13 @@ NON-REFUNDABLE RESERVATIONS:
 * Any extension of this stay requires a new booking for the additional dates, subject to availability and current rates.
 
 In the event of invalid credit card details, you will be contacted by our team. You will have 48 hours to provide valid credit card details, otherwise we reserve the right to cancel the booking.",
-        facilities: "[Security, Lockers,Key Card Access,Common Room,Elevator, Bicycle,Parking,BBQ,Adaptors]",
+        facilities: {
+            "Free" => ["Linen Included", "Free City Maps", "Free WiFi"],
+            "General" => ["Wheelchair Friendly", "Security Lockers", "Key Card Access", "Common Room", "Elevator", "Bicycle Parking", "BBQ", "Meeting Rooms", "Adaptors", "Book Exchange", "Hot Showers", "Self-Catering Facilities", "Dishwasher", "Cooker", "Fridge/Freezer", "Utensils", "Dryer", "Outdoor Terrace", "Reading Light", "Hair Dryers For Hire", "Iron / Ironing Board", "Safe Deposit Box", "Microwave", "Washing Machine"],
+            "Services" => ["Laundry Facilities", "Towels for hire", "Luggage Storage", "Fax Service", "24 Hour Reception", "Housekeeping", "Internet café", "Late check-out"],
+            "Food & Drink" => ["Bar", "Meals Available", "Vending Machines", "Cafe", "Tea & Coffee Making Facilities"],
+            "Entertainment" => ["Board Games", "Pool Table", "Foosball"]
+        },
         house_rules: "
 CANCELLATION CONDITIONS
 
