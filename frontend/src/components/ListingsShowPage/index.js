@@ -47,6 +47,13 @@ function ListingsShowPage() {
   const [refundable, setRefundable] = useState(isRefundable || false);
   const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
   sessionStorage.setItem('redirectUrl', window.location.pathname);
+  const facilitiesObjectString = listing?.facilities.replace(/=>/g, ':');
+
+  let allValues;
+  if (facilitiesObjectString) {
+    const facilitiesObject = JSON.parse(facilitiesObjectString);
+    allValues = Object.values(facilitiesObject).flat();
+  }  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -622,17 +629,22 @@ function ListingsShowPage() {
               </div>
             </div>
           </div>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
           <div className="view-house-rules"  onClick={() => handleTabClick('House Rules')}>
                 <p className="read-more">View all the house rules</p>
                 <img src={MyArrowSVG} style={{ width: '14px' }}/>
           </div>
 
-          <div className="facilities"> Facilities
+          <div className="facilities">Facilities
+            <div className="facilities-snippet">
+                <div className="facilities-category">
 
+                </div>
+            </div>
+        </div>
+
+          <div className="view-house-rules"  onClick={() => handleTabClick('Facilities')}>
+                <p className="read-more">View all facilities</p>
+                <img src={MyArrowSVG} style={{ width: '14px' }}/>
           </div>
 
           {numberOfReviews(listing?.id) !== 0 &&
