@@ -635,17 +635,26 @@ function ListingsShowPage() {
           </div>
 
           <div className="facilities">Facilities
-            <div className="facilities-snippet">
-                <div className="facilities-category">
-
+            <div className="facilities-snippet" style={{marginTop: ".5rem"}}>
+                <div className="facilities-category" style={{marginLeft: ".5rem"}}>
+                    {allValues?.slice(0, 8).map((value, index) => (
+                        <div key={index} className={`facility-item ${index < 4 ? 'first-four' : 'last-four'}`}>
+                          <div className="facilities-icon">
+                              <svg className="facilities-icon-svg"/>
+                            </div>
+                          {value}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
 
+          {allValues?.length > 8 &&
           <div className="view-house-rules"  onClick={() => handleTabClick('Facilities')}>
                 <p className="read-more">View all facilities</p>
                 <img src={MyArrowSVG} style={{ width: '14px' }}/>
           </div>
+          }
 
           {numberOfReviews(listing?.id) !== 0 &&
           <div id="show-reviews" className="show-reviews">
