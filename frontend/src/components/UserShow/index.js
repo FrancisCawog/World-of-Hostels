@@ -628,7 +628,7 @@ useEffect(() => {
                             <div style={{width: "125%"}}>
 
                                 <div className="bus-div">
-                                    <img src="https://www.hostelworld.com/_nuxt/img/05d49c7.svg"/>
+                                    <img src="https://www.hostelworld.com/pwa/_nuxt/img/05d49c7.svg"/>
                                     <div className="other-ready">
                                     <p id="other">Others are busy booking.</p>
                                     <p id="ready">Ready to start looking?</p>
@@ -803,13 +803,13 @@ useEffect(() => {
 
                         {!isReservationInPast ? (
                         <>
-                        <div className="reservation-info-button">
+                        {/* <div className="reservation-info-button">
                             <div className="reservation-info-button-inner">
                                     <img src={ChangeSVG} alt="Calendar Icon" className="trip-icon"/>
                                     <p>Change Booking</p>
-                                </div>
-                                <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
                             </div>
+                                <img src={RightSVG} alt="Calendar Icon" className="icon" style={{marginRight: "10px", marginTop: "0px"}}/>
+                        </div> */}
                             <div onClick={() => isRefundable && handleDeleteReservation(ReservationId, reservations)} disabled={!isRefundable} style={{display: "flex", alignItems: "center", opacity: isRefundable ? "initial" : ".5", pointerEvents: isRefundable ? 'auto' : 'none'}}>
                                 <div className="reservation-info-button" >
                                     <div className="reservation-info-button-inner">
