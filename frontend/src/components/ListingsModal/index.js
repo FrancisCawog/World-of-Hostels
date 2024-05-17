@@ -22,6 +22,22 @@ const ListingsModal = ({ tabName, onClose }) => {
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
+  const facilitiesObjectString = listing?.facilities.replace(/=>/g, ':');
+
+  let allKeys = [];
+  let facilitiesObject = {};
+  
+  if (facilitiesObjectString) {
+    try {
+      facilitiesObject = JSON.parse(facilitiesObjectString);
+      allKeys = Object.keys(facilitiesObject);
+    } catch (error) {
+      console.error("Invalid JSON string:", error);
+    }
+  }
+  
+  console.log(facilitiesObjectString);
+
   useEffect(() => {
     if (checkIn !== null) {
     dispatch(fetchListing(listingId, start_date, end_date)).catch((error) => {
@@ -126,10 +142,30 @@ const ListingsModal = ({ tabName, onClose }) => {
             </div>
             <div className="tab-underline"></div>
 
-            {activeTab === 'About' && (  <div className="tab-content">
-                <p> {listing.description}</p> 
+            {activeTab === 'About' && (  
+                <div className="tab-content">
+                  <p> {listing.description}</p> 
                 </div> 
             )}
+
+        {activeTab === 'Facilities' && (
+          <div className="tab-content">
+            {allKeys.map(key => (
+              <div key={key}>
+                <p className='facilities-key'>{key}</p>
+                <div className="horizontal-line" style={{ marginLeft: "0", marginRight: "0", marginBottom: "10px" }}></div>
+                {facilitiesObject[key].map((item, index) => (
+                  <>
+                  <div className="facilities-icon2">
+                    <svg className="facilities-icon-svg"/>
+                  </div>
+                  {item}
+                  </>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
 
             {activeTab === 'HouseRules' && ( 
                 <>

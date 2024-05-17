@@ -134,3 +134,20 @@
   .non-refundable-rates p {
     font-family: Poppins;
   }
+
+  .facilities-key {
+    font-family: Poppins-bold;
+    font-size: 20px;
+  }
+
+  .facilities-icon2 {
+    fill: #2767e7;
+    background-color: #f1f5fd;
+    border-radius: 50%;
+    margin-right: .5rem;
+    padding: .5rem;
+    /* display: grid; */
+    height: 1.5rem;
+    /* place-content: center; */
+    width: 1.5rem;
+}
