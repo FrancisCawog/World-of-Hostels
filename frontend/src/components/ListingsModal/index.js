@@ -150,19 +150,27 @@ const ListingsModal = ({ tabName, onClose }) => {
 
         {activeTab === 'Facilities' && (
           <div className="tab-content">
-            {allKeys.map(key => (
+            {allKeys.map((key, index) => (
+              <>
               <div key={key}>
                 <p className='facilities-key'>{key}</p>
-                <div className="horizontal-line" style={{ marginLeft: "0", marginRight: "0", marginBottom: "10px" }}></div>
-                {facilitiesObject[key].map((item, index) => (
+                <div className='facilities-modal-list'>
+                {facilitiesObject[key].map((item) => (
                   <>
-                  <div className="facilities-icon2">
-                    <svg className="facilities-icon-svg"/>
+                  <div className='facilities-modal-list-item'>
+                    <div className="facilities-icon2">
+                      <svg className="facilities-icon-svg"/>
+                    </div>
+                    {item}
                   </div>
-                  {item}
                   </>
                 ))}
+                </div>
               </div>
+              {index < allKeys.length - 1 && (
+            <div className="horizontal-line" id="facilities-modal-line" />
+          )}
+              </>
             ))}
           </div>
         )}

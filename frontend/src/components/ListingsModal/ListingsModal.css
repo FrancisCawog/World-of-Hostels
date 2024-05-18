@@ -137,7 +137,10 @@
 
   .facilities-key {
     font-family: Poppins-bold;
-    font-size: 20px;
+    font-size: 1.25rem;
+    letter-spacing: -.00625rem;
+    line-height: 1.625rem;
+    margin-bottom: 1.5rem;
   }
 
   .facilities-icon2 {
@@ -146,8 +149,29 @@
     border-radius: 50%;
     margin-right: .5rem;
     padding: .5rem;
-    /* display: grid; */
     height: 1.5rem;
     /* place-content: center; */
     width: 1.5rem;
+}
+
+.facilities-modal-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0.5rem;
+  gap: 0.5rem;
+}
+
+
+.facilities-modal-list-item {
+  width: calc(25% - 0.5rem);
+  align-items: center;
+  display: flex;
+  position: relative;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: .875rem;
+  letter-spacing: .00625rem;
+}
+
+#facilities-modal-line {
+  margin: 20px 0;
 }
