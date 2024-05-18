@@ -259,8 +259,8 @@ Please note that our dorms are not suitable for children under 12 years of age. 
 ",
         facilities: {
             "Free" => ["Linen Included", "Free Wifi", "Free City Maps", "Towels Included"],
-            "General" => ["Security Lockers", "Key Card Access", "Common Room", "Air Conditioning", "Adapters", "Hot Showers", "Fridge/Freezer", "Utensils", "Dryer", "Cable TV", "Outdoor Terrace", "Reading Light", "Hair Dryers", "Celing Fan", "Iron/Ironing Board", "Safe Deposit Box", "Microwave", "Washing Machine"],
-            "Services" => ["Laundry Facilities", "Aiport Transfer", "Luggage Storage", "24 Hour Reception", "Tours/Travel Desk", "24 Hour Security", "Housekeeping", "Wake-up calls"],
+            "General" => ["Security Lockers", "Key Card Access", "Common Room", "Air Conditioning", "Adapters", "Hot Showers", "Fridge/Freezer", "Utensils", "Dryer", "Cable TV", "Outdoor Terrace", "Reading Light", "Hair Dryers", "Ceiling Fan", "Iron/Ironing Board", "Safe Deposit Box", "Microwave", "Washing Machine"],
+            "Services" => ["Laundry Facilities", "Airport Transfer", "Luggage Storage", "24 Hour Reception", "Tours/Travel Desk", "24 Hour Security", "Housekeeping", "Wake-up calls"],
             "Food & Drink" => ["Mini-Supermarket", "Tea & Coffee Making Facilities"],
             "Entertainment" => ["Board Games", "Games Room"]
         },

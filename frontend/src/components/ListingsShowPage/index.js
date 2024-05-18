@@ -25,6 +25,7 @@ import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 // import { useLocation } from 'react-router-dom';
 import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
 import { fetchUsers } from "../../store/users";
+import FacilityIcon from "../../components/FacilityIcon/index.js";
 const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 function ListingsShowPage() {
@@ -639,8 +640,8 @@ function ListingsShowPage() {
                 <div className="facilities-category" style={{marginLeft: ".5rem"}}>
                     {allValues?.slice(0, 8).map((value, index) => (
                         <div key={index} className={`facility-item ${index < 4 ? 'first-four' : 'last-four'}`}>
-                          <div className="facilities-icon">
-                              <svg className="facilities-icon-svg"/>
+                          <div className="facilities-icon2">
+                            <FacilityIcon item={value} />
                             </div>
                           {value}
                         </div>

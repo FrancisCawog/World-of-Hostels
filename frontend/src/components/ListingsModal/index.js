@@ -7,6 +7,7 @@ import checkInPic from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.5
 import checkOutPic from '../../assets/pictures/icons/Screenshot 2023-11-17 at 1.49.46 PM.png';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png";
+import FacilityIcon from "../../components/FacilityIcon/index.js";
 
 const ListingsModal = ({ tabName, onClose }) => {
   const cart = useSelector((state) => state.cart);
@@ -35,8 +36,6 @@ const ListingsModal = ({ tabName, onClose }) => {
       console.error("Invalid JSON string:", error);
     }
   }
-  
-  console.log(facilitiesObjectString);
 
   useEffect(() => {
     if (checkIn !== null) {
@@ -159,7 +158,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                   <>
                   <div className='facilities-modal-list-item'>
                     <div className="facilities-icon2">
-                      <svg className="facilities-icon-svg"/>
+                      <FacilityIcon item={item} />
                     </div>
                     {item}
                   </div>
