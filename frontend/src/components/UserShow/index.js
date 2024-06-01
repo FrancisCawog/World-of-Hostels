@@ -14,7 +14,7 @@ import CalendarSVG from "../../assets/pictures/icons/calendar-alt-svgrepo-com.sv
 import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
 import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import BuildingSVG from "../../assets/pictures/icons/921-200.png"
-import ChangeSVG from "../../assets/pictures/icons/2831588-200.png"
+// import ChangeSVG from "../../assets/pictures/icons/2831588-200.png"
 import CancelSVG from "../../assets/pictures/icons/728248.webp"
 import RightSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
