@@ -26,8 +26,6 @@ https://world-of-hostels.onrender.com
 
 ![Sign up page for new users](./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.52.23 PM.png)
 
-![Property details on the listings show page](./frontend/src/assets/read-me-pictures/Screenshot%202023-11-26%20at%2011.29.42%20PM.png)
-
 ![Review for past stay] (./frontend/src/assets/read-me-pictures/Screenshot 2024-05-25 at 7.08.01 PM.png)
 
 ![Facilities modal on listings show page] (./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.45.52 PM.png)
