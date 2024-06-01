@@ -34,6 +34,8 @@ https://world-of-hostels.onrender.com
 
 ![Ability to change nationalities for users] (./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.46.31 PM.png)
 
+![World of Hostels homepage](./frontend/src/assets/read-me-pictures/Screenshot 2024-05-25 at 7.07.18 PM.png)
+
 
 ### Future Implementions/ Open Issues
 - Find different calander.
