@@ -22,15 +22,25 @@ https://world-of-hostels.onrender.com
 - Upon searching for a location, all available rooms are shown on an index page together
 - When an accomodation is selected, the user is brought to the listing show page where different room options are shown.
 
-![World of Hostels homepage](./frontend/src/assets/read-me-pictures/Screenshot 2024-05-25 at 7.07.18 PM.png)
+![World of Hostels homepage](./frontend/src/assets/read-me-pictures/Screenshot%202024-05-25%20at%207.07.18 PM.png)
 
-![Sign up page for new users](./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.52.23 PM.png)
+- World of Hostels homepage.
 
-![Review for past stay] (./frontend/src/assets/read-me-pictures/Screenshot 2024-05-25 at 7.08.01 PM.png)
+![Sign up page for new users](./frontend/src/assets/read-me-pictures/Screenshot%2024-05-31%at%9.52.23 PM.png)
 
-![Facilities modal on listings show page] (./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.45.52 PM.png)
+- Sign up page for new users.
 
-![Ability to change nationalities for users] (./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.46.31 PM.png)
+![Review for past stay] (./frontend/src/assets/read-me-pictures/Screenshot%2024-05-25%at%7.08.01 PM.png)
+
+- Review modal for past reservation.
+
+![Facilities modal on listings show page] (./frontend/src/assets/read-me-pictures/Screenshot%2024-05-31%at%9.45.52 PM.png)
+
+- Listings show page modal showing all the facilities.
+
+![Ability to change nationalities for users] (./frontend/src/assets/read-me-pictures/Screenshot%2024-05-31%at%9.46.31 PM.png)
+
+- User home page modal allowing using to change their nationality.
 
 
 ### Future Implementions/ Open Issues
