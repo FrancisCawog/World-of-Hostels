@@ -24,7 +24,7 @@ https://world-of-hostels.onrender.com
 - User has ability to cancel reservation and leave a review for a past reservation.
 - User can also edit details in users show page such as DOB/ nationality/ name.
 
-![World of Hostels homepage](./frontend/src/assets/read-me-pictures/Screenshot 2024-05-25 at 7.07.18 PM.png)
+![World of Hostels homepage](./frontend/src/assets/read-me-pictures/Screenshot%202024-05-25%20at%207.07.18 PM.png)
 
 ![Sign up page for new users](./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.52.23 PM.png)
 
@@ -33,8 +33,6 @@ https://world-of-hostels.onrender.com
 ![Facilities modal on listings show page] (./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.45.52 PM.png)
 
 ![Ability to change nationalities for users] (./frontend/src/assets/read-me-pictures/Screenshot 2024-05-31 at 9.46.31 PM.png)
-
-![World of Hostels homepage](./frontend/src/assets/read-me-pictures/Screenshot 2024-05-25 at 7.07.18 PM.png)
 
 
 ### Future Implementions/ Open Issues
