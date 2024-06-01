@@ -21,6 +21,8 @@ https://world-of-hostels.onrender.com
 - Certain features such as booking available only when a user is logged in
 - Upon searching for a location, all available rooms are shown on an index page together
 - When an accomodation is selected, the user is brought to the listing show page where different room options are shown.
+- User has ability to cancel reservation and leave a review for a past reservation.
+- User can also edit details in users show page such as DOB/ nationality/ name.
 
 ![World of Hostels homepage](./frontend/src/assets/read-me-pictures/Screenshot 2024-05-25 at 7.07.18 PM.png)
 
