@@ -32,15 +32,15 @@ https://world-of-hostels.onrender.com
 
 - Sign up page for new users.
 
-![Review for past stay] (./frontend/src/assets/read-me-pictures/Screenshot%202024-05-25%20at%207.08.01 PM.png)
+![Review for past stay](./frontend/src/assets/read-me-pictures/Screenshot%202024-05-25%20at%207.08.01 PM.png)
 
 - Review modal for past reservation.
 
-![Facilities modal on listings show page] (./frontend/src/assets/read-me-pictures/Screenshot%202024-05-31%20at%209.45.52 PM.png)
+![Facilities modal on listings show page](./frontend/src/assets/read-me-pictures/Screenshot%202024-05-31%20at%209.45.52 PM.png)
 
 - Listings show page modal showing all the facilities.
 
-![Ability to change nationalities for users] (./frontend/src/assets/read-me-pictures/Screenshot%202024-05-31%20at%209.46.31 PM.png)
+![Ability to change nationalities for users](./frontend/src/assets/read-me-pictures/Screenshot%202024-05-31%20at%209.46.31 PM.png)
 
 - User home page modal allowing using to change their nationality.
 
