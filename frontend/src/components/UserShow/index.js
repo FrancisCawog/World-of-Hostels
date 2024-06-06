@@ -34,6 +34,7 @@ function UserShow() {
     const { tabName } = location.state || {};
     const reviews = useSelector((state) => state.reviews);
     const history = useHistory();
+    const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const reservations = useSelector(state => state.reservations);
@@ -66,9 +67,12 @@ function UserShow() {
     const [modalListingId, setModalListingId] = useState();
     const [showDetails, setShowDetails] = useState(false);
     const [isRefundable, setIsRefundable] = useState(true);
-    const today = new Date();
+    const today = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
+    // const checkInDate = cart.checkIn || localStorage.getItem('checkInDate') || today.toISOString().split("T")[0];
+    // console.log(checkInDate)
+    // const checkOutDate = cart.checkOut || localStorage.getItem('checkOutDate') || tomorrow.toISOString().split("T")[0];
     const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
 
     useEffect(() => {
@@ -167,11 +171,11 @@ function UserShow() {
         setActiveTab(tabName);
       }, [tabName]);
 
-    useEffect(() => {
-        dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
-          console.error("Error fetching listing:", error);
-        });
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
+    //       console.error("Error fetching listing:", error);
+    //     });
+    //   }, [dispatch]);
 
     
     useEffect(() => {
@@ -321,9 +325,9 @@ function UserShow() {
               return false;
             }
             const dob = new Date(yearNum, monthNum - 1, dayNum);
-            const today = new Date();
-            const age = today.getFullYear() - dob.getFullYear();
-            const monthDiff = today.getMonth() - dob.getMonth();
+            const today2 = new Date();
+            const age = today2.getFullYear() - dob.getFullYear();
+            const monthDiff = today2.getMonth() - dob.getMonth();
             return age > 17 && age <= 100 && (age !== 18 || monthDiff >= 0);
         } else {
             return false; 
@@ -477,26 +481,22 @@ function formatInputDate(inputDate) {
     return inputDate;
 }
 
-const cart = useSelector((state) => state.cart);
 sessionStorage.setItem('redirectUrl', window.location.pathname);
-tomorrow.setDate(tomorrow.getDate() + 1);
-const checkInDate = cart.checkIn || localStorage.getItem('checkInDate') || today.toISOString().split("T")[0];
-const checkOutDate = cart.checkOut || localStorage.getItem('checkOutDate') || tomorrow.toISOString().split("T")[0];
 const guests = cart.guests || localStorage.getItem('guests') || "1";
 const locations = cart.location || localStorage.getItem('location') || "";
 
 useEffect(() => {
   localStorage.setItem('location', locations);
-  localStorage.setItem('checkInDate', checkInDate);
-  localStorage.setItem('checkOutDate', checkOutDate);
+//   localStorage.setItem('checkInDate', checkInDate);
+//   localStorage.setItem('checkOutDate', checkOutDate);
   localStorage.setItem('guests', guests);
 
   dispatch(setLocation(locations));
-  dispatch(setCheckIn(checkInDate));
-  dispatch(setCheckOut(checkOutDate));
+//   dispatch(setCheckIn(checkInDate));
+//   dispatch(setCheckOut(checkOutDate));
   dispatch(updateGuests(guests));
-}, [locations, checkInDate, checkOutDate, guests]);
-
+// }, [locations, checkInDate, checkOutDate, guests]);
+}, [locations, guests]);
 
 useEffect(() => {
   if (cart.checkIn){

@@ -25,8 +25,8 @@ function SearchBar2() {
   tomorrow.setDate(tomorrow.getDate() + 1);  
   
   const [location, setLocations] = useState("");
-  const [checkInDate, setCheckInDate] = useState(today);
-  const [checkOutDate, setCheckOutDate] = useState(tomorrow);
+  const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
+  const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().split("T")[0]);
   const [guests, setGuests] = useState(1);
 
   const [uniqueCities, setUniqueCities] = useState([]);
@@ -54,7 +54,7 @@ function SearchBar2() {
       setCheckOutDate(cart.checkOut);
       setGuests(parseInt(cart.guests, 10) || 1)
     }
-  }, [cart]);
+  }, []);
   
   const handleSearch = () => {
     if (!uniqueCities.includes(location)) {
@@ -92,6 +92,10 @@ function SearchBar2() {
   useEffect(() => {
     dispatch(setCheckOut(checkOutDate));
   }, [checkOutDate])
+
+  useEffect(() => {
+    dispatch(setLocation(location));
+  }, [location])
 
   useEffect(() => {
       const listingsArray = Object.values(listings);
