@@ -395,11 +395,11 @@ function ListingsShowPage() {
                       const currentImageIndex = imageIndexes[privateRoom.id] || 0; 
                       const isCurrentlyHovered = hoveredListings[privateRoom.id] || false;
                     return (
-                      <div key={index}>
+                      <div key={index} onMouseEnter={() => handleListingHover(privateRoom.id, true)} onMouseLeave={() => handleListingHover(privateRoom.id, false)}>
                         <div className="private-room-div">
                           <div className="private-picture-box">
                           <div className="index-picture-picture2">
-                            <img src={privateRoom.photoUrls[currentImageIndex]} alt={`Room ${privateRoom.id}`} onMouseEnter={() => handleListingHover(privateRoom.id, true)} onMouseLeave={() => handleListingHover(privateRoom.id, false)}/>
+                            <img src={privateRoom.photoUrls[currentImageIndex]} alt={`Room ${privateRoom.id}`}/>
                           </div>
                           {privateRoom.photoUrls.length > 1 && (
                             <>
