@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png";
 import './Navigation.css';
@@ -23,6 +23,8 @@ function Navigation() {
   const sessionUser = useSelector((state) => state.session.user);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isCredentialDropdownVisible, seCredentialtIsDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+  const credentialDropdownRef = useRef(null);
   const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
 
   const toggleDropdown = () => {
@@ -69,6 +71,23 @@ function Navigation() {
       window.open(targetUrl, '_blank');
     }
   };
+
+  const handleClickOutside = (event) => {
+    if (
+      dropdownRef.current && !dropdownRef.current.contains(event.target) &&
+      credentialDropdownRef.current && !credentialDropdownRef.current.contains(event.target)
+    ) {
+      setIsDropdownVisible(false);
+      seCredentialtIsDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
 
   let contentToRender = null;
@@ -85,12 +104,12 @@ function Navigation() {
         <div className="circles">
           {!sessionUser ? (
             <Link to="/login">
-              <div className="circle">
+              <div className="circle" ref={dropdownRef}>
                 <img src={userIcon} alt="User" className='circle-21'/>
               </div>
             </Link>
           ) : (
-            <div>
+            <div ref={dropdownRef}>
               <div className="circle" onClick={toggleDropdown}>
                 <img src={sessionUser?.photoUrl || defaultPic} alt="User" className='circle-28'/>
               </div>
@@ -153,6 +172,7 @@ function Navigation() {
               )}
             </div>
           )}
+          <div ref={credentialDropdownRef}>
           <div className="circle" onClick={toggleCredentialDropdown}>
             <img src={navIcon} className='circle-12' alt="Nav" />
           </div>
@@ -197,6 +217,7 @@ function Navigation() {
               </div>
             </div>
           )}
+          </div>
         </div>
       </header>
     </div>
@@ -215,12 +236,12 @@ function Navigation() {
         <div className="circles">
           {!sessionUser ? (
             <Link to="/login">
-              <div className="circle">
+              <div className="circle" ref={dropdownRef}>
                 <img src={userIcon} alt="User" className='circle-21'/>
               </div>
             </Link>
           ) : (
-            <div>
+            <div ref={dropdownRef}>
               <div className="circle" onClick={toggleDropdown}>
                 <img src={sessionUser?.photoUrl || defaultPic} alt="User" className='circle-28'/>
               </div>
@@ -283,6 +304,7 @@ function Navigation() {
               )}
             </div>
           )}
+          <div ref={credentialDropdownRef}>
           <div className="circle" onClick={toggleCredentialDropdown}>
             <img src={navIcon} style={{ width: "12px", marginLeft: "30%" }} alt="Nav" />
           </div>
@@ -328,6 +350,7 @@ function Navigation() {
             </div>
           )}
         </div>
+        </div>
       </header>
     </div>
     )
@@ -350,12 +373,12 @@ function Navigation() {
           <div className="circles">
           {!sessionUser ? (
             <Link to="/login">
-              <div className="circle">
+              <div className="circle" ref={dropdownRef}>
                 <img src={userIcon} alt="User" className='circle-21'/>
               </div>
             </Link>
           ) : (
-            <div>
+            <div ref={dropdownRef}>
               <div className="circle" onClick={toggleDropdown}>
               <img src={sessionUser?.photoUrl || defaultPic} alt="User" className='circle-28'/>
               </div>
@@ -418,6 +441,7 @@ function Navigation() {
               )}
             </div>
           )}
+          <div ref={credentialDropdownRef}>
           <div className="circle" onClick={toggleCredentialDropdown}>
             <img src={navIcon} style={{ width: "12px", marginLeft: "30%" }} alt="Nav" />
           </div>
@@ -463,6 +487,7 @@ function Navigation() {
             </div>
           )}
         </div>
+        </div>
       </header>
     </div>
     )
@@ -483,12 +508,12 @@ function Navigation() {
           <div className="circles">
           {!sessionUser ? (
             <Link to="/login">
-              <div className="circle">
+              <div className="circle" ref={dropdownRef}>
                 <img src={userIcon} alt="User" />
               </div>
             </Link>
           ) : (
-            <div>
+            <div ref={dropdownRef}>
               <div className="circle" onClick={toggleDropdown}>
                 <img src={sessionUser?.photoUrl || defaultPic} alt="User" className='circle-28'/>
               </div>
@@ -551,6 +576,7 @@ function Navigation() {
               )}
             </div>
           )}
+          <div ref={credentialDropdownRef}>
           <div className="circle" onClick={toggleCredentialDropdown}>
             <img src={navIcon} style={{ width: "12px", marginLeft: "30%" }} alt="Nav" />
           </div>
@@ -595,6 +621,7 @@ function Navigation() {
               </div>
             </div>
           )}
+        </div>
         </div>
       </header>
     </div>
