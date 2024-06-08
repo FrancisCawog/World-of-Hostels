@@ -19,9 +19,9 @@ function SearchBar() {
   const history = useHistory();
   const guestsSelectionRef = useRef(null);
   
-  const today = new Date();
+  const today = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
   const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setDate(tomorrow.getDate() + 1);  
 
   const [location, setLocations] = useState("");
   const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
@@ -35,6 +35,18 @@ function SearchBar() {
   const handleLocationChange = (e) => {
     setLocations(e.target.value);
   };
+
+  useEffect(() => {
+    if (checkInDate !== null){
+      dispatch(setCheckIn(checkInDate));
+    }
+  }, [checkInDate])
+
+  useEffect(() => {
+    if (checkOutDate !== null){
+      dispatch(setCheckOut(checkOutDate));
+    }
+  }, [checkOutDate])
 
   // const handleCheckInDateChange = (e) => {
   //   setCheckInDate(e.target.value);
