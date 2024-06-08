@@ -209,7 +209,7 @@ function SearchBar() {
                   <div className="input-prefix">
                     <img  style={{marginTop: "-5px", width:"20px", height:"20px"}} src={locationPic}/>
                   </div>
-                  <div className={`input-wrapper ${location !== "" ? 'non-empty' : ''}`}>
+                  <div className={`input-wrapper ${(location !== "" && location !== null) ? 'non-empty' : ''}`}>
                   <input
                     type="text"
                     name="location"

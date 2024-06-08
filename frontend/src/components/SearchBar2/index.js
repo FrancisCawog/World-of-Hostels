@@ -86,11 +86,15 @@ function SearchBar2() {
   }, [guests]);
 
   useEffect(() => {
-    dispatch(setCheckIn(checkInDate));
+    if (checkInDate !== null){
+      dispatch(setCheckIn(checkInDate));
+    }
   }, [checkInDate])
 
   useEffect(() => {
-    dispatch(setCheckOut(checkOutDate));
+    if (checkOutDate !== null){
+      dispatch(setCheckOut(checkOutDate));
+    }
   }, [checkOutDate])
 
   useEffect(() => {
@@ -218,7 +222,7 @@ function SearchBar2() {
                                             <img style={{marginTop: "-5px", width:"20px", height:"20px"}} src={locationPic}/>
                                         </div>
                                     </div>
-                                    <div className={`input-wrapper ${location !== "" ? 'non-empty' : ''}`} >
+                                    <div className={`input-wrapper ${(location !== "" && location !== null) ? 'non-empty' : ''}`} >
                                         <input
                                             type="text"
                                             name="location"
@@ -235,7 +239,7 @@ function SearchBar2() {
                                         </label>
                                     </div>
                                 
-                                {location !== "" &&
+                                {(location !== "" && location !== null) &&
                                     <div className="input-x">
                                         <div className="input-button-x">
                                             <div className="input-reset" onClick={() => setLocations("")}>
