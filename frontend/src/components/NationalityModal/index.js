@@ -1,8 +1,25 @@
-import React from 'react';
-import "./NationalityModal.css"
-const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent").then(res => res.json());
+// Memoized 
+
+import React, { useEffect, useState } from 'react';
+import "./NationalityModal.css";
 
 const NationalityModal = ({ onClose, onInputChange }) => {
+    const [restCountriesData, setRestCountriesData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("https://restcountries.com/v3.1/all?fields=name,independent");
+                const data = await response.json();
+                setRestCountriesData(data);
+            } catch (error) {
+                console.error('Error fetching countries data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     const handleCountryClick = (countryName) => {
         onInputChange(countryName);
         onClose();
@@ -13,8 +30,8 @@ const NationalityModal = ({ onClose, onInputChange }) => {
         .sort((a, b) => a.name.common.localeCompare(b.name.common));
 
     return (
-        <div className="modal-overlay4">
-            <div className="modal4">
+        <div className="modal-overlay4" onClick={onClose}>
+            <div className="modal4" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-content">
                     <span className="close" onClick={onClose}>&times;</span>
                     <h1 className='booking-details-h1'>Select your nationality</h1>
@@ -34,7 +51,7 @@ const NationalityModal = ({ onClose, onInputChange }) => {
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default NationalityModal;
