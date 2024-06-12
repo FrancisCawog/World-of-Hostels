@@ -634,8 +634,8 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
     };
 
     return (
-        <div className="modal-overlay">
-            <div className="review-modal-form">
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="review-modal-form" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-content">
                     {currentPage === 1 ? (
                     <p className='modal-review-label-form'>Leave a review</p>
