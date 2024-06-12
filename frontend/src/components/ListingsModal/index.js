@@ -75,6 +75,12 @@ const ListingsModal = ({ tabName, onClose }) => {
     scaledSize: markerImageSize,
   };
 
+  const handleMapClick = (e) => {
+    if (infoWindowVisible) {
+      setInfoWindowVisible(false);
+    }
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -83,6 +89,7 @@ const ListingsModal = ({ tabName, onClose }) => {
 
           {tabName === 'Map' ? (
             <>
+            <div>
               <h2 className='modal-header'>Location</h2>
               <GoogleMap
                 mapContainerStyle={mapStyles}
@@ -91,6 +98,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                   lat: listing.latitude,
                   lng: listing.longitude,
                 }}
+                onClick={handleMapClick}
               >
                 <Marker
                   position={{
@@ -113,6 +121,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                   </InfoWindow>
                 )}
               </GoogleMap>
+            </div>
             </>
           ) : (
             <>

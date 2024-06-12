@@ -1,9 +1,10 @@
+//Memoized
+
 import { useState } from 'react';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png";
 
 const ReservationMapModal = ({ latitude, longitude, onClose, name, address, city, country }) => {
-
   const mapStyles = {
     height: '40rem',
     width: '100%',
@@ -24,13 +25,19 @@ const ReservationMapModal = ({ latitude, longitude, onClose, name, address, city
     scaledSize: markerImageSize,
   };
 
+  const handleMapClick = (e) => {
+    if (infoWindowVisible) {
+      setInfoWindowVisible(false);
+    }
+  };
+
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content">
           <span className="close" onClick={onClose}>&times;</span>
 
-          <>
+          <div>
             <h2 className='modal-header'>Location</h2>
             <GoogleMap
               mapContainerStyle={mapStyles}
@@ -39,6 +46,7 @@ const ReservationMapModal = ({ latitude, longitude, onClose, name, address, city
                 lat: latitude,
                 lng: longitude,
               }}
+              onClick={handleMapClick}
             >
               <Marker
                 position={{
@@ -61,7 +69,7 @@ const ReservationMapModal = ({ latitude, longitude, onClose, name, address, city
                 </InfoWindow>
               )}
             </GoogleMap>
-          </>
+          </div>
         </div>
       </div>
     </div>
