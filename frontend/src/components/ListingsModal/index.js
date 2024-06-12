@@ -73,8 +73,8 @@ const ListingsModal = ({ tabName, onClose }) => {
   };
 
     return (
-        <div className="modal-overlay">
-        <div className="modal">
+        <div className="modal-overlay" onClick={onClose}>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-content">
             <span className="close" onClick={onClose}>&times;</span>
 
