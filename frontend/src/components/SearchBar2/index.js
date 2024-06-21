@@ -97,9 +97,9 @@ function SearchBar2() {
     }
   }, [checkOutDate])
 
-  useEffect(() => {
-    dispatch(setLocation(location));
-  }, [location])
+  // useEffect(() => {
+  //   dispatch(setLocation(location));
+  // }, [location])
 
   useEffect(() => {
       const listingsArray = Object.values(listings);
