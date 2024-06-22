@@ -20,6 +20,7 @@ function SearchBar2() {
   const listings = useSelector((state) => state.listings);
   const history = useHistory();
   const guestsSelectionRef = useRef(null);
+  const destinationContainerRef = useRef(null);
   const today = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);  
@@ -32,6 +33,7 @@ function SearchBar2() {
   const [uniqueCities, setUniqueCities] = useState([]);
   const [isInputFocused, setInputFocused] = useState(false);
   const [isInputGuestFocused, setInputGuestFocused] = useState(false);
+  const [isLocationComplete, setIsLocationComplete] = useState(true);
   const locationPath = useLocation();
   const isListingsPage = locationPath.pathname.startsWith("/listings");
 
@@ -59,6 +61,7 @@ function SearchBar2() {
   const handleSearch = () => {
     if (!uniqueCities.includes(location)) {
       document.getElementById("location").focus();
+      setIsLocationComplete(false);
       setInputFocused(true);
       return;
     }
@@ -97,10 +100,6 @@ function SearchBar2() {
     }
   }, [checkOutDate])
 
-  // useEffect(() => {
-  //   dispatch(setLocation(location));
-  // }, [location])
-
   useEffect(() => {
       const listingsArray = Object.values(listings);
       setUniqueCities([...new Set(listingsArray.map((listing) => `${listing.city}, ${listing.country}`))]);
@@ -114,17 +113,23 @@ function SearchBar2() {
       setInputGuestFocused(true);
     };
 
-  const [blurTimeout, setBlurTimeout] = useState(null);
-  const handleInputBlur = () => {
-    const timeoutId = setTimeout(() => {
-      setInputFocused(false);
-    }, 200);
-
-    setBlurTimeout(timeoutId);
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (destinationContainerRef.current && !destinationContainerRef.current.contains(event.target)) {
+        setIsLocationComplete(true);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);  
 
   const handleDestinationButtonClick = (city) => {
     clearTimeout(blurTimeout);
+    setIsLocationComplete(true);
     setInputFocused(false);
     setLocations(city);
   };
@@ -209,13 +214,24 @@ function SearchBar2() {
     return `${day} ${month}`;
   };
 
+  const [blurTimeout, setBlurTimeout] = useState(null);
+  const handleInputBlur = () => {
+    const timeoutId = setTimeout(() => {
+      if (isLocationComplete){
+        setInputFocused(false);
+      }
+    }, 200);
+
+    setBlurTimeout(timeoutId);
+  };
+  
     return (
         <div className="search-form-container">
             <div className="search-form-wrapper">
                 <div className="search-form-inline">
                     <div className={`inline-form-small ${isListingsPage ? 'listings' : ''}`}>
                         <div className="destination-container">
-                            <div className="destination-container-input">
+                            <div className="destination-container-input" ref={destinationContainerRef}>
                                 <div className="input-inner-prefix">
                                     <div className="search-input-prefix">
                                         <div className="search-input-prefix-icon-cont">
@@ -388,7 +404,7 @@ function SearchBar2() {
                                                 </div>
                                             )}
                     
-                        <button className="let-go-button" onClick={handleSearch} style={{height: "50px", display: "flex", alignItems: "center", padding: "0px", width: "50px"}}>
+                        <button className="let-go-button" onClick={handleSearch} style={{height: "50px", display: "flex", alignItems: "center", padding: "0px", width: "50px"}} ref={destinationContainerRef}>
                             <img src={glass} style={{width: "24px", height: "24px", marginLeft: "10px"}}/>
                         </button>
                     </div>
