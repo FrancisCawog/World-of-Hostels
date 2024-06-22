@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListing, fetchListings } from "../../store/listings";
@@ -22,7 +22,6 @@ import CheckoutForm from "../Checkout"
 import { setCart } from "../../store/cart";
 import { removeCart } from "../../store/cart";
 import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
-// import { useLocation } from 'react-router-dom';
 import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
 import { fetchUsers } from "../../store/users";
 import FacilityIcon from "../../components/FacilityIcon/index.js";
@@ -49,6 +48,13 @@ function ListingsShowPage() {
   const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
   sessionStorage.setItem('redirectUrl', window.location.pathname);
   const facilitiesObjectString = listing?.facilities.replace(/=>/g, ':');
+  const topPictureRef = useRef(null);
+
+  const handleScroll = () => {
+    if (topPictureRef.current) {
+      topPictureRef.current.scrollBy({ left: 500, behavior: 'smooth' });
+    }
+  };
 
   let allValues;
   if (facilitiesObjectString) {
@@ -329,10 +335,20 @@ function ListingsShowPage() {
     {showAboutModal && <ListingsModal tabName={tabName} onClose={closeModal} />}
     {showReviewModal && <ListingsShowReviewModal tabName={tabName} onClose={closeReviewModal} reviews={reviews}/>}
       <Navigation/>
-      <div className="top-picture">
+      <div className="top-picture" ref={topPictureRef}>
       {photos?.map((photo, index) => (
-        <img key={index} src={photo} alt={`Photo ${index + 1}`} />
+        <img
+          key={index}
+          src={photo}
+          alt={`Photo ${index + 1}`}
+          style={{ marginRight: index !== photos.length - 1 ? '10px' : '0' }}
+        />
       ))}
+      <div className="top-picture-next">
+        <button className="top-picture-button" onClick={handleScroll}>
+          <img src={MyArrowSVG} style={{ width: '14px', marginLeft: "0px", marginRight: "0px"}}/>
+        </button>
+      </div>
     </div>
       <h1 className="title" style={{marginBottom: "20px"}}>{listing?.property_name}</h1>
       <p className="listings-p">
