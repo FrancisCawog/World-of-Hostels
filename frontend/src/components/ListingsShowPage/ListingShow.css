@@ -1,14 +1,24 @@
 .top-picture {
-    height: 260px;
-    width: calc(100% - 12px);
-    margin: 0 6px;
+    height: 340px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
     display: inline-block;
     overflow-x: auto; 
     white-space: nowrap;
+    border-radius: 2rem;
   }
+  
+  .top-picture::-webkit-scrollbar {
+    display: none;
+  }
+  .top-picture {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }  
 
   .top-picture img {
-      height: 98%;
+      height: 100%;
       width: auto;
   }
   
