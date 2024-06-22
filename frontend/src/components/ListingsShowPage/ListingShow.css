@@ -79,6 +79,14 @@
     font-size: 24px;
 }
 
+.choose-room{
+    border: none;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    margin-top: 5px;
+    padding-top: 10px;
+}
+
 .checkInandOut {
     display: flex;
     align-items: center;

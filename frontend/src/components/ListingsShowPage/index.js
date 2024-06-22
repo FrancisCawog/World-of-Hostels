@@ -382,7 +382,15 @@ function ListingsShowPage() {
       </div>
   <div style={{display: "flex", marginRight: "10%"}}>
     <div style={{marginRight: "1.5%", marginLeft: "10%"}}>
-      <div>
+        <div className="about"> About
+            <p className="about-description"> {listing?.description} </p>
+        </div>
+            <div className="read-more-hov"  onClick={() => handleTabClick('About')}>
+              <p className="read-more">Read more</p>
+              <img src={MyArrowSVG} style={{ width: '14px' }}/>
+          </div>
+
+          <div>
         <div id="choose-room" className="choose-room">Choose your room</div>
           {rooms && (
             <>
@@ -599,17 +607,8 @@ function ListingsShowPage() {
             </>
           )}
         </div>
-          <div className="about"> About
-              <p className="about-description"> {listing?.description} </p>
-          </div>
-              <div className="read-more-hov"  onClick={() => handleTabClick('About')}>
-                <p className="read-more">Read more</p>
-                <img src={MyArrowSVG} style={{ width: '14px' }}/>
-              </div>
 
-          <div className="house-rules"> House Rules
-
-          </div>
+          <div className="house-rules"> House Rules</div>
 
           <div className="checkInandOut">
             <div className="checkInContainer">
@@ -635,11 +634,12 @@ function ListingsShowPage() {
                 <img src={MyArrowSVG} style={{ width: '14px' }}/>
           </div>
 
+          <div style={{borderBottom: "1px solid #ccc", paddingBottom: "10px"}}>
           <div className="facilities">Facilities
             <div className="facilities-snippet" style={{marginTop: ".5rem"}}>
                 <div className="facilities-category" style={{marginLeft: ".5rem"}}>
                     {allValues?.slice(0, 8).map((value, index) => (
-                        <div key={index} className={`facility-item ${index < 4 ? 'first-four' : 'last-four'}`}>
+                      <div key={index} className={`facility-item ${index < 4 ? 'first-four' : 'last-four'}`}>
                           <div className="facilities-icon2">
                             <FacilityIcon item={value} />
                             </div>
@@ -656,6 +656,7 @@ function ListingsShowPage() {
                 <img src={MyArrowSVG} style={{ width: '14px' }}/>
           </div>
           }
+          </div>
 
           {numberOfReviews(listing?.id) !== 0 &&
           <div id="show-reviews" className="show-reviews">
