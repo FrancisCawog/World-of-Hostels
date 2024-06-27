@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import { useInView } from 'react-intersection-observer';
 import './Homepage.css';
 import groupPhoto from "../../assets/pictures/hero.chats.webp"
 import arrow from "../../assets/pictures/icons/arrow.webp"
@@ -12,23 +11,12 @@ import Footer from "../Footer";
 import SearchBar from "../SearchBar";
 import car from "../../assets/pictures/The_Spindrift_Hostel-img.jpg"
 import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
-import hostel from "../../assets/pictures/los-patios-card_png.jpg"
-import user1 from "../../assets/profile-pics/user1.jpeg"
-import user2 from "../../assets/profile-pics/user2.jpeg"
-import user3 from "../../assets/profile-pics/user3.jpeg"
-import user4 from "../../assets/profile-pics/user4.jpeg"
-import user5 from "../../assets/profile-pics/user5.jpeg"
-import user6 from "../../assets/profile-pics/user6.jpeg"
-import user7 from "../../assets/profile-pics/user7.jpeg"
-import user8 from "../../assets/profile-pics/user8.jpeg"
-import user9 from "../../assets/profile-pics/user9.jpeg"
-import user10 from "../../assets/profile-pics/user10.jpeg"
-import user11 from "../../assets/profile-pics/user11.jpeg"
 import beach from "../../assets/pictures/palmar.beach.lodge.jpg"
 import eco from "../../assets/pictures/icons/eco.svg"
 import cnc from "../../assets/pictures/icons/cnc.svg"
 import InstaPage from "./Instapage";
 import WorldsBest from "./WorldsBest";
+import SeeWhosGoing from "./SeeWhosGoing";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListings } from "../../store/listings";
 
@@ -47,11 +35,6 @@ export default function HomePage() {
         checkNew.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
   }  
-
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.5,
-  });
 
   useEffect(() => {
     dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
@@ -144,57 +127,7 @@ export default function HomePage() {
       </div>
     </div>
 
-    <div className="see-who-going" id="see-who-going" ref={ref}>
-    {inView &&
-      <div className="animation" >
-        <img src={hostel} />
-        <div>
-          <div className="user-1" >
-            <img src={user1} />
-          </div>
-          <div className="user-2">
-            <img src={user2} />
-          </div>
-          <div className="user-3">
-            <img src={user3} />
-          </div>
-          <div className="user-4">
-            <img src={user4} />
-          </div>
-          <div className="user-5">
-            <img src={user5} />
-          </div>
-          <div className="user-6">
-           <img src={user6} />
-          </div>
-          <div className="user-7">
-           <img src={user7} />
-          </div>
-          <div className="user-8">
-           <img src={user8} />
-          </div>
-          <div className="user-9">
-            <img src={user9} />
-          </div>
-          <div className="user-10">
-            <img src={user10} />
-          </div>
-          <div className="user-11">
-           <img src={user11} />
-          </div>
-        </div>
-      </div>
-      }
-      <div className="see-who-going-text">
-          <h2>
-            See
-            <span style={{marginLeft: "15px", marginRight: "15px", color: "orange"}} >who's</span>
-            going.
-          </h2>
-          <p>Connect with other travellers staying in the same hostel or city as you.</p>
-      </div>
-    </div>
-
+    <SeeWhosGoing/>
     <WorldsBest listings={listings}/>
 
     <div className="commited-world">
@@ -216,7 +149,7 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-    
+
     <InstaPage/>
     <Footer/>
     </>
