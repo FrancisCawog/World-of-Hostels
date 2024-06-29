@@ -1,37 +1,42 @@
-import Navigation from "../Navigation";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { fetchListings } from "../../store/listings";
-import "./ListingsIndex.css";
-import Footer from "../Footer";
-import WifiSVG from "../../assets/pictures/icons/wifi.svg"
-import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
-import WhiteWifiSVG from "../../assets/pictures/icons/wifi-white.svg"
-import CoffeeSVG from "../../assets/pictures/icons/coffee.svg"
-import WhiteCoffeeSVG from "../../assets/pictures/icons/white-coffee.svg"
 import { useHistory } from 'react-router-dom';
-import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
+import Navigation from "../Navigation";
+import Footer from "../Footer";
+import { fetchListings } from "../../store/listings";
 import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
+import WifiSVG from "../../assets/pictures/icons/wifi.svg";
+import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png";
+import WhiteWifiSVG from "../../assets/pictures/icons/wifi-white.svg";
+import CoffeeSVG from "../../assets/pictures/icons/coffee.svg";
+import WhiteCoffeeSVG from "../../assets/pictures/icons/white-coffee.svg";
+import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg";
+import "./ListingsIndex.css";
 
 function ListingsIndexPage() {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const reviews = useSelector((state) => state.reviews);
   const rooms = useSelector((state) => Object.values(state.rooms));
+  const listings = useSelector((state) => state.listings);
+  const cart = useSelector((state) => state.cart);
+
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered2, setIsHovered2] = useState(false);
-  const history = useHistory();
-  const cart = useSelector((state) => state.cart);
-  const listings = useSelector((state) => state.listings);
-  const dispatch = useDispatch();
-  sessionStorage.setItem('redirectUrl', window.location.pathname);
+  const [hoveredListings, setHoveredListings] = useState({});
+  const [imageIndexes, setImageIndexes] = useState({});
+
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
+
   const checkInDate = cart.checkIn || localStorage.getItem('checkInDate') || today.toISOString().split("T")[0];
   const checkOutDate = cart.checkOut || localStorage.getItem('checkOutDate') || tomorrow.toISOString().split("T")[0];
   const guests = cart.guests || localStorage.getItem('guests') || "1";
   const location = cart.location || localStorage.getItem('location') || "";
   const searchCity = location.split(',');
-  const filteredListings = Object.values(listings).filter((listing) => listing.city === searchCity[0])
+
+  const filteredListings = Object.values(listings).filter((listing) => listing.city === searchCity[0]);
 
   useEffect(() => {
     localStorage.setItem('location', location);
@@ -101,7 +106,6 @@ function ListingsIndexPage() {
       return ""
     }
   }
-  const [imageIndexes, setImageIndexes] = useState({});
 
   useEffect(() => {
     const initialImageIndexes = Object.fromEntries(
@@ -122,8 +126,6 @@ const updateImageIndex = (listingId, direction) => {
       return { ...prevIndexes, [listingId]: newIndex };
     });
   };
-
-  const [hoveredListings, setHoveredListings] = useState({});
 
   const handleListingHover = (listingId, isHovered) => {
     setHoveredListings((prevHovered) => ({ ...prevHovered, [listingId]: isHovered }));
