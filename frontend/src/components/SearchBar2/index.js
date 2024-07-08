@@ -88,6 +88,19 @@ function SearchBar2() {
     dispatch(updateGuests(guests));
   }, [guests]);
 
+  useEffect(()=>{
+    setLocations(cart.location)
+  },[cart.location])
+
+  useEffect(()=>{
+    setCheckInDate(cart.checkIn);
+    setCheckOutDate(cart.checkOut);
+  },[cart.checkIn, cart.checkOut])
+
+  useEffect(()=>{
+    setGuests(parseInt(cart.guests))
+  },[cart.guests])
+
   useEffect(() => {
     if (checkInDate !== null){
       dispatch(setCheckIn(checkInDate));
