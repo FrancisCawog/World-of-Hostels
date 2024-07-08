@@ -37,6 +37,14 @@ function SearchBar2() {
   const locationPath = useLocation();
   const isListingsPage = locationPath.pathname.startsWith("/listings");
 
+  const [range, setRange] = useState([
+    {
+        startDate: checkInDate,
+        endDate: checkOutDate,
+        key: 'selection'
+      }
+  ])
+
   const handleLocationChange = (e) => {
     setLocations(e.target.value);
   };
@@ -95,6 +103,13 @@ function SearchBar2() {
   useEffect(()=>{
     setCheckInDate(cart.checkIn);
     setCheckOutDate(cart.checkOut);
+    setRange([
+      {
+          startDate: unformatDate(cart.checkIn),
+          endDate: unformatDate(cart.checkOut),
+          key: 'selection'
+      }
+  ]);
   },[cart.checkIn, cart.checkOut])
 
   useEffect(()=>{
@@ -146,14 +161,6 @@ function SearchBar2() {
     setInputFocused(false);
     setLocations(city);
   };
-
-  const [range, setRange] = useState([
-      {
-          startDate: checkInDate,
-          endDate: checkOutDate,
-          key: 'selection'
-        }
-    ])
         
     const [dateSelectionCount, setDateSelectionCount] = useState(0);
 
@@ -185,6 +192,11 @@ function SearchBar2() {
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
+    };
+
+    const unformatDate = (dateString) => {
+      const [year, month, day] = dateString.split('-').map(Number);
+      return new Date(year, month - 1, day);
     };
     
   const [open, setOpen] = useState(false)
