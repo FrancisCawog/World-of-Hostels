@@ -36,25 +36,17 @@ function SearchBar() {
     setLocations(e.target.value);
   };
 
-  useEffect(() => {
-    if (checkInDate !== null){
-      dispatch(setCheckIn(checkInDate));
-    }
-  }, [checkInDate])
+  // useEffect(() => {
+  //   if (checkInDate !== null){
+  //     dispatch(setCheckIn(checkInDate));
+  //   }
+  // }, [checkInDate])
 
-  useEffect(() => {
-    if (checkOutDate !== null){
-      dispatch(setCheckOut(checkOutDate));
-    }
-  }, [checkOutDate])
-
-  // const handleCheckInDateChange = (e) => {
-  //   setCheckInDate(e.target.value);
-  // };
-
-  // const handleCheckOutDateChange = (e) => {
-  //   setCheckOutDate(e.target.value);
-  // };
+  // useEffect(() => {
+  //   if (checkOutDate !== null){
+  //     dispatch(setCheckOut(checkOutDate));
+  //   }
+  // }, [checkOutDate])
 
   const handleGuestsChange = (action) => {
     if (action === 'add') {
@@ -90,7 +82,7 @@ function SearchBar() {
   
     localStorage.setItem('cart', JSON.stringify(cartData));
   
-    dispatch(setLocation(location));
+    // dispatch(setLocation(location));
     dispatch(setCheckIn(checkInDate));
     dispatch(setCheckOut(checkOutDate));
     dispatch(updateGuests(guests));
@@ -127,6 +119,7 @@ function SearchBar() {
     clearTimeout(blurTimeout);
     setInputFocused(false);
     setLocations(city);
+    dispatch(setLocation(city))
   };
 
   const handleGuestsSelectionClick = (e) => {
