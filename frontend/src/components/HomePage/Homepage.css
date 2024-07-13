@@ -34,46 +34,60 @@ img {
 
 .background h1 {
   position: absolute;
-  font-size: 60px;
-  top: 10rem;
-  left: 18.4%;
   color: white;
-  text-align: center;
-  font-weight: 700;
-  margin-top: 60px;
+  margin-left: 2.5%;
+  font-size: 4rem;
+  letter-spacing: -.025rem;
+  line-height: 5rem;
+  text-align: left;
 }
 
 .background p {
   position: absolute;
-  font-size: 26px;
-  top: 15.5rem;
-  left: 18.4%;
+  font-size: 1.6rem;
+  top: 13.5rem;
+  margin-left: 2.5%;
   color: white;
-  text-align: center;
-  font-weight: 550;
+  letter-spacing: -.025rem;
+  line-height: 5rem;
+  text-align: left;
+  font-family: Poppins-bold;
 }
 
 .group-photo {
-  position: absolute;
-  width: 23%;
-  height: 18rem;
   top: 9rem;
   right: 17.5%;
+  display: block;
+  position: absolute;
+  width: 425px;
 }
 
 .arrow-photo {
   position: absolute;
-  width: 9%;
-  height: auto;
+  width: 11rem;
   top: 19.75rem;
-  left: 29%;
+  left: 23%;
+}
+
+.background-text {
+  align-items: flex-start;
+  justify-content: center;
+  max-width: calc(100% - 320px);
+  min-height: 17.3125rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.background-images {
+  display: flex;
+  flex-direction: row;
 }
 
 .search-bar-container {
   position: relative;
-  top: 23rem;
-  width: 100%;
-  padding: 0px 0.75rem;
+  top: 5.5rem;
 }
 
 .inline-wrapper {

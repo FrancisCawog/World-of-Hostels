@@ -49,10 +49,14 @@ export default function HomePage() {
     <div className="home-container">
       
       <div className="background">
-        <h1>Meet your people.</h1>
-        <p>Choose where to stay and we'll show you who with!</p>
-        <img className="group-photo" src={groupPhoto} alt="Group" />
-        <img className="arrow-photo" src={arrow} alt="arrow" />
+        <div className="background-images">
+          <div className="background-text">
+            <h1>Meet your people.</h1>
+            <p>Choose where to stay and we'll show you who with!</p>
+            <img className="arrow-photo" src={arrow} alt="arrow" />
+          </div>
+          <img className="group-photo" src={groupPhoto} alt="Group" />
+        </div>
 
        <SearchBar/>
       </div>
