@@ -24,8 +24,8 @@ function SearchBar() {
   tomorrow.setDate(tomorrow.getDate() + 1);  
 
   const [location, setLocations] = useState("");
-  const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
-  const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().split("T")[0]);
+  const [checkInDate, setCheckInDate] = useState(cart.checkIn || today.toISOString().split("T")[0]);
+  const [checkOutDate, setCheckOutDate] = useState(cart.checkOut ||tomorrow.toISOString().split("T")[0]);
   const [guests, setGuests] = useState(1);
 
   const [uniqueCities, setUniqueCities] = useState([]);
@@ -36,17 +36,25 @@ function SearchBar() {
     setLocations(e.target.value);
   };
 
-  // useEffect(() => {
-  //   if (checkInDate !== null){
-  //     dispatch(setCheckIn(checkInDate));
-  //   }
-  // }, [checkInDate])
+  const [range, setRange] = useState([
+    {
+        startDate: checkInDate,
+        endDate: checkOutDate,
+        key: 'selection'
+      }
+  ])
 
-  // useEffect(() => {
-  //   if (checkOutDate !== null){
-  //     dispatch(setCheckOut(checkOutDate));
-  //   }
-  // }, [checkOutDate])
+  useEffect(() => {
+    if (checkInDate !== null){
+      dispatch(setCheckIn(checkInDate));
+    }
+  }, [])
+
+  useEffect(() => {
+    if (checkOutDate !== null){
+      dispatch(setCheckOut(checkOutDate));
+    }
+  }, [])
 
   const handleGuestsChange = (action) => {
     if (action === 'add') {
@@ -62,8 +70,20 @@ function SearchBar() {
       setCheckInDate(cart.checkIn);
       setCheckOutDate(cart.checkOut);
       setGuests(parseInt(cart.guests, 10) || 1)
+      setRange([
+        {
+            startDate: unformatDate(cart.checkIn),
+            endDate: unformatDate(cart.checkOut),
+            key: 'selection'
+        }
+      ])
     }
   }, [cart]);
+
+  const unformatDate = (dateString) => {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
 
   const handleSearch = () => {
     if (!uniqueCities.includes(location)) {
@@ -161,14 +181,6 @@ function SearchBar() {
     const day = String(date.getUTCDate()).padStart(2, '0');
     return `${day} ${month}`;
   };
-
-  const [range, setRange] = useState([
-    {
-        startDate: checkInDate,
-        endDate: checkOutDate,
-        key: 'selection'
-      }
-  ])
       
   const [dateSelectionCount, setDateSelectionCount] = useState(0);
 
