@@ -200,26 +200,20 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
             setCheckOutDate(endDate);
           };
 
-        // open close
         const [open, setOpen] = useState(false)
-
-        // get the target element to toggle 
         const refOne = useRef(null)
 
         useEffect(() => {
-            // event listeners
             document.addEventListener("keydown", hideOnEscape, true)
             document.addEventListener("click", hideOnClickOutside, true)
         }, [])
 
-        // hide dropdown on ESC press
         const hideOnEscape = (e) => {
             if( e.key === "Escape" ) {
             setOpen(false)
             }
         }
 
-        // Hide on outside click
         const hideOnClickOutside = (e) => {
             if( refOne.current && !refOne.current.contains(e.target) ) {
             setOpen(false)

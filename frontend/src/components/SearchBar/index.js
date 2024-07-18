@@ -19,18 +19,23 @@ function SearchBar() {
   const history = useHistory();
   const guestsSelectionRef = useRef(null);
   
-  const today = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);  
-
+  const estOffset = -5 * 60; 
+  const today = new Date(new Date().getTime() + estOffset * 60 * 1000).toISOString().split("T")[0];
+  const unformattedTomorrow = new Date(new Date().getTime() + estOffset * 60 * 1000);
+  unformattedTomorrow.setDate(unformattedTomorrow.getDate() + 1);
+  const tomorrow = unformattedTomorrow.toISOString().split("T")[0];
+  
   const [location, setLocations] = useState("");
-  const [checkInDate, setCheckInDate] = useState(cart.checkIn || today.toISOString().split("T")[0]);
-  const [checkOutDate, setCheckOutDate] = useState(cart.checkOut ||tomorrow.toISOString().split("T")[0]);
+  const [checkInDate, setCheckInDate] = useState(cart.checkIn || today);
+  const [checkOutDate, setCheckOutDate] = useState(cart.checkOut || tomorrow);
   const [guests, setGuests] = useState(1);
 
   const [uniqueCities, setUniqueCities] = useState([]);
   const [isInputFocused, setInputFocused] = useState(false);
   const [isInputGuestFocused, setInputGuestFocused] = useState(false);
+
+  const [open, setOpen] = useState(false)
+  const refOne = useRef(null)
 
   const handleLocationChange = (e) => {
     setLocations(e.target.value);
@@ -48,13 +53,13 @@ function SearchBar() {
     if (checkInDate !== null){
       dispatch(setCheckIn(checkInDate));
     }
-  }, [])
+  }, [checkInDate])
 
   useEffect(() => {
     if (checkOutDate !== null){
       dispatch(setCheckOut(checkOutDate));
     }
-  }, [])
+  }, [checkOutDate])
 
   const handleGuestsChange = (action) => {
     if (action === 'add') {
@@ -78,39 +83,11 @@ function SearchBar() {
         }
       ])
     }
-  }, [cart]);
+  }, [cart.checkIn, cart.checkOut]);
 
   const unformatDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     return new Date(year, month - 1, day);
-  };
-
-  const handleSearch = () => {
-    if (!uniqueCities.includes(location)) {
-      document.getElementById("location").focus();
-      setInputFocused(true);
-      return;
-    }
-  
-    const cartData = {
-      checkIn: checkInDate,
-      checkOut: checkOutDate,
-      guests: guests,
-      location: location,
-      refundable: true,
-    };
-  
-    localStorage.setItem('cart', JSON.stringify(cartData));
-  
-    // dispatch(setLocation(location));
-    dispatch(setCheckIn(checkInDate));
-    dispatch(setCheckOut(checkOutDate));
-    dispatch(updateGuests(guests));
-  
-    localStorage.setItem('checkInDate', checkInDate);
-    localStorage.setItem('checkOutDate', checkOutDate);
-    localStorage.setItem('guests', guests);
-    history.push("/listings");
   };
 
   useEffect(() => {
@@ -150,8 +127,9 @@ function SearchBar() {
     const handleClickOutside = (event) => {
       const isCalendarClicked = refOne.current && refOne.current.contains(event.target);
       const isGuestsClicked = guestsSelectionRef.current && guestsSelectionRef.current.contains(event.target);
+      const isSearchButtonClicked = event.target.closest('.let-go-button');
   
-      if (!isCalendarClicked) {
+      if (!isCalendarClicked && !isSearchButtonClicked) {
         setOpen(false);
       }
   
@@ -165,10 +143,7 @@ function SearchBar() {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []); 
-
-  const [open, setOpen] = useState(false)
-  const refOne = useRef(null)
+  }, []);  
 
   const formatDates = (dateString) => {
     const date = new Date(dateString + 'T00:00:00');
@@ -212,6 +187,40 @@ function SearchBar() {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  };
+
+  const handleSearch = () => {
+    if (!uniqueCities.includes(location)) {
+      document.getElementById("location").focus();
+      setInputFocused(true);
+      return;
+    }
+  
+    const cartData = {
+      checkIn: checkInDate,
+      checkOut: checkOutDate,
+      guests: guests,
+      location: location,
+      refundable: true,
+    };
+  
+    localStorage.setItem('cart', JSON.stringify(cartData));
+  
+    if (today <= checkInDate){
+      dispatch(setCheckIn(checkInDate));
+      localStorage.setItem('checkInDate', checkInDate);
+      if (tomorrow <= checkOutDate){
+        dispatch(setCheckOut(checkOutDate));
+        localStorage.setItem('checkOutDate', checkOutDate);
+        dispatch(updateGuests(guests));
+        localStorage.setItem('guests', guests);
+        history.push("/listings");
+      } else {
+        setOpen(true);
+      }
+    } else {
+      setOpen(true);
+    }
   };
 
   return (
