@@ -35,6 +35,7 @@ function SearchBar() {
   const [isInputGuestFocused, setInputGuestFocused] = useState(false);
 
   const [open, setOpen] = useState(false)
+  const [showWrongDates, setShowWrongDates] = useState(false);
   const refOne = useRef(null)
 
   const handleLocationChange = (e) => {
@@ -217,13 +218,29 @@ function SearchBar() {
         history.push("/listings");
       } else {
         setOpen(true);
+        setShowWrongDates(true);
       }
     } else {
       setOpen(true);
+      setShowWrongDates(true);
     }
   };
 
+      useEffect(() => {
+        if (showWrongDates) {
+          const timer = setTimeout(() => {
+            setShowWrongDates(false);
+          }, 3000);
+          return () => clearTimeout(timer);
+        }
+      }, [showWrongDates]);
+
   return (
+    <>
+    {showWrongDates && (
+            <div className="confirmation-box">Dates selected are not valid</div>
+    )}
+
     <div className="search-bar-container">
       <div className="searchbar-wrapper">
         <div className="inline-wrapper">
@@ -431,6 +448,7 @@ function SearchBar() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
