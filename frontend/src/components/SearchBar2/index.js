@@ -100,6 +100,7 @@ function SearchBar2() {
         localStorage.setItem('checkOutDate', checkOutDate);
         dispatch(updateGuests(guests));
         localStorage.setItem('guests', guests);
+        dispatch(setLocation(location))
         history.push("/listings");
       } else {
         setOpen(true);
@@ -113,7 +114,7 @@ function SearchBar2() {
 
   useEffect(() => {
     dispatch(updateGuests(guests));
-  }, [guests]);
+  }, []);
 
   useEffect(()=>{
     setLocations(cart.location)
