@@ -226,14 +226,14 @@ function SearchBar() {
     }
   };
 
-      useEffect(() => {
-        if (showWrongDates) {
-          const timer = setTimeout(() => {
-            setShowWrongDates(false);
-          }, 3000);
-          return () => clearTimeout(timer);
-        }
-      }, [showWrongDates]);
+    useEffect(() => {
+      if (showWrongDates) {
+        const timer = setTimeout(() => {
+          setShowWrongDates(false);
+        }, 3000);
+        return () => clearTimeout(timer);
+      }
+    }, [showWrongDates]);
 
   return (
     <>

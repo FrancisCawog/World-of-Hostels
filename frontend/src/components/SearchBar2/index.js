@@ -21,21 +21,29 @@ function SearchBar2() {
   const history = useHistory();
   const guestsSelectionRef = useRef(null);
   const destinationContainerRef = useRef(null);
-  const today = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);  
+
+  const estOffset = -5 * 60; 
+  const today = new Date(new Date().getTime() + estOffset * 60 * 1000).toISOString().split("T")[0];
+  const unformattedTomorrow = new Date(new Date().getTime() + estOffset * 60 * 1000);
+  unformattedTomorrow.setDate(unformattedTomorrow.getDate() + 1);
+  const tomorrow = unformattedTomorrow.toISOString().split("T")[0];
   
   const [location, setLocations] = useState("");
-  const [checkInDate, setCheckInDate] = useState(today.toISOString().split("T")[0]);
-  const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().split("T")[0]);
+  const [checkInDate, setCheckInDate] = useState(today);
+  const [checkOutDate, setCheckOutDate] = useState(tomorrow);
   const [guests, setGuests] = useState(1);
 
   const [uniqueCities, setUniqueCities] = useState([]);
   const [isInputFocused, setInputFocused] = useState(false);
   const [isInputGuestFocused, setInputGuestFocused] = useState(false);
+
   const [isLocationComplete, setIsLocationComplete] = useState(true);
   const locationPath = useLocation();
   const isListingsPage = locationPath.pathname.startsWith("/listings");
+
+  const [showWrongDates, setShowWrongDates] = useState(false);
+  const [open, setOpen] = useState(false)
+  const refOne = useRef(null)
 
   const [range, setRange] = useState([
     {
@@ -84,12 +92,23 @@ function SearchBar2() {
 
     localStorage.setItem('cart', JSON.stringify(cartData));
 
-    dispatch(setLocation(location));
-
-    localStorage.setItem('checkInDate', cartData.checkIn);
-    localStorage.setItem('checkOutDate', cartData.checkOut);
-    localStorage.setItem('guests', guests);
-    history.push("/listings");
+    if (today <= checkInDate){
+      dispatch(setCheckIn(checkInDate));
+      localStorage.setItem('checkInDate', checkInDate);
+      if (tomorrow <= checkOutDate){
+        dispatch(setCheckOut(checkOutDate));
+        localStorage.setItem('checkOutDate', checkOutDate);
+        dispatch(updateGuests(guests));
+        localStorage.setItem('guests', guests);
+        history.push("/listings");
+      } else {
+        setOpen(true);
+        setShowWrongDates(true);
+      }
+    } else {
+      setOpen(true);
+      setShowWrongDates(true);
+    }
   };
 
   useEffect(() => {
@@ -120,13 +139,13 @@ function SearchBar2() {
     if (checkInDate !== null){
       dispatch(setCheckIn(checkInDate));
     }
-  }, [checkInDate])
+  }, [])
 
   useEffect(() => {
     if (checkOutDate !== null){
       dispatch(setCheckOut(checkOutDate));
     }
-  }, [checkOutDate])
+  }, [])
 
   useEffect(() => {
       const listingsArray = Object.values(listings);
@@ -198,9 +217,6 @@ function SearchBar2() {
       const [year, month, day] = dateString.split('-').map(Number);
       return new Date(year, month - 1, day);
     };
-    
-  const [open, setOpen] = useState(false)
-  const refOne = useRef(null)
 
   const handleGuestsSelectionClick = (e) => {
     e.stopPropagation();
@@ -210,8 +226,9 @@ function SearchBar2() {
     const handleClickOutside = (event) => {
       const isCalendarClicked = refOne.current && refOne.current.contains(event.target);
       const isGuestsClicked = guestsSelectionRef.current && guestsSelectionRef.current.contains(event.target);
+      const isSearchButtonClicked = event.target.closest('.let-go-button');
   
-      if (!isCalendarClicked) {
+      if (!isCalendarClicked && !isSearchButtonClicked) {
         setOpen(false);
       }
   
@@ -249,8 +266,21 @@ function SearchBar2() {
 
     setBlurTimeout(timeoutId);
   };
+
+  useEffect(() => {
+    if (showWrongDates) {
+      const timer = setTimeout(() => {
+        setShowWrongDates(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showWrongDates]);
   
     return (
+      <>
+    {showWrongDates && (
+            <div className="confirmation-box">Dates selected are not valid</div>
+    )}
         <div className="search-form-container">
             <div className="search-form-wrapper">
                 <div className="search-form-inline">
@@ -436,6 +466,7 @@ function SearchBar2() {
                     </div>
                 </div>
             </div>
+      </>
     )
 }
 
