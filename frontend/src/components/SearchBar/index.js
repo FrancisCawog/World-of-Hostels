@@ -238,7 +238,7 @@ function SearchBar() {
   return (
     <>
     {showWrongDates && (
-            <div className="confirmation-box">Dates selected are not valid</div>
+      <div className="confirmation-box">Dates selected are not valid</div>
     )}
 
     <div className="search-bar-container">

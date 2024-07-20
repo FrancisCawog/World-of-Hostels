@@ -125,8 +125,8 @@ function SearchBar2() {
     setCheckOutDate(cart.checkOut);
     setRange([
       {
-          startDate: unformatDate(cart.checkIn),
-          endDate: unformatDate(cart.checkOut),
+          startDate: unformatDate(cart?.checkIn),
+          endDate: unformatDate(cart?.checkOut),
           key: 'selection'
       }
   ]);

@@ -41,6 +41,17 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
     const [showNotEnough, setShowNotEnough] = useState(false);
     const [isInputGuestFocused, setInputGuestFocused] = useState(false);
 
+    const estOffset = -5 * 60; 
+    const today = new Date(new Date().getTime() + estOffset * 60 * 1000).toISOString().split("T")[0];
+    const unformattedTomorrow = new Date(new Date().getTime() + estOffset * 60 * 1000);
+    unformattedTomorrow.setDate(unformattedTomorrow.getDate() + 1);
+    const tomorrow = unformattedTomorrow.toISOString().split("T")[0];
+
+    const [open, setOpen] = useState(false)
+    const [showWrongDates, setShowWrongDates] = useState(false);
+    const [showSameDates, setShowSameDates] = useState(false);
+    const refOne = useRef(null)
+
     useEffect(()=> {
         checkInDates = fecha.parse(checkInDate, "YYYY-MM-DD");
         checkOutDates = fecha.parse(checkOutDate, "YYYY-MM-DD");
@@ -70,9 +81,11 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
         sessionStorage.setItem('redirectUrl', currentUrl);
         history.push('/login');
     } else {
-        if (totalGuests < guests){
+        if (totalGuests < guests) {
             setShowNotEnough(true);
-        } else {
+          } else if (format(range[0].startDate, "dd MMM") === format(range[0].endDate, "dd MMM")) {
+            setShowSameDates(true);
+          } else {
             const reservationsToCreate = [];
             let numGuest = 0;
             let checkInDate = ""
@@ -173,35 +186,38 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
         setTotalPrice(totalPriceCalculation);
     },[cartEffect, checkInDate, checkOutDate]);
 
-        const [range, setRange] = useState([
-            {
-            startDate: checkInDates,
-            endDate: checkOutDates,
-            key: 'selection'
-            }
-        ])
-
-            useEffect(() => {
-      setRange([
+    const [range, setRange] = useState([
         {
-          startDate: checkInDates,
-          endDate: checkOutDates,
-          key: 'selection'
+        startDate: checkInDates,
+        endDate: checkOutDates,
+        key: 'selection'
         }
-      ]);
-    }, [cartEffect]);
+    ])
 
-        const handleDateRangeChange = (item) => {
-            const startDate = item.selection.startDate.toISOString().split("T")[0];
-            const endDate = item.selection.endDate.toISOString().split("T")[0];
-          
-            setRange([item.selection]);
-            setCheckInDate(startDate);
-            setCheckOutDate(endDate);
-          };
+    const handleDateRangeChange = (item) => {
+        const startDate = item.selection.startDate.toISOString().split("T")[0];
+        const endDate = item.selection.endDate.toISOString().split("T")[0];
+        const tempIn = checkInDates
+        const tempOut = checkOutDates
+        
+        setRange([item.selection]);
 
-        const [open, setOpen] = useState(false)
-        const refOne = useRef(null)
+        if (endDate !== startDate){
+            if (today <= startDate && tomorrow <= endDate) {
+                setCheckInDate(startDate);
+                setCheckOutDate(endDate);
+            } else {
+                setShowWrongDates(true);
+                setRange([
+                    {
+                        startDate: tempIn,
+                        endDate: tempOut,
+                        key: 'selection'
+                    }
+                ])
+            }
+        }
+    };
 
         useEffect(() => {
             document.addEventListener("keydown", hideOnEscape, true)
@@ -253,13 +269,22 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
       useEffect(() => {
         dispatch(updateGuests(guests));
       }, [guests])
-
-      useEffect(() => {
-        dispatch(setCheckIn(checkInDate));
-      }, [checkInDate])
-
-      useEffect(() => {
-        dispatch(setCheckOut(checkOutDate));
+    
+    useEffect(() => {
+        if (checkInDate !== checkOutDate){
+            if (today <= checkInDate){
+                dispatch(setCheckIn(checkInDate));
+                localStorage.setItem('checkInDate', checkInDate);
+                if (tomorrow <= checkOutDate){
+                    dispatch(setCheckOut(checkOutDate));
+                    localStorage.setItem('checkOutDate', checkOutDate);
+                } else {
+                    setShowWrongDates(true);
+                }
+            } else {
+                setShowWrongDates(true);
+            }
+        }
       }, [checkOutDate])
 
       useEffect(() => {
@@ -268,10 +293,36 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
         setGuests(parseInt(cartEffect.guests, 10) || 1)
       }, [cartEffect]);
 
+    useEffect(() => {
+    if (showWrongDates) {
+        const timer = setTimeout(() => {
+        setShowWrongDates(false);
+        }, 3000);
+        return () => clearTimeout(timer);
+    }
+    }, [showWrongDates]);
+
+    useEffect(() => {
+        if (showSameDates) {
+            const timer = setTimeout(() => {
+            setShowSameDates(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+        }, [showSameDates]);
+
     return (
         <>
         {showNotEnough && (
             <div className="confirmation-box">Not enough beds selected for all the guests</div>
+        )}
+
+        {showWrongDates && (
+            <div className="confirmation-box">Dates selected are not valid</div>
+        )}
+
+        {showSameDates && (
+            <div className="confirmation-box">Dates selected cannot be the same</div>
         )}
 
         {shouldRenderCheckoutChoose ? (
