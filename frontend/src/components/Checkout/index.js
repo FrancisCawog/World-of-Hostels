@@ -24,7 +24,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
     const cartItems = useSelector((state) => Object.values(state?.cart.cart));
     const cart = useSelector((state) => state?.cart.cart);
     const rooms = useSelector((state) => Object.values(state?.rooms));
-    const availableRooms = rooms.filter(room => room.available_beds > 0);
+    const availableRooms = rooms.filter(room => room.available_beds > 0 && room.listing_id === parseInt(listingId));
     const cheapestPrice = Math.min(...availableRooms.map(room => room.price));
     const shouldRenderCheckoutChoose = cartItems.length === 0 || cartItems.every(item => item === 0);
     const [totalPrice, setTotalPrice] = useState(0);
