@@ -66,13 +66,20 @@ function SearchBar2() {
   };
   
   useEffect(() => {
-    if (cart.checkIn !== "") {
+    if (cart.checkIn !== "" && cart.checkIn !== null) {
       setLocations(cart.location)
       setCheckInDate(cart.checkIn);
       setCheckOutDate(cart.checkOut);
       setGuests(parseInt(cart.guests, 10) || 1)
+      setRange([
+            {
+                startDate: unformatDate(cart?.checkIn),
+                endDate: unformatDate(cart?.checkOut),
+                key: 'selection'
+            }
+        ]);
     }
-  }, []);
+  }, [cart.checkIn, cart.checkOut]);
   
   const handleSearch = () => {
     if (!uniqueCities.includes(location)) {
@@ -120,17 +127,17 @@ function SearchBar2() {
     setLocations(cart.location)
   },[cart.location])
 
-  useEffect(()=>{
-    setCheckInDate(cart.checkIn);
-    setCheckOutDate(cart.checkOut);
-    setRange([
-      {
-          startDate: unformatDate(cart?.checkIn),
-          endDate: unformatDate(cart?.checkOut),
-          key: 'selection'
-      }
-  ]);
-  },[cart.checkIn, cart.checkOut])
+  // useEffect(()=>{
+  //   setCheckInDate(cart.checkIn);
+  //   setCheckOutDate(cart.checkOut);
+  //   setRange([
+  //     {
+  //         startDate: unformatDate(cart?.checkIn),
+  //         endDate: unformatDate(cart?.checkOut),
+  //         key: 'selection'
+  //     }
+  // ]);
+  // },[cart.checkIn, cart.checkOut])
 
   useEffect(()=>{
     setGuests(parseInt(cart.guests))
