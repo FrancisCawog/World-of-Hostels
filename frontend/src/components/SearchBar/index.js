@@ -71,7 +71,7 @@ function SearchBar() {
   };  
 
   useEffect(() => {
-    if (cart.checkIn !== "") {
+    if (cart.checkIn !== "" && cart.checkIn !== null) {
       setLocations(cart.location)
       setCheckInDate(cart.checkIn);
       setCheckOutDate(cart.checkOut);
