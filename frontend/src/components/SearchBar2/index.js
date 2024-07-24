@@ -127,18 +127,6 @@ function SearchBar2() {
     setLocations(cart.location)
   },[cart.location])
 
-  // useEffect(()=>{
-  //   setCheckInDate(cart.checkIn);
-  //   setCheckOutDate(cart.checkOut);
-  //   setRange([
-  //     {
-  //         startDate: unformatDate(cart?.checkIn),
-  //         endDate: unformatDate(cart?.checkOut),
-  //         key: 'selection'
-  //     }
-  // ]);
-  // },[cart.checkIn, cart.checkOut])
-
   useEffect(()=>{
     setGuests(parseInt(cart.guests))
   },[cart.guests])
@@ -289,6 +277,7 @@ function SearchBar2() {
     {showWrongDates && (
             <div className="confirmation-box">Dates selected are not valid</div>
     )}
+
         <div className="search-form-container">
             <div className="search-form-wrapper">
                 <div className="search-form-inline">

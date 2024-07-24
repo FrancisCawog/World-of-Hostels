@@ -26,7 +26,7 @@ import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 import BookingDetailsModal from "../BookingDetailsModal"
 import SearchBar2 from "../SearchBar2";
-import { setCheckIn, setCheckOut, updateGuests, setLocation } from "../../store/cart";
+import { updateGuests, setLocation } from "../../store/cart";
 const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 function UserShow() {
@@ -70,9 +70,6 @@ function UserShow() {
     const today = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    // const checkInDate = cart.checkIn || localStorage.getItem('checkInDate') || today.toISOString().split("T")[0];
-    // console.log(checkInDate)
-    // const checkOutDate = cart.checkOut || localStorage.getItem('checkOutDate') || tomorrow.toISOString().split("T")[0];
     const defaultPic = "https://world-of-hostels-seeds.s3.amazonaws.com/profile_pics/user8.jpeg"
 
     useEffect(() => {
@@ -170,13 +167,6 @@ function UserShow() {
     useEffect(() => {
         setActiveTab(tabName);
       }, [tabName]);
-
-    // useEffect(() => {
-    //     dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
-    //       console.error("Error fetching listing:", error);
-    //     });
-    //   }, [dispatch]);
-
     
     useEffect(() => {
         const uniqueListingIds = Object.values(reservations).reduce((acc, reservation) => {
@@ -229,7 +219,11 @@ function UserShow() {
 
     const conditionalColor = {
         backgroundColor: activeTab === 'Home' ? "#f6a90e" : "white"
-    }
+    };
+    
+    const conditionalClipPath = {
+        clipPath: activeTab === 'Home' ? 'polygon(0 0, 100% 0, 100% calc(100% - 3rem), 0 100%)' : ''
+    };    
 
     useEffect(() => {
         if (activeTab === 'My Trips'){
@@ -487,15 +481,10 @@ const locations = cart.location || localStorage.getItem('location') || "";
 
 useEffect(() => {
   localStorage.setItem('location', locations);
-//   localStorage.setItem('checkInDate', checkInDate);
-//   localStorage.setItem('checkOutDate', checkOutDate);
   localStorage.setItem('guests', guests);
 
   dispatch(setLocation(locations));
-//   dispatch(setCheckIn(checkInDate));
-//   dispatch(setCheckOut(checkOutDate));
   dispatch(updateGuests(guests));
-// }, [locations, checkInDate, checkOutDate, guests]);
 }, [locations, guests]);
 
 useEffect(() => {
@@ -518,9 +507,6 @@ useEffect(() => {
         {showDetails && <BookingDetailsModal onClose={closeModal} bookingReference= {ReservationId} startDate= {foundReservation.start_date} endDate= {foundReservation.end_date} reservationDate= {foundReservation.created_at} listing={foundListing}/>}
         {showNationality && <NationalityModal onClose={closeNationality} onInputChange={handleModalInputChange}/>}
 
-        <div style={{ borderBottom: "1px solid #dddfe4",boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
-          <Navigation />
-        </div>
 
         {showConfirmation && (
             <div className="confirmation-box">Changes saved successfully</div>
@@ -530,8 +516,11 @@ useEffect(() => {
             <div className="confirmation-box">Reservation cancelled</div>
         )}
 
+        <div style={{ borderBottom: "1px solid #dddfe4", boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
+            <Navigation />
+        </div>
 
-        <div className="user-yellow-box" style={conditionalColor}>
+        <div className="user-yellow-box" style={{ backgroundColor: conditionalColor.backgroundColor, clipPath: conditionalClipPath.clipPath }}>
             <div className="mid-div">
             <div className="user-tabs">
                 <div className={`user-tabs-cont ${activeTab === 'Home' && 'active'}`} onClick={() => handleTabClick('Home')}>
