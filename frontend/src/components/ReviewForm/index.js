@@ -538,7 +538,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                         </div>
                                     </button>
                                     {showFirstDropdown && (
-                                        <div className='dropdown' style={{ position: 'absolute', marginTop: "1.5%" }}>
+                                        <div className='dropdown' style={{ position: 'absolute', marginTop: "1.5%" }} ref={firstDropdownRef}>
                                             <ul className='dropdown-list'>
                                                 {buttonLabels[0].map((option, index) => (
                                                      <li
@@ -570,7 +570,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                         </div>
                                     </button>
                                     {showSecondDropdown && (
-                                        <div className='dropdown' style={{ position: 'absolute', marginTop: "14%" }}>
+                                        <div className='dropdown' style={{ position: 'absolute', marginTop: "14%" }} ref={secondDropdownRef}>
                                             <ul className='dropdown-list'>
                                                 {buttonLabels[1].map((option, index) => (
                                                     <li
@@ -602,7 +602,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                         </div>
                                     </button>
                                     {showThirdDropdown && (
-                                        <div className='dropdown' style={{ position: 'absolute', marginTop: "26.5%" }}>
+                                        <div className='dropdown' style={{ position: 'absolute', marginTop: "26.5%" }} ref={thirdDropdownRef}>
                                             <ul className='dropdown-list'>
                                                 {buttonLabels[2].map((option, index) => (
                                                     <li

@@ -14,7 +14,6 @@ import CalendarSVG from "../../assets/pictures/icons/calendar-alt-svgrepo-com.sv
 import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
 import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import BuildingSVG from "../../assets/pictures/icons/921-200.png"
-// import ChangeSVG from "../../assets/pictures/icons/2831588-200.png"
 import CancelSVG from "../../assets/pictures/icons/728248.webp"
 import RightSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
@@ -526,10 +525,16 @@ useEffect(() => {
                 <div className={`user-tabs-cont ${activeTab === 'Home' && 'active'}`} onClick={() => handleTabClick('Home')}>
                     <img src={houseIcon} alt="Home Icon" />
                     <p>Home</p>
+                    {activeTab === 'Home' && (
+                        <span className='check-mark2'>&#10004;</span>
+                    )}
                 </div>
                 <div className={`user-tabs-cont ${activeTab === 'Edit Details' && 'active'}`} onClick={() => handleTabClick('Edit Details')}>
                     <img src={userIcon} alt="Edit Details Icon" />
                     <p>Edit Details</p>
+                    {activeTab === 'Edit Details' && (
+                        <span className='check-mark2'>&#10004;</span>
+                    )}
                 </div>
                 <div
                     className={`user-tabs-cont ${activeTab === 'My Trips' && 'active'}`}
@@ -540,6 +545,9 @@ useEffect(() => {
                 >
                     <img src={mapIcon} alt="My Trips Icon" />
                     <p>My Trips</p>
+                    {activeTab === 'My Trips' && (
+                        <span className='check-mark2'>&#10004;</span>
+                    )}
                 </div>
             </div>
 
