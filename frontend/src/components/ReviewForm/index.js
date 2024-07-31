@@ -507,7 +507,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 <div>
                                     <button className='about-you-button' onClick={handleFirstButtonClick}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
-                                            <div className='value-wrapper'>
+                                            <div className='value-wrapper' style={{ fontWeight: selectedFirstOption ? 800 : 'normal', color: selectedFirstOption ? 'black' : 'normal' }}>
                                                 {selectedFirstOption || 'Are you?'}
                                             </div>
                                             <div className={`icon-wrapper ${showFirstDropdown ? 'rotate' : ''}`}>
@@ -519,9 +519,17 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                         <div className='dropdown' style={{ position: 'absolute', marginTop: "1.5%" }}>
                                             <ul className='dropdown-list'>
                                                 {buttonLabels[0].map((option, index) => (
-                                                    <li className="dropdown-option" key={index} onClick={() => handleFirstOptionSelect(option)}>
-                                                        {option}
-                                                    </li>
+                                                     <li
+                                                     className={`dropdown-option ${selectedFirstOption === option ? 'selected' : ''}`}
+                                                     key={index}
+                                                     onClick={() => handleFirstOptionSelect(option)}
+                                                 >
+                                                     {option}
+
+                                                     {selectedFirstOption === option && (
+                                                        <span className='check-mark'>&#10003;</span>
+                                                    )}
+                                                 </li>
                                                 ))}
                                             </ul>
                                         </div>
@@ -531,7 +539,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 <div>
                                     <button className='about-you-button' onClick={handleSecondButtonClick} placeholder=''>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
-                                            <div className='value-wrapper'>
+                                            <div className='value-wrapper' style={{ fontWeight: selectedSecondOption ? 800 : 'normal', color: selectedSecondOption ? 'black' : 'normal' }}>
                                                 {selectedSecondOption || 'Choose age group'}
                                             </div>
                                             <div className={`icon-wrapper ${showSecondDropdown ? 'rotate' : ''}`}>
@@ -543,9 +551,17 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                         <div className='dropdown' style={{ position: 'absolute', marginTop: "14%" }}>
                                             <ul className='dropdown-list'>
                                                 {buttonLabels[1].map((option, index) => (
-                                                    <li className="dropdown-option" key={index} onClick={() => handleSecondOptionSelect(option)}>
-                                                        {option}
-                                                    </li>
+                                                    <li
+                                                    className={`dropdown-option ${selectedSecondOption === option ? 'selected' : ''}`}
+                                                    key={index}
+                                                    onClick={() => handleSecondOptionSelect(option)}
+                                                >
+                                                    {option}
+
+                                                    {selectedSecondOption === option && (
+                                                        <span className='check-mark'>&#10003;</span>
+                                                    )}
+                                                </li>
                                                 ))}
                                             </ul>
                                         </div>
@@ -555,7 +571,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 <div>
                                     <button className='about-you-button' onClick={handleThirdButtonClick}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
-                                            <div className='value-wrapper'>
+                                            <div className='value-wrapper'  style={{ fontWeight: selectedThirdOption ? 800 : 'normal', color: selectedThirdOption ? 'black' : 'normal'  }}>
                                                 {selectedThirdOption || 'Trip Type'}
                                             </div>
                                             <div className={`icon-wrapper ${showThirdDropdown ? 'rotate' : ''}`}>
@@ -567,9 +583,17 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                         <div className='dropdown' style={{ position: 'absolute', marginTop: "26.5%" }}>
                                             <ul className='dropdown-list'>
                                                 {buttonLabels[2].map((option, index) => (
-                                                    <li className="dropdown-option" key={index} onClick={() => handleThirdOptionSelect(option)}>
-                                                        {option}
-                                                    </li>
+                                                    <li
+                                                    className={`dropdown-option ${selectedThirdOption === option ? 'selected' : ''}`}
+                                                    key={index}
+                                                    onClick={() => handleThirdOptionSelect(option)}
+                                                >
+                                                    {option}
+
+                                                    {selectedThirdOption === option && (
+                                                        <span className='check-mark'>&#10003;</span>
+                                                    )}
+                                                </li>
                                                 ))}
                                             </ul>
                                         </div>

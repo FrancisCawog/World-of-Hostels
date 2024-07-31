@@ -325,15 +325,16 @@
 }
 
 .value-wrapper {
+    color: #636c7d;
     margin-left: 1rem; 
-    flex-grow: 1;
     font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 1.5rem;
-    position: relative;
-    text-align: left;
+}
+
+.check-mark {
+    position: absolute;
+    right: 2rem;
+    font-size: 20px; 
 }
 
 .icon-wrapper {
@@ -344,6 +345,7 @@
     width: 12px;
     height: 12px;
     position: relative;
+    margin-top: 5px;
 }
 
 .triangle-icon {
@@ -374,13 +376,17 @@
     min-height: 5.5rem;
     overflow-y: auto;
     padding: 1rem;
+    overflow-x: hidden;
+}
+
+.dropdown-list::-webkit-scrollbar {
+    display: none;
 }
 
 .dropdown-option {
-    box-shadow: inset 0 0 0 0.0625rem #a9afbb;
     font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 1rem;
-    font-weight: 800;
+    font-weight: 400;
     line-height: 1.5rem;
     border-radius: 1rem;
     cursor: pointer;
@@ -389,6 +395,23 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.dropdown-option.selected {
+     box-shadow: inset 0 0 0 0.0625rem #a9afbb;
+     font-weight: 800;
+}
+
+/* .dropdown-option.selected::after {
+    content: ""; 
+    position: absolute;
+    top: 16%;
+    left: 85%;
+    transform: translateY(-50%);
+    background-image: url("../../assets/pictures/icons/check.svg");
+    background-size: contain;
+    width: 15%;
+    height: 2rem;
+} */
 
 .dropdown-option:hover {
     background: #f1f2f4;
