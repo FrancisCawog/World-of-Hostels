@@ -47,9 +47,7 @@ https://world-of-hostels.onrender.com
 
 ### Future Implementions/ Open Issues
 - Find different calander.
-- Prevent searches in the past and prevent start and end date on the same day.
 - Add errors to sign-up/ login/ users edit
 - Fix styling in leave review - About you
-- Fix calander to turn off when not selected
 
 - Add edit reservation feature - HostelWorld currently disables feature.
