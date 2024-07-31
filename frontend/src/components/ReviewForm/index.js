@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createReview } from '../../store/review';
 import './ReviewForm.css'
@@ -43,6 +43,28 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
     const [selectedSecondOption, setSecondSelectedOption] = useState('');
     const [selectedThirdOption, setThirdSelectedOption] = useState('');
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                firstDropdownRef.current && !firstDropdownRef.current.contains(event.target) &&
+                secondDropdownRef.current && !secondDropdownRef.current.contains(event.target) &&
+                thirdDropdownRef.current && !thirdDropdownRef.current.contains(event.target)
+            ) {
+                setshowFirstDropdown(false);
+                setshowSecondDropdown(false);
+                setshowThirdDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    const firstDropdownRef = useRef(null);
+    const secondDropdownRef = useRef(null);
+    const thirdDropdownRef = useRef(null);
 
     const buttonLabels = [
         ['Male', 'Female', 'Couple', 'All Male Group', 'All Female Group', 'Mixed Group'],
@@ -505,7 +527,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
 
                             <div style={{ position: 'relative' }}>
                                 <div>
-                                    <button className='about-you-button' onClick={handleFirstButtonClick}>
+                                    <button className='about-you-button' onClick={handleFirstButtonClick} ref={firstDropdownRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
                                             <div className='value-wrapper' style={{ fontWeight: selectedFirstOption ? 800 : 'normal', color: selectedFirstOption ? 'black' : 'normal' }}>
                                                 {selectedFirstOption || 'Are you?'}
@@ -537,7 +559,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 </div>
 
                                 <div>
-                                    <button className='about-you-button' onClick={handleSecondButtonClick} placeholder=''>
+                                    <button className='about-you-button' onClick={handleSecondButtonClick} placeholder='' ref={secondDropdownRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
                                             <div className='value-wrapper' style={{ fontWeight: selectedSecondOption ? 800 : 'normal', color: selectedSecondOption ? 'black' : 'normal' }}>
                                                 {selectedSecondOption || 'Choose age group'}
@@ -569,7 +591,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 </div>
 
                                 <div>
-                                    <button className='about-you-button' onClick={handleThirdButtonClick}>
+                                    <button className='about-you-button' onClick={handleThirdButtonClick} ref={thirdDropdownRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
                                             <div className='value-wrapper'  style={{ fontWeight: selectedThirdOption ? 800 : 'normal', color: selectedThirdOption ? 'black' : 'normal'  }}>
                                                 {selectedThirdOption || 'Trip Type'}

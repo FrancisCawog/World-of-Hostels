@@ -401,18 +401,6 @@
      font-weight: 800;
 }
 
-/* .dropdown-option.selected::after {
-    content: ""; 
-    position: absolute;
-    top: 16%;
-    left: 85%;
-    transform: translateY(-50%);
-    background-image: url("../../assets/pictures/icons/check.svg");
-    background-size: contain;
-    width: 15%;
-    height: 2rem;
-} */
-
 .dropdown-option:hover {
     background: #f1f2f4;
 }
