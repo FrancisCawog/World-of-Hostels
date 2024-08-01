@@ -324,6 +324,22 @@
     box-shadow: inset 0 0 0 0.125rem #a9afbb;
 }
 
+.about-you-label {
+    position: absolute;
+    top: 30%;
+    left: 4.5%;
+    transform: translateY(-50%);
+}
+
+.about-you-label p {
+    letter-spacing: .0125rem;
+    line-height: 1rem;
+    font-weight: 400;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #636c7d;
+}
+
 .value-wrapper {
     color: #636c7d;
     margin-left: 1rem; 

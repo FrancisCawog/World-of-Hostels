@@ -43,25 +43,6 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
     const [selectedSecondOption, setSecondSelectedOption] = useState('');
     const [selectedThirdOption, setThirdSelectedOption] = useState('');
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                firstDropdownRef.current && !firstDropdownRef.current.contains(event.target) &&
-                secondDropdownRef.current && !secondDropdownRef.current.contains(event.target) &&
-                thirdDropdownRef.current && !thirdDropdownRef.current.contains(event.target)
-            ) {
-                setshowFirstDropdown(false);
-                setshowSecondDropdown(false);
-                setshowThirdDropdown(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
     const firstDropdownRef = useRef(null);
     const secondDropdownRef = useRef(null);
     const thirdDropdownRef = useRef(null);
@@ -529,12 +510,17 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 <div>
                                     <button className='about-you-button' onClick={handleFirstButtonClick} ref={firstDropdownRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
-                                            <div className='value-wrapper' style={{ fontWeight: selectedFirstOption ? 800 : 'normal', color: selectedFirstOption ? 'black' : 'normal' }}>
+                                            <div className='value-wrapper' style={{ fontWeight: selectedFirstOption ? 500 : 'normal', color: selectedFirstOption ? 'black' : 'normal', marginTop: selectedFirstOption ? '15px' : 'normal' }}>
                                                 {selectedFirstOption || 'Are you?'}
                                             </div>
                                             <div className={`icon-wrapper ${showFirstDropdown ? 'rotate' : ''}`}>
                                                 <img src={triangleSVG} className='triangle-icon' style={{width: "12px", height: "12px"}}/>
                                             </div>
+
+                                            {selectedFirstOption &&
+                                            <span className='about-you-label'>
+                                                <p>Are you?</p>
+                                            </span>}
                                         </div>
                                     </button>
                                     {showFirstDropdown && (
@@ -561,12 +547,17 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 <div>
                                     <button className='about-you-button' onClick={handleSecondButtonClick} placeholder='' ref={secondDropdownRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
-                                            <div className='value-wrapper' style={{ fontWeight: selectedSecondOption ? 800 : 'normal', color: selectedSecondOption ? 'black' : 'normal' }}>
+                                            <div className='value-wrapper' style={{ fontWeight: selectedSecondOption ? 500 : 'normal', color: selectedSecondOption ? 'black' : 'normal', marginTop: selectedFirstOption ? '15px' : 'normal' }}>
                                                 {selectedSecondOption || 'Choose age group'}
                                             </div>
                                             <div className={`icon-wrapper ${showSecondDropdown ? 'rotate' : ''}`}>
                                                 <img src={triangleSVG} className='triangle-icon' style={{width: "12px", height: "12px"}}/>
                                             </div>
+
+                                            {selectedSecondOption &&
+                                            <span className='about-you-label'>
+                                                <p>Choose age group</p>
+                                            </span>}
                                         </div>
                                     </button>
                                     {showSecondDropdown && (
@@ -593,12 +584,17 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 <div>
                                     <button className='about-you-button' onClick={handleThirdButtonClick} ref={thirdDropdownRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
-                                            <div className='value-wrapper'  style={{ fontWeight: selectedThirdOption ? 800 : 'normal', color: selectedThirdOption ? 'black' : 'normal'  }}>
+                                            <div className='value-wrapper'  style={{ fontWeight: selectedThirdOption ? 500 : 'normal', color: selectedThirdOption ? 'black' : 'normal', marginTop: selectedThirdOption ? '15px' : 'normal'  }}>
                                                 {selectedThirdOption || 'Trip Type'}
                                             </div>
                                             <div className={`icon-wrapper ${showThirdDropdown ? 'rotate' : ''}`}>
                                                 <img src={triangleSVG} className='triangle-icon' style={{width: "12px", height: "12px"}}/>
                                             </div>
+
+                                            {selectedThirdOption &&
+                                            <span className='about-you-label'>
+                                                <p>Trip Type</p>
+                                            </span>}
                                         </div>
                                     </button>
                                     {showThirdDropdown && (
