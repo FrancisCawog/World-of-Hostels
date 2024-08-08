@@ -44,8 +44,44 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
     const [selectedThirdOption, setThirdSelectedOption] = useState('');
 
     const firstDropdownRef = useRef(null);
+    const firstButtonRef = useRef(null);
+  
     const secondDropdownRef = useRef(null);
+    const secondButtonRef = useRef(null);
+  
     const thirdDropdownRef = useRef(null);
+    const thirdButtonRef = useRef(null);
+
+    const handleClickOutside = (event) => {
+        if (
+          firstDropdownRef.current &&
+          !firstDropdownRef.current.contains(event.target) &&
+          !firstButtonRef.current.contains(event.target)
+        ) {
+          setshowFirstDropdown(false);
+        }
+        if (
+          secondDropdownRef.current &&
+          !secondDropdownRef.current.contains(event.target) &&
+          !secondButtonRef.current.contains(event.target)
+        ) {
+          setshowSecondDropdown(false);
+        }
+        if (
+          thirdDropdownRef.current &&
+          !thirdDropdownRef.current.contains(event.target) &&
+          !thirdButtonRef.current.contains(event.target)
+        ) {
+          setshowThirdDropdown(false);
+        }
+      };
+    
+      useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
 
     const buttonLabels = [
         ['Male', 'Female', 'Couple', 'All Male Group', 'All Female Group', 'Mixed Group'],
@@ -508,7 +544,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
 
                             <div style={{ position: 'relative' }}>
                                 <div>
-                                    <button className='about-you-button' onClick={handleFirstButtonClick} ref={firstDropdownRef}>
+                                    <button className='about-you-button' onClick={handleFirstButtonClick} ref={firstButtonRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
                                             <div className='value-wrapper' style={{ fontWeight: selectedFirstOption ? 500 : 'normal', color: selectedFirstOption ? 'black' : 'normal', marginTop: selectedFirstOption ? '15px' : 'normal' }}>
                                                 {selectedFirstOption || 'Are you?'}
@@ -545,7 +581,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 </div>
 
                                 <div>
-                                    <button className='about-you-button' onClick={handleSecondButtonClick} placeholder='' ref={secondDropdownRef}>
+                                    <button className='about-you-button' onClick={handleSecondButtonClick} placeholder='' ref={secondButtonRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
                                             <div className='value-wrapper' style={{ fontWeight: selectedSecondOption ? 500 : 'normal', color: selectedSecondOption ? 'black' : 'normal', marginTop: selectedSecondOption ? '15px' : 'normal' }}>
                                                 {selectedSecondOption || 'Choose age group'}
@@ -582,7 +618,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 </div>
 
                                 <div>
-                                    <button className='about-you-button' onClick={handleThirdButtonClick} ref={thirdDropdownRef}>
+                                    <button className='about-you-button' onClick={handleThirdButtonClick} placeholder='' ref={thirdButtonRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
                                             <div className='value-wrapper'  style={{ fontWeight: selectedThirdOption ? 500 : 'normal', color: selectedThirdOption ? 'black' : 'normal', marginTop: selectedThirdOption ? '15px' : 'normal'  }}>
                                                 {selectedThirdOption || 'Trip Type'}
