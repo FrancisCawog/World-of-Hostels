@@ -448,7 +448,6 @@
     border: 0.0625rem solid #dddfe4;
     border-radius: 0 0 1.4375rem 1.4375rem;
     border-top-width: 0;
-    grid-area: footer;
     justify-content: space-between;
     margin: 0 -0.5rem -0.5rem;
     height: 3rem;
@@ -470,12 +469,17 @@
   margin-right: 5px;
 }
 
-.leave-review{
-    width: 20%;
-    padding-top: 1rem;
+.leave-review {
+    padding-top: 0.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
+    white-space: nowrap;
+    gap: 0.5rem;
+}
+
+.leave-review p:hover {
+  cursor: pointer;
 }
 
 .leave-review img {
