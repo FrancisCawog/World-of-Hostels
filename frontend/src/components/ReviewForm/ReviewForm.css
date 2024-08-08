@@ -141,7 +141,7 @@
 }
 
 .review-stars {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     text-align: center;
 }
 
@@ -149,6 +149,8 @@
     transition: color .4s;
     width: 28px;
     height: 28px;
+    margin-right: .75rem;
+    margin-left: .75rem;
 }
 
 .feedback-input {
