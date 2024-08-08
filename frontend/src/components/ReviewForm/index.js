@@ -547,7 +547,7 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
                                 <div>
                                     <button className='about-you-button' onClick={handleSecondButtonClick} placeholder='' ref={secondDropdownRef}>
                                         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center"}}>
-                                            <div className='value-wrapper' style={{ fontWeight: selectedSecondOption ? 500 : 'normal', color: selectedSecondOption ? 'black' : 'normal', marginTop: selectedFirstOption ? '15px' : 'normal' }}>
+                                            <div className='value-wrapper' style={{ fontWeight: selectedSecondOption ? 500 : 'normal', color: selectedSecondOption ? 'black' : 'normal', marginTop: selectedSecondOption ? '15px' : 'normal' }}>
                                                 {selectedSecondOption || 'Choose age group'}
                                             </div>
                                             <div className={`icon-wrapper ${showSecondDropdown ? 'rotate' : ''}`}>
