@@ -66,8 +66,6 @@ export default function ChooseRoom({listingId, cartItems, cart}){
           setRefundable(null); 
         }}, [cart]);
 
-        // console.log({ listingId });
-
         
     return(
     <div>

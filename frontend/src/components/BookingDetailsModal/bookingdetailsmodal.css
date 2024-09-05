@@ -19,7 +19,14 @@
     width: 30%;
     overflow: auto;
     position: relative;
+    overflow-y: scroll;
+    scrollbar-width: none;
   }
+  
+  .modal3::-webkit-scrollbar {
+    display: none;
+  }
+  
 
   .booking-details-h1{
     padding-right: 4rem;

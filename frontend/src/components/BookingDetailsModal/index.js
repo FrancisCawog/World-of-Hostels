@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from "react-redux";
 import "./bookingdetailsmodal.css"
 import users from "../../assets/pictures/icons/17115.png"
@@ -13,51 +13,64 @@ const BookingDetailsModal = ({ onClose, bookingReference, startDate, endDate, re
     const reservations = useSelector(state => state.reservations);
     const rooms = useSelector(state => state.rooms);
     const sessionUser = useSelector(state => state.session.user);
+    
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                onClose();
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [onClose]);
 
     const handleClick = () => {
         setShowCondition(prevState => !prevState);
-      };
-
-    const handleSecondClick = () => {
-        setShowCancellation(prevState => !prevState);
     };
 
-  const timeTolerance = 1500;
+    const handleSecondClick = () => {
+        setShowCancellation(prevState => !(prevState));
+    };
 
-  const filteredReservations = Object.values(reservations).filter(reservation => {
-    const reservationCreatedAt = new Date(reservation.created_at).getTime();
-    const targetReservationDate = new Date(reservationDate).getTime();
-    const timeDifference = Math.abs(reservationCreatedAt - targetReservationDate);
+    const timeTolerance = 1500;
+    const filteredReservations = Object.values(reservations).filter(reservation => {
+        const reservationCreatedAt = new Date(reservation.created_at).getTime();
+        const targetReservationDate = new Date(reservationDate).getTime();
+        const timeDifference = Math.abs(reservationCreatedAt - targetReservationDate);
+        return timeDifference <= timeTolerance && sessionUser.id === reservation.user_id;
+    });
 
-    return timeDifference <= timeTolerance && sessionUser.id === reservation.user_id;
-  });
+    const totalGuests = filteredReservations.reduce((sum, reservation) => sum + reservation.num_guests, 0);
+    const totalPrice = filteredReservations.reduce((sum, reservation) => sum + reservation.total_price, 0);
 
-  const totalGuests = filteredReservations.reduce((sum, reservation) => sum + reservation.num_guests, 0);
-  const totalPrice = filteredReservations.reduce((sum, reservation) => sum + (reservation.total_price), 0);
+    const getRoomTitle = (roomId) => {
+        const room = rooms[roomId];
+        return room ? room.room_title : 'N/A';
+    };
 
-  const getRoomTitle = (roomId) => {
-    const room = rooms[roomId];
-    return room ? room.room_title : 'N/A';
-  };
+    const getRoomType = (roomId) => {
+        const room = rooms[roomId];
+        return room.room_type;
+    };
 
-  const getRoomType = (roomId) => {
-    const room = rooms[roomId];
-    return room.room_type
-  };
+    const startDateObject = new Date(startDate);
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
 
-  const startDateObject = new Date(startDate);
-  const currentDate = new Date();
-  currentDate.setHours(0, 0, 0, 0);
-
-  const rulesArray = listing.house_rules.split('\n').filter(rule => rule.trim() !== '');
+    const rulesArray = listing.house_rules.split('\n').filter(rule => rule.trim() !== '');
 
     const formattedHouseRules = rulesArray.map((rule, index) => (
-    <p key={index}>{rule.trim()}</p>
+        <p key={index}>{rule.trim()}</p>
     ));
 
     return (
         <div className="modal-overlay3">
-            <div className="modal3">
+            <div className="modal3" ref={modalRef}>
                 <div className="modal-content">
                     <span className="close" onClick={onClose}>&times;</span>
                     <h1 className='booking-details-h1'>Booking Details</h1>

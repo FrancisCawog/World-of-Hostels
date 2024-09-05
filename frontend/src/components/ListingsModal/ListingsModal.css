@@ -22,6 +22,12 @@
     width: 48%;
     overflow: auto;
     position: relative;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }  
+
+  .modal::-webkit-scrollbar {
+    display: none;
   }
   
   .close {

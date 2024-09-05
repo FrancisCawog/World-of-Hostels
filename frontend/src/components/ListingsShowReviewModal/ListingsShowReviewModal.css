@@ -137,5 +137,9 @@
   overflow: auto; 
   white-space: nowrap;
   max-height: 82.5%;
-  /* margin-bottom: 20px; */
+  scrollbar-width: none;
+}  
+
+.review-modal-popup::-webkit-scrollbar {
+  display: none;
 }
