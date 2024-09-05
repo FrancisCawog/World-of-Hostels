@@ -79,9 +79,20 @@ const handleDemoLogin = async () => {
               <h1>Welcome traveller!</h1>
               <p className="log-in-p">Log in to unlock extras and start connecting with travelers heading to your hostel</p>
               <form onSubmit={handleSubmit}>
-                <ul>
-                  {errors.map(error => <li key={error}>{error}</li>)}
-                </ul>
+              <ul className="error-list-login">
+                {errors.map((error, index) => {
+                  const [part1, part2] = error.split(". ");
+                  return (
+                    <li key={index} className="error-item-login">
+                      <p>
+                        <span className="error-part1">{part1}.</span>
+                        <br />
+                        <span>{ part2}</span>
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
                 <div className={`input-wrapper-login ${email !== "" ? 'non-empty' : ''}`}>
                      <input
                       type="text"

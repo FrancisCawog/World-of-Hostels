@@ -2,6 +2,7 @@
     display: flex;
   }
   
+  
   .loginContainer,
   .car-container {
     flex: 1;
@@ -161,19 +162,37 @@ img {
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     font-weight: 400;
-    /* left: 0px; */
     letter-spacing: 0px;
     line-height: 1.5rem;
     overflow-x: hidden;
     pointer-events: none;
     position: absolute;
     text-overflow: ellipsis;
-    /* top: 0px; */
-    /* width: 100%; */
     z-index: 1;
-    /* padding: 1rem; */
     transition: all 0.2s ease 0s;
     white-space: nowrap;
     margin-left: 1rem;
     margin-top: -3.5rem;
+}
+
+.error-list-login {
+  list-style-type: none; 
+  padding: 0;
+  margin: 0;
+}
+
+.error-item-login p {
+  border-radius: 16px;
+    background: #FCE8EC;
+    border: 1px solid #D11A3B;
+    color: #D11A3B;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    font-family: Inter;
+}
+
+.error-part1 {
+  font-family: Inter-bold;
 }
