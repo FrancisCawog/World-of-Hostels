@@ -196,3 +196,17 @@ img {
 .error-part1 {
   font-family: Inter-bold;
 }
+
+.input-wrapper-login {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: gray;
+}
