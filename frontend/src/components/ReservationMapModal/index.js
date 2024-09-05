@@ -63,8 +63,8 @@ const ReservationMapModal = ({ latitude, longitude, onClose, name, address, city
                 >
                   <div>
                     <h3 style={{ fontFamily: "Inter", fontSize: "20px" }}>{name}</h3>
-                    <p style={{ fontFamily: "Inter", fontWeight: "400", padding: "0px" }}>{address}</p>
-                    <p style={{ fontFamily: "Inter", fontWeight: "400", marginTop: "-10px" }}>{`${city}, ${country}`}</p>
+                    <p style={{ fontFamily: "Inter", padding: "0px" }}>{address}</p>
+                    <p style={{ fontFamily: "Inter", marginTop: "-10px" }}>{`${city}, ${country}`}</p>
                   </div>
                 </InfoWindow>
               )}

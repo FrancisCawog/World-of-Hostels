@@ -592,9 +592,8 @@ li {
 
 .date-and-rating p {
     color: rgb(99, 108, 125);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Inter;
     font-size: 0.75rem;
-    font-weight: 400;
     letter-spacing: 0.0125rem;
     line-height: 1rem;
 }
@@ -713,11 +712,10 @@ li {
 }
 
 .facilities-snippet {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Inter;
     font-size: 16px;
     letter-spacing: 0;
     line-height: 1.5rem;
-    font-weight: 400;
 }
 
 .facilities-category {

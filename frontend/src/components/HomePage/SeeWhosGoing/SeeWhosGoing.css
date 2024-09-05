@@ -267,10 +267,9 @@
   }
   
   .see-who-going-text p {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
-      font-size: 1.125rem;
-      font-weight: 800;
-      letter-spacing: -.00625rem;
-      margin-top: -1.5rem;
-      color: white;
+    font-family: Inter-bold;
+    font-size: 1.125rem;
+    letter-spacing: -.00625rem;
+    margin-top: -1.5rem;
+    color: white;
   }

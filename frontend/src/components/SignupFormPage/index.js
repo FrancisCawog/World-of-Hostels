@@ -42,7 +42,7 @@ function SignupFormPage() {
     <div className="sign-container">
         <div className="signupContainer">
           <div className="signupBox">
-            <Link to="/" exact="true" style={{ textDecoration: 'underline', color: 'black', display: 'flex', alignItems: 'center', fontFamily: "Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif", fontWeight: "bolder" }}>
+            <Link to="/" exact="true" style={{ textDecoration: 'underline', color: 'black', display: 'flex', alignItems: 'center', fontFamily: "Inter" }}>
                 <img src={MyArrowSVG} alt="Back" style={{ width: '14px', marginTop: "2px" }}/> Back
               </Link>
             <br/>

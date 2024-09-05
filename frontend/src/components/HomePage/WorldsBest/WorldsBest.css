@@ -78,9 +78,8 @@
   }
   
   .world-text p {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1.125rem;
-    font-weight: 400;
     letter-spacing: -.00625rem;
     line-height: 1.5rem;
   }
@@ -105,11 +104,10 @@
   .world-car-p2 {
     color: #636c7d;
     margin-bottom: 0.5rem;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: .75rem;
     letter-spacing: .0125rem;
     line-height: 1rem;
-    font-weight: 400;
   }
 
   .world-text {
@@ -135,9 +133,8 @@
   }
   
   .world-text p {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
-    font-weight: 400;
   }
   
   .world-text img:last-child {

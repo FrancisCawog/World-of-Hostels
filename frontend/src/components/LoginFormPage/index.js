@@ -111,8 +111,7 @@ function LoginFormPage() {
                 color: 'black', 
                 display: 'flex', 
                 alignItems: 'center', 
-                fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif", 
-                fontWeight: "bolder" 
+                fontFamily: "Inter-bold"
               }}
             >
               <img src={MyArrowSVG} alt="Back" style={{ width: '14px', marginTop: "2px" }} /> Back

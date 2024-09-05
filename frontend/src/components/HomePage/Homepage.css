@@ -111,29 +111,28 @@ img {
 }
 
 .input-inner {
-    position: relative;
+  position: relative;
 }
 
 .input-prefix {
-    position: absolute;
-    top: 4px;
-    z-index: 1;
-    padding: 1rem;
+  position: absolute;
+  top: 4px;
+  z-index: 1;
+  padding: 1rem;
 }
 
 .input-wrapper input {
   padding-left: 3rem;
   padding-bottom: 0.5rem;
-    padding-top: 1.5rem;
-    text-overflow: ellipsis;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0px;
-    line-height: 1.5rem;
-    border-style: none;
-    border-radius: 1rem;
-    margin: 0px;
+  padding-top: 1.5rem;
+  text-overflow: ellipsis;
+  font-family: Inter;
+  font-size: 1rem;
+  letter-spacing: 0px;
+  line-height: 1.5rem;
+  border-style: none;
+  border-radius: 1rem;
+  margin: 0px;
 }
 
 .input-wrapper input:hover {
@@ -147,23 +146,22 @@ img {
 
 .input-label {
   color: rgb(99, 108, 125);
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    left: 0px;
-    letter-spacing: 0px;
-    line-height: 1.5rem;
-    overflow-x: hidden;
-    pointer-events: none;
-    position: absolute;
-    text-overflow: ellipsis;
-    top: 0px;
-    width: 100%;
-    z-index: 1;
-    padding: 1rem;
-    transition: all 0.2s ease 0s;
-    white-space: nowrap;
-    margin-left: 32.5px;
+  font-family: Inter;
+  font-size: 1rem;
+  left: 0px;
+  letter-spacing: 0px;
+  line-height: 1.5rem;
+  overflow-x: hidden;
+  pointer-events: none;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: 0px;
+  width: 100%;
+  z-index: 1;
+  padding: 1rem;
+  transition: all 0.2s ease 0s;
+  white-space: nowrap;
+  margin-left: 32.5px;
 }
 
 .input-wrapper input:focus + .input-label,
@@ -172,13 +170,12 @@ img {
 .input-label2,
 .input-label3,
 .input-label4 {
-  font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
-    font-size: .75rem;
-    font-weight: 400;
-    letter-spacing: .0125rem;
-    line-height: 1rem;
-    transform: translateX(0) translateY(-0.5rem);
-    margin-top: -5px;
+  font-family: Inter;
+  font-size: .75rem;
+  letter-spacing: .0125rem;
+  line-height: 1rem;
+  transform: translateX(0) translateY(-0.5rem);
+  margin-top: -5px;
 }
 .input-label2,
 .input-label3 {
@@ -427,11 +424,10 @@ img {
 }
 
 .world-pic p {
-  font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-family: Inter-bold;
   font-size: .875rem;
   letter-spacing: .00625rem;
   line-height: 1.25rem;
-  font-weight: 800;
 }
 
 .destination-selection {
@@ -466,25 +462,24 @@ img {
 
 .destination-selection-button {
   align-items: center;
-    background: none;
-    border: none;
-    border-radius: 1rem;
-    color: #121417;
-    cursor: pointer;
-    display: flex;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    justify-content: space-between;
-    letter-spacing: 0;
-    line-height: 1.5rem;
-    margin: 0;
-    outline: none;
-    padding: 1rem;
-    text-align: left;
-    -webkit-text-decoration: none;
-    text-decoration: none;
-    width: 100%;
+  background: none;
+  border: none;
+  border-radius: 1rem;
+  color: #121417;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter;
+  font-size: 1rem;
+  justify-content: space-between;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+  margin: 0;
+  outline: none;
+  padding: 1rem;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  width: 100%;
 }
 
 .destination-selection-button:hover {
@@ -515,8 +510,8 @@ img {
 
 .guests-label-selection{
   align-items: center;
-    display: flex;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  font-family: Inter;
 }
 
 .guests-counter {
@@ -545,9 +540,8 @@ img {
 }
 
 .guests-counter-number {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Inter;
   font-size: 0.875rem;
-  font-weight: 400;
   letter-spacing: 0.00625rem;
   line-height: 1.25rem;
   text-align: center;

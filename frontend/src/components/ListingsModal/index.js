@@ -115,8 +115,8 @@ const ListingsModal = ({ tabName, onClose }) => {
                   >
                     <div>
                       <h3 style={{ fontFamily: "Inter", fontSize: "20px" }}>{listing.property_name}</h3>
-                      <p style={{ fontFamily: "Inter", fontWeight: "400", padding: "0px" }}>{listing.address}</p>
-                      <p style={{ fontFamily: "Inter", fontWeight: "400", marginTop: "-10px" }}>{`${listing.city}, ${listing.country}`}</p>
+                      <p style={{ fontFamily: "Inter", padding: "0px" }}>{listing.address}</p>
+                      <p style={{ fontFamily: "Inter", marginTop: "-10px" }}>{`${listing.city}, ${listing.country}`}</p>
                     </div>
                   </InfoWindow>
                 )}

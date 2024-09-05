@@ -816,7 +816,7 @@ useEffect(() => {
                                     <img src={RightSVG} alt="Calendar Icon" className="icon" style={{ marginRight: "10px", marginTop: "0px" }} />
                                 </div>
                                 { !isRefundable && 
-                                <p style={{fontFamily: "Inter", fontWeight: "700", marginTop: "14px", fontSize: "12px"}}>This booking is non-refundable</p>
+                                <p style={{fontFamily: "Inter-bold", marginTop: "14px", fontSize: "12px"}}>This booking is non-refundable</p>
                                 }
                             </div>
                         </>

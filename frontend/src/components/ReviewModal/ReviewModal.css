@@ -28,7 +28,7 @@
 }
 
 .property-name {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: .875rem;
     letter-spacing: .00625rem;
     margin-top: 5px;
@@ -52,7 +52,7 @@
 }
 
 .category-rating p {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
     letter-spacing: 0;
     line-height: 1.5rem;
@@ -90,15 +90,14 @@
 }
 
 #review-word {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1.125rem;
-    font-weight: 400;
     letter-spacing: -.00625rem;
     line-height: 1.5rem;
 }
 
 .my-review {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: .875rem;
     letter-spacing: .00625rem;
     line-height: 1.25rem;
@@ -107,7 +106,7 @@
 }
 
 .my-feedback {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
     letter-spacing: 0;
     line-height: 1.5rem;
@@ -115,7 +114,7 @@
 }
 
 .my-review-desc {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
     letter-spacing: 0;
     line-height: 1.5rem;

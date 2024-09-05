@@ -65,7 +65,7 @@
 }
 
 .review-disclaimer {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
     letter-spacing: 0;
     line-height: 1.5rem;
@@ -100,7 +100,7 @@
 .review-helper {
     opacity: 1;
     visibility: visible;    
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: .875rem;
     letter-spacing: .00625rem;
     line-height: 1.25rem;
@@ -131,8 +131,7 @@
 
 .review-overall p {
     margin: 0px;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
-    font-weight: 400;
+    font-family: Inter;
     letter-spacing: -.00625rem;
     font-size: 1.125rem;
     line-height: 1.5rem;
@@ -190,26 +189,19 @@
     pointer-events: none;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: .75rem;
     letter-spacing: .0125rem;
     line-height: 1rem;
 }
 
 #reviewInput {
-    /* appearance: none; */
     background: none;
     border: none;
-    /* box-sizing: content-box; */
-    /* color: currentColor; */
-    /* display: block; */
     margin: 0;
-    /* max-height: 17.5rem; */
     outline: none;
     padding-bottom: 1rem;
-    /* resize: none; */
-    /* width: 100%; */
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
     letter-spacing: 0;
     line-height: 1.5rem;
@@ -240,7 +232,7 @@
 }
 
 .review-footer-score p {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: .875rem;
     letter-spacing: .00625rem;
     line-height: 1.25rem;
@@ -255,9 +247,8 @@
 }
 
 #rounded-average {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter-bold;
     font-size: 1rem;
-    font-weight: 800;
     letter-spacing: 0;
     line-height: 1.5rem;
     color: black;
@@ -274,9 +265,8 @@
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter-bold;
     font-size: 1rem;
-    font-weight: 700;
     height: 3rem;
     justify-content: center;
     letter-spacing: 0;
@@ -336,8 +326,7 @@
 .about-you-label p {
     letter-spacing: .0125rem;
     line-height: 1rem;
-    font-weight: 400;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Inter;
     font-size: 10px;
     color: #636c7d;
 }
@@ -345,7 +334,7 @@
 .value-wrapper {
     color: #636c7d;
     margin-left: 1rem; 
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
 }
 
@@ -396,9 +385,8 @@
 }
 
 .dropdown-option {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
-    font-weight: 400;
     line-height: 1.5rem;
     border-radius: 1rem;
     cursor: pointer;

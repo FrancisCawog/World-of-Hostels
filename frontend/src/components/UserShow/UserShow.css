@@ -47,7 +47,7 @@
 }
 
 .user-tabs-cont p {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Inter;
     font-size: 1rem;
 }
 
@@ -79,15 +79,14 @@
 }
 
 .travel-stats p:nth-of-type(1) {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Inter-bold;
     font-size: 1.125rem;
-    font-weight: 800;
     line-height: 1.5rem;
 }
 
 .travel-stats p:nth-of-type(2),
 .travel-stats p:nth-of-type(3) {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Inter;
     font-size: 0.75rem;
     letter-spacing: 0.2px;
     line-height: 1.33;
@@ -118,16 +117,14 @@
   }
 
   .user-about p:nth-of-type(1) {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter-bold;
     font-size: 2.5rem;
-    font-weight: 800;
     line-height: 1.5rem;
   }
 
   .user-about p:nth-of-type(2) {
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1.25rem;
-    font-weight: 400;
     letter-spacing: .00625rem;
     line-height: 1.25rem;
     margin-top: -1rem;
@@ -160,9 +157,8 @@
 
   .edit-about p,
   .my-trips p {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Inter-bold;
     font-size: 1.8rem;
-    font-weight: 800;
     letter-spacing: -.0125rem;
   }
 
@@ -178,9 +174,8 @@
     border: 0;
     border-radius: 1rem;
     box-shadow: inset 0 0 0 0.0625rem #a9afbb;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: 1rem;
-    font-weight: 400;
     padding: 0.8rem 1rem;
     margin-top: 0.5rem;
     height: 3.5rem; 
@@ -205,9 +200,8 @@
     left: 1rem;
     color: gray;
     transition: all 0.3s ease;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter;
     font-size: .75rem;
-    font-weight: 400;
     letter-spacing: .0125rem;
     line-height: 1rem;
     transform: translateX(0) translateY(-0.5rem);
@@ -238,9 +232,8 @@
     border-radius: 1rem;
     color: #fff;
     cursor: pointer;
-    font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Inter-bold;
     font-size: 1rem;
-    font-weight: 700;
     line-height: 1.5rem;
     outline: none;
     padding: 0.75rem 1.5rem;
@@ -257,7 +250,7 @@
     padding: 20px 40px;
     border-radius: 10px;
     animation: fadeInRight 0.5s ease-in-out;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Inter;
     font-size: 1rem;
     z-index: 100;
   }
@@ -522,8 +515,7 @@
 }
 
 .back-to-my-trips p {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-weight: 800;
+  font-family: Inter-bold;
   font-size: .875rem;
 }
 
@@ -543,8 +535,7 @@
 }
 
 .found-listing-name {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-weight: 800;
+  font-family: Inter-bold;
   letter-spacing: -.0125rem;
   font-size: 1.75rem;
   line-height: 2.125rem;
@@ -571,7 +562,7 @@
 
 
 .trips-maps-button p {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Inter;
   font-size: 1rem;
 }
 
@@ -615,7 +606,7 @@
 }
 
 .reservation-info-button p {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Inter;
   font-size: 1rem;
 }
 
@@ -637,9 +628,8 @@
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-family: Inter-bold;
   font-size: 1rem;
-  font-weight: 700;
   height: 3rem;
   padding: 0.75rem 1.5rem;
   width: 21.5%;
