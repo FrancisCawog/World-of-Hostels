@@ -192,7 +192,7 @@ function LoginFormPage() {
               className="link" 
               to="/signup"
             >
-              <img src={PencilSVG} alt="Sign Up" style={{ width: '14px' }} /> Sign Up
+              <img src={PencilSVG} alt="Sign Up" style={{ width: '14px' }} />Sign Up
             </Link>
           </div>
         </div>
