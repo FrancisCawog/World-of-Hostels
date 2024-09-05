@@ -48,6 +48,5 @@ https://world-of-hostels.onrender.com
 ### Future Implementions/ Open Issues
 - Find different calander.
 - Add errors to sign-up/ login/ users edit
-- Fix styling in leave review - About you
 
 - Add edit reservation feature - HostelWorld currently disables feature.
