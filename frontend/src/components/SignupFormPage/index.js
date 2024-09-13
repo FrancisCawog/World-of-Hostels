@@ -8,6 +8,7 @@ import car from "../../assets/pictures/Screenshot 2023-11-12 at 12.22.54 PM.png"
 import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png"
 import MyArrowSVG from "../../assets/pictures/icons/arrow-left.svg"
 import UserSVG from "../../assets/pictures/icons/user-line.svg"
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function SignupFormPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;
@@ -35,6 +37,10 @@ function SignupFormPage() {
         else if (data) setErrors([data]);
         else setErrors([res.statusText]);
       });
+  };
+
+  const handleTogglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
@@ -94,18 +100,23 @@ function SignupFormPage() {
                     </label>
                 </div>
                 <div className={`input-wrapper-login ${password !== "" ? 'non-empty' : ''}`}>
-                     <input
-                      type="text"
-                      name="password"
-                      id="location"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    />
-                    <label className="input-label5">
-                      Password
-                    </label>
-                </div>
+                <input
+                  type={isPasswordVisible ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <label className="input-label5">Password</label>
+                <button
+                  type="button"
+                  className="toggle-password"
+                  onClick={handleTogglePasswordVisibility}
+                >
+                  {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
 
                 <button id="loginButton" type="submit" style={{pointerEvents: (email !== '' && password !== '' && firstName !== '' && lastName !== '') ? 'auto' : 'none', opacity: (email === '' || password === '' && firstName !== '' && lastName !== '') ? 0.5 : 1}}>Sign Up</button>
               </form>
