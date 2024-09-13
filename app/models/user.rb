@@ -9,7 +9,7 @@
 #  password_digest :string           not null
 #  session_token   :string           not null
 #  nationality     :string
-#  date_of_birth   :date
+#  date_of_birth   :date             not null
 #  age             :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

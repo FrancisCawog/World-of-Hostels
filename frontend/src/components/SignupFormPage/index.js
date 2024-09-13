@@ -14,6 +14,7 @@ function SignupFormPage() {
   const sessionUser = useSelector(state => state.session.user);
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -24,7 +25,7 @@ function SignupFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.signup({ email, firstName, lastName, password }))
+    return dispatch(sessionActions.signup({ email, firstName, lastName, password, dateOfBirth }))
       .catch(async (res) => {
         let data;
         try {
@@ -79,6 +80,17 @@ function SignupFormPage() {
                   required
                 />
                 <label className="input-label5">Last Name</label>
+              </div>
+
+              <div className={`input-wrapper-login ${dateOfBirth ? 'non-empty' : ''}`}>
+                <input
+                  type="text"
+                  name="dateOfBirth"
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
+                  required
+                />
+                <label className="input-label5">Date of Birth</label>
               </div>
 
               <div className={`input-wrapper-login ${email ? 'non-empty' : ''}`}>
