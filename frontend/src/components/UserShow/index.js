@@ -45,7 +45,7 @@ function UserShow() {
     let formattedDate = null;
     if (sessionUser.date_of_birth) {
         const [year, month, day] = sessionUser.date_of_birth.split('-');
-        formattedDate = `${day}/${month}/${year}`;
+        formattedDate = `${year}-${month}-${day}`;
     }
     const [fullName, setFullName] = useState(
         sessionUser.first_name + " " + sessionUser.last_name
@@ -237,8 +237,8 @@ function UserShow() {
         const dateOfBirth = document.getElementById('dateofBirth').value;
         const nationality = document.getElementById('nationality').value;
       
-        const [month, day, year] = dateOfBirth.split('/');
-        const dob = new Date(`${month}/${day}/${year}`);
+        const [year, month, day] = dateOfBirth.split('-');
+        const dob = new Date(`${year}-${month}-${day}`);
         const now = new Date();
         let ages = now.getFullYear() - dob.getFullYear();
         const monthDiff = now.getMonth() - dob.getMonth();
@@ -309,28 +309,38 @@ function UserShow() {
 
       function isValidAge(dateOfBirth) {
         if (dateOfBirth) {
-            const [day, month, year] = dateOfBirth.split('/');
+            const [year, month, day] = dateOfBirth.split('-');
             const dayNum = parseInt(day, 10);
             const monthNum = parseInt(month, 10);
             const yearNum = parseInt(year, 10);
-          
+
             if (yearNum < 1900 || yearNum > new Date().getFullYear()) {
               return false;
             }
+      
             const dob = new Date(yearNum, monthNum - 1, dayNum);
+            if (dob.getMonth() !== monthNum - 1 || dob.getDate() !== dayNum) {
+              return false;
+            }
+
             const today2 = new Date();
-            const age = today2.getFullYear() - dob.getFullYear();
+            let age = today2.getFullYear() - dob.getFullYear();
             const monthDiff = today2.getMonth() - dob.getMonth();
-            return age > 17 && age <= 100 && (age !== 18 || monthDiff >= 0);
+      
+            if (monthDiff < 0 || (monthDiff === 0 && today2.getDate() < dob.getDate())) {
+                age--;
+            }
+
+            return age >= 18 && age <= 100;
         } else {
             return false; 
         }
-    }    
+      }
 
       function flip(formattedDate) {
         if (formattedDate) {
-            const [day, month, year] = formattedDate.split('/')
-            return `${month}/${day}/${year}`
+            const [year, month, day] = formattedDate.split('-')
+            return `${year}-${month}-${day}`
         } else {
             return false
         }
@@ -466,10 +476,10 @@ function UserShow() {
 function formatInputDate(inputDate) {
     const cleanedInput = inputDate.replace(/\D/g, '');
     if (cleanedInput.length === 8) {
-        const year = cleanedInput.slice(-4);
-        const month = cleanedInput.slice(0, 2);
-        const day = cleanedInput.slice(2, 4);
-        return `${month}/${day}/${year}`;
+        const year = cleanedInput.slice(0,4);
+        const month = cleanedInput.slice(4, 6);
+        const day = cleanedInput.slice(-2);
+        return `${year}-${month}-${day}`;
     }
     return inputDate;
 }

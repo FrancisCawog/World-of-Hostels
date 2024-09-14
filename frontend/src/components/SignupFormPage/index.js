@@ -43,6 +43,47 @@ function SignupFormPage() {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  function formatInputDate(inputDate) {
+    const cleanedInput = inputDate.replace(/\D/g, '');
+    if (cleanedInput.length === 8) {
+        const year = cleanedInput.slice(0,4);
+        const month = cleanedInput.slice(4, 6);
+        const day = cleanedInput.slice(-2);
+        return `${year}-${month}-${day}`;
+    }
+    return inputDate;
+}
+
+function isValidAge(dateOfBirth) {
+  if (dateOfBirth) {
+      const [year, month, day] = dateOfBirth.split('-');
+      const dayNum = parseInt(day, 10);
+      const monthNum = parseInt(month, 10);
+      const yearNum = parseInt(year, 10);
+
+      if (yearNum < 1900 || yearNum > new Date().getFullYear()) {
+        return false;
+      }
+
+      const dob = new Date(yearNum, monthNum - 1, dayNum);
+      if (dob.getMonth() !== monthNum - 1 || dob.getDate() !== dayNum) {
+        return false;
+      }
+
+      const today2 = new Date();
+      let age = today2.getFullYear() - dob.getFullYear();
+      const monthDiff = today2.getMonth() - dob.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today2.getDate() < dob.getDate())) {
+          age--;
+      }
+
+      return age >= 18 && age <= 100;
+  } else {
+      return false; 
+  }
+}
+
   return (
     <>
       <div className="sign-container">
@@ -87,7 +128,7 @@ function SignupFormPage() {
                   type="text"
                   name="dateOfBirth"
                   value={dateOfBirth}
-                  onChange={(e) => setDateOfBirth(e.target.value)}
+                  onChange={(e) => setDateOfBirth(formatInputDate(e.target.value))}
                   required
                 />
                 <label className="input-label5">Date of Birth</label>
@@ -127,8 +168,8 @@ function SignupFormPage() {
                 type="submit"
                 className="signup-button"
                 style={{ 
-                  pointerEvents: (email && password && firstName && lastName) ? 'auto' : 'none',
-                  opacity: (email && password && firstName && lastName) ? 1 : 0.5
+                  pointerEvents: (email && password && firstName && lastName && isValidAge(dateOfBirth)) ? 'auto' : 'none',
+                  opacity: (email && password && firstName && lastName && isValidAge(dateOfBirth)) ? 1 : 0.5
                 }}
               >
                 Sign Up
