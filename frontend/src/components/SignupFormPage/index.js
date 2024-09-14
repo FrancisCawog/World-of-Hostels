@@ -84,6 +84,28 @@ function isValidAge(dateOfBirth) {
   }
 }
 
+function isValidLength(password){
+  if (password.length < 8){
+    return false
+  } else {
+    return true
+  }
+}
+
+function isValidEmail(email){
+  const atIndex = email.indexOf('@')
+  const dotIndex = email.indexOf('.')
+
+  const atSym = email.split('@').length === 2 && atIndex !== 0;
+  const dotSym = email.split('.').length === 2 && dotIndex > atIndex + 1;
+
+  if (atSym && dotSym && dotIndex <= email.length - 3) {
+    return true
+  } else {
+    return false
+  }
+}
+
   return (
     <>
       <div className="sign-container">
@@ -168,8 +190,8 @@ function isValidAge(dateOfBirth) {
                 type="submit"
                 className="signup-button"
                 style={{ 
-                  pointerEvents: (email && password && firstName && lastName && isValidAge(dateOfBirth)) ? 'auto' : 'none',
-                  opacity: (email && password && firstName && lastName && isValidAge(dateOfBirth)) ? 1 : 0.5
+                  pointerEvents: (isValidEmail(email) && isValidLength(password) && firstName && lastName && isValidAge(dateOfBirth)) ? 'auto' : 'none',
+                  opacity: (isValidEmail(email) && isValidLength(password) && firstName && lastName && isValidAge(dateOfBirth)) ? 1 : 0.5
                 }}
               >
                 Sign Up
