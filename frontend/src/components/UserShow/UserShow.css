@@ -262,6 +262,10 @@
     margin-top: -13px;
 }
 
+.edit-user-button:hover {
+  box-shadow: 0 0 10px 3px rgba(242, 86, 33, 0.7); 
+}
+
 .confirmation-box {
     position: fixed;
     top: 20px;

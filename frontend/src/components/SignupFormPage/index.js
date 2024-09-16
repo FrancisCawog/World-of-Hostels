@@ -56,6 +56,11 @@ function SignupFormPage() {
 
 function isValidAge(dateOfBirth) {
   if (dateOfBirth) {
+      const cleanedInput = dateOfBirth.replace(/\D/g, '');
+      if (cleanedInput.length !== 8) {
+          return false;
+      }
+
       const [year, month, day] = dateOfBirth.split('-');
       const dayNum = parseInt(day, 10);
       const monthNum = parseInt(month, 10);

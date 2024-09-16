@@ -293,7 +293,7 @@ function UserShow() {
             !isValidAge(dateOfBirth)
           ){
             setButtonDisabled(true);
-          } else if (dateOfBirth?.length !== 10 && dateOfBirth?.length !== 0){
+          } else if (dateOfBirth?.length !== 10 && dateOfBirth?.length !== 0 && isValidAge(dateOfBirth)){
             setButtonDisabled(true);
           } else if(
           flip(formattedDate) === dateOfBirth &&
@@ -309,6 +309,11 @@ function UserShow() {
 
       function isValidAge(dateOfBirth) {
         if (dateOfBirth) {
+            const cleanedInput = dateOfBirth.replace(/\D/g, '');
+            if (cleanedInput.length !== 8) {
+                return false;
+            }
+
             const [year, month, day] = dateOfBirth.split('-');
             const dayNum = parseInt(day, 10);
             const monthNum = parseInt(month, 10);
@@ -604,28 +609,20 @@ useEffect(() => {
                                 value={dateOfBirth}
                                 onChange={(e) => setDateOfBirth(formatInputDate(e.target.value))}
                             />
-                            </div>
+                        </div>
+                        <div className="input-with-label" id="input-with-label-nat">
                             {userNationality !== null && userNationality !== "" ? 
-                            <div className="input-with-label" id="input-with-label-nat">
                                 <label htmlFor="nationality">Nationality</label>
-                                <input
-                                    id="nationality"
-                                    value={userNationality}
-                                    onClick={handleNationalityInput}
-                                    readOnly
-                                />
-                            </div>
-                            : 
-                            <div className="input-with-label" id="input-with-label-nat">
+                                :
                                 <label htmlFor="nationality" id="blankNationality">Nationality</label>
+                            }
                                 <input
                                     id="nationality"
                                     value={userNationality}
                                     onClick={handleNationalityInput}
                                     readOnly
                                 />
-                            </div>
-                        }
+                        </div>
                         <div className="input-with-label">
                             <label htmlFor="email">Email</label>
                             <input id="email"  value={sessionUser.email} disabled />
@@ -786,7 +783,7 @@ useEffect(() => {
 
             </div>
         </div>
-
+x
         {activeTab === 'Home' && (
             <div className="travel-stats">
                 <div >
