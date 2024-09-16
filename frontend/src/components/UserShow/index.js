@@ -568,10 +568,10 @@ useEffect(() => {
                     </div>
                     <div className="name-and-age">
                         <p>{sessionUser.first_name}</p>
-                        {sessionUser.date_of_birth !== null && sessionUser.nationality !== "" && (
+                        {sessionUser.date_of_birth !== null && sessionUser.nationality !== "" && sessionUser.nationality !== null && (
                             <p style={{ fontSize: "26px" }}>{age} years old, {findCountryCCA3(sessionUser.nationality)}</p>
                         )}
-                        {sessionUser.date_of_birth !== null && sessionUser.nationality === "" && (
+                        {sessionUser.date_of_birth !== null && (sessionUser.nationality === "" || sessionUser.nationality === null) && (
                             <p style={{ fontSize: "26px" }}>{age} years old</p>
                         )}
                         {sessionUser.date_of_birth === null && sessionUser.nationality !== "" && (
@@ -605,15 +605,27 @@ useEffect(() => {
                                 onChange={(e) => setDateOfBirth(formatInputDate(e.target.value))}
                             />
                             </div>
-                        <div className="input-with-label">
-                            <label htmlFor="nationality">Nationality</label>
-                            <input
-                                id="nationality"
-                                value={userNationality}
-                                onClick={handleNationalityInput}
-                                readOnly
-                            />
-                        </div>
+                            {userNationality !== null && userNationality !== "" ? 
+                            <div className="input-with-label" id="input-with-label-nat">
+                                <label htmlFor="nationality">Nationality</label>
+                                <input
+                                    id="nationality"
+                                    value={userNationality}
+                                    onClick={handleNationalityInput}
+                                    readOnly
+                                />
+                            </div>
+                            : 
+                            <div className="input-with-label" id="input-with-label-nat">
+                                <label htmlFor="nationality" id="blankNationality">Nationality</label>
+                                <input
+                                    id="nationality"
+                                    value={userNationality}
+                                    onClick={handleNationalityInput}
+                                    readOnly
+                                />
+                            </div>
+                        }
                         <div className="input-with-label">
                             <label htmlFor="email">Email</label>
                             <input id="email"  value={sessionUser.email} disabled />

@@ -198,13 +198,34 @@
     position: absolute;
     top: 1.2rem;
     left: 1rem;
-    color: gray;
+    color: #636c7d;
     transition: all 0.3s ease;
     font-family: Inter;
     font-size: .75rem;
     letter-spacing: .0125rem;
     line-height: 1rem;
     transform: translateX(0) translateY(-0.5rem);
+}
+
+#blankNationality{
+  top: 50%;
+  transform: translateY(-50%);
+  transition: top .2s cubic-bezier(0,0,.2,1) 0ms, font-size .2s cubic-bezier(0,0,.2,1) 0ms;
+  font-size: 1rem;
+  height: 40px;
+  letter-spacing: 0;
+}
+
+#input-with-label-nat::after {
+  content: '▼';
+  position: absolute;
+  right: 15px;
+  top: 40%;
+  transform: translateY(-50%); 
+  pointer-events: none; 
+  font-size: 10px;
+  color: black;
+  cursor: pointer;
 }
 
 #fullName,
