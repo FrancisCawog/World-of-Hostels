@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -19,8 +19,28 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [passwordConditions, setPasswordConditions] = useState({
+    hasLowercase: false,
+    hasUppercase: false,
+    hasNumber: false,
+    hasSpecialChar: false
+  });
+  const [validPassword, setValidPassword] = useState(true);
 
-  if (sessionUser) return <Redirect to="/" />;
+  useEffect(() => {
+    const updatedConditions = {
+      hasLowercase: /[a-z]/.test(password),
+      hasUppercase: /[A-Z]/.test(password),
+      hasNumber: /\d/.test(password),
+      hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    };
+    setPasswordConditions(updatedConditions);
+
+    const hasEightCharacters = password.length >= 8;
+    const trueConditionsCount = Object.values(updatedConditions).filter(Boolean).length;
+
+    setValidPassword((trueConditionsCount >= 3 && hasEightCharacters) || password.length === 0);
+  }, [password]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -111,6 +131,8 @@ function isValidEmail(email){
   }
 }
 
+if (sessionUser) return <Redirect to="/" />;
+
   return (
     <>
       <div className="sign-container">
@@ -188,6 +210,27 @@ function isValidEmail(email){
                 >
                   {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
                 </button>
+
+                {!validPassword &&
+                  <div className="password-check">
+                    <span style={{ color: password.length >= 8 ? 'green' : 'red' }}>
+                      At least 8 characters
+                    </span>
+                    <span>Contain at least 3 of the following 4 types of characters:</span>
+                    <span style={{ color: passwordConditions.hasLowercase ? 'green' : 'white' }}>
+                      Lower case letters (a-z)
+                    </span>
+                    <span style={{ color: passwordConditions.hasUppercase ? 'green' : 'white' }}>
+                      Upper case letters (A-Z)
+                    </span>
+                    <span style={{ color: passwordConditions.hasNumber ? 'green' : 'white' }}>
+                      Numbers (i.e. 0-9)
+                    </span>
+                    <span style={{ color: passwordConditions.hasSpecialChar ? 'green' : 'white' }}>
+                      Special characters (e.g. !@#$%^&*)
+                    </span>
+                  </div>
+                }
               </div>
 
               <button
@@ -195,8 +238,8 @@ function isValidEmail(email){
                 type="submit"
                 className="signup-button"
                 style={{ 
-                  pointerEvents: (isValidEmail(email) && isValidLength(password) && firstName && lastName && isValidAge(dateOfBirth)) ? 'auto' : 'none',
-                  opacity: (isValidEmail(email) && isValidLength(password) && firstName && lastName && isValidAge(dateOfBirth)) ? 1 : 0.5
+                  pointerEvents: (isValidEmail(email) && isValidLength(password) && firstName && lastName && isValidAge(dateOfBirth) && validPassword) ? 'auto' : 'none',
+                  opacity: (isValidEmail(email) && isValidLength(password) && firstName && lastName && isValidAge(dateOfBirth) && validPassword) ? 1 : 0.5
                 }}
               >
                 Sign Up
