@@ -47,7 +47,7 @@ https://world-of-hostels.onrender.com
 
 ### Future Implementions/ Open Issues
 - Find different calander.
-- Add errors to sign-up password
+- Add error handling for already used Email
 - Add calender to date of birth
 - Add change password feature
 
