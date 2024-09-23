@@ -146,9 +146,23 @@ if (sessionUser) return <Redirect to="/" />;
             <h1>Sign up to add more adventure!</h1>
             <p className="log-in-p" style={{fontSize: "12px"}}> Sign up to agree to the use of your information. To learn more, visit our social terms of service and privacy policy pages. </p>
             <form onSubmit={handleSubmit}>
-              <ul>
-                {errors.map((error) => <li key={error}>{error}</li>)}
-              </ul>
+            <ul>
+              {errors.map((error) => 
+                error === "Email has already been taken" ? (
+                  <div key="email-error" className="email-error">
+                    <img src="https://a.hwstatic.com/image/upload/hw/auth0/warning.svg" alt="Warning" />
+                    <div className="error-message">
+                      <span>You already have an account, try login instead!</span>
+                    </div>
+                    <div className="error-login">
+                      <Link id="bottom" className="link" to="/login" style={{fontFamily: "Inter-bold"}}>Login</Link>
+                    </div>
+                  </div>
+                ) : (
+                  <li key={error}>{error}</li>
+                )
+              )}
+            </ul>
 
               <div className={`input-wrapper-login ${firstName ? 'non-empty' : ''}`}>
                 <input
@@ -248,8 +262,8 @@ if (sessionUser) return <Redirect to="/" />;
 
             <br />
             <p id="bottom">Already have an account?</p>
-            <Link id="bottom" className="link" to="/login">
-              <img src={UserSVG} alt="Back" style={{ width: '14px' }}/> Login
+            <Link id="bottom" className="link" to="/login" style= {{fontFamily: "Inter-bold"}}>
+              <img src={UserSVG} alt="Back" style={{ width: '14px' }}/>Login
             </Link>
           </div>
         </div>

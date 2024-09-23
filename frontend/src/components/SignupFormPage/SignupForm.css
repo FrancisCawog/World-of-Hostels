@@ -146,3 +146,34 @@
     border-right: 15px solid transparent;
     border-bottom: none;
   }
+
+  .email-error {
+    display: flex;
+    align-items: center;
+    border-radius: 16px;
+    background: #FEF8EB;
+    color: black;
+    border: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-family: Inter;
+    font-size: 14px;
+    line-height: 1.42857143;
+  }
+  
+  .email-error img {
+    height: 16px;
+    width: 16px;
+    flex: 10%;
+  }
+  
+  .error-message {
+    flex: 70%;
+    text-align: left;
+  }
+  
+  .error-login {
+    flex: 20%;
+    text-align: right;
+    transform: translateY(-25%);
+  }  
