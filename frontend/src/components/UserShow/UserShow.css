@@ -246,8 +246,16 @@
     box-shadow: none;
 }
 
+.two-button-div{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+  grid-gap: .5rem;
+  width: 33.75%;
+  margin-left: 27.5%;
+}
+
 .edit-user-button {
-    margin-left: 27.5%;
     background: #f25621;
     border: none;
     border-radius: 1rem;
@@ -258,12 +266,39 @@
     line-height: 1.5rem;
     outline: none;
     padding: 0.75rem 1.5rem;
-    width: 16.25%;
-    margin-top: -13px;
 }
 
 .edit-user-button:hover {
   box-shadow: 0 0 10px 3px rgba(242, 86, 33, 0.7); 
+}
+
+.save-new-password-button {
+  box-shadow: rgb(18, 20, 23) 0px 0px 0px 0.125rem inset;
+  color: rgb(18, 20, 23);
+  cursor: pointer;
+  font-family: Inter;
+  font-size: 1rem;
+  font-weight: 800;
+  height: 3rem;
+  justify-content: center;
+  letter-spacing: 0px;
+  line-height: 1.5rem;
+  background: none;
+  border-style: none;
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.save-new-password-button:hover {
+  box-shadow: rgb(18, 20, 23) 0px 0px 0px 0.125rem inset, rgba(18, 20, 23, 0.2) 0px 8px 24px;
+  color: rgb(18, 20, 23);
+}
+
+.key-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .confirmation-box {

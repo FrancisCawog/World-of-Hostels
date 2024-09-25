@@ -17,6 +17,7 @@ import BuildingSVG from "../../assets/pictures/icons/921-200.png"
 import CancelSVG from "../../assets/pictures/icons/728248.webp"
 import RightSVG from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
+import KeySVG from "../../assets/pictures/icons/key.svg"
 import ReservationMapModal from "../ReservationMapModal";
 import { useHistory, useLocation } from 'react-router-dom';
 import ReviewModal from "../ReviewModal";
@@ -783,7 +784,7 @@ useEffect(() => {
 
             </div>
         </div>
-x
+
         {activeTab === 'Home' && (
             <div className="travel-stats">
                 <div >
@@ -795,7 +796,13 @@ x
         )}
 
         {activeTab === 'Edit Details' && (
-            <button className={`edit-user-button ${buttonDisabled ? 'disabled' : ''}`} onClick={!buttonDisabled ? handleSaveChanges : undefined} disabled={buttonDisabled} > Save Changes</button>
+            <div className="two-button-div">
+                <button className="save-new-password-button" onClick={handleSaveChanges}>
+                    <img src={KeySVG} alt="key" className="key-icon" />
+                    Update Password
+                </button>
+                <button className={`edit-user-button ${buttonDisabled ? 'disabled' : ''}`} onClick={!buttonDisabled ? handleSaveChanges : undefined} disabled={buttonDisabled} > Save Changes</button>
+            </div>  
         )}
 
         {activeTab === 'My Trips' && showReservation && (
