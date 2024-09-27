@@ -49,5 +49,6 @@ https://world-of-hostels.onrender.com
 - Find different calander.
 - Add calender to date of birth
 - Add change password feature
+- Error with new users, nationality and age null
 
 - Add edit reservation feature - HostelWorld currently disables feature.
