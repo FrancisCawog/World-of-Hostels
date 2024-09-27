@@ -22,6 +22,7 @@ import ReservationMapModal from "../ReservationMapModal";
 import { useHistory, useLocation } from 'react-router-dom';
 import ReviewModal from "../ReviewModal";
 import NationalityModal from "../NationalityModal";
+import PasswordChangeModal from "../PasswordChangeModal";
 import ReviewForm from "../ReviewForm";
 import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 import BookingDetailsModal from "../BookingDetailsModal"
@@ -59,6 +60,7 @@ function UserShow() {
     const [showReservation, setShowReservation] = useState(false);
     const [ReservationId, setReservationId] = useState();
     const [showMapModal, setShowMapModal] = useState(false);
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
     const [showReviewModal, setShowReviewModal] = useState(false);
     const [showNationality, setShowNationality] = useState(false);
     const [showReviewForm, setShowReviewForm] = useState(false);
@@ -90,6 +92,21 @@ function UserShow() {
       const closeMapModal = () => {
         setShowMapModal(false);
       };
+
+      const closePasswordModal = () => {
+        setShowPasswordModal(false)
+      };
+
+      useEffect(() => {
+        if (showPasswordModal) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+        return () => {
+          document.body.style.overflow = 'auto'; 
+        };
+      }, [showPasswordModal]);
 
       useEffect(() => {
         if (showReviewModal) {
@@ -123,6 +140,10 @@ function UserShow() {
 
      function handleMapClick() {
         setShowMapModal(true);
+     } 
+
+     function handlePasswordChange() {
+        setShowPasswordModal(true);
      } 
 
      const closeModal = () => {
@@ -517,6 +538,7 @@ useEffect(() => {
     return (
         <>
         {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} name= {foundListing.property_name} address={foundListing.address} city={foundListing.city} country={foundListing.country} onClose={closeMapModal} />}
+        {showPasswordModal && <PasswordChangeModal   onClose={closePasswordModal} />}
         {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReservationId= {modalReservationId} modalPropertyName= {modalPropertyName}/>}
         {showReviewForm && <ReviewForm onClose={closeReviewForm} sessionUserId= {sessionUser.id} modalReservationId= {modalReservationId} modalListingId= {modalListingId} modalPropertyName= {modalPropertyName}/>}
         {showDetails && <BookingDetailsModal onClose={closeModal} bookingReference= {ReservationId} startDate= {foundReservation.start_date} endDate= {foundReservation.end_date} reservationDate= {foundReservation.created_at} listing={foundListing}/>}
@@ -797,7 +819,7 @@ useEffect(() => {
 
         {activeTab === 'Edit Details' && (
             <div className="two-button-div">
-                <button className="save-new-password-button" onClick={handleSaveChanges}>
+                <button className="save-new-password-button" onClick={handlePasswordChange}>
                     <img src={KeySVG} alt="key" className="key-icon" />
                     Update Password
                 </button>

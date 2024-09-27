@@ -77,6 +77,37 @@ export const updateUser = (user) => async (dispatch) => {
   return response;
 };
 
+// const getCsrfToken = () => {
+//   const tokenElement = document.querySelector('meta[name="csrf-token"]');
+//   const token = tokenElement ? tokenElement.getAttribute('content') : null;
+//   console.log("CSRF Token:", token); // Debugging line
+//   return token;
+// };
+
+export const passwordChange = (userId, oldPassword, newPassword) => async () => {
+  // console.log("User ID for password change:", userId);
+  
+  const response = await fetch(`/api/users/${userId}/update_password`, {
+      method: 'PATCH',
+      headers: {
+          'Content-Type': 'application/json',
+          // 'X-CSRF-Token': getCsrfToken()
+      },
+      body: JSON.stringify({
+          user: {
+              old_password: oldPassword,
+              new_password: newPassword
+          }
+      })
+  });
+
+  if (!response.ok) {
+      const error = await response.json();
+      console.error('Password update error:', error);
+      throw new Error('Password update failed: ' + error.message);
+  }
+};
+
 
 export const logout = () => async (dispatch) => {
   const response = await csrfFetch("/api/session", {
