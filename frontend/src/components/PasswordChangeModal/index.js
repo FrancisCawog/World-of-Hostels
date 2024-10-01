@@ -96,7 +96,7 @@ const PasswordChangeModal = ({ onClose }) => {
                             />
                             <label className="input-label5">New Password</label>
 
-                            {isPFocused && newPassword !== "" && !validPassword ? 
+                            {isPFocused || newPassword === "" || validPassword ? 
                                 <span className='password-change-condition'>
                                     <img src={errorSvg}/>
                                     Must be 8 or more characters, with at least 1 lowercase letter and one number.
