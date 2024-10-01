@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react';
 import errorSvg from "../../assets/pictures/icons/error.svg";
+import redError from "../../assets/pictures/icons/exclamation-mark-inside-a-circle-svgrepo-com.webp"
 import "./PasswordChangeModal.css"
 import { passwordChange } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +13,9 @@ const PasswordChangeModal = ({ onClose }) => {
     const [newPassword, setNewPassword] = useState("");
     const [verifyPassword, setVerifyPassword] = useState("");
     const [validPassword, setValidPassword] = useState(false);
+    const [isPFocused, setIsPFocused] = useState(false);
+    const [isVFocused, setIsVFocused] = useState(false);
+    // console.log(validPassword)
 
     useEffect(() => {
         const updatedConditions = {
@@ -77,30 +81,55 @@ const PasswordChangeModal = ({ onClose }) => {
                             <label className="input-label5">Existing Password</label>
                         </div>
 
-                        <div className={`input-wrapper-login ${newPassword ? 'non-empty' : ''}`}>
+                        <div 
+                            className={`input-wrapper-login ${newPassword ? 'non-empty' : ''} ${newPassword !== "" && !validPassword ? 'notValid' : ''}`} 
+                            id="newPassword"
+                        >
                             <input
                             type= "password"
                             name="password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
+                            onFocus={() => setIsPFocused(true)}
+                            onBlur={() => setIsPFocused(false)}
                             required
                             />
                             <label className="input-label5">New Password</label>
+
+                            {isPFocused && newPassword !== "" && !validPassword ? 
+                                <span className='password-change-condition'>
+                                    <img src={errorSvg}/>
+                                    Must be 8 or more characters, with at least 1 lowercase letter and one number.
+                                </span>
+                            : 
                             <span className='password-change-condition'>
-                                <img src={errorSvg}/>
+                                <img src={redError}/>
                                 Must be 8 or more characters, with at least 1 lowercase letter and one number.
                             </span>
+                            }
                         </div>
 
-                        <div className={`input-wrapper-login ${verifyPassword ? 'non-empty' : ''}`}>
+                        <div 
+                            className={`input-wrapper-login ${verifyPassword ? 'non-empty' : ''} ${verifyPassword !== "" && verifyPassword !== newPassword ? 'notValid' : ''}`} 
+                            id="verifyPassword"
+                            >
                             <input
                             type="password"
                             name="verifyPassword"
                             value={verifyPassword}
                             onChange={(e) => setVerifyPassword(e.target.value)}
+                            onFocus={() => setIsVFocused(true)}
+                            onBlur={() => setIsVFocused(false)}
                             required
                             />
                             <label className="input-label5">Verify Password</label>
+
+                            {!isVFocused && verifyPassword !== "" && verifyPassword !== newPassword &&
+                                <span className='password-change-condition'>
+                                    <img src={redError}/>
+                                    Passwords do not match
+                                </span>
+                            }
                         </div>
                     </div>
 

@@ -73,7 +73,7 @@ function LoginFormPage() {
   const handleDemoLogin = async () => {
     const demoUser = {
       email: "demo_user@gmail.com",
-      password: "Password123!",
+      password: "Password123!", /////////
     };
 
     try {
