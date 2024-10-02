@@ -48,7 +48,7 @@ https://world-of-hostels.onrender.com
 ### Future Implementions/ Open Issues
 - Find different calander.
 - Add calender to date of birth
-- Add errors to wrong password entered, passwords dont match, password is not valid, password field selected, and alert for password change successful
+- Add errors to wrong password entered and alert for password change successful
 - Error with new users, nationality and age null
 
 - Add edit reservation feature - HostelWorld currently disables feature.
