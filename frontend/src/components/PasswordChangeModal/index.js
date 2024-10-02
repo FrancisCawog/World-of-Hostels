@@ -5,7 +5,7 @@ import "./PasswordChangeModal.css"
 import { passwordChange } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 
-const PasswordChangeModal = ({ onClose }) => {
+const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id);
 
@@ -15,7 +15,6 @@ const PasswordChangeModal = ({ onClose }) => {
     const [validPassword, setValidPassword] = useState(false);
     const [isPFocused, setIsPFocused] = useState(false);
     const [isVFocused, setIsVFocused] = useState(false);
-    // console.log(validPassword)
 
     useEffect(() => {
         const updatedConditions = {
@@ -46,11 +45,11 @@ const PasswordChangeModal = ({ onClose }) => {
             if (userId) {
                 dispatch(passwordChange(userId, oldPassword, newPassword))
                     .then(() => {
-                        alert("Password updated successfully");  ////////////
                         onClose();
+                        setShowPasswordChange(true);
                     })
                     .catch(err => {
-                        alert("Password update failed. " + err.message);  ////////
+                        alert("Password update failed. " + err.message);
                     });
             } else {
                 alert("User ID is not available. Please log in again.");  

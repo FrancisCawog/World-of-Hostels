@@ -500,50 +500,60 @@ function UserShow() {
         return matchingCountry ? matchingCountry.cca3 : commonName;
     };
 
-function formatInputDate(inputDate) {
-    const cleanedInput = inputDate.replace(/\D/g, '');
-    if (cleanedInput.length === 8) {
-        const year = cleanedInput.slice(0,4);
-        const month = cleanedInput.slice(4, 6);
-        const day = cleanedInput.slice(-2);
-        return `${year}-${month}-${day}`;
+    function formatInputDate(inputDate) {
+        const cleanedInput = inputDate.replace(/\D/g, '');
+        if (cleanedInput.length === 8) {
+            const year = cleanedInput.slice(0,4);
+            const month = cleanedInput.slice(4, 6);
+            const day = cleanedInput.slice(-2);
+            return `${year}-${month}-${day}`;
+        }
+        return inputDate;
     }
-    return inputDate;
-}
 
-sessionStorage.setItem('redirectUrl', window.location.pathname);
-const guests = cart.guests || localStorage.getItem('guests') || "1";
-const locations = cart.location || localStorage.getItem('location') || "";
+    sessionStorage.setItem('redirectUrl', window.location.pathname);
+    const guests = cart.guests || localStorage.getItem('guests') || "1";
+    const locations = cart.location || localStorage.getItem('location') || "";
 
-useEffect(() => {
-  localStorage.setItem('location', locations);
-  localStorage.setItem('guests', guests);
+    useEffect(() => {
+    localStorage.setItem('location', locations);
+    localStorage.setItem('guests', guests);
 
-  dispatch(setLocation(locations));
-  dispatch(updateGuests(guests));
-}, [locations, guests]);
+    dispatch(setLocation(locations));
+    dispatch(updateGuests(guests));
+    }, [locations, guests]);
 
-useEffect(() => {
-  if (cart.checkIn){
-  dispatch(fetchListings(cart.checkIn, cart.checkOut)).catch((error) => {
-  console.error("Error fetching listing:", error);
-  });
-} else {
-  dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
-    console.error("Error fetching listing:", error)
-  });
-}
-}, [dispatch]);
+    useEffect(() => {
+    if (cart.checkIn){
+    dispatch(fetchListings(cart.checkIn, cart.checkOut)).catch((error) => {
+    console.error("Error fetching listing:", error);
+    });
+    } else {
+    dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
+        console.error("Error fetching listing:", error)
+    });
+    }
+    }, [dispatch]);
+
+    const [showPasswordChange, setShowPasswordChange] = useState(false);
+
+    useEffect(() => {
+        if (showPasswordChange) {
+        const timer = setTimeout(() => {
+            setShowPasswordChange(false);
+        }, 3000);
+        return () => clearTimeout(timer);
+        }
+    }, [showPasswordChange]);
 
     return (
         <>
         {showMapModal && <ReservationMapModal  latitude= {foundListing.latitude} longitude= {foundListing.longitude} name= {foundListing.property_name} address={foundListing.address} city={foundListing.city} country={foundListing.country} onClose={closeMapModal} />}
-        {showPasswordModal && <PasswordChangeModal   onClose={closePasswordModal} />}
+        {showPasswordModal && <PasswordChangeModal   onClose={closePasswordModal} setShowPasswordChange={setShowPasswordChange} />}
         {showReviewModal && <ReviewModal onClose={closeReviewModal} modalReservationId= {modalReservationId} modalPropertyName= {modalPropertyName}/>}
         {showReviewForm && <ReviewForm onClose={closeReviewForm} sessionUserId= {sessionUser.id} modalReservationId= {modalReservationId} modalListingId= {modalListingId} modalPropertyName= {modalPropertyName}/>}
         {showDetails && <BookingDetailsModal onClose={closeModal} bookingReference= {ReservationId} startDate= {foundReservation.start_date} endDate= {foundReservation.end_date} reservationDate= {foundReservation.created_at} listing={foundListing}/>}
         {showNationality && <NationalityModal onClose={closeNationality} onInputChange={handleModalInputChange}/>}
-
 
         {showConfirmation && (
             <div className="confirmation-box">Changes saved successfully</div>
@@ -551,6 +561,10 @@ useEffect(() => {
 
         {showDeleteConfirmation && (
             <div className="confirmation-box">Reservation cancelled</div>
+        )}
+
+        {showPasswordChange && (
+            <div className="confirmation-box"> Password updated successfully</div>
         )}
 
         <div style={{ borderBottom: "1px solid #dddfe4", boxShadow: "0 4px 32px rgba(0,0,0,.1)"}}>
