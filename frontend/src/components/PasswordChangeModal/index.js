@@ -10,11 +10,14 @@ const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
     const userId = useSelector(state => state.session.user.id);
 
     const [oldPassword, setOldPassword] = useState("");
+    const [samePasswords, setSamePassword] = useState(true);
     const [newPassword, setNewPassword] = useState("");
     const [verifyPassword, setVerifyPassword] = useState("");
     const [validPassword, setValidPassword] = useState(false);
+    const [isEFocused, setIsEFocused] = useState(false);
     const [isPFocused, setIsPFocused] = useState(false);
     const [isVFocused, setIsVFocused] = useState(false);
+    let unmatchedPassword;
 
     useEffect(() => {
         const updatedConditions = {
@@ -49,15 +52,24 @@ const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
                         setShowPasswordChange(true);
                     })
                     .catch(err => {
-                        alert("Password update failed. " + err.message);
+                        unmatchedPassword = oldPassword;
+                        setSamePassword(false);
                     });
             } else {
-                alert("User ID is not available. Please log in again.");  
+                alert("User ID is not available. Please refresh page. If issue persists, log in again.");  
             }
         } else {
-            alert("New passwords do not match or invalid."); ///////////
+            alert("New passwords do not match or invalid.");
         }
     };
+
+    useEffect(() => {
+        if (!samePasswords) {
+            if (oldPassword !== unmatchedPassword){
+                setSamePassword(true);
+            }
+        }
+    },[oldPassword])
 
     return (
         <div className="modal-overlay" onClick={onClose}>
@@ -69,15 +81,26 @@ const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
                     <div className="horizontal-line"/>
 
                     <div className='three-passwords'>
-                        <div className={`input-wrapper-login ${oldPassword ? 'non-empty' : ''}`}>
+                        <div className={`input-wrapper-login ${oldPassword ? 'non-empty' : ''} ${!samePasswords ? 'notValid' : ''}`} 
+                        id="oldPassword"
+                        >
                             <input
                             type="password"
                             name="verifyPassword"
                             value={oldPassword}
                             onChange={(e) => setOldPassword(e.target.value)}
+                            onFocus={() => setIsEFocused(true)}
+                            onBlur={() => setIsEFocused(false)}
                             required
                             />
                             <label className="input-label5">Existing Password</label>
+
+                            {!isEFocused && !samePasswords &&
+                                <span className='password-change-condition'>
+                                    <img src={redError}/>
+                                    This password does not match your current password
+                                </span>
+                            }
                         </div>
 
                         <div 
