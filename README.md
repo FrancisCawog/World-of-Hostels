@@ -48,7 +48,6 @@ https://world-of-hostels.onrender.com
 ### Future Implementions/ Open Issues
 - Find different calander.
 - Add calender to date of birth
-- Add errors to wrong password entered
 - Sign out user after a certain amount of time
 - Demo user can't login if password changed
 - Error with new users, nationality and age null
