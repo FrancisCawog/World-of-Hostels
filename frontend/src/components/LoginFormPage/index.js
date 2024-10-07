@@ -15,6 +15,7 @@ function LoginFormPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
+  const demoPassword = useSelector((state) => state.demoUser.password);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -73,7 +74,7 @@ function LoginFormPage() {
   const handleDemoLogin = async () => {
     const demoUser = {
       email: "demo_user@gmail.com",
-      password: "Password123!", /////////
+      password: demoPassword,
     };
 
     try {
@@ -146,7 +147,9 @@ function LoginFormPage() {
                   onChange={handleChange}
                   required
                 />
-                <label className="input-label5">Email</label>
+                <label className="input-label5">
+                  Email <span className="demo-email">(demo_user@gmail.com)</span>
+                </label>
               </div>
               <div className={`input-wrapper-login ${password !== "" ? 'non-empty' : ''}`}>
                 <input

@@ -1,4 +1,5 @@
 import { useState,useEffect } from 'react';
+import { updatePassword } from "../../store/demoUserSlice";
 import errorSvg from "../../assets/pictures/icons/error.svg";
 import redError from "../../assets/pictures/icons/exclamation-mark-inside-a-circle-svgrepo-com.webp"
 import "./PasswordChangeModal.css"
@@ -7,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
     const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.session.user);
     const userId = useSelector(state => state.session.user.id);
 
     const [oldPassword, setOldPassword] = useState("");
@@ -50,6 +52,10 @@ const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
                     .then(() => {
                         onClose();
                         setShowPasswordChange(true);
+
+                        if (currentUser.email === "demo_user@gmail.com") {
+                            dispatch(updatePassword(newPassword));
+                        }
                     })
                     .catch(err => {
                         unmatchedPassword = oldPassword;
