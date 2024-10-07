@@ -170,8 +170,8 @@ function LoginFormPage() {
                 id="loginButton"
                 type="submit"
                 style={{
-                  pointerEvents: (hasError || email === '' || password === '') ? 'none' : 'auto',
-                  opacity: (hasError || email === '' || password === '') ? 0.5 : 1
+                  pointerEvents: (hasError || email === '' || password.length <= 7 ) ? 'none' : 'auto',
+                  opacity: (hasError || email === '' ||  password.length <= 7) ? 0.5 : 1
                 }}
               >
                 Login
