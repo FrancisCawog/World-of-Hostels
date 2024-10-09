@@ -26,6 +26,13 @@ class User < ApplicationRecord
     has_many :reservations, dependent: :destroy
     has_many :reviews, dependent: :destroy
 
+    def age
+      today = Date.today
+      age = today.year - date_of_birth.year
+      age -= 1 if today < date_of_birth + age.years
+      return age
+    end
+
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)
         if user&.authenticate(password)

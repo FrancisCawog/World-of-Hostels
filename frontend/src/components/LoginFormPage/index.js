@@ -138,7 +138,9 @@ function LoginFormPage() {
                   );
                 })}
               </ul>
-              <div className={`input-wrapper-login ${email !== "" ? 'non-empty' : ''}`}>
+              <div className={`input-wrapper-login ${email !== "" ? 'non-empty' : ''}`}
+              id="input-wrapper-login-email"
+              >
                 <input
                   type="text"
                   name="email"

@@ -194,9 +194,6 @@ img {
 
 .input-wrapper-login {
   position: relative;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .toggle-password {
@@ -211,4 +208,10 @@ img {
 
 .demo-email {
   color: #0079faa9; 
+}
+
+#input-wrapper-login-email{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
