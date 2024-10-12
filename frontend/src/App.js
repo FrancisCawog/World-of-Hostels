@@ -33,7 +33,7 @@ function App() {
         <Route path="/users/:userId" exact>
           <UserShow />
         </Route>
-        <Route path="/confirmation" exact>
+        <Route path="/confirmationPage" exact>
           <ConfirmationPage />
         </Route>
         <Route>

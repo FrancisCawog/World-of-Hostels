@@ -24,7 +24,5 @@ class Room < ApplicationRecord
     def available_beds(start_date, end_date)
       taken_beds = self.reservations.where('(start_date >= ? AND start_date <= ?) OR (end_date > ? AND end_date <= ?) OR (start_date <= ? AND end_date >= ?)', start_date, end_date, start_date, end_date, start_date, end_date).sum(:num_guests)
       return num_beds - taken_beds
-    end
-    
-  end
-  
+    end    
+end
