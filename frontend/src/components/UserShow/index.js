@@ -1,4 +1,5 @@
 import Navigation from "../Navigation";
+import { UserHome, HomeStats } from '../UserShow/UserHome';
 import "./UserShow.css"
 import Footer from "../Footer";
 import userIcon from "../../assets/pictures/icons/user-128.svg"
@@ -28,7 +29,6 @@ import transpartstar from "../../assets/pictures/icons/2336461-200.png"
 import BookingDetailsModal from "../BookingDetailsModal"
 import SearchBar2 from "../SearchBar2";
 import { updateGuests, setLocation } from "../../store/cart";
-const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
 function UserShow() {
     const location = useLocation();
@@ -41,9 +41,6 @@ function UserShow() {
     const reservations = useSelector(state => state.reservations);
     const listings = useSelector(state => state.listings);
     const [activeTab, setActiveTab] = useState(tabName);
-    const [countryCount, setcountryCount] = useState(0);
-    const [propertyCount, setpropertyCount] = useState(0);
-    const [age, setAge] = useState(0);
     let formattedDate = null;
     if (sessionUser.date_of_birth) {
         const [year, month, day] = sessionUser.date_of_birth.split('-');
@@ -51,7 +48,7 @@ function UserShow() {
     }
     const [fullName, setFullName] = useState(
         sessionUser.first_name + " " + sessionUser.last_name
-      );
+    );
     const [dateOfBirth, setDateOfBirth] = useState(flip(formattedDate))
     const [userNationality, setUserNationality] = useState(sessionUser.nationality);
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -164,23 +161,6 @@ function UserShow() {
          setShowReviewForm(true);
      }
 
-
-    let propertyWord;
-
-    if (propertyCount === 1) {
-        propertyWord = "property";
-    } else {
-        propertyWord = "properties";
-    }
-
-    let countryWord;
-
-    if (countryCount === 1) {
-        countryWord = "country";
-    } else {
-        countryWord = "countries";
-    }
-
     const handleTabClick = (tabName) => {
         setActiveTab(tabName); 
     };
@@ -188,55 +168,6 @@ function UserShow() {
     useEffect(() => {
         setActiveTab(tabName);
       }, [tabName]);
-    
-    useEffect(() => {
-        const uniqueListingIds = Object.values(reservations).reduce((acc, reservation) => {
-            if (reservation && reservation.listing_id && reservation.user_id === sessionUser.id) {
-                acc.add(reservation.listing_id);
-            }
-            return acc;
-        }, new Set());
-
-        const numberOfProperties = uniqueListingIds.size;
-        setpropertyCount(numberOfProperties);
-    }, [reservations]);
-
-    useEffect(() => {
-        const uniqueListingIds = Object.values(reservations).reduce((acc, reservation) => {
-            if (reservation && reservation.listing_id && reservation.user_id === sessionUser.id) {
-                acc.add(reservation.listing_id);
-            }
-            return acc;
-        }, new Set());
-
-        const uniqueCountries = new Set();
-
-        Object.values(listings).forEach(listing => {
-            if (uniqueListingIds.has(listing.id) && listing.country) {
-                uniqueCountries.add(listing.country);
-            }
-        });
-
-        const numberOfCountries = uniqueCountries.size;
-
-        setcountryCount(numberOfCountries);
-    }, [reservations, listings, sessionUser]);
-
-    useEffect(() => {
-        if (sessionUser.date_of_birth !== null) {
-        const dob = new Date(sessionUser.date_of_birth);
-        const now = new Date();
-    
-        let ages = now.getFullYear() - dob.getFullYear();
-        const monthDiff = now.getMonth() - dob.getMonth();
-    
-        if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < dob.getDate())) {
-            ages--;
-        }
-    
-        setAge(ages);
-        }
-    }, [sessionUser.date_of_birth]);
 
     const conditionalColor = {
         backgroundColor: activeTab === 'Home' ? "#f6a90e" : "white"
@@ -495,11 +426,6 @@ function UserShow() {
         setShowNationality(false);
       };
 
-      const findCountryCCA3 = (commonName) => {
-        const matchingCountry = restCountriesData.find(country => country.name.common === commonName);
-        return matchingCountry ? matchingCountry.cca3 : commonName;
-    };
-
     function formatInputDate(inputDate) {
         const cleanedInput = inputDate.replace(/\D/g, '');
         if (cleanedInput.length === 8) {
@@ -604,23 +530,7 @@ function UserShow() {
             </div>
 
             {activeTab === 'Home' && (
-                <div className="user-about">
-                    <div className="picture-circle">
-                        <img src={sessionUser?.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "5rem", height: "5rem"}}/>
-                    </div>
-                    <div className="name-and-age">
-                        <p>{sessionUser.first_name}</p>
-                        {sessionUser.date_of_birth !== null && sessionUser.nationality !== "" && sessionUser.nationality !== null && (
-                            <p style={{ fontSize: "26px" }}>{age} years old, {findCountryCCA3(sessionUser.nationality)}</p>
-                        )}
-                        {sessionUser.date_of_birth !== null && (sessionUser.nationality === "" || sessionUser.nationality === null) && (
-                            <p style={{ fontSize: "26px" }}>{age} years old</p>
-                        )}
-                        {sessionUser.date_of_birth === null && sessionUser.nationality !== "" && (
-                            <p style={{ fontSize: "26px" }}>{findCountryCCA3(sessionUser.nationality)}</p>
-                        )}
-                    </div>
-                </div>
+                <UserHome sessionUser= {sessionUser}/>
             )}
 
             {activeTab === 'Edit Details' && (
@@ -822,13 +732,7 @@ function UserShow() {
         </div>
 
         {activeTab === 'Home' && (
-            <div className="travel-stats">
-                <div >
-                    <p>My Travel Stats</p>
-                    <p>I've explored <strong>{countryCount} {countryWord}</strong></p>
-                    <p>and stayed in <strong>{propertyCount} {propertyWord}</strong></p>
-                </div>
-            </div>
+          <HomeStats reservations= {reservations} sessionUser= {sessionUser} listings= {listings}/>
         )}
 
         {activeTab === 'Edit Details' && (
