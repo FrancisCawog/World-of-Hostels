@@ -12,17 +12,17 @@ export function UserHome({ sessionUser }) {
 
     useEffect(() => {
         if (sessionUser.date_of_birth !== null) {
-        const dob = new Date(sessionUser.date_of_birth);
-        const now = new Date();
+            const dob = new Date(sessionUser.date_of_birth);
+            const now = new Date();
     
-        let ages = now.getFullYear() - dob.getFullYear();
-        const monthDiff = now.getMonth() - dob.getMonth();
+            let ages = now.getFullYear() - dob.getFullYear();
+            const monthDiff = now.getMonth() - dob.getMonth();
     
-        if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < dob.getDate())) {
-            ages--;
-        }
+            if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < dob.getDate())) {
+                ages--;
+            }
     
-        setAge(ages);
+            setAge(ages);
         }
     }, [sessionUser.date_of_birth]);
 
@@ -35,13 +35,13 @@ export function UserHome({ sessionUser }) {
                 <p>{sessionUser.first_name}</p>
                 {sessionUser.date_of_birth !== null && sessionUser.nationality !== "" && sessionUser.nationality !== null && (
                     <p style={{ fontSize: "26px" }}>{age} years old, {findCountryCCA3(sessionUser.nationality)}</p>
-                    )}
+                )}
                 {sessionUser.date_of_birth !== null && (sessionUser.nationality === "" || sessionUser.nationality === null) && (
                     <p style={{ fontSize: "26px" }}>{age} years old</p>
-                    )}
+                )}
                 {sessionUser.date_of_birth === null && sessionUser.nationality !== "" && (
                     <p style={{ fontSize: "26px" }}>{findCountryCCA3(sessionUser.nationality)}</p>
-                    )}
+                )}
             </div>
         </div>
     )
