@@ -2,8 +2,11 @@ import { React, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteReservation } from "../../../store/reservations";
+import SearchBar2 from "../../SearchBar2";
 import ReservationMapModal from "../../ReservationMapModal";
 import BookingDetailsModal from "../../BookingDetailsModal";
+import StarSVG from "../../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
+import ArrowRight from "../../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
 import mapIcon from "../../../assets/pictures/icons/clipart2731071.png";
 import LocationSVG from "../../../assets/pictures/icons/location-pin-svgrepo-com.svg";
 import MyArrowSVG from "../../../assets/pictures/icons/arrow-left.svg";
@@ -13,11 +16,147 @@ import BuildingSVG from "../../../assets/pictures/icons/921-200.png";
 import CancelSVG from "../../../assets/pictures/icons/728248.webp";
 import transpartstar from "../../../assets/pictures/icons/2336461-200.png";
 
-export function UserTrips() {
-    // return (
+export function UserTrips({
+    futureReservations,
+    formatDate,
+    listings,
+    pastReservations,
+    listingReview,
+    reviews,
+    handleReviewClick,
+    handleReviewForm,
+    handleReservation
+}) {
+    const groupReservationsByTime = (reservations) => {
+        return reservations.reduce((groups, reservation) => {
+            const existingGroup = groups.find(group => 
+                Math.abs(new Date(reservation.created_at) - new Date(group[group.length - 1].created_at)) <= 1500
+            );
+            existingGroup ? existingGroup.push(reservation) : groups.push([reservation]);
+            return groups;
+        }, []).map(group => group[0]);
+    };
 
-    // )
+    const extractRating = (reservationId) => {
+        const listingReviews = Object.values(reviews).filter(review => review.reservation_id === reservationId);
+        const review = listingReviews[0];
+        return review?.total_score;
+    };
+
+    return (
+        <>
+            <div className="my-trips">
+                <p>My Trips</p>
+                <p>Coming Soon</p>
+
+                {futureReservations.length === 0 ? (
+                    <div style={{width: "125%"}}>
+                        <div className="bus-div">
+                            <img src="https://www.hostelworld.com/pwa/_nuxt/img/05d49c7.svg" />
+                            <div className="other-ready">
+                                <p id="other">Others are busy booking.</p>
+                                <p id="ready">Ready to start looking?</p>
+                            </div>
+                        </div>
+                        <div style={{width: "45rem"}}>
+                            <SearchBar2 />
+                        </div>
+                    </div>
+                ) : (
+                    <>
+                        {groupReservationsByTime(futureReservations).map((reservation) => {
+                            const startDate = formatDate(reservation.start_date);
+                            const endDate = formatDate(reservation.end_date);
+                            const correspondingListing = Object.values(listings).find(
+                                (listing) => listing.id === reservation.listing_id
+                            );
+
+                            return (
+                                <div key={reservation.id} className="future-booking" onClick={() => handleReservation(reservation.id)}>
+                                    <div className="future-picture">
+                                        <img src={correspondingListing?.photoUrls[0]} />
+                                    </div>
+                                    <p>{correspondingListing?.property_name}</p>
+                                    <div className="icon-and-text">
+                                        <img src={LocationSVG} alt="Location Icon" className="icon" />
+                                        <p>{correspondingListing?.city}</p>
+                                    </div>
+                                    <div className="icon-and-text">
+                                        <img src={CalendarSVG} alt="Calendar Icon" className="icon" />
+                                        <p>{startDate} - {endDate}</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </>
+                )}
+
+                {pastReservations.length > 0 && (
+                    <>
+                        <br />
+                        <p>Past Trips</p>
+                        {groupReservationsByTime(pastReservations).map((reservation) => {
+                            const startDate = formatDate(reservation.start_date);
+                            const endDate = formatDate(reservation.end_date);
+                            const correspondingListing = Object.values(listings).find(
+                                (listing) => listing.id === reservation.listing_id
+                            );
+
+                            return (
+                                <div key={reservation.id} className="past-booking" onClick={() => handleReservation(reservation.id)}>
+                                    <div className="outer-past-div">
+                                        <div className="past-picture">
+                                            <img src={correspondingListing?.photoUrls[0]} />
+                                        </div>
+                                        <div className="past-trip-info">
+                                            <p>{correspondingListing?.property_name}</p>
+                                            <div className="past-icon-and-text">
+                                                <img src={LocationSVG} alt="Location Icon" className="past-icon" />
+                                                <p>{correspondingListing?.city}</p>
+                                            </div>
+                                            <div className="past-icon-and-text">
+                                                <img src={CalendarSVG} alt="Calendar Icon" className="past-icon" />
+                                                <p>{startDate} - {endDate}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="past-review-div">
+                                        <div className="past-num-div">
+                                            {listingReview(reservation.id) && (
+                                                <>
+                                                    <img src={StarSVG} />
+                                                    <p style={{fontSize: "16px"}}>{extractRating(reservation.id)}</p>
+                                                </>
+                                            )}
+                                        </div>
+                                        <div className="leave-review">
+                                            {listingReview(reservation.id) ? (
+                                                <>
+                                                    <p style={{fontSize: "14px"}} onClick={() => handleReviewClick(reservation.id, correspondingListing.property_name)}>
+                                                        See review
+                                                    </p>
+                                                    <img src={ArrowRight} />
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p style={{fontSize: "14px"}} onClick={() => handleReviewForm(reservation.id, correspondingListing.property_name, correspondingListing.id)}>
+                                                        Leave a review
+                                                    </p>
+                                                    <img src={ArrowRight} />
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </>
+                )}
+            </div>
+        </>
+    );
 }
+
 
 export function PastTrips({
     handleTabClick, 

@@ -3,8 +3,6 @@ import { UserHome, HomeStats } from '../UserShow/UserHome';
 import { UserEdit, EditButtons } from "./UserEdit";
 import { UserTrips, PastTrips, PastTripButtons } from "./UserTrips";
 import mapIcon from "../../assets/pictures/icons/clipart2731071.png"
-import LocationSVG from "../../assets/pictures/icons/location-pin-svgrepo-com.svg"
-import CalendarSVG from "../../assets/pictures/icons/calendar-alt-svgrepo-com.svg"
 import "./UserShow.css"
 import Footer from "../Footer";
 import userIcon from "../../assets/pictures/icons/user-128.svg"
@@ -12,12 +10,9 @@ import houseIcon from "../../assets/pictures/icons/house-svgrepo-com.svg"
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchListings } from "../../store/listings";
-import ArrowRight from "../../assets/pictures/icons/right-arrow-svgrepo-com.svg"
-import StarSVG from "../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ReviewModal from "../ReviewModal";
 import ReviewForm from "../ReviewForm";
-import SearchBar2 from "../SearchBar2";
 import { updateGuests, setLocation } from "../../store/cart";
 
 function UserShow() {
@@ -88,6 +83,11 @@ function UserShow() {
         setShowReviewForm(false);
       };
 
+      const handleReservation = (id) => {
+        setShowReservation(true);
+        setReservationId(id);
+      };
+
      function handleReviewClick(reservationId, property_name) {
         handleReservation(reservationId)
         setModalReservationId(reservationId)
@@ -138,23 +138,6 @@ function UserShow() {
         const startDate = new Date(reservation?.start_date);
         return startDate > currentDate;
       });
-
-      const groupReservationsByTime = (reservations) => reservations.reduce((groups, reservation) => {
-        const existingGroup = groups.find(group => Math.abs(new Date(reservation.created_at) - new Date(group[group.length - 1].created_at)) <= 1500);
-        existingGroup ? existingGroup.push(reservation) : groups.push([reservation]);
-        return groups;
-      }, []).map(group => group[0]);
-
-      const handleReservation = (id) => {
-        setShowReservation(true);
-        setReservationId(id);
-      };
-
-    const extractRating = (reservationId) => {
-        const listingReviews = Object.values(reviews).filter(review => review.reservation_id === reservationId);
-        const review = listingReviews[0]
-        return review?.total_score
-      }
 
     const listingReview = (reservationId) => {
         const review = Object.values(reviews).filter(review => review?.reservation_id === reservationId);
@@ -239,116 +222,7 @@ function UserShow() {
             )}
 
             {activeTab === "My Trips" && !showReservation && (
-                <>
-                    <div className="my-trips">
-                        <p>My Trips</p>
-                        <p>Coming Soon</p>
-
-                        {futureReservations.length === 0 ? (
-                            <>
-                            <div style={{width: "125%"}}>
-
-                                <div className="bus-div">
-                                    <img src="https://www.hostelworld.com/pwa/_nuxt/img/05d49c7.svg"/>
-                                    <div className="other-ready">
-                                    <p id="other">Others are busy booking.</p>
-                                    <p id="ready">Ready to start looking?</p>
-                                    </div>
-                                </div>
-                            <div style={{width: "45rem"}}>
-                                <SearchBar2/>
-                            </div>
-                            </div>
-                            
-                            </>
-                            ) : (
-                            <>
-                                {groupReservationsByTime(futureReservations).map((reservation) => {
-                                const startDate = formatDate(reservation.start_date);
-                                const endDate = formatDate(reservation.end_date);
-                                const correspondingListing = Object.values(listings).find(
-                                    (listing) => listing.id === reservation.listing_id
-                                );
-
-                                return (
-                                    <div key={reservation.id} className="future-booking" onClick={() => handleReservation(reservation.id)}>
-                                        <div className="future-picture">
-                                            <img src={correspondingListing?.photoUrls[0]}/>
-                                        </div >
-                                        <p>{correspondingListing?.property_name}</p>
-                                        <div className="icon-and-text">
-                                            <img src={LocationSVG} alt="Location Icon" className="icon" />
-                                            <p>{correspondingListing?.city}</p>
-                                            </div>
-                                        <div className="icon-and-text">
-                                            <img src={CalendarSVG} alt="Calendar Icon" className="icon" />
-                                            <p>{startDate} - {endDate}</p>
-                                        </div>
-                                    </div>
-                                );
-                                })}
-                            </>
-                        )}
-                        
-                        {pastReservations.length > 0 ? (
-                        <>
-                        <br/>
-                        <p>Past Trips</p>
-                        {groupReservationsByTime(pastReservations).map((reservation) => {
-                            const startDate = formatDate(reservation.start_date);
-                            const endDate = formatDate(reservation.end_date);
-                            const correspondingListing = Object.values(listings).find(
-                                (listing) => listing.id === reservation.listing_id
-                            );
-
-                            return (
-                                <div key={reservation.id} className="past-booking" onClick={() => handleReservation(reservation.id)}>
-                                    <div className="outer-past-div">
-                                        <div className="past-picture">
-                                            <img src={correspondingListing?.photoUrls[0]} />
-                                        </div>
-                                        <div className="past-trip-info">
-                                            <p>{correspondingListing?.property_name}</p>
-                                            <div className="past-icon-and-text">
-                                                <img src={LocationSVG} alt="Location Icon" className="past-icon" />
-                                                <p>{correspondingListing?.city}</p>
-                                            </div>
-                                            <div className="past-icon-and-text">
-                                                <img src={CalendarSVG} alt="Calendar Icon" className="past-icon" />
-                                                <p>{startDate} - {endDate}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="past-review-div">
-                                        <div className="past-num-div">
-                                            {listingReview(reservation.id) &&
-                                            <>
-                                            <img src={StarSVG}/>
-                                            <p style={{fontSize: "16px"}}>{extractRating(reservation.id)}</p>
-                                            </>
-                                            }
-                                        </div>
-                                        <div className="leave-review">
-                                            {listingReview(reservation.id) ? (
-                                            <>
-                                                <p style={{fontSize: "14px"}} onClick={() => handleReviewClick(reservation.id, correspondingListing.property_name)}>See review</p>
-                                                <img src={ArrowRight}/>
-                                            </>
-                                            ) : (
-                                            <>
-                                                <p style={{fontSize: "14px"}} onClick={() => handleReviewForm(reservation.id, correspondingListing.property_name, correspondingListing.id)}>Leave a review</p>
-                                                <img src={ArrowRight}/>
-                                            </>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                            })}
-                        </>
-                        ) : null}
-                    </div>
-                </>
+                <UserTrips futureReservations={futureReservations} formatDate={formatDate} listings={listings} pastReservations={pastReservations} listingReview={listingReview} reviews={reviews} handleReviewClick={handleReviewClick} handleReviewForm={handleReviewForm} handleReservation={handleReservation}/>
             )}
 
             {activeTab === "My Trips" && showReservation && (
