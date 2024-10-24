@@ -193,7 +193,11 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
                 {["security", "location", "staff", "atmosphere", "cleanliness", "facilities", "value_for_money"].map((category) => (
                   <div key={category} className="rating-cats-tab-review">
                     <div className="category-label">
+                    {category === "value_for_money" ? 
+                    <p>Value for Money</p>
+                      :
                       <p>{category.charAt(0).toUpperCase() + category.slice(1)}</p>
+                    }
                     </div>
                     <div className="rating-bar-and-score-review">
                       <div className="rating-bars">
