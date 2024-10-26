@@ -199,276 +199,73 @@ const ReviewForm = ({ onClose, sessionUserId, modalReservationId, modalListingId
         textarea.style.height = `${textarea.scrollHeight}px`;
     };
 
+    const sections = [
+    { title: 'Value', question: 'Overall, what do you think about the property?', icon: diamondSVG, field: 'value' },
+    { title: 'Security', question: 'Did you feel safe in the property?', icon: securitySVG, field: 'security' },
+    { title: 'Location', question: 'Did you like the property’s location?', icon: locationSVG, field: 'location' },
+    { title: 'Staff', question: 'Was the staff good for you?', icon: staffSVG, field: 'staff' },
+    { title: 'Atmosphere', question: 'How was the atmosphere there?', icon: atmosphereSVG, field: 'atmosphere' },
+    { title: 'Cleanliness', question: 'Was the property clean?', icon: cleanlinessSVG, field: 'cleanliness' },
+    { title: 'Facilities', question: 'Were the facilities good?', icon: facilitiesSVG, field: 'facilities' },
+];
+
+    const RatingSection = ({ title, question, currentRating, icon, onClick }) => (
+        <div className='review-inner-square'>
+            <div className='review-pic-and-print'>
+                <img src={icon} alt={title} />
+                <p>{title}</p>
+            </div>
+            <div className='review-overall'>
+                <p>{question}</p>
+            </div>
+            <div className='review-stars'>
+                {[1, 2, 3, 4, 5].map(star => (
+                    <img
+                        key={star}
+                        src={currentRating >= star ? StarSVG : GrayStar}
+                        onClick={() => onClick(star)}
+                        alt={`Rate ${star} star${star > 1 ? 's' : ''}`}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+
+
     const renderPageContent = () => {
         switch (currentPage) {
             case 1:
                 return (
                     <>
-                    <p className='review-disclaimer'>Your review will appear on WorldofHostels.com websites and on selected partner sites</p>
-                    <div className='review-square'>
-                        <div className='review-inner-square'>
-                            <div className='review-pic-and-print'>
-                                <img src={diamondSVG}/>
-                                <p>Value</p>
-                            </div>
-
-                            <div className='review-overall'>
-                                <p>Overall, what do you think about the property?</p>
-                            </div>
-                            
-                            <div className='review-stars'>
-                                <img
-                                    src={formData.page1.value >= 1 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(1, "value")}
-                                />
-                                <img
-                                    src={formData.page1.value >= 2 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(2, "value")}
-                                />
-                                <img
-                                    src={formData.page1.value >= 3 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(3, "value")}
-                                />
-                                <img
-                                    src={formData.page1.value >= 4 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(4, "value")}
-                                />
-                                <img
-                                    src={formData.page1.value >= 5 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(5, "value")}
-                                />
-                            </div>
+                        <p className='review-disclaimer'>Your review will appear on WorldofHostels.com websites and on selected partner sites</p>
+                        <div className='review-square' style={{ marginTop:'0'}}>
+                            <RatingSection
+                                title={sections[0].title}
+                                question={sections[0].question}
+                                icon={sections[0].icon}
+                                currentRating={formData.page1.value}
+                                onClick={(star) => handleStarClick(star, sections[0].field)}
+                            />
                         </div>
-                    </div>
-                    <p className='review-helper'>By filling in this quick review, you will help fellow travellers to decide on the property that best suits their needs.</p>
+                        <p className='review-helper'>By filling in this quick review, you will help fellow travellers to decide on the property that best suits their needs.</p>
                     </>
                 );
             case 2:
-                return (
-                    <div className={currentPage !== 2 ? 'review-square-slide' : 'review-square'} style={{marginTop: "2.6rem"}}>
-                        <div className='review-inner-square'>
-                            <div className='review-pic-and-print'>
-                                <img src={securitySVG}/>
-                                <p>Security</p>
-                            </div>
-
-                            <div className='review-overall'>
-                                <p>Did you feel safe in the property?</p>
-                            </div>
-                            
-                            <div className='review-stars'>
-                                <img
-                                    src={formData.page2.security >= 1 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(1, "security")}
-                                />
-                                <img
-                                    src={formData.page2.security >= 2 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(2, "security")}
-                                />
-                                <img
-                                    src={formData.page2.security >= 3 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(3, "security")}
-                                />
-                                <img
-                                    src={formData.page2.security >= 4 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(4, "security")}
-                                />
-                                <img
-                                    src={formData.page2.security >= 5 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(5, "security")}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                );
             case 3:
-                return (
-                    <div className='review-square' style={{marginTop: "2.6rem"}}>
-                        <div className='review-inner-square'>
-                            <div className='review-pic-and-print'>
-                                <img src={locationSVG}/>
-                                <p>Location</p>
-                            </div>
-
-                            <div className='review-overall'>
-                                <p>Did you like property’s location?</p>
-                            </div>
-                            
-                            <div className='review-stars'>
-                                <img
-                                    src={formData.page3.location >= 1 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(1, "location")}
-                                />
-                                <img
-                                    src={formData.page3.location >= 2 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(2, "location")}
-                                />
-                                <img
-                                    src={formData.page3.location >= 3 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(3, "location")}
-                                />
-                                <img
-                                    src={formData.page3.location >= 4 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(4, "location")}
-                                />
-                                <img
-                                    src={formData.page3.location >= 5 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(5, "location")}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                );
             case 4:
-                return (
-                    <div className='review-square' style={{marginTop: "2.6rem"}}>
-                        <div className='review-inner-square'>
-                            <div className='review-pic-and-print'>
-                                <img src={staffSVG}/>
-                                <p>Staff</p>
-                            </div>
-
-                            <div className='review-overall'>
-                                <p>Was the staff good for you?</p>
-                            </div>
-                            
-                            <div className='review-stars'>
-                                <img
-                                    src={formData.page4.staff >= 1 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(1, "staff")}
-                                />
-                                <img
-                                    src={formData.page4.staff >= 2 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(2, "staff")}
-                                />
-                                <img
-                                    src={formData.page4.staff >= 3 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(3, "staff")}
-                                />
-                                <img
-                                    src={formData.page4.staff >= 4 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(4, "staff")}
-                                />
-                                <img
-                                    src={formData.page4.staff >= 5 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(5, "staff")}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                );
             case 5:
-                return (
-                    <div className='review-square' style={{marginTop: "2.6rem"}}>
-                        <div className='review-inner-square'>
-                            <div className='review-pic-and-print'>
-                                <img src={atmosphereSVG}/>
-                                <p>Atmosphere</p>
-                            </div>
-
-                            <div className='review-overall'>
-                                <p>How was the atmosphere there?</p>
-                            </div>
-                            
-                            <div className='review-stars'>
-                                <img
-                                    src={formData.page5.atmosphere >= 1 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(1, "atmosphere")}
-                                />
-                                <img
-                                    src={formData.page5.atmosphere >= 2 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(2, "atmosphere")}
-                                />
-                                <img
-                                    src={formData.page5.atmosphere >= 3 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(3, "atmosphere")}
-                                />
-                                <img
-                                    src={formData.page5.atmosphere >= 4 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(4, "atmosphere")}
-                                />
-                                <img
-                                    src={formData.page5.atmosphere >= 5 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(5, "atmosphere")}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                );
             case 6:
-                return (
-                    <div className='review-square' style={{marginTop: "2.6rem"}}>
-                        <div className='review-inner-square'>
-                            <div className='review-pic-and-print'>
-                                <img src={cleanlinessSVG}/>
-                                <p>Cleanliness</p>
-                            </div>
-
-                            <div className='review-overall'>
-                                <p>Was the property clean?</p>
-                            </div>
-                            
-                            <div className='review-stars'>
-                                <img
-                                    src={formData.page6.cleanliness >= 1 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(1, "cleanliness")}
-                                />
-                                <img
-                                    src={formData.page6.cleanliness >= 2 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(2, "cleanliness")}
-                                />
-                                <img
-                                    src={formData.page6.cleanliness >= 3 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(3, "cleanliness")}
-                                />
-                                <img
-                                    src={formData.page6.cleanliness >= 4 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(4, "cleanliness")}
-                                />
-                                <img
-                                    src={formData.page6.cleanliness >= 5 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(5, "cleanliness")}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                );
             case 7:
+                const section = sections[currentPage - 1];
                 return (
-                    <div className='review-square' style={{marginTop: "2.6rem"}}>
-                        <div className='review-inner-square'>
-                            <div className='review-pic-and-print'>
-                                <img src={facilitiesSVG}/>
-                                <p>Facilities</p>
-                            </div>
-
-                            <div className='review-overall'>
-                                <p>Were the facilities good?</p>
-                            </div>
-                            
-                            <div className='review-stars'>
-                                <img
-                                    src={formData.page7.facilities >= 1 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(1, "facilities")}
-                                />
-                                <img
-                                    src={formData.page7.facilities >= 2 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(2, "facilities")}
-                                />
-                                <img
-                                    src={formData.page7.facilities >= 3 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(3, "facilities")}
-                                />
-                                <img
-                                    src={formData.page7.facilities >= 4 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(4, "facilities")}
-                                />
-                                <img
-                                    src={formData.page7.facilities >= 5 ? StarSVG : GrayStar}
-                                    onClick={() => handleStarClick(5, "facilities")}
-                                />
-                            </div>
-                        </div>
+                    <div className='review-square' style={{ marginTop:'2.6rem'}}>
+                        <RatingSection
+                            title={section.title}
+                            question={section.question}
+                            icon={section.icon}
+                            currentRating={formData[`page${currentPage}`][section.field]}
+                            onClick={(star) => handleStarClick(star, section.field)}
+                        />
                     </div>
                 );
             case 8:

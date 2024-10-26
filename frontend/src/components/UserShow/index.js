@@ -23,6 +23,8 @@ function UserShow() {
     const sessionUser = useSelector(state => state.session.user);
     const reservations = useSelector(state => state.reservations);
     const listings = useSelector(state => state.listings);
+    const guests = cart.guests || localStorage.getItem('guests') || "1";
+    const locations = cart.location || localStorage.getItem('location') || "";
 
     const [activeTab, setActiveTab] = useState(tabName);
     const [showReservation, setShowReservation] = useState(false);
@@ -115,15 +117,12 @@ function UserShow() {
     }, [tabName]);
 
     useEffect(() => {
-        const guests = cart.guests || localStorage.getItem('guests') || "1";
-        const locations = cart.location || localStorage.getItem('location') || "";
-
         localStorage.setItem('location', locations);
         localStorage.setItem('guests', guests);
-        
+
         dispatch(setLocation(locations));
         dispatch(updateGuests(guests));
-    }, [dispatch, cart]);
+    }, [locations, guests]);
 
     useEffect(() => {
         const fetchDate = cart.checkIn ? cart.checkIn : today.toISOString().split("T")[0];
