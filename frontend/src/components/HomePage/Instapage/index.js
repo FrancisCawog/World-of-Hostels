@@ -3,7 +3,7 @@ import "./InstaPage.css"
 
 import insta from "../../../assets/pictures/icons/new-instagram-logo-glyph.png"
 import london from "../../../assets/Insta Pics/FRA01122.jpg"
-import hanoi from "../../../assets/Insta Pics/FRA00675.jpg"
+import hanoi from "../../../assets/Insta Pics/FRA00675.2.jpg"
 import kamodo from "../../../assets/Insta Pics/FRA01447.jpg"
 import fuji from "../../../assets/Insta Pics/FRA01616-HDR.jpg"
 import luxor from "../../../assets/Insta Pics/FRA06852.jpg"
