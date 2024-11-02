@@ -171,11 +171,10 @@ function SearchBar2() {
   }, []);  
 
   const handleDestinationButtonClick = (city) => {
-    clearTimeout(blurTimeout);
     setIsLocationComplete(true);
     setInputFocused(false);
     setLocations(city);
-  };
+    };  
         
     const [dateSelectionCount, setDateSelectionCount] = useState(0);
 
@@ -252,15 +251,8 @@ function SearchBar2() {
     return `${day} ${month}`;
   };
 
-  const [blurTimeout, setBlurTimeout] = useState(null);
   const handleInputBlur = () => {
-    const timeoutId = setTimeout(() => {
-      if (isLocationComplete){
-        setInputFocused(false);
-      }
-    }, 200);
-
-    setBlurTimeout(timeoutId);
+    setInputFocused(false);
   };
 
   useEffect(() => {
@@ -323,7 +315,7 @@ function SearchBar2() {
                                 <div className="destination-selection-ul">
                                     {uniqueCities.map((city, index) => (
                                     <div key={index} className="destination-selection-li">
-                                        <button className="destination-selection-button" onClick={() => handleDestinationButtonClick(city)}>
+                                        <button className="destination-selection-button" onMouseDown={() => handleDestinationButtonClick(city)}>
                                         {city}
                                         </button>
                                     </div>
