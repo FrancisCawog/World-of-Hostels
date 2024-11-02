@@ -4,6 +4,7 @@ import check from "../../assets/pictures/icons/515345.png"
 import CalenderSVG from "../../assets/pictures/icons/calendar-confirmation.svg"
 import users from "../../assets/pictures/icons/17115.png"
 import { useLocation, useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function ConfirmationPage() {
     sessionStorage.setItem('redirectUrl', window.location.pathname);
