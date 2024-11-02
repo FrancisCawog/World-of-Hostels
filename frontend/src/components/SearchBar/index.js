@@ -104,21 +104,15 @@ function SearchBar() {
     setInputGuestFocused(true);
   };
 
-  const [blurTimeout, setBlurTimeout] = useState(null);
   const handleInputBlur = () => {
-    const timeoutId = setTimeout(() => {
-      setInputFocused(false);
-    }, 200);
-
-    setBlurTimeout(timeoutId);
-  };
-
-  const handleDestinationButtonClick = (city) => {
-    clearTimeout(blurTimeout);
     setInputFocused(false);
-    setLocations(city);
-    dispatch(setLocation(city))
   };
+  
+  const handleDestinationButtonClick = (city) => {
+    setLocations(city);
+    dispatch(setLocation(city));
+    setInputFocused(false);
+  };  
 
   const handleGuestsSelectionClick = (e) => {
     e.stopPropagation();
@@ -275,7 +269,7 @@ function SearchBar() {
                   <div className="destination-selection-ul">
                     {uniqueCities.map((city, index) => (
                       <div key={index} className="destination-selection-li">
-                        <button className="destination-selection-button" onClick={() => handleDestinationButtonClick(city)}>
+                        <button className="destination-selection-button" onMouseDown={() => handleDestinationButtonClick(city)}>
                           {city}
                         </button>
                       </div>
