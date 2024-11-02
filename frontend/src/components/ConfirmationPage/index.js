@@ -11,6 +11,10 @@ function ConfirmationPage() {
     const location = useLocation();
     const { listingName, guests, reservationNumber, checkIn, checkOut, price, photoUrl } = location.state;
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
     const nights = () => {
         const millisecondsPerDay = 24 * 60 * 60 * 1000;
         const checkInDate = new Date(checkIn);

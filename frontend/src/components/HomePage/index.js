@@ -37,6 +37,10 @@ export default function HomePage() {
   }  
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchListings(today.toISOString().split("T")[0], tomorrow.toISOString().split("T")[0])).catch((error) => {
       console.error("Error fetching listing:", error);
     });

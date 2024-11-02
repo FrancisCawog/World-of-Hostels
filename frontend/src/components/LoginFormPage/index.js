@@ -22,6 +22,10 @@ function LoginFormPage() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [hasError, setHasError] = useState(false); 
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleTogglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };

@@ -28,6 +28,10 @@ function SignupFormPage() {
     hasSpecialChar: false
   });
   const [validPassword, setValidPassword] = useState(true);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const updatedConditions = {

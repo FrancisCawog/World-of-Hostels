@@ -63,6 +63,10 @@ function ListingsIndexPage() {
   }
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleRedirect = (listingId) => {
     const queryString = new URLSearchParams(cart).toString();
     history.push(`/listings/${listingId}?${queryString}`);

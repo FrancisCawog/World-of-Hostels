@@ -1,4 +1,8 @@
-import React from 'react';
+import { React, useEffect } from 'react';
+
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
 const NotFoundPage = () => {
   return (
