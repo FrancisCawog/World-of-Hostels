@@ -32,7 +32,7 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
 
     const conditionalHeight = () => {
         const numReviews = numberOfReviews(listing?.id);
-        return { height: numReviews <= 2 ? "520px" : "900px" };
+        return { height: (numReviews - numbers.length + 3) <= 2 ? "520px" : "900px" };
     };
 
     const averageTotalScore = (listingId) => {
