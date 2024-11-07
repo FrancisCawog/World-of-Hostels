@@ -113,6 +113,13 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
 
     const closeReviewModal = () => setShowReviewModal(false);
 
+    let numbers = [1, 2, 3];
+    const missingCount = numbers.filter(num => extractFeedback(listing?.id, numberOfReviews(listing?.id) - num) === "").length;
+
+    for (let i = 0; i < missingCount; i++) {
+      numbers.push(4 + i);
+    }
+
     return (
         <>
         {showReviewModal && <ListingsShowReviewModal tabName={tabName} onClose={closeReviewModal} reviews={reviews} />}
@@ -162,31 +169,29 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
                 </div>
               
                 <div className="side-divs">
-                    {[1, 2, 3].map(num => 
-                        numberOfReviews(listing?.id) >= num && (
+                    {numbers.map(num => numberOfReviews(listing?.id) >= num && extractFeedback(listing?.id, numberOfReviews(listing?.id) - num) !== "" && (
                         <div key={num} className="side-div">
-                            <div className="date-and-rating">
+                        <div className="date-and-rating">
                             <p style={{ marginTop: "25px" }}>Stayed in {extractDate(listing?.id, numberOfReviews(listing?.id) - num)}</p>
                             <div className="star-and-rating">
-                                <img src={StarSVG} style={{ width: "20px", height: "20px" }} />
-                                <p>{extractRating(listing?.id, numberOfReviews(listing?.id) - num)}</p>
-                            </div>
-                            </div>
-                            <div className="pic-name-and-info">
-                            <div className="review-profile-pic">
-                                <img src={extractPicture(listing?.id, numberOfReviews(listing?.id) - num) || defaultPic} style={{ width: "2.25rem", height: "2.25rem", borderRadius: "50%" }} />
-                            </div>
-                            <div className="review-name-info">
-                                <p>{extractName(listing?.id, numberOfReviews(listing?.id) - num)}</p>
-                                <p>{extractDemographic(listing?.id, numberOfReviews(listing?.id) - num)}</p>
-                            </div>
-                            </div>
-                            <div className="review-feedback">
-                            <p>{extractFeedback(listing?.id, numberOfReviews(listing?.id) - num)}</p>
+                            <img src={StarSVG} style={{ width: "20px", height: "20px" }} />
+                            <p>{extractRating(listing?.id, numberOfReviews(listing?.id) - num)}</p>
                             </div>
                         </div>
-                        )
-                    )}
+                        <div className="pic-name-and-info">
+                            <div className="review-profile-pic">
+                            <img src={extractPicture(listing?.id, numberOfReviews(listing?.id) - num) || defaultPic} style={{ width: "2.25rem", height: "2.25rem", borderRadius: "50%" }} />
+                            </div>
+                            <div className="review-name-info">
+                            <p>{extractName(listing?.id, numberOfReviews(listing?.id) - num)}</p>
+                            <p>{extractDemographic(listing?.id, numberOfReviews(listing?.id) - num)}</p>
+                            </div>
+                        </div>
+                        <div className="review-feedback">
+                            <p>{extractFeedback(listing?.id, numberOfReviews(listing?.id) - num)}</p>
+                        </div>
+                        </div>
+                    ))}
                     {numberOfReviews(listing?.id) >= 4 && (
                         <div className="view-reviews" onClick={() => setShowReviewModal(true)}>
                         <p className="read-more">View all reviews</p>
