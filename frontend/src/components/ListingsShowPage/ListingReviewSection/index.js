@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../../store/users";
 import ListingsShowReviewModal from "../../ListingsShowReviewModal";
 import StarSVG from "../../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
+import { compose } from "redux";
 
 const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
@@ -120,6 +121,9 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
       numbers.push(4 + i);
     }
 
+    console.log(numbers.length)
+    console.log(numbers)
+
     return (
         <>
         {showReviewModal && <ListingsShowReviewModal tabName={tabName} onClose={closeReviewModal} reviews={reviews} />}
@@ -192,7 +196,7 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
                         </div>
                         </div>
                     ))}
-                    {numberOfReviews(listing?.id) >= 4 && (
+                    {numberOfReviews(listing?.id) - numbers.length + 3 >= 4 && (
                         <div className="view-reviews" onClick={() => setShowReviewModal(true)}>
                         <p className="read-more">View all reviews</p>
                         <img src={MyArrowSVG} style={{ width: '14px' }} />
