@@ -123,22 +123,25 @@
 
 .side-div2 {
   min-height: 255px;
-    width: 95%;
-    margin-left: 2.5%;
-    margin-top: 2.5%;
-    margin-bottom: 20px;
-    background-color: white;
-    box-shadow: 0 0 9px 1px rgb(225, 225, 225);
-    border-radius: 25px 25px 25px 25px;
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 2.5%;
+  margin-bottom: 20px;
+  background-color: white;
+  box-shadow: 0 0 9px 1px rgb(225, 225, 225);
+  border-radius: 25px 25px 25px 25px;
+  padding-bottom: 10px;
 }
 
 .review-modal-popup {
   width: 55%;
-  overflow: auto; 
-  white-space: nowrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: normal;
   max-height: 82.5%;
   scrollbar-width: none;
-}  
+  box-sizing: border-box;
+}
 
 .review-modal-popup::-webkit-scrollbar {
   display: none;

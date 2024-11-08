@@ -153,7 +153,7 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
         </div>
       </div>
 
-      <div className="review-feedback" style={{ marginRight: "2.5%", whiteSpace: "pre-wrap" }}>
+      <div className="review-feedback" style={{ whiteSpace: "pre-wrap" }}>
         <p>{extractFeedback(listing?.id, index)}</p>
       </div>
     </div>
@@ -162,7 +162,7 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
 
   return (
     <div className="modal-overlay-review" onClick={onClose}>
-      <div className="modal-review" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-review"  style={{overflowY: "auto", overflowX: "hidden", paddingBottom: "25px"}} onClick={(e) => e.stopPropagation()}>
         <div className="modal-content-review">
           <p className='review-p'>Reviews</p>
           <span className="close" onClick={onClose}>&times;</span>

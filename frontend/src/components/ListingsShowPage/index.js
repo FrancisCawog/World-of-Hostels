@@ -170,14 +170,16 @@ function ListingsShowPage() {
 
       <br /><br />
 
-      <div className="tabs" style={{ display: 'flex', alignItems: 'center', marginLeft: "10%" }}>
-        <span className="tabs-name" onClick={() => handleTabClick('Rooms')} style={{ cursor: 'pointer' }}>Rooms</span>
-        <span className="tabs-name" onClick={() => handleTabClick('About')} style={{ cursor: 'pointer' }}>About</span>
-        <span className="tabs-name" onClick={() => handleTabClick('House Rules')} style={{ cursor: 'pointer' }}>House Rules</span>
-        <span className="tabs-name" onClick={() => handleTabClick('Map')} style={{ cursor: 'pointer' }}>Location</span>
-        {numberOfReviews(listing?.id) !== 0 && (
-          <span className="tabs-name" onClick={() => handleTabClick('Reviews')} style={{ cursor: 'pointer' }}>Reviews</span>
-        )}
+      <div className="tabs">
+        <div className="tabs" style={{ display: 'flex', alignItems: 'center', marginLeft: "10%"}}>
+          <span className="tabs-name" onClick={() => handleTabClick('Rooms')} style={{ cursor: 'pointer' }}>Rooms</span>
+          <span className="tabs-name" onClick={() => handleTabClick('About')} style={{ cursor: 'pointer' }}>About</span>
+          <span className="tabs-name" onClick={() => handleTabClick('House Rules')} style={{ cursor: 'pointer' }}>House Rules</span>
+          <span className="tabs-name" onClick={() => handleTabClick('Map')} style={{ cursor: 'pointer' }}>Location</span>
+          {numberOfReviews(listing?.id) !== 0 &&
+            <span className="tabs-name" onClick={() => handleTabClick('Reviews')} style={{ cursor: 'pointer' }}>Reviews</span>
+          }
+        </div>
       </div>
 
       <div style={{ display: "flex", marginRight: "10%" }}>
