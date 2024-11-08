@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../../store/users";
 import ListingsShowReviewModal from "../../ListingsShowReviewModal";
 import StarSVG from "../../../assets/pictures/icons/Yellow_Star_with_rounded_edges.svg.png"
-import { compose } from "redux";
 
 const restCountriesData = await fetch("https://restcountries.com/v3.1/all?fields=name,independent,cca3").then(res => res.json());
 
