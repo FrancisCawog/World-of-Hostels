@@ -1,5 +1,3 @@
-//Memoized
-
 import { useState } from 'react';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import logo from "../../assets/pictures/Screenshot 2023-11-12 at 3.36.15 PM.png";

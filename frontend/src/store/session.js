@@ -85,7 +85,6 @@ export const updateUser = (user) => async (dispatch) => {
 // };
 
 export const passwordChange = (userId, oldPassword, newPassword) => async () => {
-  // console.log("User ID for password change:", userId);
   
   const response = await fetch(`/api/users/${userId}/update_password`, {
       method: 'PATCH',

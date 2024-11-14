@@ -1,5 +1,3 @@
-//Memoizedzz
-
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -22,7 +20,7 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
       setCountriesData(data);
     };
     fetchCountriesData();
-  }, []);
+  }, [])
 
   const extractDate = (listingId, num) => {
     const listingReviews = Object.values(reviews).filter(review => review.listing_id === listingId);
