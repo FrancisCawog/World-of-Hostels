@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
+    const demoPassword = useSelector((state) => state.demoUser.password);
     const userId = useSelector(state => state.session.user.id);
 
     const [oldPassword, setOldPassword] = useState("");
@@ -99,7 +100,12 @@ const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
                             onBlur={() => setIsEFocused(false)}
                             required
                             />
-                            <label className="input-label5">Existing Password</label>
+
+                            {currentUser.email === "demo_user@gmail.com" ?
+                                <label className="input-label5">Existing Password <span style={{color: "#0079faa9"}}>({demoPassword})</span></label>
+                            : 
+                                <label className="input-label5">Existing Password</label>
+                            }
 
                             {!isEFocused && !samePasswords &&
                                 <span className='password-change-condition'>
