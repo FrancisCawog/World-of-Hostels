@@ -568,3 +568,7 @@ img {
 .rdrDayToday .rdrDayNumber span:after {
   background: #F25621c0 !important;
 }
+
+.rdrDateDisplayWrapper {
+  display: none !important;
+}
