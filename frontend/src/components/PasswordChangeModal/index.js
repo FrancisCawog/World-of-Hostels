@@ -101,11 +101,12 @@ const PasswordChangeModal = ({ onClose, setShowPasswordChange }) => {
                             required
                             />
 
-                            {currentUser.email === "demo_user@gmail.com" ?
-                                <label className="input-label5">Existing Password <span style={{color: "#0079faa9"}}>({demoPassword})</span></label>
-                            : 
-                                <label className="input-label5">Existing Password</label>
-                            }
+                            <label className="input-label5">
+                            Existing Password 
+                            {currentUser.email === "demo_user@gmail.com" && (
+                                <span style={{ color: "#0079faa9" }}> ({demoPassword})</span>
+                            )}
+                            </label>
 
                             {!isEFocused && !samePasswords &&
                                 <span className='password-change-condition'>
