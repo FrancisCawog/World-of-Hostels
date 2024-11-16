@@ -551,3 +551,20 @@ img {
   margin: 0px 0.25rem;
   outline: none;
 }
+
+.rdrStartEdge,
+.rdrEndEdge,
+.rdrDayStartPreview,
+.rdrDayEndPreview,
+.rdrDayInPreview,
+.rdrDayHovered {
+  color: #F25621 !important;
+}
+
+.rdrInRange {
+  color: #fbcfc0 !important;
+}
+
+.rdrDayToday .rdrDayNumber span:after {
+  background: #F25621c0 !important;
+}
