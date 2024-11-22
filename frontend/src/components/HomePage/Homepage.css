@@ -187,6 +187,7 @@ img {
   margin-right: 7.5px;
   height: 3rem;
   width: 0.0625rem;
+  margin-top: 4px;
 }
 
 .cancellation img {
@@ -569,6 +570,41 @@ img {
   background: #F25621c0 !important;
 }
 
-.rdrDateDisplayWrapper {
+.rdrDateDisplayWrapper,
+.rdrMonthAndYearPickers {
   display: none !important;
+}
+
+.rdrMonthName {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.rdrMonthAndYearWrapper{
+  height: 35px !important;
+  margin-bottom: -35px !important;
+}
+
+.rdrMonthName {
+  color: #121417 !important;
+  font-family: Inter-bold;
+  font-size: 1rem;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span {
+  color: black !important;
+}
+
+.rdrCalendarWrapper,
+.searchBar2-cal {
+  border-radius: 1.5rem !important;
+}
+
+.rdrNextPrevButton {
+  margin: 20px !important;
+}
+
+.rdrMonth {
+  padding-bottom: 5px !important;
 }

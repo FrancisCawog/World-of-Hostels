@@ -350,6 +350,8 @@ function SearchBar() {
                   months={2}
                   direction="horizontal"
                   className="calendarElement"
+                  minDate={new Date()}
+                  maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
               />
               }
           </div>
