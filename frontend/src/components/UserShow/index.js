@@ -60,13 +60,28 @@ function UserShow() {
         };
     }, [showReviewModal, showReviewForm]);
 
+    const normalizeDate = (dateString) => {
+        const [year, month, day] = dateString.split("-").map(Number);
+        return new Date(year, month - 1, day); 
+    };
+    
     const pastReservations = Object.values(reservations)
         .filter(reservation => reservation?.user_id === sessionUser.id)
-        .filter(reservation => new Date(reservation?.start_date) < currentDate);
-
+        .filter(reservation => {
+            const reservationDate = normalizeDate(reservation?.start_date);
+            return reservationDate < currentDate;
+        });
+    
     const futureReservations = Object.values(reservations)
         .filter(reservation => reservation?.user_id === sessionUser.id)
-        .filter(reservation => new Date(reservation?.start_date) > currentDate);
+        .filter(reservation => {
+            const reservationDate = normalizeDate(reservation?.start_date);
+            return reservationDate >= currentDate;
+        });
+
+    console.log(pastReservations)
+    console.log(currentDate)
+    console.log(futureReservations)
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
