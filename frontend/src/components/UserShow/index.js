@@ -30,6 +30,7 @@ function UserShow() {
     const [showReservation, setShowReservation] = useState(false);
     const [showReviewModal, setShowReviewModal] = useState(false);
     const [showReviewForm, setShowReviewForm] = useState(false);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [modalReservationId, setModalReservationId] = useState("");
     const [modalPropertyName, setModalPropertyName] = useState("");
     const [modalListingId, setModalListingId] = useState();
@@ -78,10 +79,6 @@ function UserShow() {
             const reservationDate = normalizeDate(reservation?.start_date);
             return reservationDate >= currentDate;
         });
-
-    console.log(pastReservations)
-    console.log(currentDate)
-    console.log(futureReservations)
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
@@ -152,6 +149,7 @@ function UserShow() {
         <>
             {showReviewModal && <ReviewModal onClose={() => setShowReviewModal(false)} modalReservationId={modalReservationId} modalPropertyName={modalPropertyName} />}
             {showReviewForm && <ReviewForm onClose={() => setShowReviewForm(false)} sessionUserId={sessionUser.id} modalReservationId={modalReservationId} modalListingId={modalListingId} modalPropertyName={modalPropertyName} />}
+            {showDeleteConfirmation && <div className="confirmation-box">Reservation cancelled</div>}
 
             <div style={{ borderBottom: "1px solid #dddfe4", boxShadow: "0 4px 32px rgba(0,0,0,.1)" }}>
                 <Navigation />
@@ -175,7 +173,7 @@ function UserShow() {
             {activeTab === 'Home' && <HomeStats reservations={reservations} sessionUser={sessionUser} listings={listings} />}
             {activeTab === 'Edit Details' && <EditButtons buttonDisabled={buttonDisabled} sessionUser={sessionUser} />}
             {activeTab === 'My Trips' && showReservation && (
-                <PastTripButtons reservations={reservations} foundListing={foundListing} handleTabClick={handleTabClick} setShowReservation={setShowReservation} listingReview={listingReview} handleReviewForm={handleReviewForm} handleReviewClick={handleReviewClick} ReservationId={ReservationId} isRefundable={isRefundable} setShowDetails={setShowDetails} pastReservations={pastReservations} />
+                <PastTripButtons reservations={reservations} foundListing={foundListing} handleTabClick={handleTabClick} setShowReservation={setShowReservation} listingReview={listingReview} handleReviewForm={handleReviewForm} handleReviewClick={handleReviewClick} ReservationId={ReservationId} isRefundable={isRefundable} setShowDetails={setShowDetails} pastReservations={pastReservations} setShowDeleteConfirmation={setShowDeleteConfirmation} showDeleteConfirmation={showDeleteConfirmation} />
             )}
 
             <Footer />

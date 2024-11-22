@@ -120,9 +120,6 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
       numbers.push(4 + i);
     }
 
-    console.log(numbers.length)
-    console.log(numbers)
-
     return (
         <>
         {showReviewModal && <ListingsShowReviewModal tabName={tabName} onClose={closeReviewModal} reviews={reviews} />}

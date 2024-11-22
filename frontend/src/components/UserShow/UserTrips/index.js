@@ -277,11 +277,12 @@ export function PastTripButtons({
     ReservationId, 
     isRefundable, 
     setShowDetails, 
-    pastReservations 
+    pastReservations,
+    setShowDeleteConfirmation,
+    showDeleteConfirmation
 }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const isReservationInPast = pastReservations.some(reservation => reservation.id === ReservationId);
 
     const handleDeleteReservation = (ReservationId, reservations) => {
@@ -316,7 +317,6 @@ export function PastTripButtons({
 
     return (
         <>
-        {showDeleteConfirmation && <div className="confirmation-box">Reservation cancelled</div>}
 
         <div className="reservation-info">
             <div className="reservation-info-buttons">
