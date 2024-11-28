@@ -365,6 +365,8 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                         months={1}
                                         direction="horizontal"
                                         className="calendarElement"
+                                        minDate={new Date()}
+                                        maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
                                     />
                                     }
                                 </div>
