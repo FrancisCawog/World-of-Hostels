@@ -46,7 +46,6 @@ https://world-of-hostels.onrender.com
 
 
 ### Future Implementions/ Open Issues
-- Find different calander.
 - Add calender to date of birth
 
 - Add edit reservation feature - HostelWorld currently disables feature.
