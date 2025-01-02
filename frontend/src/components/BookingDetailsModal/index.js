@@ -117,7 +117,7 @@ const BookingDetailsModal = ({ onClose, bookingReference, startDate, endDate, re
                                     </div>
                                 ))}
 
-                                <div className='taxes' style={{marginTop: "-10px"}}> 
+                                <div className='taxes' id='taxes-amount'> 
                                     <div className='taxes-row'>
                                         <p>Taxes</p>
                                         <p>0</p>
@@ -130,16 +130,16 @@ const BookingDetailsModal = ({ onClose, bookingReference, startDate, endDate, re
 
                                 <div className='taxes'> 
                                     <div className='taxes-row2'>
-                                        <p style={{color: "#26a159"}}>Total Paid</p>
+                                        <p className='taxes-row2-color'>Total Paid</p>
                                         { startDateObject < currentDate ? ( 
-                                            <p style={{color: "#26a159"}}>${totalPrice.toFixed(2)}</p>
+                                            <p className='taxes-row2-color'>${totalPrice.toFixed(2)}</p>
                                         ) : (
-                                            <p style={{color: "#26a159"}}>${(totalPrice * .15).toFixed(2)}</p>
+                                            <p className='taxes-row2-color'>${(totalPrice * .15).toFixed(2)}</p>
                                         )}
                                     </div>
                                 </div>
 
-                                <div className='taxes' style={{borderBottom: "none"}}> 
+                                <div className='taxes' id='taxes-payable'> 
                                     <div className='taxes-row2'>
                                         <p>Payable on Arrival</p>
                                         { startDateObject < currentDate ? ( 
