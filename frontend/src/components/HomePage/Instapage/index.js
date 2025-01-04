@@ -53,7 +53,7 @@ export default function InstaPage() {
               </div>
             </a>
           </div>
-          <div className="insta-column2" style={{marginTop: "5.5625rem"}}>
+          <div className="insta-column2">
           <a href="https://www.instagram.com/p/Cr8wo6eSamf/?img_index=1" target="_blank">
               <div>
                 <div>
@@ -123,7 +123,7 @@ export default function InstaPage() {
               </div>
             </a>
           </div>
-          <div className="insta-column4" style={{marginTop: "5.5625rem"}}>
+          <div className="insta-column4">
           <a href="https://www.instagram.com/p/CtZeB_tOhMB/?img_index=1" target="_blank">
               <div>
                 <div>

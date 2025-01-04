@@ -38,6 +38,11 @@
     flex-direction: column;
     margin-right: 1.5rem;
   }
+
+  .insta-column2,
+  .insta-column4 {
+    margin-top: 5.5625rem;
+  }
   
   .insta-pic {
     border-radius: 1.5rem;
