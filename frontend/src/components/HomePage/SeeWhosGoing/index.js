@@ -38,7 +38,7 @@ export default function SeeWhosGoing() {
             <div className="see-who-going-text">
                 <h2>
                     See
-                    <span style={{ marginLeft: "15px", marginRight: "15px", color: "orange" }}>who's</span>
+                    <span className="see-who-going-orange">who's</span>
                     going.
                 </h2>
                 <p>Connect with other travellers staying in the same hostel or city as you.</p>

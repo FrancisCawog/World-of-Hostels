@@ -24,7 +24,7 @@ export default function WorldsBest({listings}) {
         </div>
 
         <div className="world-best-flex">
-          <div className="world-text">
+          <div className="world-text" id="world-text-middle">
             <h3>
               The world's best hostels, with over
               <span className="thirteen-million">13 million reviews</span>

@@ -273,3 +273,9 @@
     margin-top: -1.5rem;
     color: white;
   }
+
+  .see-who-going-orange {
+    margin-left: 15px; 
+    margin-right: 15px; 
+    color: orange;
+  }

@@ -2,6 +2,10 @@
   display: flex;
 }
 
+#world-text-middle {
+  width: 30%;
+}
+
 .world-cards1 {
     margin-left: 10%;
     margin-top: 2rem;
@@ -70,7 +74,6 @@
   .world-text {
     margin-left: 10%;
     margin-top: 3rem;
-    width: 30%;
   }
   
   .world-text h3 {
