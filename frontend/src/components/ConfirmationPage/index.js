@@ -63,7 +63,7 @@ function ConfirmationPage() {
                             <img src={photoUrl}/>
                         </div>
                         <div className="conf-details-info">
-                            <p style={{fontWeight: "700"}}>{listingName}</p>
+                            <p id="conf-details-info-name">{listingName}</p>
                             <div className="conf-details">
                                 <img src={CalenderSVG}/>
                                 {nights(checkIn, checkOut) === 1 ? (

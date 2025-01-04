@@ -66,6 +66,10 @@
     margin-top: 5px;
 }
 
+#conf-details-info-name {
+    font-family: Inter-bold;
+}
+
 .conf-details {
     display: flex;
     align-items: center;
