@@ -1,3 +1,6 @@
+.world-best-flex {
+  display: flex;
+}
 
 .world-cards1 {
     margin-left: 10%;
@@ -67,6 +70,7 @@
   .world-text {
     margin-left: 10%;
     margin-top: 3rem;
+    width: 30%;
   }
   
   .world-text h3 {
@@ -141,4 +145,9 @@
     filter: brightness(0);
     margin-top: 2rem;
     width: 9.375rem;
+  }
+
+  .thirteen-million {
+    color: #30cf72; 
+    margin-left: 10px;
   }

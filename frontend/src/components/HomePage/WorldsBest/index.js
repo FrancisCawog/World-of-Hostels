@@ -6,7 +6,7 @@ export default function WorldsBest({listings}) {
     return (
     <div className="world-best">
       <div className="world-cards">
-        <div style={{display: "flex"}}>
+        <div className="world-best-flex">
         <Link to={`/listings/${listings[1]?.id}`} className="world-cards1">
             <div className="world-photo">
               <img  src={listings[1]?.photoUrls[0]}/>
@@ -23,11 +23,11 @@ export default function WorldsBest({listings}) {
         </Link>
         </div>
 
-        <div style={{display: "flex"}}>
-          <div className="world-text" style={{width: "30%"}}>
+        <div className="world-best-flex">
+          <div className="world-text">
             <h3>
               The world's best hostels, with over
-              <span style={{color: "#30cf72", marginLeft: "10px"}}>13 million reviews</span>
+              <span className="thirteen-million">13 million reviews</span>
               .
             </h3>
             <p>With over 16,500 hostels in 180 countries, there’s always room for a new adventure!</p>
@@ -41,7 +41,7 @@ export default function WorldsBest({listings}) {
         </Link>
         </div>
 
-        <div style={{display: "flex"}}>
+        <div className="world-best-flex">
         <Link to={`/listings/${listings[4]?.id}`} className="world-cards4">
             <div className="world-photo">
               <img  src={listings[4]?.photoUrls[0]}/>
