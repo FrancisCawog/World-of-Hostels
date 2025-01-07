@@ -5,10 +5,9 @@ function Footer() {
 
     return (
         <div className="footer">
-            <div style={{width: "70%", marginLeft: "15%"}}>
+            <div className="footer-sub">
                 <div className="footer-p">
                 <p className= "footer-ps">Technologies Used :</p>
-                {/* <a className= "footer-ps" href="frontend/public/Resume.pdf" target="_blank">View my Resume</a> */}
                 </div>
 
                 <div className="row">

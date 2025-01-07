@@ -1,8 +1,12 @@
 .footer {
-    /* position: relative; */
     height: 600px;
     background-color: rgba(0, 0, 0, 0.925);
     clip-path: polygon(0% 15%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .footer-sub {
+    width: 70%; 
+    margin-left: 15%;
   }
 
   .footer-p {
