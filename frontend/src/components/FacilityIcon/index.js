@@ -288,7 +288,7 @@ const FacilityIcon = ({ item }) => {
         );
     } else if (item === 'Towels Included'){
     return (
-        <img src={towelSVG} style={{marginLeft: "2px", marginTop: "1px"}}/>
+        <img src={towelSVG} className='icon-position'/>
         );
     } else if (item === 'Cable TV'){
     return (
@@ -296,31 +296,31 @@ const FacilityIcon = ({ item }) => {
         );
     } else if (item === 'Ceiling Fan' || item === "Ceiling fan"){
     return (
-        <img src={fanSVG} style={{marginLeft: "2px", marginTop: "1px"}}/>
+        <img src={fanSVG} className='icon-position'/>
         );
     } else if (item === 'Airport Transfer' || item === "Airport Transfers"){
     return (
-        <img src={airportSVG} style={{marginLeft: "2px", marginTop: "1px"}}/>
+        <img src={airportSVG} className='icon-position'/>
         );
     } else if (item === 'Wake-up calls'){
     return (
-        <img src={wakeUpSVG} style={{marginLeft: "2px", marginTop: "1px"}}/>
+        <img src={wakeUpSVG} className='icon-position'/>
         );
     } else if (item === 'Mini-Supermarket'){
     return (
-        <img src={supermarketSVG} style={{marginLeft: "2px", marginTop: "1px"}}/>
+        <img src={supermarketSVG} className='icon-position'/>
         );
     } else if (item === 'Free Breakfast'){
     return (
-        <img src={CoffeeSVG} style={{marginLeft: "2px", marginTop: "1px"}}/>
+        <img src={CoffeeSVG} className='icon-position'/>
         );
     } else if (item === "Internet access"){
         return (
-        <img src={internetSVG} style={{marginLeft: "2px", marginTop: "1px"}}/>
+        <img src={internetSVG} className='icon-position'/>
         )
     } else if (item === 'ATM'){
     return (
-        <img src={atmSVG} style={{marginLeft: "2px", marginTop: "1px"}}/>
+        <img src={atmSVG} className='icon-position'/>
         );
     }
 
