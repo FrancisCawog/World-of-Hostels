@@ -155,6 +155,12 @@
     margin-bottom: 1rem;
   }
 
+  .edit-picture-circle img {
+    border-radius: 50%; 
+    width: 2.5rem; 
+    height: 2.5rem;
+  }
+
   .edit-about p,
   .my-trips p {
     font-family: Inter-bold;
@@ -205,6 +211,12 @@
     letter-spacing: .0125rem;
     line-height: 1rem;
     transform: translateX(0) translateY(-0.5rem);
+}
+
+#input-email-change {
+  font-size: 12px; 
+  font-weight: 300; 
+  margin-top: -2.5px;
 }
 
 #blankNationality{

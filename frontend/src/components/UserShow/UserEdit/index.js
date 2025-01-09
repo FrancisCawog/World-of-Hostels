@@ -117,7 +117,7 @@ export function UserEdit({ sessionUser, setButtonDisabled }) {
       <div className="edit-about">
         <p>Edit Details</p>
         <div className="edit-picture-circle">
-          <img src={sessionUser?.photoUrl || defaultPic} alt="User" style={{ borderRadius: "50%", width: "2.5rem", height: "2.5rem" }} />
+          <img src={sessionUser?.photoUrl || defaultPic} alt="User"/>
         </div>
         <div className="four-inputs-div">
           <div className="input-with-label">
@@ -139,7 +139,7 @@ export function UserEdit({ sessionUser, setButtonDisabled }) {
           <div className="input-with-label">
             <label htmlFor="email">Email</label>
             <input id="email" value={sessionUser.email} disabled />
-            <p style={{ fontSize: "12px", fontWeight: "300", marginTop: "-2.5px" }}>To change your email, please contact us</p>
+            <p id="input-email-change">To change your email, please contact us</p>
           </div>
         </div>
       </div>
