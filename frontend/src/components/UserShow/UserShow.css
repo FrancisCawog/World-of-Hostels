@@ -723,3 +723,8 @@
   box-shadow: 0 8px 24px rgba(242,85,33,.35);
   color: #fff;
 }
+
+#user-show-nav {
+  border-bottom: 1px solid #dddfe4; 
+  box-shadow: 0 4px 32px rgba(0,0,0,.1);
+}

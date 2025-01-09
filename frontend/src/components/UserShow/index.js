@@ -151,7 +151,7 @@ function UserShow() {
             {showReviewForm && <ReviewForm onClose={() => setShowReviewForm(false)} sessionUserId={sessionUser.id} modalReservationId={modalReservationId} modalListingId={modalListingId} modalPropertyName={modalPropertyName} />}
             {showDeleteConfirmation && <div className="confirmation-box">Reservation cancelled</div>}
 
-            <div style={{ borderBottom: "1px solid #dddfe4", boxShadow: "0 4px 32px rgba(0,0,0,.1)" }}>
+            <div id='user-show-nav'>
                 <Navigation />
             </div>
 
