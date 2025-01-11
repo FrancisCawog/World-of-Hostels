@@ -116,6 +116,12 @@
     padding-right: -1rem;
   }
 
+  .picture-circle img {
+    border-radius: 50%; 
+    width: 5rem; 
+    height: 5rem;
+  }
+
   .user-about p:nth-of-type(1) {
     font-family: Inter-bold;
     font-size: 2.5rem;
@@ -137,6 +143,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .name-and-age-DOB {
+    font-Size: 26px !important;
   }
 
   .edit-about {
@@ -727,4 +737,8 @@
 #user-show-nav {
   border-bottom: 1px solid #dddfe4; 
   box-shadow: 0 4px 32px rgba(0,0,0,.1);
+}
+
+.travel-stats-span {
+  font-family:Inter-bold;
 }

@@ -260,7 +260,7 @@ function SignupFormPage() {
             <br />
             <p id="bottom">Already have an account?</p>
 
-            <Link id="bottom" className="link" to="/login" style= {{fontFamily: "Inter-bold"}}> <img src={UserSVG} alt="Back" style={{ width: '14px' }}/>Login </Link>
+            <Link id="bottom" className="link" to="/login" style={{fontFamily: "Inter-bold"}}> <img src={UserSVG} alt="Back" style={{ width: '14px' }}/>Login </Link>
           </div>
         </div>
 

@@ -155,7 +155,7 @@ function UserShow() {
                 <Navigation />
             </div>
 
-            <div className="user-yellow-box" style={{ backgroundColor: conditionalColor.backgroundColor, clipPath: conditionalClipPath.clipPath }}>
+            <div className="user-yellow-box" style= {{ backgroundColor: conditionalColor.backgroundColor, clipPath: conditionalClipPath.clipPath }}>
                 <div className="mid-div">
                     <SideBar activeTab={activeTab} handleTabClick={handleTabClick} setShowReservation={setShowReservation} />
 

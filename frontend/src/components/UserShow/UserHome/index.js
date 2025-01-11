@@ -29,18 +29,18 @@ export function UserHome({ sessionUser }) {
     return (
         <div className="user-about">
             <div className="picture-circle">
-                <img src={sessionUser?.photoUrl || defaultPic} alt="User" style={{borderRadius: "50%", width: "5rem", height: "5rem"}}/>
+                <img src={sessionUser?.photoUrl || defaultPic} alt="User" />
             </div>
             <div className="name-and-age">
                 <p>{sessionUser.first_name}</p>
                 {sessionUser.date_of_birth !== null && sessionUser.nationality !== "" && sessionUser.nationality !== null && (
-                    <p style={{ fontSize: "26px" }}>{age} years old, {findCountryCCA3(sessionUser.nationality)}</p>
+                    <p className="name-and-age-DOB">{age} years old, {findCountryCCA3(sessionUser.nationality)}</p>
                 )}
                 {sessionUser.date_of_birth !== null && (sessionUser.nationality === "" || sessionUser.nationality === null) && (
-                    <p style={{ fontSize: "26px" }}>{age} years old</p>
+                    <p className="name-and-age-DOB">{age} years old</p>
                 )}
                 {sessionUser.date_of_birth === null && sessionUser.nationality !== "" && (
-                    <p style={{ fontSize: "26px" }}>{findCountryCCA3(sessionUser.nationality)}</p>
+                    <p className="name-and-age-DOB">{findCountryCCA3(sessionUser.nationality)}</p>
                 )}
             </div>
         </div>
@@ -102,8 +102,8 @@ export function HomeStats({ reservations, sessionUser, listings }) {
         <div className="travel-stats">
             <div >
                 <p>My Travel Stats</p>
-                <p>I've explored <span style={{ fontFamily:"Inter-bold"}} >{countryCount} {countryWord}</span></p>
-                <p>and stayed in <span style={{ fontFamily:"Inter-bold"}} >{propertyCount} {propertyWord}</span></p>
+                <p>I've explored <span className="travel-stats-span" >{countryCount} {countryWord}</span></p>
+                <p>and stayed in <span className="travel-stats-span" >{propertyCount} {propertyWord}</span></p>
             </div>
         </div>
     )
