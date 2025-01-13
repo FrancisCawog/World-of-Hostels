@@ -50,7 +50,7 @@ export function UserTrips({
                 <p>Coming Soon</p>
 
                 {futureReservations.length === 0 ? (
-                    <div style={{width: "125%"}}>
+                    <div className="others-booking">
                         <div className="bus-div">
                             <img src="https://www.hostelworld.com/pwa/_nuxt/img/05d49c7.svg" />
                             <div className="other-ready">
@@ -58,9 +58,8 @@ export function UserTrips({
                                 <p id="ready">Ready to start looking?</p>
                             </div>
                         </div>
-                        <div style={{width: "45rem"}}>
-                            <SearchBar2 />
-                        </div>
+
+                        <SearchBar2 />
                     </div>
                 ) : (
                     <>
@@ -125,21 +124,21 @@ export function UserTrips({
                                             {listingReview(reservation.id) && (
                                                 <>
                                                     <img src={StarSVG} />
-                                                    <p style={{fontSize: "16px"}}>{extractRating(reservation.id)}</p>
+                                                    <p className="past-num-div-rating">{extractRating(reservation.id)}</p>
                                                 </>
                                             )}
                                         </div>
                                         <div className="leave-review">
                                             {listingReview(reservation.id) ? (
                                                 <>
-                                                    <p style={{fontSize: "14px"}} onClick={() => handleReviewClick(reservation.id, correspondingListing.property_name)}>
+                                                    <p onClick={() => handleReviewClick(reservation.id, correspondingListing.property_name)}>
                                                         See review
                                                     </p>
                                                     <img src={ArrowRight} />
                                                 </>
                                             ) : (
                                                 <>
-                                                    <p style={{fontSize: "14px"}} onClick={() => handleReviewForm(reservation.id, correspondingListing.property_name, correspondingListing.id)}>
+                                                    <p onClick={() => handleReviewForm(reservation.id, correspondingListing.property_name, correspondingListing.id)}>
                                                         Leave a review
                                                     </p>
                                                     <img src={ArrowRight} />
@@ -239,7 +238,7 @@ export function PastTrips({
                 setShowReservation(false);
             }}>
                 <div className="back-to-my-trips">
-                    <img src={MyArrowSVG} alt="Back" style={{ width: '12px' }} />
+                    <img src={MyArrowSVG} alt="Back"/>
                     <p>Back to My Trips</p>
                 </div>
             </div>
@@ -342,7 +341,7 @@ export function PastTripButtons({
                             <img src={ChangeSVG} alt="Calendar Icon" className="trip-icon"/>
                             <p>Change Booking</p>
                         </div>
-                        <img src={RightSVG} alt="Calendar Icon" className="icon" style={{ marginRight: "10px", marginTop: "0px" }}/>
+                        <img src={RightSVG} alt="Calendar Icon" className="icon" style= {{ marginRight: "10px", marginTop: "0px" }}/>
                     </div> */}
                     <div
                         onClick={() => isRefundable && handleDeleteReservation(ReservationId, reservations)}

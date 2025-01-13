@@ -547,6 +547,10 @@
   margin-right: 5px;
 }
 
+.past-num-div-rating {
+  font-size: 16px !important;
+}
+
 .leave-review {
     padding-top: 0.5rem;
     display: flex;
@@ -741,4 +745,16 @@
 
 .travel-stats-span {
   font-family:Inter-bold;
+}
+
+.others-booking {
+  width: 125%;
+}
+
+.leave-review p {
+  font-size: 14px !important;
+}
+
+.back-to-my-trips img {
+  width: 12px;
 }
