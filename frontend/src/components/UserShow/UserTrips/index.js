@@ -252,7 +252,7 @@ export function PastTrips({
                 <img src={LocationSVG} alt="Location Icon" className="icon" />
                 <p>{foundListing?.address}, {foundListing?.city}, {foundListing?.country}</p>
             </div>
-            <div className="icon-and-text" style={{ marginTop: "5px" }}>
+            <div className="icon-and-text" id="calendar-icon-top">
                 <img src={CalendarSVG} alt="Calendar Icon" className="icon" />
                 <p>{formatDate(foundReservation.start_date)} - {formatDate(foundReservation.end_date)}</p>
             </div>
@@ -324,14 +324,14 @@ export function PastTripButtons({
                         <img src={CalendarSVG} alt="Calendar Icon" className="trip-icon" />
                         <p>Booking Details</p>
                     </div>
-                    <img src={RightSVG} alt="Calendar Icon" className="icon" style={{ marginRight: "10px", marginTop: "0px" }} />
+                    <img src={RightSVG} alt="Calendar Icon" className="icon-arrow"  />
                 </div>
                 <div className="reservation-info-button" onClick={() => history.push(`/listings/${foundListing.id}`)}>
                     <div className="reservation-info-button-inner">
                         <img src={BuildingSVG} alt="Calendar Icon" className="trip-icon" />
                         <p>View Booking</p>
                     </div>
-                    <img src={RightSVG} alt="Calendar Icon" className="icon" style={{ marginRight: "10px", marginTop: "0px" }} />
+                    <img src={RightSVG} alt="Calendar Icon" className="icon-arrow"  />
                 </div>
 
                 {!isReservationInPast ? (
@@ -344,11 +344,10 @@ export function PastTripButtons({
                         <img src={RightSVG} alt="Calendar Icon" className="icon" style= {{ marginRight: "10px", marginTop: "0px" }}/>
                     </div> */}
                     <div
+                        className="nonrefundable-cancel"
                         onClick={() => isRefundable && handleDeleteReservation(ReservationId, reservations)}
                         disabled={!isRefundable}
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
+                        style= {{
                             opacity: isRefundable ? "initial" : ".5",
                             pointerEvents: isRefundable ? 'auto' : 'none'
                         }}
@@ -358,10 +357,10 @@ export function PastTripButtons({
                                 <img src={CancelSVG} alt="Calendar Icon" className="trip-icon" />
                                 <p>Cancel Booking</p>
                             </div>
-                            <img src={RightSVG} alt="Calendar Icon" className="icon" style={{ marginRight: "10px", marginTop: "0px" }} />
+                            <img src={RightSVG} alt="Calendar Icon" className="icon-arrow"  />
                         </div>
                         {!isRefundable && (
-                            <p style={{ fontFamily: "Inter-bold", marginTop: "14px", fontSize: "12px" }}>
+                            <p className="nonrefundable-message">
                                 This booking is non-refundable
                             </p>
                         )}

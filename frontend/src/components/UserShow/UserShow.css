@@ -444,11 +444,11 @@
     flex-direction: row;
 }
 
-.icon {
+.icon,
+.icon-arrow {
     width: 1rem;
     height: 1rem;
     margin: 0;
-    margin-top: -.75rem;
     margin-left: .5rem;
   }
 
@@ -757,4 +757,28 @@
 
 .back-to-my-trips img {
   width: 12px;
+}
+
+.nonrefundable-cancel {
+  display: flex;
+  align-items: center;
+}
+
+#calendar-icon-top {
+  margin-top: 5px;
+}
+
+.icon-arrow {
+  margin-right: 10px; 
+  margin-top: 0px;
+}
+
+.icon {
+  margin-top: -.75rem;
+}
+
+.nonrefundable-message {
+  font-family: Inter-bold; 
+  margin-top: 14px; 
+  font-size: 12px;
 }
