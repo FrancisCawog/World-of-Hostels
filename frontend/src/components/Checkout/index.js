@@ -329,16 +329,16 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
             <div className="checkout-choose">
                 <div className="checkout-info">
                     <div className="choose-top">
-                        <div style={{marginTop: "-10px"}}>
+                        <div className="choose-top-div">
                             <p>Rooms from</p>
-                            <p style={{marginTop: "-12px", fontFamily: "Poppins-bold", fontSize: "18px", marginLeft: "7px"}}>US ${(cheapestPrice * 0.95).toFixed(2)}</p>
+                            <p>US ${(cheapestPrice * 0.95).toFixed(2)}</p>
                         </div>
                         <button className="check-button" onClick={handleScroll}>
                             Choose a room
                         </button>
                     </div>
 
-                    <div className="inline-form" style={{border: "1px solid black"}}>
+                    <div className="inline-form" id="inline-checkout">
                     <div className="dates">
                         <div className="checkin-checkout">
                             <div className="checkin-input">
@@ -346,16 +346,16 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                 <div className="input-prefix">
                                 <img/>
                                 </div>
-                                <div className="input-wrapper" style={{width: "10rem"}}>
+                                <div className="input-wrapper" id="inline-wrapper-checkout">
                                 <input
                                     value={`${format(range[0].startDate, "dd MMM")} to ${format(range[0].endDate, "dd MMM")}`}
                                     readOnly
                                     className="inputBox"
+                                    id="inputBox-checkout"
                                     onClick={ () => setOpen(open => !open) }
-                                    style={{paddingLeft: "1rem", marginBottom: "12px"}}
                                 />
 
-                                <div className="searchBar2-cal" ref={refOne} style={{marginLeft: "20%"}}>
+                                <div className="searchBar2-cal" ref={refOne} id="searchbar2-cal-checkout">
                                     {open && 
                                     <DateRange
                                         onChange={handleDateRangeChange}
@@ -370,7 +370,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                     />
                                     }
                                 </div>
-                                <label className="input-label2" style={{marginLeft: "0"}}>
+                                <label className="input-label2" id="input-label2-checkout">
                                     Check In - Check Out
                                 </label>
                                 </div>
@@ -385,7 +385,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                         <div className="guests-input">
                             <div className="input-with-label">
                                 <div className="input-prefix">
-                                <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
+                                    <img src= {users} id="input-prefix-guest"/>
                                 </div>
                                 <div className="input-wrapper">
                                     <input
@@ -409,53 +409,53 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                     </div>
 
                     {isInputGuestFocused && (
-                        <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} style={{marginLeft: "2%"}}>
-                        <div className="guests-inner-selection">
-                        <div className="guests-label-selection"> 
-                        <div>
-                        <img src={users} style={{width: "20px", height: "20px", marginTop: "5px"}}/>
-                        </div>
-                        <span>
-                        Guests
-                        </span>
-                        </div>
-                        
-                            <div className="guests-counter" style={{marginLeft: "5px"}}> 
-                            {guests > 1 ? (
-                                <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
-                                    <img src={minus} alt="Minus" style={{width: "90%"}}/>
-                                </button> 
-                                ):( 
-                                    <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                    <img src={grayminus} alt="Minus" style={{width: "90%"}}/>
-                                    </button>
-                                )}
-                                
-                                <input className="guests-counter-number"
-                                    type="text"
-                                    name="guests"
-                                    id="guests"
-                                    value={guests}
-                                    autoComplete="off"
-                                    onChange={handleGuestsChange}
-                                    readOnly
-                                />
-                                {guests !== 10 ? (
-                                    <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
-                                        <img src={add} alt="add" style={{width: "90%"}}/>
+                        <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} id="guestSelection2-checkout">
+                            <div className="guests-inner-selection">
+                                <div className="guests-label-selection"> 
+                                    <div>
+                                        <img src={users} id="users-checkout-image"/>
+                                    </div>
+                                    <span>
+                                    Guests
+                                    </span>
+                                </div>
+                            
+                                <div className="guests-counter" style={{marginLeft: "5px"}}> 
+                                {guests > 1 ? (
+                                    <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
+                                        <img src={minus} alt="Minus" style={{width: "90%"}}/>
                                     </button> 
-                                ):( 
-                                    <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                        <img src={grayadd} alt="add" style={{width: "90%"}}/>
-                                    </button>
-                                )}
+                                    ):( 
+                                        <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                        <img src={grayminus} alt="Minus" style={{width: "90%"}}/>
+                                        </button>
+                                    )}
+                                    
+                                    <input className="guests-counter-number"
+                                        type="text"
+                                        name="guests"
+                                        id="guests"
+                                        value={guests}
+                                        autoComplete="off"
+                                        onChange={handleGuestsChange}
+                                        readOnly
+                                    />
+                                    {guests !== 10 ? (
+                                        <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
+                                            <img src={add} alt="add" style={{width: "90%"}}/>
+                                        </button> 
+                                    ):( 
+                                        <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
+                                            <img src={grayadd} alt="add" style={{width: "90%"}}/>
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                                    </div>
-                                )}
-                        </div>
+                    )}
+                    </div>
                     
-                        <img src={cardinfo} alt="Card Information"></img>
+                    <img src={cardinfo} alt="Card Information"></img>
                 </div>
             </div>
             ) : (
