@@ -420,14 +420,14 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                     </span>
                                 </div>
                             
-                                <div className="guests-counter" style={{marginLeft: "5px"}}> 
+                                <div className="guests-counter" id="guests-counter-checkout"> 
                                 {guests > 1 ? (
                                     <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
-                                        <img src={minus} alt="Minus" style={{width: "90%"}}/>
+                                        <img src={minus} alt="Minus" id="checkout-button-symbol"/>
                                     </button> 
                                     ):( 
-                                        <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                        <img src={grayminus} alt="Minus" style={{width: "90%"}}/>
+                                        <button className="guests-minus" id="guests-plus-minus-checkout">
+                                        <img src={grayminus} alt="Minus" id="checkout-button-symbol"/>
                                         </button>
                                     )}
                                     
@@ -442,11 +442,11 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                     />
                                     {guests !== 10 ? (
                                         <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
-                                            <img src={add} alt="add" style={{width: "90%"}}/>
+                                            <img src={add} alt="add" id="checkout-button-symbol"/>
                                         </button> 
                                     ):( 
-                                        <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                            <img src={grayadd} alt="add" style={{width: "90%"}}/>
+                                        <button className="guests-plus" id="guests-plus-minus-checkout">
+                                            <img src={grayadd} alt="add" id="checkout-button-symbol"/>
                                         </button>
                                     )}
                                 </div>
@@ -461,21 +461,21 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
             ) : (
             <div className="checkout-check">
                 <div className="checkout-info">
-                <div className="inline-form" style={{border: "1px solid black"}}>
+                <div className="inline-form" id="inline-form-checkout2">
                     <div className="dates">
                         <div className="checkin-checkout">
                             <div className="checkin-input">
                                 <div className="input-with-label">
-                                    <div className="input-wrapper" style={{width: "10rem"}}>
+                                    <div className="input-wrapper" id="input-wrapper-checkout2">
                                     <input
                                         value={`${format(range[0].startDate, "dd MMM")} to ${format(range[0].endDate, "dd MMM")}`}
                                         readOnly
                                         className="inputBox"
+                                        id="inputBox-checkout2"
                                         onClick={ () => setOpen(open => !open) }
-                                        style={{paddingLeft: "1rem", marginBottom: "12px"}}
                                     />
 
-                                    <div className="searchBar2-cal" ref={refOne} style={{marginLeft: "20%"}}>
+                                    <div className="searchBar2-cal" ref={refOne} id="searchbar2-cal-checkout">
                                         {open && 
                                         <DateRange
                                             onChange={handleDateRangeChange}
@@ -490,7 +490,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                         />
                                         }
                                     </div>
-                                    <label className="input-label2" style={{marginLeft: "0"}}>
+                                    <label className="input-label2" id="input-label2-checkout">
                                         Check In
                                     </label>
                                     </div>
@@ -505,7 +505,7 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                             <div className="guests-input">
                             <div className="input-with-label">
                                 <div className="input-prefix">
-                                <img src= {users} style={{width: "20px", height: "20px", marginTop: "4px"}}/>
+                                <img src= {users} id="input-prefix-guest"/>
                                 </div>
                                 <div className="input-wrapper">
                                     <input
@@ -529,25 +529,25 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                         </div>
 
                             {isInputGuestFocused && (
-                                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} style={{marginLeft: "2%"}}>
+                                <div className="guests-selection2" ref={guestsSelectionRef} onClick={handleGuestsSelectionClick} id="guestSelection2-checkout">
                                 <div className="guests-inner-selection">
                                 <div className="guests-label-selection"> 
                                 <div>
-                                <img src={users} style={{width: "20px", height: "20px", marginTop: "5px"}}/>
+                                <img src={users} id="users-checkout-image"/>
                                 </div>
                                 <span>
                                 Guests
                                 </span>
                                 </div>
                                 
-                                <div className="guests-counter" style={{marginLeft: "5px"}}> 
+                                <div className="guests-counter" id="guests-counter-checkout"> 
                                 {guests > 1 ? (
                                     <button className="guests-minus" onClick={() => handleGuestsChange('subtract')}>
-                                    <img src={minus} alt="Minus" style={{width: "90%"}}/>
+                                    <img src={minus} alt="Minus" id="checkout-button-symbol"/>
                                     </button> 
                                     ):( 
-                                        <button className="guests-minus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                        <img src={grayminus} alt="Minus" style={{width: "90%"}}/>
+                                        <button className="guests-minus" id="guests-plus-minus-checkout">
+                                        <img src={grayminus} alt="Minus" id="checkout-button-symbol"/>
                                         </button>
                                         )}
                                         
@@ -562,11 +562,11 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                         />
                                         {guests !== 10 ? (
                                             <button className="guests-plus" onClick={() => handleGuestsChange('add')}>
-                                            <img src={add} alt="add" style={{width: "90%"}}/>
+                                            <img src={add} alt="add" id="checkout-button-symbol"/>
                                             </button> 
                                             ):( 
-                                                <button className="guests-plus" style={{pointerEvents: 'none', boxShadow: "rgb(211, 211, 211) 0px 0px 0px 0.125rem inset "}}>
-                                                <img src={grayadd} alt="add" style={{width: "90%"}}/>
+                                                <button className="guests-plus" id="guests-plus-minus-checkout">
+                                                <img src={grayadd} alt="add" id="checkout-button-symbol"/>
                                                 </button>
                                                 )}
                                             </div>
@@ -575,14 +575,14 @@ function CheckoutForm( { checkIn, checkOut, listingId, listingName, photoUrl}) {
                                 )}
                 </div>
                 
-                <div style={{marginTop: "1rem"}}>
-                    <div style={{fontFamily: "Poppins-bold"}}>
-                        <div style={{display: "flex", }}>
-                            <p style={{marginRight: "5px"}}>Total</p>
+                <div className="checkout-price-div">
+                    <div>
+                        <div className="checkout-price-inner-div">
+                            <p>Total</p>
                             <p>US${totalPrice.toFixed(2)}</p>
                         </div>
-                        <div style={{display: "flex", }}>
-                            <p style={{color: "green", marginRight: "5px"}}> Payable Now</p>
+                        <div className="checkout-price-inner-div">
+                            <p> Payable Now</p>
                             <p>US${(totalPrice * .15).toFixed(2)}</p>
                         </div>
                     </div>

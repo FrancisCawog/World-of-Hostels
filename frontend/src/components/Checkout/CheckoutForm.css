@@ -114,3 +114,49 @@
     height: 20px; 
     margin-top: 5px;
 }
+
+#guests-counter-checkout {
+    margin-left: 5px;
+}
+
+#checkout-button-symbol {
+    width: 90%;
+}
+
+#guests-plus-minus-checkout {
+    pointer-events: none; 
+    box-shadow: rgb(211, 211, 211) 0px 0px 0px 0.125rem inset;
+}
+
+#inline-form-checkout2 {
+    border: 1px solid black;
+}
+
+#input-wrapper-checkout2 {
+    width: 10rem;
+}
+
+#inputBox-checkout2 {
+    padding-left: 1rem; 
+    margin-bottom: 12px;
+}
+
+.checkout-price-div {
+    margin-top: 1rem;
+}
+
+.checkout-price-div div {
+    font-family: Poppins-bold;
+}
+
+.checkout-price-inner-div {
+    display: flex;
+}
+
+.checkout-price-inner-div p:first-of-type {
+    margin-right: 5px;
+}
+
+.checkout-price-inner-div:nth-of-type(2) p:first-of-type {
+    color: green;
+}
