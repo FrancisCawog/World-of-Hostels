@@ -72,7 +72,7 @@ export default function HomePage() {
     
     <div className="cancellation">
       <p>
-        <img src={CalenderSVG} id="calender" style={{ width: '24px' }}/>
+        <img src={CalenderSVG} id="calender"/>
         <span className="bold">Free Cancellation</span> & <span className="bold">Flexible Booking</span> available
       </p>
 
@@ -115,18 +115,19 @@ export default function HomePage() {
         <div className="this-text">
           <p>
             This is the
-            <span style={{color: "#cc0074", marginLeft: "3px", marginRight: "3px"}}>NEW</span> 
+            <span className="highlight new">NEW</span> 
             Hostelworld.
           </p>
           <h2>
             Helping you
-            <span style={{color: "#cc0074", marginLeft: "10px"}}>connect with travellers</span>
+            <span className="highlight connect">connect with travellers</span>
             . Even
-            <span style={{color: "#cc0074", marginLeft: "10px", marginRight: "10px"}}>before</span>
+            <span className="highlight before">before</span>
             you get to your hostel
           </h2>
-          <button onClick={handleClick}>Check what's new
-            <img className="arrow-down-this" src={MyArrowSVG}/>
+          <button onClick={handleClick}>
+            Check what's new
+            <img className="arrow-down-this" src={MyArrowSVG} />
           </button>
         </div>
       </div>
@@ -140,20 +141,19 @@ export default function HomePage() {
 
     <div className="commited-world">
       <div className="world-pic">
-        <img src={beach}/>
-        <p style={{marginTop: "2rem"}}>Palmar Beach Lodge, Panama</p>
-        <p style={{fontWeight: "400"}}>Hoscars 2022 Winner</p>
+        <img src={beach} alt="Beach" />
+        <p className="world-pic-title">Palmar Beach Lodge, Panama</p>
+        <p className="world-pic-subtitle">Hoscars 2022 Winner</p>
       </div>
       <div>
         <div className="world-text">
-          <img src={eco}/>
+          <img src={eco} alt="Eco Icon" />
           <h2>
-          We are commited to a 
-          <span style={{color: "#30cf72", marginLeft: "10px"}}>better world</span>
-          .
+            We are committed to a 
+            <span className="highlight-green">better world</span>.
           </h2>
           <p>Join us in making the planet a priority. We are proud to be a Climate Neutral verified company, committed to reducing our environmental footprint.</p>
-          <img src={cnc}/>
+          <img src={cnc} alt="Climate Neutral Certified Logo" />
         </div>
       </div>
     </div>

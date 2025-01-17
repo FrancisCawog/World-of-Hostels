@@ -192,6 +192,7 @@ img {
 
 .cancellation img {
   margin-bottom: -5px;
+  
 }
 
 .cancellation {
@@ -209,6 +210,7 @@ img {
 
 #calender {
   color: white;
+  width: 24px;
 }
 
 .bold {
@@ -369,7 +371,6 @@ img {
 .this-text button {
   margin-left: 0;
   margin-right: 0;
-  /* margin-top: 3rem; */
   background: linear-gradient(275.42deg,#f6a90e 17%,#f8bf0a 79.31%);
   position: relative;
   border: none;
@@ -397,6 +398,24 @@ img {
     z-index: -1;
 }
 
+.this-text .highlight {
+  color: #cc0074;
+}
+
+.this-text .highlight.new {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.this-text .highlight.connect {
+  margin-left: 10px;
+}
+
+.this-text .highlight.before {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .arrow-down-this {
   margin-left: 0.5rem;
   margin-right: -5px;
@@ -414,6 +433,19 @@ img {
   margin: 7rem 0 3rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+.world-pic-title {
+  margin-top: 2rem;
+}
+
+.world-pic-subtitle {
+  font-weight: 400;
+}
+
+.highlight-green {
+  color: #30cf72;
+  margin-left: 10px;
 }
 
 .world-pic img {
