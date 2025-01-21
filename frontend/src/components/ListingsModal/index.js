@@ -111,10 +111,10 @@ const ListingsModal = ({ tabName, onClose }) => {
                     position={infoWindowPosition}
                     onCloseClick={() => setInfoWindowVisible(false)}
                   >
-                    <div>
-                      <h3 style={{ fontFamily: "Inter", fontSize: "20px" }}>{listing.property_name}</h3>
-                      <p style={{ fontFamily: "Inter", padding: "0px" }}>{listing.address}</p>
-                      <p style={{ fontFamily: "Inter", marginTop: "-10px" }}>{`${listing.city}, ${listing.country}`}</p>
+                    <div className="listing-container">
+                      <h3 className="listing-title">{listing.property_name}</h3>
+                      <p className="listing-address">{listing.address}</p>
+                      <p className="listing-location">{`${listing.city}, ${listing.country}`}</p>
                     </div>
                   </InfoWindow>
                 )}
@@ -180,10 +180,10 @@ const ListingsModal = ({ tabName, onClose }) => {
 
               {activeTab === 'HouseRules' && (
                 <>
-                  <h2 style={{ fontFamily: "Poppins-bold", fontSize: "20px", marginLeft: "2%", marginTop: "-.5%" }}>Hostel Policies</h2>
+                  <h2 className='hostel-policies'>Hostel Policies</h2>
                   <div id='modal-check' className="checkInandOut">
                     <div className="checkInContainer">
-                      <img className="checkIn" src={checkInPic} style={{ width: '18px' }} alt="Check In" />
+                      <img className="checkIn" src={checkInPic} id='checkin-modal-img' alt="Check In" />
                       <div className="checkInText">
                         Check In
                         <div className="check_in">{listing?.check_in}</div>
@@ -191,7 +191,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                     </div>
                     <div className="separator"></div>
                     <div className="checkOutContainer">
-                      <img className="checkOut" src={checkOutPic} style={{ width: '18px' }} alt="Check Out" />
+                      <img className="checkOut" src={checkOutPic} id='checkin-modal-img' alt="Check Out" />
                       <div className="checkOutText">
                         Check Out
                         <div className="check_out">until {listing?.check_out}</div>
@@ -201,7 +201,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                   <div className="smaller-horizontal-line"></div>
 
                   <div className="tab-content">
-                    <h2 style={{ fontFamily: "Poppins-bold", fontSize: "20px", marginTop: "15px" }}>Cancellation Policy</h2>
+                    <h2 className='tab-cancellation'>Cancellation Policy</h2>
                     <div className='cancellation-policy'>
                       <div className='free-cancellation-rates'>
                         <h2>Free Cancellation rates</h2>
@@ -213,7 +213,7 @@ const ListingsModal = ({ tabName, onClose }) => {
                       </div>
                     </div>
                     <div className="smaller-horizontal-line"></div>
-                    <h2 style={{ fontFamily: "Poppins-bold", fontSize: "20px", marginTop: "15px", marginBottom: "-25px" }}>Things to Note</h2>
+                    <h2 className='things-to-note '>Things to Note</h2>
                     <p>{listing?.house_rules}</p>
                   </div>
                 </>

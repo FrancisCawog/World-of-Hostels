@@ -189,3 +189,43 @@
   margin-left: 2px;
   margin-top: 1px;
 }
+
+.listing-title {
+  font-family: "Inter";
+  font-size: 20px;
+}
+
+.listing-address {
+  font-family: "Inter";
+  padding: 0;
+}
+
+.listing-location {
+  font-family: "Inter";
+  margin-top: -10px;
+}
+
+#checkin-modal-img {
+  width: 18px;
+}
+
+.hostel-policies,
+.tab-cancellation,
+.things-to-note {
+  font-family: Poppins-bold; 
+  font-size: 20px; 
+}
+
+.hostel-policies {
+  margin-left: 2%; 
+  margin-top: -.5%;
+}
+
+ .tab-cancellation,
+ .things-to-note {
+  margin-top: 15px;
+ }
+
+ .things-to-note {
+  margin-bottom: -25px;
+ }
