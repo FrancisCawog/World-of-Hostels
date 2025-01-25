@@ -203,7 +203,7 @@ function LoginFormPage() {
           </div>
         </div>
         <div className="car-container">
-          <img src={car} style={{ marginLeft: "10%", width: "85%" }} />
+          <img src={car} className="car-signup" />
         </div>
       </div>
     </>

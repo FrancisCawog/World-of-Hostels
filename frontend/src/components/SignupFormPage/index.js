@@ -133,13 +133,13 @@ function SignupFormPage() {
       <div className="sign-container">
         <div className="signupContainer">
           <div className="signupBox">
-            <Link to="/" exact="true" style={{ textDecoration: 'underline', color: 'black', display: 'flex', alignItems: 'center', fontFamily: "Inter" }}>
-              <img src={MyArrowSVG} alt="Back" style={{ width: '14px', marginTop: "2px" }} /> Back
+            <Link to="/" exact="true" className="back-link">
+              <img src={MyArrowSVG} alt="Back" className="back-link-arrow" /> Back
             </Link>
             <br />
-            <img src={logo} style={{ width: '50px' }} />
+            <img src={logo} className="hostel-world-logo" />
             <h1>Sign up to add more adventure!</h1>
-            <p className="log-in-p" style={{ fontSize: "12px" }}>
+            <p className="log-in-p2">
               Sign up to agree to the use of your information. To learn more, visit our social terms of service and privacy policy pages.
             </p>
             <form onSubmit={handleSubmit}>
@@ -152,7 +152,7 @@ function SignupFormPage() {
                         <span>You already have an account, try login instead!</span>
                       </div>
                       <div className="error-login">
-                        <Link id="bottom" className="link" to="/login" style={{ fontFamily: "Inter-bold" }}>Login</Link>
+                        <Link id="bottom2" className="link" to="/login" >Login</Link>
                       </div>
                     </div>
                   ) : (
@@ -224,20 +224,20 @@ function SignupFormPage() {
 
                 {!validPassword && (
                   <div className="password-check">
-                    <span style={{ color: password.length >= 8 ? 'green' : 'red' }}>
+                    <span style= {{ color: password.length >= 8 ? 'green' : 'red' }}>
                       At least 8 characters
                     </span>
                     <span>Contain at least 3 of the following 4 types of characters:</span>
-                    <span style={{ color: passwordConditions.hasLowercase ? 'green' : 'white' }}>
+                    <span style= {{ color: passwordConditions.hasLowercase ? 'green' : 'white' }}>
                       {passwordConditions.hasLowercase ? '✓' : '✗'} Lowercase Letters
                     </span>
-                    <span style={{ color: passwordConditions.hasUppercase ? 'green' : 'white' }}>
+                    <span style= {{ color: passwordConditions.hasUppercase ? 'green' : 'white' }}>
                       {passwordConditions.hasUppercase ? '✓' : '✗'} Uppercase Letters
                     </span>
-                    <span style={{ color: passwordConditions.hasNumber ? 'green' : 'white' }}>
+                    <span style= {{ color: passwordConditions.hasNumber ? 'green' : 'white' }}>
                       {passwordConditions.hasNumber ? '✓' : '✗'} Numbers
                     </span>
-                    <span style={{ color: passwordConditions.hasSpecialChar ? 'green' : 'white' }}>
+                    <span style= {{ color: passwordConditions.hasSpecialChar ? 'green' : 'white' }}>
                       {passwordConditions.hasSpecialChar ? '✓' : '✗'} Special Characters
                     </span>
                   </div>
@@ -248,7 +248,7 @@ function SignupFormPage() {
                 id="loginButton"
                 className="signup-button"
                 type="submit"
-                style={{ 
+                style= {{ 
                   pointerEvents: (isValidEmail(email) && isValidLength(password) && firstName && lastName && isValidAge(dateOfBirth) && validPassword) ? 'auto' : 'none',
                   opacity: (isValidEmail(email) && isValidLength(password) && firstName && lastName && isValidAge(dateOfBirth) && validPassword) ? 1 : 0.5
                 }}
@@ -260,12 +260,14 @@ function SignupFormPage() {
             <br />
             <p id="bottom">Already have an account?</p>
 
-            <Link id="bottom" className="link" to="/login" style={{fontFamily: "Inter-bold"}}> <img src={UserSVG} alt="Back" style={{ width: '14px' }}/>Login </Link>
+            <Link id="bottom2" className="link" to="/login">
+              <img src={UserSVG} alt="Back" className="user-svg"/>Login 
+            </Link>
           </div>
         </div>
 
         <div className="car-container">
-          <img src={car} style={{marginLeft: "10%", width: "85%"}}/>
+          <img src={car} className="car-signup"/>
         </div>
       </div>
     </>

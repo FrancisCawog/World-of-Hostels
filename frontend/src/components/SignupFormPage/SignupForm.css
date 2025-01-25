@@ -86,18 +86,9 @@
     background-color: #c44c24;
   }
   
-  .link {
-    display: block;
-    margin-top: 14px;
-    font-family: Inter;
-    text-decoration: none;
-    color: black;
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  
-  #bottom {
+  #bottom2 {
     text-align: center;
+    font-family: Inter-bold;
   }
   
   img {
@@ -177,3 +168,39 @@
     text-align: right;
     transform: translateY(-25%);
   }  
+
+  .back-link {
+    text-decoration: underline;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .back-link-arrow {
+    width: 14px;
+    margin-top: 2px;
+  }
+  
+  .hostel-world-logo {
+    width: 50px;
+  }
+
+  .log-in-p2 {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  margin-bottom: 16px;
+  background-color: #ffff;
+  font-family: Inter;
+  }
+
+  .user-svg {
+    width: 14px;
+  }
+
+  .car-signup {
+    height: 850px;
+    margin-left: 5%; 
+    width: 85%;
+  }

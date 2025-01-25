@@ -38,11 +38,11 @@ p {
 
 .log-in-p {
   font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.1px;
-    margin-bottom: 16px;
-    background-color: #ffff;
-    font-family: Inter;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  margin-bottom: 16px;
+  background-color: #ffff;
+  font-family: Inter;
 }
 
 form {
