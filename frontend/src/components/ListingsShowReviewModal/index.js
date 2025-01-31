@@ -160,7 +160,7 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
 
   return (
     <div className="modal-overlay-review" onClick={onClose}>
-      <div className="modal-review"  style={{overflowY: "auto", overflowX: "hidden", paddingBottom: "25px"}} onClick={(e) => e.stopPropagation()}>
+      <div className="modal-review" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content-review">
           <p className='review-p'>Reviews</p>
           <span className="close" onClick={onClose}>&times;</span>
@@ -170,7 +170,7 @@ const ListingsShowReviewModal = ({ onClose, reviews }) => {
               <p className='review-100'>100% genuine reviews from real hostel travellers like you!</p>
             </div>
           </div>
-          <div style={{ display: "flex", height: "30rem" }}>
+          <div style={{ display: "flex", height: "25rem" }}>
             <div className="review-box-modal">
               <div className="review-rating-box-modal">
                 <div className="listing-review-star-and-rating">

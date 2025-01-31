@@ -72,8 +72,8 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
 
     const extractDate = (listingId, num) => {
         const { reservation } = getReviewDetails(listingId, num);
-        if (!reservation) return '';
-        const date = new Date(reservation.start_date);
+        // if (!reservation) return '';
+        const date = new Date(reservation?.start_date);
         const options = { year: 'numeric', month: 'short' };
         return date.toLocaleDateString('en-US', options);
     };
