@@ -168,7 +168,7 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
                     </div>
                 </div>
               
-                <div className="side-divs">
+                <div className="side-divs" style={{backgroundColor: "#f6a90e", padding: "20px", borderRadius: "2.5rem", marginTop: "5%"}}>
                     {numbers.map(num => numberOfReviews(listing?.id) >= num && extractFeedback(listing?.id, numberOfReviews(listing?.id) - num) !== "" && (
                         <div key={num} className="side-div">
                         <div className="date-and-rating">
