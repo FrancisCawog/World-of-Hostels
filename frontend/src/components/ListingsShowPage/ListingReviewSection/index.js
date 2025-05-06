@@ -193,9 +193,11 @@ export default function ListingReviewSection({ numberOfReviews, listing, reviews
                         </div>
                     ))}
                     {numberOfReviews(listing?.id) - numbers.length + 3 >= 4 && (
-                        <div className="view-reviews" onClick={() => setShowReviewModal(true)}>
-                        <p className="read-more">View all reviews</p>
-                        <img src={MyArrowSVG} style={{ width: '14px' }} />
+                        <div style={{width:"100%"}}>
+                            <div className="view-reviews" onClick={() => setShowReviewModal(true)}>
+                                <p className="read-more">View all reviews</p>
+                                <img src={MyArrowSVG} style={{ width: '14px' }} />
+                            </div>
                         </div>
                     )}
                 </div>

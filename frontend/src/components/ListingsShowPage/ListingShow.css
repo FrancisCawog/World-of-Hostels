@@ -575,11 +575,10 @@ li {
 .view-reviews {
     display: flex;
     align-items: center;
-    justify-content: center; 
     cursor: pointer;
-    margin-left: 82.5%;
-    width: 160px;
-    padding-left: 1.5%;
+    width: 150px;
+    margin-left: auto;
+    padding-left: 2.5%;
 }
 
 .date-and-rating {

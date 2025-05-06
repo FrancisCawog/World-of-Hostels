@@ -36,6 +36,16 @@
     top: 16px;
     right: 25.5px;
     cursor: pointer;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+  }
+
+  .close:hover {
+    background: #f1f2f4;
+    color: #121417;
+    /* border-radius: 2px; */
   }
   
   .modal-header {
